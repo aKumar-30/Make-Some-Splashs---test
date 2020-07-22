@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MyAnimation.qml</file>
+        <file>CompetitiveMode.qml</file>
+        <file>CustomizationMode.qml</file>
+        <file>BallImage.qml</file>
+        <file>MyAnimationCustom.qml</file>
+    </qresource>
+</RCC>
