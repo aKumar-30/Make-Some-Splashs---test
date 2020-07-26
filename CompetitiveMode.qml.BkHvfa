@@ -22,10 +22,10 @@ Page {
     property var manyMakes: 0;
     property var extraPoints: 0;
     property var level: 2;
-    property var levelIndicator: 19;
+    property var levelIndicator: 24;
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
-    property var levelIndicatorDown: (level!==3)?(22-levelIndicator):(50-levelIndicator)
+    property var levelIndicatorDown: (level==1)?(22-levelIndicator):(26-levelIndicator)
     property var animationWhichIsRunning:1
     property var makingStreakColor: "red"
     property var colors: ["#cf3732","#db8d44","#e3d430","#29c910", "#e3d430", "#db8d44", "#cf3732"]
@@ -167,7 +167,6 @@ Page {
             if(levelIndicator > 21)
             {
                 whatToDoForNextLevel()
-                mDuration=1400
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
@@ -180,13 +179,13 @@ Page {
             var options = [Easing.Linear, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.OutCirc, Easing.OutInCirc, Easing.InOutElastic, Easing.OutElastic, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.InBounce, Easing.OutBounce, Easing.InOutBounce, Easing.OutInBounce, Easing.BezierCurve]
             sliderEasingType=options[Math.floor((Math.random() * 27))];
             sliderId.value=200;
-            mDuration-=35;
+            mDuration-=28;
             insideRectangleMouseArea.enabled = true;
-            if(levelIndicator >21)
+            if(levelIndicator >25)
             {
-                handleId.visible=false;
-                sliderId.enabled=false;
                 whatToDoForNextLevel()
+                handleId.visible=false;
+                sliderId.enabled=true;
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
@@ -347,7 +346,7 @@ Page {
                     levelRectangleText.text = "     Hint: The slider moves faster as you go along. Survive for 21 shots to advance, 3 missed and you are out"
                 }
                 else if(level===2){
-                    levelRectangleText.text = "     Hint: The slider moves faster as you go alone and has different waves of motion. Survive for 21 shots to advance, 3 missed and you are out"
+                    levelRectangleText.text = "     Hint: The slider moves faster as you go alone and has different waves of motion. Survive for 25 shots to advance, 3 missed and you are out"
                 }
                 else if(level===3){
                     levelRectangleText.text = "     Hint: The colors of the slider are moving fast! Try to catch the green one. If not, maybe settle for a yellow, orange, or red? "
@@ -410,10 +409,8 @@ Page {
                 levelRectangle.height = 1;
                 levelRectangleText1.font.pointSize=1
                 levelRectangleText.visible=false
-                if (level===3){
-                    sliderId.enabled=true;
+                if (level===3)
                     mPauseAnim.start();
-                }
                 else
                       insideRectangleMouseArea.enabled = true;
             }
@@ -571,8 +568,9 @@ Page {
                 y: 1
                 text:"apples are cool"
                 rotation: 0
-                font.family: "Snap ITC"
-                font.pointSize: 14
+                font.family: "Papyrus"
+                font.bold: true
+                font.pointSize: 17
             }
 
             NumberAnimation {
