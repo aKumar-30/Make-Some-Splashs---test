@@ -163,13 +163,13 @@ Page {
         //General thing to do if MAKE for AFTER THE ANIMATION IS FINISHED
         if(manyMakes>0){
             if(flipable.visible)
-                coinAnim.start()
+                numCoins++;
         }
 
         //Level one stuff
         if(level===1)
         {
-            coinProb = 6;
+            coinProb = 0;
             sliderId.value=100;
             mDuration-=42
             insideRectangleMouseArea.enabled = true
@@ -186,7 +186,7 @@ Page {
         //Level two stuff
         else if(level===2)
         {
-            coinProb = 4;
+            coinProb = 6;
             var options = [Easing.Linear, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.OutCirc, Easing.OutInCirc, Easing.InOutElastic, Easing.OutElastic, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.InBounce, Easing.OutBounce, Easing.InOutBounce, Easing.OutInBounce, Easing.BezierCurve]
             sliderEasingType=options[Math.floor((Math.random() * 27))];
             sliderId.value=200;
@@ -206,7 +206,7 @@ Page {
         //Level three stuff
         else if(level===3)
         {
-            coinProb = 3;
+            coinProb = 4;
             mPauseAnim.duration-=15;
             handleId.visible=false;
             sliderId.enabled=true;
@@ -222,14 +222,8 @@ Page {
             mPauseAnim.restart();
         }
         //other variables stuff for everything
-        if (Math.floor((Math.random()*coinProb))==0){
-            flipable.visible=true;
-            flipable.flipped = !flipable.flipped;
-        }
-        else
-            flipable.visible=false;
-
-
+        let shouldHaveCoin = Math.random()*coinProb==0;
+        flipable.visible=shouldHaveCoin;
     }
     //Images start here
     //Sky
@@ -313,34 +307,17 @@ Page {
             x: parent.width/2-10
         }
     }
-    //Coin counter thingy
-    Rectangle{
-        Row{
-            spacing: 20;
-            x: 10
-            y:10
-            Image{
-                width: 25
-                height: 25
-                source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinFront.png"
-            }
-            Text{
-                text: numCoins
-                font.family: "Stencil"
-                horizontalAlignment: Text.AlignHCenter
-                font.pointSize:15
-            }
-        }
-    }
-
     //the coin with anim
 
     Flipable {
         visible: false
-        x: rim.x+65
-        y:rim.y+17
+        x: rim.x+45
+        y:rim.y+30
         id: flipable
         property bool flipped: false
+        onVisibleChanged: {
+            flipable.flipped = !flipable.flipped;
+        }
         front: Image { //--> collapse
             width: 50
             height: 50
@@ -357,75 +334,17 @@ Page {
         transform: Rotation {
             axis.x: 0; axis.y: 1; axis.z: 0
             angle: flipable.flipped ? 180 : 0
-            onAngleChanged: {
-                if(angle === 180 || angle ===0){
-                    if(flipable.visible)
-                        flipable.flipped = !flipable.flipped
-                }
-            }
 
             Behavior on angle {
                 NumberAnimation {
                     duration: 500
-
-                }
-            }
-        }
-
-        ParallelAnimation{
-            id: coinAnim
-            onFinished:{
-                flipable.visible = false;
-                flipable.x= rim.x+65
-                flipable.y = rim.y+17
-                flipable.back.height = 50;
-                flipable.back.width = 50;
-                flipable.front.width = 50;
-                flipable.front.height = 50;
-                numCoins++;
-            }
-
-            NumberAnimation {
-                target: flipable.back
-                property: "width"
-                duration: 500
-                to:30
-            }
-            NumberAnimation {
-                target: flipable.back
-                property: "height"
-                duration: 500
-                to:30
-            }
-            NumberAnimation {
-                target: flipable.front
-                property: "width"
-                duration: 500
-                to:30
-            }
-            NumberAnimation {
-                target: flipable.front
-                property: "height"
-                duration: 500
-                to:30
-            }
-            PathAnimation {
-                id: pathAnim
-                duration: 1000
-                target: flipable
-                orientation: PathAnimation.TopFirst
-                anchorPoint: Qt.point(flipable.width/2,
-                                      flipable.height/2)
-                path: Path {
-                    startX:rim.x+65 ; startY: rim.y+17
-                    PathCurve {
-                        x: 22
-                        y: 22
+                    onFinished: {
+                        if(flipable.visible)
+                            flipable.flipped = !flipable.flipped
                     }
                 }
             }
         }
-
     }
 
     //basketball
@@ -1070,6 +989,7 @@ Page {
                     insideContainerId.sliderStopped(sliderId.value);
                 }
                 else{
+                    console.log(value+"\n")
                     if(value===1)
                     {
                         seqAnimationId.restart()
@@ -1743,7 +1663,6 @@ Page {
     Settings{
         category: "allOtherStuff"
         property alias personalBest: root.personalBest
-        property alias numCoins: root.numCoins
     }
 }
 
