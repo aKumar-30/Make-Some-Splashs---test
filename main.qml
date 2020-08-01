@@ -12,6 +12,19 @@ ApplicationWindow {
     id: root
     property var p: false
     property var thisTitle: "Make some splashs!"
+    property var endingPage: " "
+    onClosing: {
+        console.log("HELLO????")
+        if(endingPage==="qrc:/CompetitiveMode.qml"){
+            stackView.push("qrc:/GameStore.qml");
+            stackView.pop()
+        }
+        else if (endingPage==="qrc:/GameStore.qml"){
+            stackView.push("qrc:/CompetitiveMode.qml");
+            stackView.pop()
+        }
+    }
+
     Dialog {
         id: aboutDialog
         modal: true
@@ -63,9 +76,9 @@ ApplicationWindow {
 
     }
     function help() {
-           let url = "https://nba.com/"
-           Qt.openUrlExternally(url)
-       }
+        let url = "https://nba.com/"
+        Qt.openUrlExternally(url)
+    }
     Settings {
         id: settings
         property string style: "Default"
@@ -154,29 +167,15 @@ ApplicationWindow {
             if (stackView.depth > 1) {
                 //Give them a reset warning
                 if(listView.currentIndex===0)
-                   warningDialog.open();
+                    warningDialog.open();
                 else{
                     stackView.pop()
                     listView.currentIndex = -1
+                    thisTitle = "Make some splashs!"
                 }
             }
             else {
                 drawer.open()
-            }
-            if(listView.currentItem)
-            {
-                if(listView.currentItem.title==="Competitive Mode")
-                {
-                    thisTitle="Competitive Mode"
-                }
-                else if(listView.currentItem.title==="Customization Mode")
-                {
-                    thisTitle="Customization Mode"
-                }
-            }
-            else
-            {
-                thisTitle = "Make some splashs!"
             }
         }
     }
@@ -194,6 +193,7 @@ ApplicationWindow {
             stackView.pop()
             listView.currentIndex = -1
             warningDialog.close()
+            thisTitle = "Make some splashs!"
         }
         onRejected: {
             warningDialog.close()
@@ -276,44 +276,51 @@ ApplicationWindow {
             anchors.fill: parent
 
             delegate: ItemDelegate {
-                    height: root.height/2
+                height: root.height/2
+                width: parent.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text{
+                    text: model.title
+                    font.family: "PanRoman"
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.Wrap
+                    anchors.centerIn: parent
+                    font.pointSize: 25
                     width: parent.width
-                    Text{
-                        text: model.title
-                        wrapMode: Text.Wrap
-                        anchors.centerIn: parent
-                        font.pointSize: 25
-                        width: parent.width
-                        anchors.horizontalCenter: parent.horizontalCenter
-                    }
-                    /*
-                    background: Rectangle{
-                        anchors.fill: parent
-                        //color: "paleturquoise"
-                        opacity: 0.4
-                    }
-                    */
-                    highlighted: ListView.isCurrentItem
-                    onClicked: {
-                        listView.currentIndex = index
-                        stackView.push(model.source);
-                        drawer.close()
-                        if(model.source==="qrc:/CustomizationMode.qml")
-                        {
-                            root.width= 1200
-                            root.height = 580
-                        }
-                        else if(model.source==="qrc:/CompetitiveMode.qml"){
-                            root.width = 708
-                            root.height = 785
-                        }
-
-                    }
+                    anchors.horizontalCenter: parent.horizontalCenter
                 }
+                highlighted: ListView.isCurrentItem
+                onClicked: {
+                    listView.currentIndex = index
+                    stackView.push(model.source);
+                    endingPage=model.source;
+                    drawer.close()
+                    if(model.source==="qrc:/CompetitiveMode.qml")
+                    {
+                        console.log("POTATOS ARE TAKING OVER THE WORLD")
+                        thisTitle="Competitive Mode"
+                    }
+                    else if(model.source==="qrc:/GameMode.qml")
+                    {
+                        console.log("POTATOS ARE TAKING OVER THE WORLD FOREVER")
+                        thisTitle="Game Mode"
+                    }
+                    //                        if(model.source==="qrc:/CustomizationMode.qml")
+                    //                        {
+                    //                            root.width= 1200
+                    //                            root.height = 580
+                    //                        }
+                    //                        else if(model.source==="qrc:/CompetitiveMode.qml"){
+                    //                            root.width = 708
+                    //                            root.height = 785
+                    //                        }
+
+                }
+            }
 
             model: ListModel {
                 ListElement { title: "Game Mode"; source: "qrc:/CompetitiveMode.qml" }
-                ListElement { title: "Customization Mode"; source: "qrc:/CustomizationMode.qml" }
+                ListElement { title: "Store"; source: "qrc:/GameStore.qml" }
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }
@@ -362,7 +369,7 @@ ApplicationWindow {
         }
     }
     Settings{
-        category: "windows"
+        category: "windows1"
         property alias x: root.x
         property alias y: root.y
         property alias width: root.width

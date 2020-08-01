@@ -37,7 +37,6 @@ Page {
     MouseArea{
         anchors.fill: parent
         onDoubleClicked:{
-            numCoins+=200;
             function pauseAllAnim()
             {
                 if(levelRectangleAnimation.running){

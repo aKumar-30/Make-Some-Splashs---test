@@ -31,13 +31,10 @@ Page {
     property var makingStreakColor: "red"
     property var colors: ["#cf3732","#db8d44","#e3d430","#29c910", "#e3d430", "#db8d44", "#cf3732"]
     property var numCoins: 0;
-    property bool haveRandomlyChoosenIfCoinAppears: false;
-    property int coinProb: 0;
     //Pause button
     MouseArea{
         anchors.fill: parent
         onDoubleClicked:{
-            numCoins+=200;
             function pauseAllAnim()
             {
                 if(levelRectangleAnimation.running){
@@ -113,8 +110,8 @@ Page {
     function whatToDoWhenAnimFinished()
     {
         //variable declaration
-        haveRandomlyChoosenIfCoinAppears = false;
         //this is the random prob for the coin
+        let coinProb = 0;
         //function for what to do when going to next level
         function whatToDoForNextLevel()
         {
@@ -127,7 +124,6 @@ Page {
             x1.visible=false;
             x2.visible=false;
             x3.visible=false;
-            feedbackLabel.text=""
             flashingScoreText.color = "black"
             insideRectangleMouseArea.enabled = true
             manyMakes=0;
@@ -167,10 +163,8 @@ Page {
         }
         //General thing to do if MAKE for AFTER THE ANIMATION IS FINISHED
         if(manyMakes>0){
-            if(flipable.visible){
-                haveRandomlyChoosenIfCoinAppears=true;
+            if(flipable.visible)
                 coinAnim.start()
-           }
         }
 
         //Level one stuff
@@ -228,18 +222,15 @@ Page {
             colors= mArray;
             mPauseAnim.restart();
         }
-
         //other variables stuff for everything
-        //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
-        if(!haveRandomlyChoosenIfCoinAppears){
-            console.log("Is this working?");
-            if (Math.floor((Math.random()*coinProb))==0){
-                flipable.visible=true;
-                flipable.flipped = !flipable.flipped;
-            }
-            else
-                flipable.visible=false;
+        if (Math.floor((Math.random()*coinProb))==0){
+            flipable.visible=true;
+            flipable.flipped = !flipable.flipped;
         }
+        else
+            flipable.visible=false;
+
+
     }
     //Images start here
     //Sky
@@ -247,10 +238,7 @@ Page {
         Component.onCompleted: {
             //Used to show level one message
             levelRectangleAnimation.start()
-            if(Global.numberCoins===-95)
-                Global.numberCoins=numCoins
-            else
-                numCoins = Global.numberCoins;
+            numCoins = Global.numberCoins;
         }
         Component.onDestruction:  {
             Global.numberCoins=numCoins;
@@ -393,6 +381,7 @@ Page {
         ParallelAnimation{
             id: coinAnim
             onFinished:{
+                console.log("hello");
                 flipable.visible = false;
                 flipable.x= rim.x+65
                 flipable.y = rim.y+17
@@ -401,14 +390,6 @@ Page {
                 flipable.front.width = 50;
                 flipable.front.height = 50;
                 numCoins++;
-
-                //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
-                if (Math.floor((Math.random()*coinProb))==0){
-                    flipable.visible=true;
-                    flipable.flipped = !flipable.flipped;
-                }
-                else
-                    flipable.visible=false;
             }
 
             NumberAnimation {
@@ -1772,10 +1753,9 @@ Page {
 
 
     Settings{
-        category: "allOtherStuff1"
-        id: mSettings
+        category: "allOtherStuff"
         property alias personalBest: root.personalBest
-        property alias mNumCoins: root.numCoins
+        //property alias mNumCoins: root.numCoins
     }
 }
 

@@ -7,5 +7,6 @@
         <file>BallImage.qml</file>
         <file>MyAnimationCustom.qml</file>
         <file>GameStore.qml</file>
+        <file>test.js</file>
     </qresource>
 </RCC>

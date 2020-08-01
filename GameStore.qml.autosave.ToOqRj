@@ -3,7 +3,6 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import QtQuick.Dialogs 1.2
 import Qt.labs.settings 1.1
-import "test.js" as Global
 Page {
     visible: true
     width: 708
@@ -12,34 +11,23 @@ Page {
     property int duration: 1000
     id: root
     property var found: true;
+
     property var bought: ["Normal Ball", "Blue", "Green"]
+    property int numCoins: 45;
     property int count: 0;
     property var mName: "";
-    property var mSource: "";
-    property int numCoins: 100;
-    property bool firstTime: true;
-    onFoundChanged: {
-        console.log("ONION")
-        console.log(found);
-    }
-    Component.onCompleted: {
-        console.log(found)
-    }
 
     function checkIfFound()
     {
         found = false;
         for(var i =0; i < bought.length; i++){
-            if(bought[i]===mName){
+            if(bought[i]===mName)
                 found = true;
-                return true;
-           }
+            console.log(found);
         }
-        return false;
     }
     function someOfTheStuffToDoWhenClicked()
     {
-        firstTime=false;
         if(!found){
             //not bought yet
             purchaseButton.visible=true;
@@ -59,12 +47,11 @@ Page {
         }
         else{
             //bought before
-            Global.currentBallSource=mSource;
             purchaseButton.visible=false;
             buttonFadeRect.visible=false;
             lockSign.visible = false;
         }
-        bigPicImage.source= mSource;
+        bigPicImage.source= picSource;
         bigPicText.text =mName;
     }
     Image{
@@ -77,14 +64,6 @@ Page {
     Rectangle{
         Component.onCompleted: {
             bigPicAnim.start()
-            if(Global.numberCoins===-95)
-                Global.numberCoins=numCoins
-            else
-                numCoins = Global.numberCoins;
-            numCoins = Global.numberCoins;
-        }
-        Component.onDestruction:  {
-            Global.numberCoins=numCoins;
         }
 
         Row{
@@ -103,7 +82,7 @@ Page {
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize:15
                 Behavior on value {
-                    NumberAnimation { duration: (firstTime)?1:1000; easing.type: Easing.InOutQuad}
+                    NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad }
                 }
             }
 
@@ -133,7 +112,7 @@ Page {
         }
         Image{
             id: bigPicImage
-            source: Global.currentBallSource
+            source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"
             width: 165;
             height: 165;
             anchors.horizontalCenter: parent.horizontalCenter
@@ -148,6 +127,7 @@ Page {
             to: 360*5;
             duration: 10020
             onStopped: {
+                console.log("stopped")
                 bigPicImage.rotation =0;
                 bigPicAnim.start()
             }
@@ -171,11 +151,10 @@ Page {
             id: confirmMessage
             title: "Confirmation"
             standardButtons: MessageDialog.Yes |MessageDialog.Cancel
-            text: "Are you sure you want to purchase this?"
+            text: "Are you sure you want to purchase this"
             onYes:{
                 numCoins-=count
                 bought.push(mName);
-                boughtChanged();
                 checkIfFound()
                 someOfTheStuffToDoWhenClicked();
             }
@@ -248,9 +227,9 @@ Page {
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/greenBall.png";
             price: 10
         } ListElement{
-            type: "redBall";
-            name: "Red"
-            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/redBall.png"
+            type: "sparkleBall";
+            name: "Sparkle"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/blueBall.png"
             price: 15
         }ListElement{
             type: "tennisBall";
@@ -311,6 +290,7 @@ Page {
                     border.width: 3
                     border.color: "black"
                     radius: 5;
+
                     Image{
                         id: mImage
                         x:parent.x
@@ -337,12 +317,35 @@ Page {
                         onClicked:{
                             count = price;
                             mName = name;
-                            mSource = picSource;
                             console.log("Clicked on :" + name)
                             //what happens when u click
                             grid.currentIndex=index;
                             checkIfFound()
-                            someOfTheStuffToDoWhenClicked()
+                            if(!found){
+                                //not bought yet
+                                purchaseButton.visible=true;
+                                buttonFadeRect.visible=true;
+                                lockSign.visible = true;
+
+                                purchaseButtonText.text = price;
+
+                                if(numCoins>=price){
+                                    purchaseButton.enabled=true;
+                                    colorRect.color= "#bdbd22"
+                                }
+                                else{
+                                    purchaseButton.enabled = false;
+                                    colorRect.color= "#69685a"
+                                }
+                            }
+                            else{
+                                //bought before
+                                purchaseButton.visible=false;
+                                buttonFadeRect.visible=false;
+                                lockSign.visible = false;
+                            }
+                            bigPicImage.source= picSource;
+                            bigPicText.text =name;
                         }
                     }
                 }
@@ -354,33 +357,34 @@ Page {
         delegate: contactsDelegate
         highlight:
             Rectangle {
-            z:8
-            color: "steelblue";
-            radius: 5;
-            opacity: 0.6
-            Image{
-                id: checkMark
-                visible: found;
-                anchors.centerIn: parent
-                width: 100;
-                height: 100;
-                source: "file:///Users/arjun/Documents/CompetitiveBall/images/checkMark.png"
-            }
-            Image{
-                id: theXofDoom
-                visible: !found;
-                anchors.centerIn: parent
-                width: 100;
-                height: 100;
-                source: "file:///Users/arjun/Documents/CompetitiveBall/images/theXOfDoomAndHorror.png"
-            }
-        }
+                z:8
+                color: "steelblue";
+                radius: 5;
+                opacity: 0.6
+                Rectangle{
+                    width: grid.cellWidth-20
+                    height: grid.cellHeight-20
+                    color: "transparent"
+                    anchors.centerIn: parent
+                    z:8
+                    Image{
+                        id: checkMark
+                        visible: found;
+                        anchors.centerIn: parent
+                        width: 100;
+                        height: 100;
+                        source: "file:///Users/arjun/Documents/CompetitiveBall/images/checkMark.png"
+                    }
+                    Image{
+                        id: theXofDoom
+                        visible: !found;
+                        anchors.centerIn: parent
+                        width: 100;
+                        height: 100;
+                        source: "file:///Users/arjun/Documents/CompetitiveBall/images/theXOfDoom.png"
+                    }
+                }
+           }
         focus: true
-    }
-
-    Settings{
-        category: "mySettingsThing5"
-        property alias mBought: root.bought
-        property alias numCoins: root.numCoins
     }
 }

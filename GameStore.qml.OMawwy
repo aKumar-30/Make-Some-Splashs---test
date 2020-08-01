@@ -12,34 +12,23 @@ Page {
     property int duration: 1000
     id: root
     property var found: true;
+
     property var bought: ["Normal Ball", "Blue", "Green"]
     property int count: 0;
     property var mName: "";
     property var mSource: "";
     property int numCoins: 100;
-    property bool firstTime: true;
-    onFoundChanged: {
-        console.log("ONION")
-        console.log(found);
-    }
-    Component.onCompleted: {
-        console.log(found)
-    }
-
     function checkIfFound()
     {
         found = false;
         for(var i =0; i < bought.length; i++){
-            if(bought[i]===mName){
+            if(bought[i]===mName)
                 found = true;
-                return true;
-           }
+            console.log(found);
         }
-        return false;
     }
     function someOfTheStuffToDoWhenClicked()
     {
-        firstTime=false;
         if(!found){
             //not bought yet
             purchaseButton.visible=true;
@@ -59,7 +48,6 @@ Page {
         }
         else{
             //bought before
-            Global.currentBallSource=mSource;
             purchaseButton.visible=false;
             buttonFadeRect.visible=false;
             lockSign.visible = false;
@@ -77,14 +65,9 @@ Page {
     Rectangle{
         Component.onCompleted: {
             bigPicAnim.start()
-            if(Global.numberCoins===-95)
-                Global.numberCoins=numCoins
-            else
-                numCoins = Global.numberCoins;
-            numCoins = Global.numberCoins;
         }
-        Component.onDestruction:  {
-            Global.numberCoins=numCoins;
+        Component.onDestroyed: {
+            console.log(bought);
         }
 
         Row{
@@ -97,13 +80,13 @@ Page {
                 source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinFront.png"
             }
             Text{
-                property int value: numCoins
+                property int value: (numCoins)
                 text: value
                 font.family: "Stencil"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize:15
                 Behavior on value {
-                    NumberAnimation { duration: (firstTime)?1:1000; easing.type: Easing.InOutQuad}
+                    NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad }
                 }
             }
 
@@ -133,7 +116,7 @@ Page {
         }
         Image{
             id: bigPicImage
-            source: Global.currentBallSource
+            source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"
             width: 165;
             height: 165;
             anchors.horizontalCenter: parent.horizontalCenter
@@ -148,6 +131,7 @@ Page {
             to: 360*5;
             duration: 10020
             onStopped: {
+                console.log("stopped")
                 bigPicImage.rotation =0;
                 bigPicAnim.start()
             }
@@ -175,7 +159,6 @@ Page {
             onYes:{
                 numCoins-=count
                 bought.push(mName);
-                boughtChanged();
                 checkIfFound()
                 someOfTheStuffToDoWhenClicked();
             }
@@ -311,6 +294,7 @@ Page {
                     border.width: 3
                     border.color: "black"
                     radius: 5;
+
                     Image{
                         id: mImage
                         x:parent.x
@@ -379,8 +363,7 @@ Page {
     }
 
     Settings{
-        category: "mySettingsThing5"
+        category: "justSomeSettings"
         property alias mBought: root.bought
-        property alias numCoins: root.numCoins
     }
 }
