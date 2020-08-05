@@ -8,5 +8,7 @@
         <file>MyAnimationCustom.qml</file>
         <file>GameStore.qml</file>
         <file>test.js</file>
+        <file>GameStoreDelegate.qml</file>
+        <file>GameStoreDelegateNot.qml</file>
     </qresource>
 </RCC>

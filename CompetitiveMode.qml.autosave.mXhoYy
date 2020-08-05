@@ -384,7 +384,7 @@ Page {
         id: pointingFinger
         width: 414*1/6;
         height: 600*1/6;
-        x: insideContainerId.x+insideContainerId.width/2-width/2
+        anchors.horizontalCenter: insideContainerId.horizontalCenter
         y: insideContainerId.y-height;
         source: "file:///Users/arjun/Documents/CompetitiveBall/images/pointingPicture.png"
         onVisibleChanged: {
@@ -392,14 +392,13 @@ Page {
             pointingFingerAnim.start()
         }
         onYChanged: {
-            if(y===(insideContainerId.y-height-2)||y===(insideContainerId.y-height+32))
+            if(y===(insideContainerId.y-height-2))
                 pointingFingerAnim.restart()
         }
 
         SequentialAnimation{
             id: pointingFingerAnim
             NumberAnimation {
-                id: pointingFingerAnimFront
                 target: pointingFinger
                 property: "y"
                 to:insideContainerId.y-pointingFinger.height+20;
@@ -407,7 +406,6 @@ Page {
                 easing.type: Easing.Linear
             }
             NumberAnimation {
-                id: pointingFingerAnimBack
                 target: pointingFinger
                 property: "y"
                 to:(insideContainerId.y-pointingFinger.height-2)
@@ -1188,16 +1186,16 @@ Page {
                     }
                     if(counter2 ==1 && value===500.5){
                         seqAnimationId.stop();
+                        firstTime2=false;
                         pointingFinger.visible=true;
                     }
                 }
                 if(level===3)
                 {
                     mPauseAnim.stop();
-                    pointingFinger.visible=false;
                     insideContainerId.sliderStopped(sliderId.value);
                     handleId.visible=true;
-                    sliderId.enabled=false;
+                    sliderId.enabled=true;
                     firstTime3=false;
                 }
                 else{
@@ -1280,14 +1278,12 @@ Page {
                     currentIndexForRandom+=1;
 
                     if(firstTime3===true&&currentIndexForRandom===4){
-                        console.log(colors)
                         for(let i =0; i< colors.length; i++){
                             if(colors[i]==="#29c910"){
-                                pointingFinger.x=sliderId.x-(pointingFinger.width/2)+(i/7*sliderId.width)+(1/14*sliderId.width)+165;
-                                pointingFinger.y+= 34
-                                pointingFingerAnimFront.to+=34
-                                pointingFingerAnimBack.to+=34
-                                firstTime3=false;
+                                pointingFinger.x=sliderId.x-(sliderId.width/2)+(i/7*sliderId.width)+(1/14*sliderId.width)
+                                pointingFinger.y-=20
+                                seqAnimationId.stop();
+                                firstTime2=false;
                                 pointingFinger.visible=true;
                                 break;
                             }
