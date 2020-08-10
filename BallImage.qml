@@ -22,6 +22,8 @@ Image {
                 var random_number = Math.floor((Math.random() * 5) + 1);
                 changeBallBasedOnRandomNumber(random_number)
             }
+            if(startText.visible)
+                startText.visible=false;
             sequencialAnimation.restart()
             otherCustomizeButton.visible=true;
         }

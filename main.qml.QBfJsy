@@ -23,7 +23,7 @@ ApplicationWindow {
     }
     Component.onDestruction: {
         console.log(Extra.volume)
-        s_manager.writeSettings("volume0100", Extra.volume);
+        s_manager.writeSettings("volume45678", Extra.volume);
     }
     SettingsManager{
         id: s_manager
@@ -133,7 +133,6 @@ ApplicationWindow {
             spacing: 20
             RowLayout{
                 spacing: 10
-
                 Label{
                     text: "Volume"
                 }
@@ -141,11 +140,11 @@ ApplicationWindow {
                     id: volumeSlider
                     from: 0
                     to: 1
-                    value: QtMultimedia.convertVolume(Extra.volume,QtMultimedia.LinearVolumeScale,QtMultimedia.LogarithmicVolumeScale);
                     property real volume: QtMultimedia.convertVolume(volumeSlider.value,
-                                                                     QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
+                                                                         QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
                 }
             }
+
             RowLayout {
                 spacing: 10
 

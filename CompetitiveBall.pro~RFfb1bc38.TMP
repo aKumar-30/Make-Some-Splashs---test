@@ -15,8 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         extras.cpp \
-        main.cpp \
-        settingsmanager.cpp
+        main.cpp
 
 RESOURCES += qml.qrc
 

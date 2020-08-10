@@ -13,6 +13,33 @@ Page {
     property var gradientGround2: "#00803F"
     property var ball: basketBall
     //Functions for setting type of ball start
+    Component.onCompleted: {
+        startAnim.start()
+    }
+    SequentialAnimation{
+        id: startAnim
+        PauseAnimation {
+            duration: 1000
+
+        }
+        NumberAnimation {
+            target: startText
+            property: "opacity"
+            duration: 500
+            to: 1
+            from: 0;
+        }
+    }
+    Text{
+        z:9
+        opacity:0;
+        id: startText
+        anchors.centerIn: parent
+        font.pointSize: 20
+        color: "black"
+        text: "Click the ball the start"
+    }
+
     function index1func(){
         basketBall.x = ball.x
         basketBall.y = ball.y
@@ -321,7 +348,7 @@ Page {
         y:50
         width:130
         height:130
-        source:"file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/circle-cropped.png"
+        source:"file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/moon.png"
     }
     BallImage{
         id: soccerBall

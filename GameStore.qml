@@ -19,14 +19,13 @@ Page {
     property int numCoins: 100;
     property bool firstTime: true;
     property var currentBallSource: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png";
-    onFoundChanged: {
-        console.log("ONION")
-        console.log(found);
+    function findCurrentIndex()
+    {
+        for(let i =0; i < contactModel.count;i++){
+            if(contactModel.get(i).picSource=== currentBallSource)
+                return i;
+        }
     }
-    Component.onCompleted: {
-        console.log(found)
-    }
-
     function checkIfFound()
     {
         found = false;
@@ -86,6 +85,7 @@ Page {
         }
         Component.onDestruction:  {
             Global.numberCoins=numCoins;
+            Global.currentBallSource=root.currentBallSource
         }
 
         Row{
@@ -232,7 +232,6 @@ Page {
     //List model for all the different things
     ListModel{
         id: contactModel
-
         ListElement{
             type: "regularBall";
             name: "Normal Ball"
@@ -295,7 +294,7 @@ Page {
         id:grid
         anchors.horizontalCenter: parent.horizontalCenter
         y:root.height-height-40
-        currentIndex: 0;
+        currentIndex: findCurrentIndex()
         model: contactModel
         Component{
             id: foundDel

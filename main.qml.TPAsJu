@@ -5,7 +5,6 @@ import QtQuick.Controls.Material 2.12
 import QtQuick.Controls.Universal 2.12
 import Qt.labs.settings 1.0
 import QtMultimedia 5.15
-import Arjun 1.0
 import "test.js" as Global
 
 //New VERSION STARTS HERE
@@ -15,19 +14,10 @@ ApplicationWindow {
     height: 785
     title: qsTr("Make some splashs!")
     id: root
+    property var test: "apples"
     property var p: false
     property var thisTitle: "Make some splashs!"
     property var endingPage: " "
-    Component.onCompleted: {
-        console.log(Extra.volume)
-    }
-    Component.onDestruction: {
-        console.log(Extra.volume)
-        s_manager.writeSettings("volume0100", Extra.volume);
-    }
-    SettingsManager{
-        id: s_manager
-    }
 
     onClosing: {
         if(endingPage==="qrc:/CompetitiveMode.qml"){
@@ -133,19 +123,19 @@ ApplicationWindow {
             spacing: 20
             RowLayout{
                 spacing: 10
-
                 Label{
                     text: "Volume"
                 }
                 Slider {
                     id: volumeSlider
-                    from: 0
-                    to: 1
-                    value: QtMultimedia.convertVolume(Extra.volume,QtMultimedia.LinearVolumeScale,QtMultimedia.LogarithmicVolumeScale);
+                    onValueChanged: {
+                        console.log(volume);
+                    }
                     property real volume: QtMultimedia.convertVolume(volumeSlider.value,
-                                                                     QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
+                                                                         QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
                 }
             }
+
             RowLayout {
                 spacing: 10
 
