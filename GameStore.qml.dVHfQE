@@ -17,12 +17,7 @@ Page {
     property var mName: "";
     property var mSource: "";
     property bool firstTime: true;
-    property bool firstTime1: true;
-    property var givenName: "";
-    Component.onCompleted: {
-        bigPicText.text =givenName;
 
-    }
 
     function findCurrentIndex()
     {
@@ -68,7 +63,6 @@ Page {
             purchaseButton.visible=false;
             buttonFadeRect.visible=false;
             lockSign.visible = false;
-            givenName=mName;
         }
         bigPicImage.source= mSource;
         bigPicText.text =mName;
@@ -293,6 +287,10 @@ Page {
         y:root.height-height-40
         currentIndex: findCurrentIndex()
         model: contactModel
+        onCurrentIndexChanged: {
+            bigPicText.text =mName;
+        }
+
         Component{
             id: foundDel
             Rectangle{
@@ -376,7 +374,6 @@ Page {
     Settings{
         category: "mySettingsThing5"
         property alias mBought: root.bought
-        property alias mMName: root.givenName
     }
 }
 

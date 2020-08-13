@@ -32,7 +32,6 @@ ApplicationWindow {
     SettingsManager{
         id: s_manager
     }
-
     onClosing: {
         if(endingPage==="qrc:/CompetitiveMode.qml"){
             stackView.push("qrc:/GameStore.qml");
@@ -41,253 +40,47 @@ ApplicationWindow {
         stackView.push("qrc:/CompetitiveMode.qml");
         stackView.pop()
     }
-    //MISSIONS START HERE    ----------------------------------------------------1
-    function checkIfCompleted(){
-        for(let i =0; i < mMissionModel.count; i++){
-            if(mMissionModel.get(i)){
-                return true;
-            }
-        }
-        return false;
-    }
-
+    //MISSIONS START HERE    ----------------------------------------------------
     Rectangle {
-        visible:false
-        z:17
         id: mainRect
-        width: parent.width*2/3
+        width: parent.width*1/2
         height: parent.width*4/5
-        anchors.centerIn: parent
         Rectangle{
             anchors.top: parent.top
             id: header
             width: parent.width
-            height: 60
+            height: 120
             color: "#e6ae60"
             Text{
-                anchors.fill: parent
                 color: "#ffffff"
+                font.family: "AMGDT_IV50"
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 28
-                text: "Missions"
-                font.family: "Complex"
+                font.pointSize: 40
             }
         }
         Rectangle{
-            id: headerFade
             width: parent.width
             anchors.top:header.bottom
-            height: 8
+            height: 10
             color: "#c2910c"
         }
         Text{
-            id: countdownText
-            anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            anchors.top: headerFade.bottom
-            text: "NEXT MISSIONS IN "+whatToPrint;
+            anchors.centerIn: parent
+            text: "NEXT MISSIONS IN "
             font.family: "GENISO"
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
-            color: "#595756"
+            color: "gray"
             y: header.y+16
-            font.pointSize: 12
-        }
-        ListModel{
-            id: mMissionModel
-            ListElement{
-                name: ""
-                description: "Splash 3 times in a row 99089 9898 89098 8808 9 89089 890"
-                reward: 6;
-                neededThings: 4
-                currentThings: 2
-            }
-            ListElement{
-                name: ""
-                description: "Miss at the backboard twice"
-                reward: 2;
-                neededThings: 2
-                currentThings: 0
-            }
-            ListElement{
-                name: ""
-                description: "Buy 3 different types of balls"
-                reward: 8;
-                neededThings: 3
-                currentThings: 3
-            }
-            ListElement{
-                name: ""
-                description: "Get 3 coins in a match twice"
-                reward: 3;
-                neededThings: 1
-                currentThings: 2
-            }
-        }
-        Component{
-            id: mMissionDelegate
-            Rectangle{
-                width: mainRect.width-25
-                height: width*1/4+20
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: "transparent"
-                Rectangle{
-                    id: mainDelegateRect
-                    width: parent.width
-                    height: parent.height-12
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: (currentThings===neededThings)?"#7ae868":"#e6ae60"
-                    Column{
-                        x:16
-                        y:10
-                        spacing: 20;
-                        width: parent.width
-                        Text{
-                            id: theText
-                            y:15
-                            font.family: "Swis721 Cn BT"
-                            font.bold: true
-                            width: parent.width*2/3+15
-                            wrapMode: Text.Wrap
-                            font.pointSize: 12.5
-                            color: "white"
-                            text:description
-                            //description text
-                        }
-                        Row{
-                            spacing:2
-                            //progress bar
-                            ProgressBar {
-                                id: thingsLeft
-                                value: currentThings/neededThings
-                                padding: 2
-                                Text{
-                                    z:3
-                                    anchors.centerIn: parent
-                                    color: "white"
-                                    font.family: "Swis721 Cn BT"
-                                    font.bold: true
-                                    font.pointSize: 14
-                                    text:currentThings+"/"+neededThings
-                                }
-                                background: Rectangle {
-                                    implicitWidth: theText.width
-                                    implicitHeight: 32
-                                    color: "#000000"
-                                    radius: 2
-                                }
-                                contentItem: Item {
-                                    implicitWidth: theText.width
-                                    implicitHeight: 26
-                                    Rectangle {
-                                        width: thingsLeft.visualPosition * parent.width
-                                        height: parent.height
-                                        radius: 2
-                                        color: "#06bf0c"
-                                    }
-                                }
-                            }
-                            //filler space
-                            Rectangle{
-                                width: 35
-                                height: 2
-                                color: "transparent"
-                            }
-                            //reward
-                            Text{
-                                anchors.verticalCenter: parent.verticalCenter
-                                color: "black"
-                                font.family: "Swis721 Cn BT"
-                                font.bold: true
-                                font.pointSize: 18
-                                text:reward
-                            }
-                            //coin pic
-                            Image{
-                                anchors.verticalCenter: parent.verticalCenter
-                                width: 35
-                                height: 35
-                                source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinFront.png"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        ListView{
-            z:18
-            anchors.top: countdownText.bottom
-            width: parent.width
-            height: parent.height-header.height-headerFade.height-countdownText.height-button.height-10
-            x: 0;
-            id: listOfMissions
-            delegate: mMissionDelegate
-            model: mMissionModel
-        }
-        Button{
-            z: 19
-            id: button
-            anchors.top: listOfMissions.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: 60
-            width: 140
-            Rectangle{
-                anchors.fill: parent
-                color: "#40ad36"
-
-            }
-            Row{
-                x:10
-                anchors.verticalCenter: parent.verticalCenter
-                Text{
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: "black"
-                    font.family: "Swis721 Cn BT"
-                    font.bold: true
-                    font.pointSize: 18
-                    text:"Get"
-                }
-                Rectangle{
-                    width: 15
-                    height: 2
-                    color: "transparent"
-                }
-
-                //text
-                Text{
-                    anchors.verticalCenter: parent.verticalCenter
-                    color: "black"
-                    font.family: "Swis721 Cn BT"
-                    font.bold: true
-                    font.pointSize: 18
-                    text:"5"
-                }
-                //coin pic
-                Image{
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: 35
-                    height: 35
-                    source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinFront.png"
-                }
-            }
-        }
-        Rectangle{
-            width: button.width
-            height: button.height
-            y: button.y+5
-            x: button.x-5
-            color: "#188509"
         }
     }
+
     Rectangle{
-        visible:false;
-        z:16
         id: fadedRect
-        x: mainRect.x-10
-        y: mainRect.y+17
-        width: mainRect.width
-        height:mainRect.height
+        x: mainRect.x-15
+        y: mainRect.y-25
         color: "#c2910c"
     }
     //MISSIONS ENDS HERE  ------------------------------------------------------
@@ -669,37 +462,6 @@ ApplicationWindow {
                         }
                     }
                 }
-                Rectangle{
-                    color: "transparent"
-                    width: 75
-                    height: 75
-                    radius: 50
-                    border.width: 2
-                    border.color: "black"
-                    Image{
-                        x: 5
-                        y:5
-                        width: 20
-                        height: 20
-                        source: "file:///Users/arjun/Documents/CompetitiveBall/images/exclamationMark.png"
-                        visible:(true)?(true):(false)    //change this to something else
-                    }
-
-                    Image{
-                        z:-1
-                        anchors.centerIn: parent
-                        width: 70
-                        height: 70
-                        source: "file:///Users/arjun/Documents/CompetitiveBall/images/missionsIcon.png"
-                    }
-                    MouseArea{
-                        anchors.fill: parent
-                        onClicked: {
-                            mainRect.visible = true;
-                            fadedRect.visible = true;
-                        }
-                    }
-                }
             }
             Image {
                 id: arrow
@@ -717,6 +479,7 @@ ApplicationWindow {
         anchors.fill: parent
         focus: true
         Keys.onDigit5Pressed: {
+            console.log("smart ass")
             if(event.modifiers===Qt.ControlModifier){
                 console.log("food")
                 verification.visible=true;

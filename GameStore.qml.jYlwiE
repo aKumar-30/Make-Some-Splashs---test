@@ -17,11 +17,8 @@ Page {
     property var mName: "";
     property var mSource: "";
     property bool firstTime: true;
-    property bool firstTime1: true;
-    property var givenName: "";
     Component.onCompleted: {
-        bigPicText.text =givenName;
-
+        someOfTheStuffToDoWhenClicked();
     }
 
     function findCurrentIndex()
@@ -68,7 +65,6 @@ Page {
             purchaseButton.visible=false;
             buttonFadeRect.visible=false;
             lockSign.visible = false;
-            givenName=mName;
         }
         bigPicImage.source= mSource;
         bigPicText.text =mName;
@@ -346,6 +342,16 @@ Page {
                 }
             }
         }
+        //        delegate: Component {
+        //            Loader {
+        //                source: if(checkIfFound()) {
+        //                            console.log("?????")
+        //                            return "GameStoreDelegate.qml"
+        //                        }
+        //                        else
+        //                            return "GameStoreDelegateNot.qml"
+        //            }
+        //        }
         delegate: foundDel
         highlight:
             Rectangle {
@@ -376,7 +382,6 @@ Page {
     Settings{
         category: "mySettingsThing5"
         property alias mBought: root.bought
-        property alias mMName: root.givenName
     }
 }
 

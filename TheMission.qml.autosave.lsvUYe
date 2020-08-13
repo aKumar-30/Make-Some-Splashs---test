@@ -1,0 +1,36 @@
+import QtQuick 2.0
+Item{
+    anchors.fill: parent
+    Rectangle {
+        id: mainRect
+        width: parent.width*1/2
+        height: parent.width*4/5
+        Rectangle{
+            anchors.top: parent.top
+            id: header
+            width: parent.width
+            height: 100
+            color: "#e6ae60"
+            Text{
+                color: "#ffffff"
+                font.family: "AMGDT_IV50"
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 40
+            }
+        }
+        Rectangle{
+            width: parent.width
+            anchors.top:header.bottom
+        }
+    }
+    
+    Rectangle{
+        id: fadedRect
+        x: mainRect.x-15
+        y: mainRect.y-25
+        color: "#c2910c"
+    } 
+}
+
+

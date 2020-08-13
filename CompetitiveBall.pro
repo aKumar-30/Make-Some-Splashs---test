@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         extras.cpp \
+        flashingtimer.cpp \
         main.cpp \
         settingsmanager.cpp
 
@@ -33,4 +34,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     extras.h \
+    flashingtimer.h \
     settingsmanager.h

@@ -5,11 +5,11 @@ SettingsManager::SettingsManager(QObject *parent) : QObject(parent)
 
 }
 
-QVariant SettingsManager::loadSettings(const QString &key)
+double SettingsManager::loadSettings(const QString &key)
 {
     // .ini format example
     QSettings settings(thing(), QSettings::NativeFormat);
-    return settings.value(key,0);
+    return settings.value(key,0).toDouble();
 }
 
  void SettingsManager::writeSettings(const QString &key, const QVariant &variant)

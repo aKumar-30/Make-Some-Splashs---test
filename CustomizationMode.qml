@@ -14,7 +14,7 @@ Page {
     property var ball: basketBall
     //Functions for setting type of ball start
     Component.onCompleted: {
-        startAnim.start()
+        startTextTimer.start()
     }
     SequentialAnimation{
         id: startAnim
@@ -30,14 +30,36 @@ Page {
             from: 0;
         }
     }
-    Text{
+    Rectangle{
+        id: startText
+        color: "transparent"
+        border.color: "brown"
+        border.width: 2
+        radius: 5
+        width: text.implicitWidth+15
+        height: text.implicitHeight+15
         z:9
         opacity:0;
-        id: startText
         anchors.centerIn: parent
-        font.pointSize: 20
-        color: "black"
-        text: "Click the ball the start"
+        Text{
+            id: text
+            anchors.centerIn: parent
+            font.pointSize: 20
+            color: "black"
+            width: 275;
+            wrapMode: Label.Wrap
+            text: "Click the ball or customize to begin"
+        }
+    }
+    Timer{
+        id: startTextTimer
+        interval: 3000
+        onTriggered: {
+            if(interval!=5000)
+                interval= 5000;
+            console.log("Steph")
+            startAnim.start()
+        }
     }
 
     function index1func(){
@@ -379,6 +401,12 @@ Page {
     SequentialAnimation
     {
         id: sequencialAnimation
+        onFinished: {
+            startText.visible = true;
+            startText.opacity=0;
+            startTextTimer.restart()
+        }
+
         MyAnimationCustom{
             id: firstBounce
             upEasingHeight: 20

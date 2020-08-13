@@ -23,8 +23,8 @@ Page {
     property var manyMisses : 0;
     property var manyMakes: 0;
     property var extraPoints: 0;
-    property int level: 1;
-    property int levelIndicator: 1
+    property int level: 2;
+    property int levelIndicator: 21
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
     property var levelIndicatorDown: (level!==3)?(22-levelIndicator):(50-levelIndicator)
@@ -39,6 +39,7 @@ Page {
     property bool newRun: false;
     property var currentRandomOrder5: []
     property var currentIndexForRandom: 0;
+    property var currentBallSource: "";
     property var mIsOpen: Extra.isOpen
 
     onMIsOpenChanged:{
@@ -67,7 +68,6 @@ Page {
         }
         //red
         if(figureOutColor(value)==="#cf3732"){
-            console.log("I went to red")
             let random = Math.random()*3;
             if(random<=1)
                 return "airball"
@@ -92,7 +92,6 @@ Page {
         }
         //green
         else if(figureOutColor(value)==="#29c910"){
-            console.log("I went to green")
             let random = Math.random()*10;
             if(random<=1)
             {
@@ -285,7 +284,7 @@ Page {
             extraPoints=0;
             manyMisses=0;
             manyMakes = 0;
-            mDuration=1300
+            mDuration=1500
             sliderEasingType = Easing.Linear
             mMusic1.stop()
             tryAgainDialog.open()
@@ -340,14 +339,14 @@ Page {
         else if(level===3)
         {
             coinProb = 3;
-            mPauseAnim.duration-=20;
+            mPauseAnim.duration-=15;
             handleId.visible=false;
             sliderId.enabled=true;
             //clearling the last times random order
             currentRandomOrder5=[];
             //making sure it starts at the first index (index 0);
             currentIndexForRandom = 0;
-            newRandomColors3();
+             newRandomColors3();
             mPauseAnim.restart();
 
         }
@@ -369,6 +368,7 @@ Page {
         Component.onCompleted: {
             //Used to show level one message
             levelRectangleAnimation.start()
+           currentBallSource = Global.currentBallSource
         }
         id: sky
         anchors.top: parent.top
@@ -554,7 +554,7 @@ Page {
                 flipable.back.width = 50;
                 flipable.front.width = 50;
                 flipable.front.height = 50;
-                Extra.numCoins++;
+                 Extra.numCoins++;
 
                 //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
                 if (Math.floor((Math.random()*coinProb))==0){
@@ -616,7 +616,7 @@ Page {
         x:33;
         width: 115
         height: 115
-        source: Extra.ballSource
+        source: currentBallSource
     }
     //feedback label
     Label{
@@ -973,8 +973,7 @@ Page {
             let level3ShotAccuracy = figureOutShotWithColor(value);
             let pointsThisRound = 0;
 
-            if(level3ShotAccuracy==="airball"|| level3ShotAccuracy==="null"&&(value <110  || value >890)){
-                console.log("Shooting an airball")
+            if(value <110  || value >890 || level3ShotAccuracy==="airball"){
                 manyMisses++;
                 manyMakes=0;
                 points -= 120;
@@ -984,7 +983,7 @@ Page {
                 random_number = Math.floor((Math.random() * 6));
                 feedbackLabel.font.italic = true;
             }
-            else if(level3ShotAccuracy==="backboardMiss"|| level3ShotAccuracy==="null"&&(value <190 || value >820)){
+            else if(value <190 || value >820 || level3ShotAccuracy==="backboardMiss"){
                 manyMisses++;
                 manyMakes=0;
                 points -= 50;
@@ -993,7 +992,7 @@ Page {
                 feedback = ["Well, better than an airball", "Atleast you hit the backboard", "Your NBA hopes are dwindling", "Next time, try to hit the rim", "Might want to start taking some basketball lessons", "Not your worst..."]
                 random_number = Math.floor((Math.random() * 6));
             }
-            else if(level3ShotAccuracy==="rimMiss"|| level3ShotAccuracy==="null"&&(value <290 || value >720)){
+            else if(value <290 || value >720 || level3ShotAccuracy==="rimMiss"){
                 manyMisses++;
                 manyMakes=0;
                 points -= 20;
@@ -1002,7 +1001,7 @@ Page {
                 feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time"]
                 random_number = Math.floor((Math.random() * 5));
             }
-            else if(level3ShotAccuracy==="backboardMake"|| level3ShotAccuracy==="null"&&(value < 330 || value >680)){
+            else if(value < 330 || value >680 || level3ShotAccuracy==="backboardMake"){
                 manyMakes++;
                 manyMisses=0
                 points +=30;
@@ -1011,7 +1010,7 @@ Page {
                 feedback = ["Good shot","A make is a make", "A bucket is a bucket", "Lucky shot??", "Banks don't count...try again", "According to Satvik: Banks don't count...try again", "You can do even better"]
                 random_number = Math.floor((Math.random() * 7));
             }
-            else if(level3ShotAccuracy==="rimMake"|| level3ShotAccuracy==="null"&&(value <420 || value > 570)){
+            else if(value <420 || value > 570 || level3ShotAccuracy==="rimMake"){
                 manyMakes++;
                 manyMisses=0
 
@@ -1021,8 +1020,7 @@ Page {
                 feedback = ["I thought that was going to miss", "The rim was on your side", "Looks like you are on a set path to the NBA", "Amazing shot!", "Pretty nice!"]
                 random_number = Math.floor((Math.random() * 5));
             }
-            else if(level3ShotAccuracy==="splash"|| level3ShotAccuracy==="null"&&(value <480|| value>510)){
-                console.log("Shooting an splash")
+            else if(value <480|| value>510 || level3ShotAccuracy==="splash"){
                 manyMakes++;
                 manyMisses=0
 
@@ -1034,7 +1032,6 @@ Page {
             }
             else{
                 //need these stuffy here for if statement to check for make the work
-                console.log("Shooting an splash")
                 manyMakes++;
                 manyMisses=0
 
@@ -1894,6 +1891,7 @@ Page {
         category: "allOtherStuff1"
         id: mSettings
         property alias personalBest: root.personalBest
+        property alias mCurrentBallSource: root.currentBallSource
     }
 }
 

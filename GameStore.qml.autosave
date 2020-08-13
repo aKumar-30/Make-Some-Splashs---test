@@ -34,7 +34,7 @@ Page {
     function checkIfFound()
     {
         found = false;
-        for(var i =0; i < bought.length; i++){
+        for(let i =0; i < bought.length; i++){
             if(bought[i]===mName){
                 found = true;
                 return true;
