@@ -1,6 +1,7 @@
 #include "extras.h"
 
-Extras::Extras(QObject *parent) : QObject(parent), m_volume(0.0), m_isOpen(false), m_numCoins(64), m_ballSource("file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png")
+Extras::Extras(QObject *parent) : QObject(parent), m_volume(0.0), m_isOpen(false), m_numCoins(64),
+    m_ballSource("file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"),m_personalBest(1243)
 {
 
 }
@@ -60,4 +61,18 @@ void Extras::setBallSource(QString ballSource)
 
     m_ballSource = ballSource;
     emit ballSourceChanged(m_ballSource);
+}
+
+int Extras::personalBest() const
+{
+    return m_personalBest;
+}
+
+void Extras::setPersonalBest(int personalBest)
+{
+    if (m_personalBest == personalBest)
+        return;
+
+    m_personalBest = personalBest;
+    emit personalBestChanged(m_personalBest);
 }

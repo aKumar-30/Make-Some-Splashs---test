@@ -57,7 +57,6 @@ Page {
         onTriggered: {
             if(interval!=5000)
                 interval= 5000;
-            console.log("Steph")
             startAnim.start()
         }
     }
@@ -276,7 +275,7 @@ Page {
                         thirdBounce.rotationNumber = 0
                     }
                     function threeBallBounce(){
-                        firstBounceDuration=root.duration*4/12
+                        firstBounceDuration=root.duration*5/12
                         firstBounce.upEasingType=Easing.OutCirc
                         firstBounce.downEasingType=Easing.InCirc
                         firstBounce.toX = (root.width-ball.width)*4/12
@@ -290,11 +289,11 @@ Page {
                         secondBounce.rotationNumber = 360
                         secondBounce.toY= 230
 
-                        thirdBounceDuration=root.duration*4/12
+                        thirdBounceDuration=root.duration*3/12
                         thirdBounce.upEasingType=Easing.OutCirc
                         thirdBounce.downEasingType=Easing.OutBounce
                         thirdBounce.toX = (root.width-ball.width)
-                        thirdBounce.rotationNumber = 360
+                        thirdBounce.rotationNumber = 720
                         thirdBounce.toY = 300
                     }
 
@@ -425,7 +424,7 @@ Page {
             id: thirdBounce
             upEasingHeight: 400
             toX: (root.width-ball.width)
-            animationDuration: secondBounceDuration
+            animationDuration: thirdBounceDuration
         }
     }
     Rectangle{

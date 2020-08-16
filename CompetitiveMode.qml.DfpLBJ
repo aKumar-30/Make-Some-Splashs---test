@@ -1141,6 +1141,27 @@ Page {
 
             insideRectangleMouseArea.enabled = false;
         }
+        Item {
+            anchors.fill: parent
+            focus: (level!=3)?true:false
+            Keys.onPressed: {
+                if (event.key === Key_Space){
+                    //MAKE SURE THIS STAYS THE SAME AS THE MOUSE AREA BELOW SHOULD BE EXACTLY THE SAME!!!
+                    if(stateRectId.state=="notPaused" && level!==3){
+                        if(!seqAnimationId.running&&!pointingFinger.visible){
+                            seqAnimationId.start();
+                            whatToDoWhenClicked=true
+                        }
+                        else{
+                            seqAnimationId.stop();
+                            insideContainerId.sliderStopped(sliderId.value);
+                        }
+                    }
+                    pointingFinger.visible=false;
+                    firstTime2=false
+                }
+            }
+        }
         MouseArea{
             id: insideRectangleMouseArea
             enabled: false;

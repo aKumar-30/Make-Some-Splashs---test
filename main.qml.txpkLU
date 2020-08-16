@@ -27,18 +27,13 @@ ApplicationWindow {
     property var currentMissionRewards: 0;
     property var arr: []
     property var currentMissionsNumber: []
-    Audio{
-        id: mMusic1
-        source:"file:///Users/arjun/Documents/CompetitiveBall/images/mMusic1.wav"
-        loops:Audio.Infinite
-        volume: Extra.volume
-    }
+
     Component.onDestruction: {
-        mMusic1.stop()
+        console.log("Coins: "+Extra.numCoins)
+        console.log(Extra.volume)
         s_manager.writeSettings("volume0100", Extra.volume);
         s_manager.writeSettings("numCoins21", Extra.numCoins);
         s_manager.writeSettings("ballSource", Extra.ballSource);
-        s_manager.writeSettings("personalBest55",Extra.personalBest);
     }
     SettingsManager{
         id: s_manager
@@ -51,72 +46,47 @@ ApplicationWindow {
         }
         stackView.push("qrc:/CompetitiveMode.qml");
         stackView.pop()
-        //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
 
         storeForSettings();
 
-        var datamodel = []
-        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-        datastore = JSON.stringify(datamodel)
     }
-    property string datastore: ""
-    Component.onCompleted: {
-        mMusic1.play()
-        if (datastore) {
-            mMissionModel.clear()
-            var datamodel = JSON.parse(datastore)
-            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        }
-    }
-
-    Settings {
-        property alias datastore: root.datastore
-    }
-
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
     function storeForSettings(){
-        if(currentMissionsNumber.length===0){
-            currentMissionsNumber.push(displayDelegateModel.items.get(0).model.index);
-            currentMissionsNumberChanged()
-            currentMissionsNumber.push(displayDelegateModel.items.get(1).model.index);
-            currentMissionsNumberChanged()
-            currentMissionsNumber.push(displayDelegateModel.items.get(2).model.index);
-            currentMissionsNumberChanged()
+        for(let i =0; i< mMissionModel.count; i++){
+            if(displayDelegateModel.items.get(i).model.description===mMissionModel.get(i).description){
+                currentMissionsNumber.push(i);
+            }
         }
     }
-    function checkIfButtonNeedsToBeVisible(whatFor){
+    function checkIfButtonNeedsToBeVisible(){
         let thing = false;
         currentMissionRewards=0;
-        if(currentMissionsNumber.length==0){
-            for(let j =0; j< displayDelegateModel.count;j++){
-                if(displayDelegateModel.items.get(j).model.currentThings>=displayDelegateModel.items.get(j).model.neededThings && displayDelegateModel.items.get(j).model.completed!==true){
-                    if(whatFor)
-                        currentMissionRewards+=displayDelegateModel.items.get(j).model.reward
+        for(let i =0; i< displayDelegateModel.items.count;i++){
+            console.log("Needed things for thingy: "+displayDelegateModel.items.get(i).model.neededThings)
+            if(displayDelegateModel.items.get(i).model.currentThings>=displayDelegateModel.items.get(i).model.neededThings){
+                currentMissionRewards+=displayDelegateModel.items.get(i).model.reward
+                if(displayDelegateModel.items.get(i).model.completed)
                     thing=true;
-                }
             }
-            return thing;
         }
-        else{
-            for(let i =0; i< 3; i++){
-                if( mMissionModel.get(currentMissionsNumber[i]).currentThings>=mMissionModel.get(currentMissionsNumber[i]).neededThings && mMissionModel.get(currentMissionsNumber[i]).completed!==true){
-                    if(whatFor)
-                        currentMissionRewards+= mMissionModel.get(currentMissionsNumber[i]).reward
-                    thing=true;
-                }
-            }
-            return thing
-        }
+        return true;
     }
+
     Connections{
         target: FlashingTimer
         function onCallUpdateMissions(){
+            //            let rowCount = mMissionModel.count;
+            //            mArray = [];
+            //            displayDelegateModel.items.removeGroups(0, 3, "todaysMissions");
+            //            for(let i =0;i < rowCount;i++ ) {
+            //                let entry = mMissionModel.get(i);
+            //                mArray.push(entry)
+            //            }
+            //            arr= mArray.sort(() => Math.random() - Math.random()).slice(0, 3)
+            //            displayDelegateModel.items.insert(arr[0], "todaysMissions");
+            //            displayDelegateModel.items.insert(arr[1], "todaysMissions");
+            //            displayDelegateModel.items.insert(arr[2], "todaysMissions");
             updateMissions()
-            currentMissionsNumber=[]
-            currentMissionsNumber.push(displayDelegateModel.items.get(0).model.index)
-            currentMissionsNumber.push(displayDelegateModel.items.get(1).model.index)
-            currentMissionsNumber.push(displayDelegateModel.items.get(2).model.index)
-            currentMissionsNumberChanged()
         }
     }
     function updateMissions(){
@@ -137,6 +107,7 @@ ApplicationWindow {
             //subject to change
             arr[h].completed=false;
         }
+
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
         displayDelegateModel.items.insert(arr[1], "todaysMissions");
         displayDelegateModel.items.insert(arr[2], "todaysMissions");
@@ -187,40 +158,35 @@ ApplicationWindow {
         //Actual model stuff START HERE-----------------------------------
         ListModel{
             id: mMissionModel
-            ListElement{//0
-                index: 0
+            ListElement{
                 completed: false;
                 description: "Splash 3 times in a row 99089 9898 89098 8808 9 89089 890"
                 reward: 6;
                 neededThings: 4
                 currentThings: 4
             }
-            ListElement{//1
-                index: 1
+            ListElement{
                 completed: false;
                 description: "Miss at the backboard twice"
                 reward: 2;
                 neededThings: 2
                 currentThings: 2
             }
-            ListElement{//2
-                index: 2
+            ListElement{
                 completed: false;
                 description: "Buy 3 different types of balls"
                 reward: 8;
                 neededThings: 3
                 currentThings: 3
             }
-            ListElement{//3
-                index: 3
+            ListElement{
                 completed: false;
                 description: "Test number number number 1111"
                 reward: 3;
                 neededThings: 2
                 currentThings: 2
             }
-            ListElement{//4
-                index: 4
+            ListElement{
                 completed: false;
                 name: ""
                 description: "Test number number number 2222"
@@ -228,32 +194,28 @@ ApplicationWindow {
                 neededThings: 2
                 currentThings: 2
             }
-            ListElement{//5
-                index: 5
+            ListElement{
                 completed: false;
                 description: "Test number number number 3333"
                 reward: 3;
                 neededThings: 2
                 currentThings: 2
             }
-            ListElement{//6
-                index: 6
+            ListElement{
                 completed: false;
                 description: "Test number number number 4444"
                 reward: 3;
                 neededThings: 2
                 currentThings: 2
             }
-            ListElement{//7
-                index: 7
+            ListElement{
                 completed: false;
                 description: "Test number number number 5555"
                 reward: 3;
                 neededThings: 1
-                currentThings: 1
+                currentThings: 2
             }
-            ListElement{//8
-                index: 8
+            ListElement{
                 completed: false
                 description: "Get 3 coins in a match twice"
                 reward: 3;
@@ -402,13 +364,12 @@ ApplicationWindow {
             filterOnGroup: "todaysMissions"
             Component.onCompleted: {
                 if(currentMissionsNumber.length!=0){
-                    displayDelegateModel.items.insert(mMissionModel.get(currentMissionsNumber[0]), "todaysMissions");
-                    displayDelegateModel.items.insert(mMissionModel.get(currentMissionsNumber[1]), "todaysMissions");
-                    displayDelegateModel.items.insert(mMissionModel.get(currentMissionsNumber[2]), "todaysMissions");
+                    for(let i =0; i< currentMissionsNumber.length; i++){
+                       displayDelegateModel.items.insert(mMissionModel.get(currentMissionRewards[i]), "todaysMissions");
+                    }
                 }
-                else{
+                else
                     updateMissions()
-                }
             }
         }
         //Actual model stuff ENDS HERE------------------------------------------------------------
@@ -420,7 +381,7 @@ ApplicationWindow {
                     for(let i =0; i< displayDelegateModel.items.count;i++){
                         if(displayDelegateModel.items.get(i).model.currentThings>=displayDelegateModel.items.get(i).model.neededThings){
                             displayDelegateModel.items.get(i).model.completed=true;
-                            mMissionModel.get(displayDelegateModel.items.get(i).model.index).completed=true
+                            console.log("hello world")
                         }
                     }
                     visible=false;
@@ -793,17 +754,8 @@ ApplicationWindow {
                 anchors.fill: parent
                 source: "file:///Users/arjun/Documents/CompetitiveBall/images/homeBackground.png"
             }
-            Text{
-                x:528
-                y:547
-                text: "PB: " +Extra.personalBest;
-                font.pointSize: 12
-                font.bold: true
-                font.family: "Helventica"
-            }
             //coin thing in corner
             Rectangle{
-                id:coinThing
                 Row{
                     spacing: 20;
                     x: 10
@@ -936,7 +888,7 @@ ApplicationWindow {
                         width: 20
                         height: 20
                         source: "file:///Users/arjun/Documents/CompetitiveBall/images/exclamationMark.png"
-                        visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
+                        visible: true    //change this to something else
                     }
 
                     Image{
@@ -951,7 +903,7 @@ ApplicationWindow {
                         onClicked: {
                             mainRect.visible = true;
                             mainRectFade.visible = true;
-                            checkIfButtonNeedsToBeVisible(true);
+                            checkIfButtonNeedsToBeVisible();
                         }
                     }
                 }
@@ -973,6 +925,7 @@ ApplicationWindow {
         focus: true
         Keys.onDigit5Pressed: {
             if(event.modifiers===Qt.ControlModifier){
+                console.log("food")
                 verification.visible=true;
             }
         }
@@ -1001,6 +954,6 @@ ApplicationWindow {
     }
     Settings{
         category: "missions"
-        property alias fdjkjiojkjah2sdljadgdodsadasdf42dadsf: root.currentMissionsNumber
+        property alias something: root.currentMissionsNumber
     }
 }

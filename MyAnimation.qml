@@ -12,7 +12,6 @@ SequentialAnimation {
     property var percentageLarge: 0.73
     property bool shrink: true
     ParallelAnimation {
-
         SequentialAnimation {
             NumberAnimation {
                 target: basketBall

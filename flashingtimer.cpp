@@ -1,20 +1,23 @@
 #include "flashingtimer.h"
 #include <stdlib.h>
 #include <time.h>
-#include <QTime>
+#include <QDateTime>
 #include <string>
 #include <sstream>
 #include <QDebug>
-FlashingTimer::FlashingTimer(QTime tomorrow1,QObject *parent)
+FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
     :QObject(parent), tomorrow(tomorrow1),timer(new QTimer(this)),difference(0),m_whatToPrint("Getting ready..."){
     //Intialize the timer
     srand(time(NULL));
 
     connect(timer,&QTimer::timeout, [=](){
-        QTime now = QTime::currentTime();
+        QDateTime now = QDateTime::currentDateTime();
         difference = now.secsTo(tomorrow);
         difference += 86400;
         display();
+        if(difference == 0){
+            emit callUpdateMissions();
+        }
     });
 
     timer->start(1000);
@@ -52,5 +55,15 @@ void FlashingTimer::display(){
         x+="0";
     x+=QString::number(seconds);
     setWhatToPrint(x);
-    qDebug()<<(whatToPrint());
+}
+
+FlashingTimer::FlashingTimer(const FlashingTimer &source)
+    :QObject{nullptr},tomorrow{source.tomorrow}{
+}
+
+FlashingTimer &FlashingTimer::operator=(const FlashingTimer &rhs){
+    if(this==&rhs)
+        return *this;
+    tomorrow=rhs.tomorrow;
+    return *this;
 }

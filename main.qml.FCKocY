@@ -70,7 +70,7 @@ ApplicationWindow {
     }
 
     Settings {
-        property alias datastore: root.datastore
+        property alias datastore1: root.datastore
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -84,14 +84,12 @@ ApplicationWindow {
             currentMissionsNumberChanged()
         }
     }
-    function checkIfButtonNeedsToBeVisible(whatFor){
+    function checkIfButtonNeedsToBeVisible(){
         let thing = false;
-        currentMissionRewards=0;
         if(currentMissionsNumber.length==0){
             for(let j =0; j< displayDelegateModel.count;j++){
                 if(displayDelegateModel.items.get(j).model.currentThings>=displayDelegateModel.items.get(j).model.neededThings && displayDelegateModel.items.get(j).model.completed!==true){
-                    if(whatFor)
-                        currentMissionRewards+=displayDelegateModel.items.get(j).model.reward
+                    currentMissionRewards+=displayDelegateModel.items.get(j).model.reward
                     thing=true;
                 }
             }
@@ -100,12 +98,11 @@ ApplicationWindow {
         else{
             for(let i =0; i< 3; i++){
                 if( mMissionModel.get(currentMissionsNumber[i]).currentThings>=mMissionModel.get(currentMissionsNumber[i]).neededThings && mMissionModel.get(currentMissionsNumber[i]).completed!==true){
-                    if(whatFor)
-                        currentMissionRewards+= mMissionModel.get(currentMissionsNumber[i]).reward
-                    thing=true;
+                    currentMissionRewards+= mMissionModel.get(currentMissionsNumber[i]).reward
+                    thing =true;
+
                 }
             }
-            return thing
         }
     }
     Connections{
@@ -250,7 +247,7 @@ ApplicationWindow {
                 description: "Test number number number 5555"
                 reward: 3;
                 neededThings: 1
-                currentThings: 1
+                currentThings: 2
             }
             ListElement{//8
                 index: 8
@@ -936,7 +933,7 @@ ApplicationWindow {
                         width: 20
                         height: 20
                         source: "file:///Users/arjun/Documents/CompetitiveBall/images/exclamationMark.png"
-                        visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
+                        visible: checkIfButtonNeedsToBeVisible()    //change this to something else
                     }
 
                     Image{
@@ -951,7 +948,7 @@ ApplicationWindow {
                         onClicked: {
                             mainRect.visible = true;
                             mainRectFade.visible = true;
-                            checkIfButtonNeedsToBeVisible(true);
+                            checkIfButtonNeedsToBeVisible();
                         }
                     }
                 }
@@ -1001,6 +998,6 @@ ApplicationWindow {
     }
     Settings{
         category: "missions"
-        property alias fdjkjiojkjah2sdljadgdodsadasdf42dadsf: root.currentMissionsNumber
+        property alias fdjkjiojkjah2sdljfljk34adsak1sddads0odsadasdf42dadsf: root.currentMissionsNumber
     }
 }

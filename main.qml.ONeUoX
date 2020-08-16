@@ -94,6 +94,8 @@ ApplicationWindow {
                         currentMissionRewards+=displayDelegateModel.items.get(j).model.reward
                     thing=true;
                 }
+//                else if(displayDelegateModel.items.get(j).model.currentThings>=displayDelegateModel.items.get(j).model.neededThings)
+//                    thing=thing;
             }
             return thing;
         }
@@ -104,6 +106,8 @@ ApplicationWindow {
                         currentMissionRewards+= mMissionModel.get(currentMissionsNumber[i]).reward
                     thing=true;
                 }
+//                else if(mMissionModel.get(currentMissionsNumber[i]).currentThings>=mMissionModel.get(currentMissionsNumber[i]).neededThings)
+//                    thing =thing;
             }
             return thing
         }
@@ -1001,6 +1005,6 @@ ApplicationWindow {
     }
     Settings{
         category: "missions"
-        property alias fdjkjiojkjah2sdljadgdodsadasdf42dadsf: root.currentMissionsNumber
+        property alias fdjkjiojkjah2sdljadgdfadljk34dasa9dsak1sdaddads0odsadasdf42dadsf: root.currentMissionsNumber
     }
 }

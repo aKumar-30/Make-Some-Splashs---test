@@ -70,7 +70,7 @@ ApplicationWindow {
     }
 
     Settings {
-        property alias datastore: root.datastore
+        property alias datastore1: root.datastore
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -94,6 +94,8 @@ ApplicationWindow {
                         currentMissionRewards+=displayDelegateModel.items.get(j).model.reward
                     thing=true;
                 }
+//                else if(displayDelegateModel.items.get(j).model.currentThings>=displayDelegateModel.items.get(j).model.neededThings)
+//                    thing=thing;
             }
             return thing;
         }
@@ -104,6 +106,8 @@ ApplicationWindow {
                         currentMissionRewards+= mMissionModel.get(currentMissionsNumber[i]).reward
                     thing=true;
                 }
+//                else if(mMissionModel.get(currentMissionsNumber[i]).currentThings>=mMissionModel.get(currentMissionsNumber[i]).neededThings)
+//                    thing =thing;
             }
             return thing
         }
@@ -193,7 +197,7 @@ ApplicationWindow {
                 description: "Splash 3 times in a row 99089 9898 89098 8808 9 89089 890"
                 reward: 6;
                 neededThings: 4
-                currentThings: 4
+                currentThings: 1
             }
             ListElement{//1
                 index: 1
@@ -201,7 +205,7 @@ ApplicationWindow {
                 description: "Miss at the backboard twice"
                 reward: 2;
                 neededThings: 2
-                currentThings: 2
+                currentThings: 1
             }
             ListElement{//2
                 index: 2
@@ -209,7 +213,7 @@ ApplicationWindow {
                 description: "Buy 3 different types of balls"
                 reward: 8;
                 neededThings: 3
-                currentThings: 3
+                currentThings: 1
             }
             ListElement{//3
                 index: 3
@@ -217,7 +221,7 @@ ApplicationWindow {
                 description: "Test number number number 1111"
                 reward: 3;
                 neededThings: 2
-                currentThings: 2
+                currentThings: 1
             }
             ListElement{//4
                 index: 4
@@ -226,7 +230,7 @@ ApplicationWindow {
                 description: "Test number number number 2222"
                 reward: 3;
                 neededThings: 2
-                currentThings: 2
+                currentThings: 1
             }
             ListElement{//5
                 index: 5
@@ -234,7 +238,7 @@ ApplicationWindow {
                 description: "Test number number number 3333"
                 reward: 3;
                 neededThings: 2
-                currentThings: 2
+                currentThings: 1
             }
             ListElement{//6
                 index: 6
@@ -242,7 +246,7 @@ ApplicationWindow {
                 description: "Test number number number 4444"
                 reward: 3;
                 neededThings: 2
-                currentThings: 2
+                currentThings: 1
             }
             ListElement{//7
                 index: 7
@@ -250,7 +254,7 @@ ApplicationWindow {
                 description: "Test number number number 5555"
                 reward: 3;
                 neededThings: 1
-                currentThings: 1
+                currentThings: 0
             }
             ListElement{//8
                 index: 8
@@ -1001,6 +1005,6 @@ ApplicationWindow {
     }
     Settings{
         category: "missions"
-        property alias fdjkjiojkjah2sdljadgdodsadasdf42dadsf: root.currentMissionsNumber
+        property alias fdjkjiojkjah2sdljadgdfljk34dasa9dsak1sdaddads0odsadasdf42dadsf: root.currentMissionsNumber
     }
 }

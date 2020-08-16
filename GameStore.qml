@@ -34,7 +34,7 @@ Page {
     function checkIfFound()
     {
         found = false;
-        for(var i =0; i < bought.length; i++){
+        for(let i =0; i < bought.length; i++){
             if(bought[i]===mName){
                 found = true;
                 return true;
@@ -90,11 +90,13 @@ Page {
             x: 10
             y:10
             Image{
+                anchors.verticalCenter: parent.verticalCenter
                 width: 25
                 height: 25
                 source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinFront.png"
             }
             Text{
+                anchors.verticalCenter: parent.verticalCenter
                 property int value: Extra.numCoins
                 text: value
                 font.family: "Stencil"
@@ -336,7 +338,6 @@ Page {
                             count = price;
                             mName = name;
                             mSource = picSource;
-                            console.log("Clicked on :" + name)
                             //what happens when u click
                             grid.currentIndex=index;
                             checkIfFound()
