@@ -16,6 +16,7 @@ Page {
     property int count: 0;
     property var mName: "";
     property var mSource: "";
+    property var mIndex: -1;
     property bool firstTime: true;
     property bool firstTime1: true;
     property var givenName: "";
@@ -26,10 +27,21 @@ Page {
 
     function findCurrentIndex()
     {
+        console.log(bought)
+        let thing;
         for(let i =0; i < contactModel.count;i++){
             if(contactModel.get(i).picSource=== Extra.ballSource)
-                return i;
+                thing = i
         }
+        for(let k =0; k <bought.length; k++){
+            for(let j = 0; j < contactModel.count; j++){
+                if(bought[k]===contactModel.get(j).name){
+                    contactModel.get(j).isBought=true
+                    break;
+                }
+            }
+        }
+        return thing;
     }
     function checkIfFound()
     {
@@ -232,58 +244,78 @@ Page {
     ListModel{
         id: contactModel
         ListElement{
+            index:0
+            isBought: false
             type: "regularBall";
             name: "Normal Ball"
             picSource: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"
             price: 0;
         } ListElement{
+            index:1
+            isBought: false
             type: "blueBall";
             name: "Blue"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/blueBall.png"
             price: 10
         } ListElement{
+            index:2
+            isBought: false
             type: "greenBall";
             name: "Green"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/greenBall.png";
             price: 10
         } ListElement{
+            index:3
+            isBought: false
             type: "redBall";
             name: "Red"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/redBall.png"
             price: 15
         }ListElement{
+            index:4
+            isBought: false
             type: "tennisBall";
             name: "Tennis Ball"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/tennis_ball.png"
             price: 15
         }ListElement{
+            index:5
+            isBought: false
             type: "soccerBall";
             name: "Soccer Ball"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/soccer_ball.png"
             price: 20
         }ListElement{
+            index:6
+            isBought: false
             type: "bowlingBall";
             name: "Bowling Ball"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/bowling_ball.png"
             price: 20
 
         }ListElement{
+            index:7
+            isBought: false
             type: "volleyBall";
             name: "Volley Ball"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/volley_ball.png"
             price: 25
         }
         ListElement{
+            index:8
+            isBought: false
             type: "moon";
             name: "The Moon"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/moon.png"
             price: 80
         }
         ListElement{
+            index:9
+            isBought: false
             type: "Earth";
             name: "The Earth"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
-            price: 80
+            price: 85
         }
     }
 
@@ -310,7 +342,7 @@ Page {
                     border.width: 3
                     border.color: "black"
                     radius: 5;
-                    color: "white"
+                    color: (isBought)?"white":"#8c8c8c"
                     Image{
                         id: mImage
                         x:parent.x

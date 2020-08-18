@@ -12,6 +12,8 @@ class Extras : public QObject
     Q_PROPERTY(int numCoins READ numCoins WRITE setNumCoins NOTIFY numCoinsChanged)
     Q_PROPERTY(QString ballSource READ ballSource WRITE setBallSource NOTIFY ballSourceChanged)
     Q_PROPERTY(int personalBest READ personalBest WRITE setPersonalBest NOTIFY personalBestChanged)
+    Q_PROPERTY(QString datastore READ datastore WRITE setDatastore NOTIFY datastoreChanged)
+    Q_PROPERTY(QString miniStore READ miniStore WRITE setMiniStore NOTIFY miniStoreChanged)
 public:
     explicit Extras(QObject *parent = nullptr);
     double volume() const;
@@ -26,8 +28,13 @@ public:
     void setBallSource(QString ballSource);
 
     int personalBest() const;
-
     void setPersonalBest(int personalBest);
+
+    QString datastore() const;
+    void setDatastore(QString datastore);
+
+    QString miniStore() const;
+    void setMiniStore(QString miniStore);
 
 signals:
     void volumeChanged(double volume);
@@ -35,6 +42,8 @@ signals:
     void numCoinsChanged(int numCoins);
     void ballSourceChanged(QString ballSource);
     void personalBestChanged(int personalBest);
+    void datastoreChanged(QString datastore);
+    void miniStoreChanged(QString miniStore);
 
 private:
     double m_volume;
@@ -42,6 +51,8 @@ private:
     int m_numCoins;
     QString m_ballSource;
     int m_personalBest;
+    QString m_datastore;
+    QString m_miniStore;
 };
 
 #endif // EXTRAS_H

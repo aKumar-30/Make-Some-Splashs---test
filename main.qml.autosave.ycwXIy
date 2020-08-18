@@ -39,7 +39,7 @@ ApplicationWindow {
         s_manager.writeSettings("numCoins21", Extra.numCoins);
         s_manager.writeSettings("ballSource", Extra.ballSource);
         s_manager.writeSettings("personalBest55",Extra.personalBest);
-        s_manager.writeSettings("kemba22",Extra.datastore);
+        s_manager.writeSettings("datastoreeekss",Extra.datastore);
     }
     SettingsManager{
         id: s_manager
@@ -223,60 +223,6 @@ ApplicationWindow {
                 neededThings: 2
                 currentThings: 0
             }
-            ListElement{//4
-                index: 4
-                completed: false;
-                description: "Make at the rim 6 times in a row in level 3. Record:"
-                multipleTimes: true
-                reward: 6;
-                neededThings: 6
-                currentThings: 0
-            }
-            ListElement{//5
-                index: 5
-                completed: false;
-                description: "Make at the backboard 9 times in a row in level 2. Record:"
-                multipleTimes: true
-                reward: 8;
-                neededThings: 9
-                currentThings: 0
-            }
-            ListElement{//6
-                index: 6
-                completed: false;
-                description: "Splash the ball 8 times in a row during level 3. Record:"
-                multipleTimes: true
-                reward: 7;
-                neededThings: 8
-                currentThings: 0
-            }
-            ListElement{//7
-                index: 7
-                completed: false;
-                description: "Make all the shots in level 1. Record"
-                multipleTimes: true
-                reward: 9;
-                neededThings: 21
-                currentThings: 0
-            }
-            ListElement{//8
-                index: 8
-                completed: false;
-                description: "Make all the shots in level 2. Record"
-                multipleTimes: true
-                reward: 23;
-                neededThings: 21
-                currentThings: 0
-            }
-            ListElement{//9
-                index: 9
-                completed: false
-                description: "Miss two consecutively at the rim in level 3. Record:"
-                multipleTimes: true
-                reward: 6;
-                neededThings: 2
-                currentThings: 0
-            }
             //            ListElement{//5
             //                index: 5
             //                completed: false;
@@ -284,15 +230,6 @@ ApplicationWindow {
             //                multipleTimes: false
             //                reward: 3;
             //                neededThings: 3
-            //                currentThings: 0
-            //            }
-            //            ListElement{//6
-            //                index: 6
-            //                completed: false;
-            //                description: "Purchase 'The Moon' ball"
-            //                multipleTimes: false
-            //                reward: 9;
-            //                neededThings: 1
             //                currentThings: 0
             //            }
             //            ListElement{//6
@@ -359,7 +296,15 @@ ApplicationWindow {
             //                neededThings: 2
             //                currentThings: 0
             //            }
-            //
+            //            ListElement{//13
+            //                index: 13
+            //                completed: false
+            //                description: "Miss two consecutively at the rim in level 3. Record:"
+            //                multipleTimes: true
+            //                reward: 3;
+            //                neededThings: 3
+            //                currentThings: 0
+            //            }
             //            ListElement{//14
             //                index: 14
             //                completed: false;
@@ -810,28 +755,16 @@ ApplicationWindow {
         title: "Warning"
 
         standardButtons: Dialog.Ok | Dialog.Cancel
-        Timer{
-            id: thePauseTimer
-            interval: 500
-            onTriggered: {
-                //update model
-                mMissionModel.clear()
-                var datamodel = JSON.parse(Extra.datastore)
-                for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-                console.log("From main mode: "+Extra.datastore)
-
-                //update delegate with updated model
-                for(let s = 0; s< 3; s++){
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(currentMissionsNumber[s]).currentThings
-                }
-            }
-        }
-
         onAccepted: {
             stackView.pop()
             warningDialog.close()
-            //starting timer
-            thePauseTimer.start()
+            //update model
+            mMissionModel.clear()
+            var datamodel = JSON.parse(Extra.datastore)
+            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+            //update delegate
+                var miniModel = JSON.parse(Extra.miniStore)
+                for (let j = 0; j < miniModel.length; ++j) displayDelegateModel.insert(i,miniModel[i],"todaysMissions")
         }
         onRejected: {
             warningDialog.close()
@@ -993,6 +926,10 @@ ApplicationWindow {
                         var datamodel = []
                         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
                         Extra.datastore = JSON.stringify(datamodel)
+                        //update displayDelegateModel
+                        var miniModel = []
+                        for (let j = 0; j < displayDelegateModel.items.count; ++j) miniModel.push(displayDelegateModel.items.get(j))
+                        Extra.miniStore = JSON.stringify(miniModel)
                         //
                         mainRect.visible = false;
                         mainRectFade.visible = false;
@@ -1136,6 +1073,6 @@ ApplicationWindow {
     }
     Settings{
         category: "missions"
-        property alias airconditioning: root.currentMissionsNumber
+        property alias fdjkjiasdsdfokadjj124kadasadsdadasd12sdf23434543f42jmdadsf: root.currentMissionsNumber
     }
 }

@@ -277,6 +277,15 @@ ApplicationWindow {
                 neededThings: 2
                 currentThings: 0
             }
+            ListElement{//10
+                index: 10
+                completed: false;
+                description: "Get exactly 3 coins in a twice"
+                multipleTimes: true
+                reward: 4;
+                neededThings: 2
+                currentThings: 0
+            }
             //            ListElement{//5
             //                index: 5
             //                completed: false;
@@ -313,15 +322,7 @@ ApplicationWindow {
             //                neededThings: 3
             //                currentThings: 0
             //            }
-            //            ListElement{//8
-            //                index: 8
-            //                completed: false;
-            //                description: "Get exactly 3 coins in a twice"
-            //                multipleTimes: true
-            //                reward: 4;
-            //                neededThings: 2
-            //                currentThings: 0
-            //            }
+                        
             //            ListElement{//9
             //                index: 9
             //                completed: false;

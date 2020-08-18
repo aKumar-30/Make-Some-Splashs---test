@@ -39,7 +39,7 @@ ApplicationWindow {
         s_manager.writeSettings("numCoins21", Extra.numCoins);
         s_manager.writeSettings("ballSource", Extra.ballSource);
         s_manager.writeSettings("personalBest55",Extra.personalBest);
-        s_manager.writeSettings("kemba22",Extra.datastore);
+        s_manager.writeSettings("datastore4445",Extra.datastore);
     }
     SettingsManager{
         id: s_manager
@@ -135,7 +135,6 @@ ApplicationWindow {
         for(let h =0; h < arr.length; h++){
             //subject to change
             arr[h].completed=false;
-            arr[h].currentThings=0;
         }
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
         displayDelegateModel.items.insert(arr[1], "todaysMissions");
@@ -223,60 +222,6 @@ ApplicationWindow {
                 neededThings: 2
                 currentThings: 0
             }
-            ListElement{//4
-                index: 4
-                completed: false;
-                description: "Make at the rim 6 times in a row in level 3. Record:"
-                multipleTimes: true
-                reward: 6;
-                neededThings: 6
-                currentThings: 0
-            }
-            ListElement{//5
-                index: 5
-                completed: false;
-                description: "Make at the backboard 9 times in a row in level 2. Record:"
-                multipleTimes: true
-                reward: 8;
-                neededThings: 9
-                currentThings: 0
-            }
-            ListElement{//6
-                index: 6
-                completed: false;
-                description: "Splash the ball 8 times in a row during level 3. Record:"
-                multipleTimes: true
-                reward: 7;
-                neededThings: 8
-                currentThings: 0
-            }
-            ListElement{//7
-                index: 7
-                completed: false;
-                description: "Make all the shots in level 1. Record"
-                multipleTimes: true
-                reward: 9;
-                neededThings: 21
-                currentThings: 0
-            }
-            ListElement{//8
-                index: 8
-                completed: false;
-                description: "Make all the shots in level 2. Record"
-                multipleTimes: true
-                reward: 23;
-                neededThings: 21
-                currentThings: 0
-            }
-            ListElement{//9
-                index: 9
-                completed: false
-                description: "Miss two consecutively at the rim in level 3. Record:"
-                multipleTimes: true
-                reward: 6;
-                neededThings: 2
-                currentThings: 0
-            }
             //            ListElement{//5
             //                index: 5
             //                completed: false;
@@ -284,15 +229,6 @@ ApplicationWindow {
             //                multipleTimes: false
             //                reward: 3;
             //                neededThings: 3
-            //                currentThings: 0
-            //            }
-            //            ListElement{//6
-            //                index: 6
-            //                completed: false;
-            //                description: "Purchase 'The Moon' ball"
-            //                multipleTimes: false
-            //                reward: 9;
-            //                neededThings: 1
             //                currentThings: 0
             //            }
             //            ListElement{//6
@@ -359,7 +295,15 @@ ApplicationWindow {
             //                neededThings: 2
             //                currentThings: 0
             //            }
-            //
+            //            ListElement{//13
+            //                index: 13
+            //                completed: false
+            //                description: "Miss two consecutively at the rim in level 3. Record:"
+            //                multipleTimes: true
+            //                reward: 3;
+            //                neededThings: 3
+            //                currentThings: 0
+            //            }
             //            ListElement{//14
             //                index: 14
             //                completed: false;
@@ -784,9 +728,8 @@ ApplicationWindow {
                     root.height = 785;
                 }
 
-                if(endingPage==="qrc:/CompetitiveMode.qml"){
+                if(endingPage==="qrc:/CompetitiveMode.qml")
                     warningDialog.open();
-                }
                 else{
                     stackView.pop()
                     thisTitle = "Make some splashs!"
@@ -810,28 +753,10 @@ ApplicationWindow {
         title: "Warning"
 
         standardButtons: Dialog.Ok | Dialog.Cancel
-        Timer{
-            id: thePauseTimer
-            interval: 500
-            onTriggered: {
-                //update model
-                mMissionModel.clear()
-                var datamodel = JSON.parse(Extra.datastore)
-                for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-                console.log("From main mode: "+Extra.datastore)
-
-                //update delegate with updated model
-                for(let s = 0; s< 3; s++){
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(currentMissionsNumber[s]).currentThings
-                }
-            }
-        }
-
         onAccepted: {
             stackView.pop()
             warningDialog.close()
-            //starting timer
-            thePauseTimer.start()
+            thisTitle = "Make some splashs!"
         }
         onRejected: {
             warningDialog.close()
@@ -845,7 +770,7 @@ ApplicationWindow {
                 spacing: 10
 
                 Label {
-                    text: "Are you sure you would like to leave? All progress in the current game (including missions) may be lost"
+                    text: "Are you sure you would like to leave? All progress in the current game will be lost"
                     horizontalAlignment: Label.AlignHCenter
                     verticalAlignment: Label.AlignVCenter
                     Layout.fillWidth: true
@@ -989,11 +914,9 @@ ApplicationWindow {
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
-                        //update model
                         var datamodel = []
                         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
                         Extra.datastore = JSON.stringify(datamodel)
-                        //
                         mainRect.visible = false;
                         mainRectFade.visible = false;
                         stackView.push("qrc:/CompetitiveMode.qml");
@@ -1136,6 +1059,6 @@ ApplicationWindow {
     }
     Settings{
         category: "missions"
-        property alias airconditioning: root.currentMissionsNumber
+        property alias fdjkjioj124kadasdasd12sdf23434543f42dadsf: root.currentMissionsNumber
     }
 }

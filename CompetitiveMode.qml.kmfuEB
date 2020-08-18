@@ -43,7 +43,6 @@ Page {
     property var currentRandomOrder5: []
     property var currentIndexForRandom: 0;
     property var mIsOpen: Extra.isOpen
-    property var coinsThisRound: 0
     Component.onDestruction:{
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
@@ -292,15 +291,6 @@ Page {
         if(manyMisses==3)
         {
             if(true){
-                //10
-                if(coinsThisRound===4){
-                    if(!(mMissionModel.get(10).currentThings>=mMissionModel.get(10).neededThings)){
-                        mMissionModel.get(10).currentThings++
-                    }
-                }
-            }
-
-            if(true){
                 //make all counters zero
                 counter0= 0;
                 counter1= 0;
@@ -318,7 +308,7 @@ Page {
                 counter13= 0;
                 counter14= 0;
             }
-            coinsThisRound=0;
+
             giantX.visible= true;
             //Just resetting somethings
             flashingScoreText.color="black"
@@ -603,7 +593,7 @@ Page {
                 flipable.front.width = 50;
                 flipable.front.height = 50;
                 Extra.numCoins++;
-                coinsThisRound++;
+
                 //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
                 if (Math.floor((Math.random()*coinProb))==0){
                     flipable.visible=true;
@@ -1059,21 +1049,9 @@ Page {
                         counter5=0;
                     }
                     //6
-                    if(level===3){
-                        if(counter6>mMissionModel.get(6).currentThings&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)){
-                            mMissionModel.get(6).currentThings=counter6
-                        }
-                        counter6=0;
-                    }
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1127,21 +1105,9 @@ Page {
                         counter5=0;
                     }
                     //6
-                    if(level===3){
-                        if(counter6>mMissionModel.get(6).currentThings&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)){
-                            mMissionModel.get(6).currentThings=counter6
-                        }
-                        counter6=0;
-                    }
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1195,21 +1161,9 @@ Page {
                         counter5=0;
                     }
                     //6
-                    if(level===3){
-                        if(counter6>mMissionModel.get(6).currentThings&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)){
-                            mMissionModel.get(6).currentThings=counter6
-                        }
-                        counter6=0;
-                    }
                     //7
                     //8
                     //9
-                    if(level===3){
-                        counter9++;
-                        if(counter9===2&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=2
-                        }
-                    }
                     //10
                     //11
                     //12
@@ -1257,27 +1211,15 @@ Page {
                     }
                     //5
                     if(level===2){
-                        counter5++;
-                        if(counter5===9&&!(mMissionModel.get(5).currentThings>=mMissionModel.get(5).neededThings)){
-                            mMissionModel.get(5).currentThings=9
-                        }
+                            counter5++;
+                            if(counter5===9&&!(mMissionModel.get(5).currentThings>=mMissionModel.get(5).neededThings)){
+                                mMissionModel.get(5).currentThings=9
+                            }
                     }
                     //6
-                    if(level===3){
-                        if(counter6>mMissionModel.get(6).currentThings&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)){
-                            mMissionModel.get(6).currentThings=counter6
-                        }
-                        counter6=0;
-                    }
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1331,21 +1273,9 @@ Page {
                         counter5=0;
                     }
                     //6
-                    if(level===3){
-                        if(counter6>mMissionModel.get(6).currentThings&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)){
-                            mMissionModel.get(6).currentThings=counter6
-                        }
-                        counter6=0;
-                    }
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1400,21 +1330,9 @@ Page {
                         counter5=0;
                     }
                     //6
-                    if(level===3){
-                        counter6++;
-                        if(counter6===8&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)){
-                            mMissionModel.get(6).currentThings=8
-                        }
-                    }
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1471,21 +1389,9 @@ Page {
                         counter5=0;
                     }
                     //6
-                    if(level===3){
-                        counter6++;
-                        if(counter6===8&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)){
-                            mMissionModel.get(6).currentThings=8
-                        }
-                    }
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1511,24 +1417,6 @@ Page {
             //If make- in general
             if(manyMakes>0)
             {
-                if(true){
-                    if(level===1){
-                        //update mission
-                        //7
-                        counter7++;
-                        if(counter7===21&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)){
-                            mMissionModel.get(7).currentThings=21
-                        }
-                    }
-                    if(level===2){
-                        //update missions
-                        //8
-                        counter8++;
-                        if(counter8===21&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)){
-                            mMissionModel.get(8).currentThings=21
-                        }
-                    }
-                }
                 x1.visible=false;
                 x2.visible=false;
                 x3.visible=false;
@@ -1612,25 +1500,6 @@ Page {
             }
             //If miss - in general
             else{
-                if(true){
-                    if(level===1){
-                        //update mission
-                        //7
-                        if(counter7>mMissionModel.get(7).currentThings&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)){
-                            mMissionModel.get(7).currentThings=counter7
-                        }
-                        counter7=0;
-
-                    }
-                    if(level===2){
-                        //update missions
-                        //8
-                        if(counter8>mMissionModel.get(8).currentThings&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)){
-                            mMissionModel.get(8).currentThings=counter8
-                        }
-                        counter8=0;
-                    }
-                }
                 tally1.visible =false; tally2.visible =false; tally3.visible =false;
                 tally4.visible =false; tally5.visible =false; tally6.visible =false;
                 tally7.visible =false; tally3.visible =false; tally8.visible =false;

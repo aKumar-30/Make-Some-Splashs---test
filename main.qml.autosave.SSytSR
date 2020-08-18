@@ -39,7 +39,6 @@ ApplicationWindow {
         s_manager.writeSettings("numCoins21", Extra.numCoins);
         s_manager.writeSettings("ballSource", Extra.ballSource);
         s_manager.writeSettings("personalBest55",Extra.personalBest);
-        s_manager.writeSettings("kemba22",Extra.datastore);
     }
     SettingsManager{
         id: s_manager
@@ -58,17 +57,20 @@ ApplicationWindow {
 
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-        Extra.datastore = JSON.stringify(datamodel)
-        console.log(Extra.datastore);
+        datastore = JSON.stringify(datamodel)
     }
+    property string datastore: ""
     Component.onCompleted: {
         mMusic1.play()
-        if ( Extra.datastore) {
-            console.log(Extra.datastore);
+        if (datastore) {
             mMissionModel.clear()
-            var datamodel = JSON.parse(Extra.datastore)
+            var datamodel = JSON.parse(datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
         }
+    }
+
+    Settings {
+        property alias datastore: root.datastore
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -128,14 +130,12 @@ ApplicationWindow {
             displayDelegateModel.items.removeGroups(0, 3, "todaysMissions");
         for(let i =0;i < rowCount;i++ ) {
             let entry = mMissionModel.get(i);
-            if(!(entry.multipleTimes && entry.completed))
-                mArray.push(entry)
+            mArray.push(entry)
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 3)
         for(let h =0; h < arr.length; h++){
             //subject to change
             arr[h].completed=false;
-            arr[h].currentThings=0;
         }
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
         displayDelegateModel.items.insert(arr[1], "todaysMissions");
@@ -200,7 +200,6 @@ ApplicationWindow {
                 index: 1
                 completed: false;
                 description: "Splash 6 times in a row. Record: "
-                multipleTimes: true
                 reward: 4;
                 neededThings: 6
                 currentThings: 0
@@ -209,167 +208,91 @@ ApplicationWindow {
                 index: 2
                 completed: false;
                 description: "Splash 11 times in a row. Record: "
-                multipleTimes: true
-                reward: 12;
+                reward: 6;
                 neededThings: 11
                 currentThings: 0
             }
-            ListElement{//3
+            ListElement{//4
                 index: 3
                 completed: false;
                 description: "Miss at the backboard two consecutive time. Record: "
-                multipleTimes: true
                 reward: 2;
                 neededThings: 2
-                currentThings: 0
-            }
-            ListElement{//4
-                index: 4
-                completed: false;
-                description: "Make at the rim 6 times in a row in level 3. Record:"
-                multipleTimes: true
-                reward: 6;
-                neededThings: 6
                 currentThings: 0
             }
             ListElement{//5
                 index: 5
                 completed: false;
-                description: "Make at the backboard 9 times in a row in level 2. Record:"
-                multipleTimes: true
-                reward: 8;
-                neededThings: 9
+                description: "Play with three different balls"
+                reward: 3;
+                neededThings: 3
                 currentThings: 0
             }
             ListElement{//6
                 index: 6
                 completed: false;
-                description: "Splash the ball 8 times in a row during level 3. Record:"
-                multipleTimes: true
-                reward: 7;
-                neededThings: 8
+                description: "Purchase 'The Moon' ball"
+                reward: 9;
+                neededThings: 1
                 currentThings: 0
             }
             ListElement{//7
                 index: 7
                 completed: false;
-                description: "Make all the shots in level 1. Record"
-                multipleTimes: true
-                reward: 9;
-                neededThings: 21
+                description: "Buy 3 different types of balls"
+                reward: 8;
+                neededThings: 3
                 currentThings: 0
             }
             ListElement{//8
                 index: 8
                 completed: false;
-                description: "Make all the shots in level 2. Record"
-                multipleTimes: true
-                reward: 23;
-                neededThings: 21
+                description: "Get exactly 3 coins in a twice"
+                reward: 4;
+                neededThings: 2
                 currentThings: 0
             }
             ListElement{//9
                 index: 9
-                completed: false
-                description: "Miss two consecutively at the rim in level 3. Record:"
-                multipleTimes: true
+                completed: false;
+                name: ""
+                description: "Advance to level 3 while earning zero coins"
+                reward: 9;
+                neededThings: 1
+                currentThings: 0
+            }
+            ListElement{//10
+                index: 10
+                completed: false;
+                description: "Earning 8 coins in a game. Record: "
+                reward: 4;
+                neededThings: 1
+                currentThings: 0
+            }
+            ListElement{//11
+                index: 11
+                completed: false;
+                description: "Make at the backboard four consecutive times. Record: "
                 reward: 6;
+                neededThings: 4
+                currentThings: 0
+            }
+            ListElement{//12
+                index: 12
+                completed: false;
+                description: "Complete the other two challenges."
+                reward: 4;
                 neededThings: 2
                 currentThings: 0
             }
-            //            ListElement{//5
-            //                index: 5
-            //                completed: false;
-            //                description: "Play with three different balls"
-            //                multipleTimes: false
-            //                reward: 3;
-            //                neededThings: 3
-            //                currentThings: 0
-            //            }
-            //            ListElement{//6
-            //                index: 6
-            //                completed: false;
-            //                description: "Purchase 'The Moon' ball"
-            //                multipleTimes: false
-            //                reward: 9;
-            //                neededThings: 1
-            //                currentThings: 0
-            //            }
-            //            ListElement{//6
-            //                index: 6
-            //                completed: false;
-            //                description: "Purchase 'The Moon' ball"
-            //                multipleTimes: false
-            //                reward: 9;
-            //                neededThings: 1
-            //                currentThings: 0
-            //            }
-            //            ListElement{//7
-            //                index: 7
-            //                completed: false;
-            //                description: "Buy 3 different types of balls"
-            //                multipleTimes: false
-            //                reward: 8;
-            //                neededThings: 3
-            //                currentThings: 0
-            //            }
-            //            ListElement{//8
-            //                index: 8
-            //                completed: false;
-            //                description: "Get exactly 3 coins in a twice"
-            //                multipleTimes: true
-            //                reward: 4;
-            //                neededThings: 2
-            //                currentThings: 0
-            //            }
-            //            ListElement{//9
-            //                index: 9
-            //                completed: false;
-            //                name: ""
-            //                description: "Advance to level 3 while earning zero coins in the match"
-            //                multipleTimes: true
-            //                reward: 9;
-            //                neededThings: 1
-            //                currentThings: 0
-            //            }
-            //            ListElement{//10
-            //                index: 10
-            //                completed: false;
-            //                description: "Earning 8 coins in a game. Record: "
-            //                multipleTimes: true
-            //                reward: 4;
-            //                neededThings: 1
-            //                currentThings: 0
-            //            }
-            //            ListElement{//11
-            //                index: 11
-            //                completed: false;
-            //                description: "Make at the backboard four consecutive times. Record: "
-            //                multipleTimes: true
-            //                reward: 6;
-            //                neededThings: 4
-            //                currentThings: 0
-            //            }
-            //            ListElement{//12
-            //                index: 12
-            //                completed: false;
-            //                description: "Complete the other two challenges."
-            //                multipleTimes: true
-            //                reward: 4;
-            //                neededThings: 2
-            //                currentThings: 0
-            //            }
-            //
-            //            ListElement{//14
-            //                index: 14
-            //                completed: false;
-            //                name: ""
-            //                description: "Advance to level 2 while earning zero coins in the match"
-            //                multipleTimes: true
-            //                reward: 9;
-            //                neededThings: 1
-            //                currentThings: 0
-            //            }
+            ListElement{//13
+                index: 13
+                completed: false
+                description: "Miss two consecutively at the rim in level 3. Record:"
+                reward: 3;
+                neededThings: 3
+                currentThings: 0
+            }
         }
         Component{
             id: mMissionDelegate
@@ -675,7 +598,6 @@ ApplicationWindow {
             Extra.isOpen = true;
         }
         onClosed: {
-            Extra.volume=volumeSlider.volume
             Extra.isOpen = false;
         }
 
@@ -784,9 +706,8 @@ ApplicationWindow {
                     root.height = 785;
                 }
 
-                if(endingPage==="qrc:/CompetitiveMode.qml"){
+                if(endingPage==="qrc:/CompetitiveMode.qml")
                     warningDialog.open();
-                }
                 else{
                     stackView.pop()
                     thisTitle = "Make some splashs!"
@@ -810,28 +731,10 @@ ApplicationWindow {
         title: "Warning"
 
         standardButtons: Dialog.Ok | Dialog.Cancel
-        Timer{
-            id: thePauseTimer
-            interval: 500
-            onTriggered: {
-                //update model
-                mMissionModel.clear()
-                var datamodel = JSON.parse(Extra.datastore)
-                for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-                console.log("From main mode: "+Extra.datastore)
-
-                //update delegate with updated model
-                for(let s = 0; s< 3; s++){
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(currentMissionsNumber[s]).currentThings
-                }
-            }
-        }
-
         onAccepted: {
             stackView.pop()
             warningDialog.close()
-            //starting timer
-            thePauseTimer.start()
+            thisTitle = "Make some splashs!"
         }
         onRejected: {
             warningDialog.close()
@@ -845,7 +748,7 @@ ApplicationWindow {
                 spacing: 10
 
                 Label {
-                    text: "Are you sure you would like to leave? All progress in the current game (including missions) may be lost"
+                    text: "Are you sure you would like to leave? All progress in the current game will be lost"
                     horizontalAlignment: Label.AlignHCenter
                     verticalAlignment: Label.AlignVCenter
                     Layout.fillWidth: true
@@ -989,11 +892,6 @@ ApplicationWindow {
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
-                        //update model
-                        var datamodel = []
-                        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-                        Extra.datastore = JSON.stringify(datamodel)
-                        //
                         mainRect.visible = false;
                         mainRectFade.visible = false;
                         stackView.push("qrc:/CompetitiveMode.qml");
@@ -1136,6 +1034,6 @@ ApplicationWindow {
     }
     Settings{
         category: "missions"
-        property alias airconditioning: root.currentMissionsNumber
+        property alias fdjkjiojkjah2sdljadgdodsadasdf42dadsf: root.currentMissionsNumber
     }
 }

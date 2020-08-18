@@ -1,7 +1,7 @@
 #include "extras.h"
 
 Extras::Extras(QObject *parent) : QObject(parent), m_volume(0.0), m_isOpen(false), m_numCoins(64),
-    m_ballSource("file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"),m_personalBest(1243)
+    m_ballSource("file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"),m_personalBest(1243), m_datastore(""), m_miniStore("")
 {
 
 }
@@ -75,4 +75,32 @@ void Extras::setPersonalBest(int personalBest)
 
     m_personalBest = personalBest;
     emit personalBestChanged(m_personalBest);
+}
+
+QString Extras::datastore() const
+{
+    return m_datastore;
+}
+
+void Extras::setDatastore(QString datastore)
+{
+    if (m_datastore == datastore)
+        return;
+
+    m_datastore = datastore;
+    emit datastoreChanged(m_datastore);
+}
+
+QString Extras::miniStore() const
+{
+    return m_miniStore;
+}
+
+void Extras::setMiniStore(QString miniStore)
+{
+    if (m_miniStore == miniStore)
+        return;
+
+    m_miniStore = miniStore;
+    emit miniStoreChanged(m_miniStore);
 }

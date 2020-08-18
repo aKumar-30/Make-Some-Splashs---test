@@ -43,7 +43,6 @@ Page {
     property var currentRandomOrder5: []
     property var currentIndexForRandom: 0;
     property var mIsOpen: Extra.isOpen
-    property var coinsThisRound: 0
     Component.onDestruction:{
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
@@ -292,15 +291,6 @@ Page {
         if(manyMisses==3)
         {
             if(true){
-                //10
-                if(coinsThisRound===4){
-                    if(!(mMissionModel.get(10).currentThings>=mMissionModel.get(10).neededThings)){
-                        mMissionModel.get(10).currentThings++
-                    }
-                }
-            }
-
-            if(true){
                 //make all counters zero
                 counter0= 0;
                 counter1= 0;
@@ -318,7 +308,7 @@ Page {
                 counter13= 0;
                 counter14= 0;
             }
-            coinsThisRound=0;
+
             giantX.visible= true;
             //Just resetting somethings
             flashingScoreText.color="black"
@@ -603,7 +593,7 @@ Page {
                 flipable.front.width = 50;
                 flipable.front.height = 50;
                 Extra.numCoins++;
-                coinsThisRound++;
+
                 //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
                 if (Math.floor((Math.random()*coinProb))==0){
                     flipable.visible=true;
@@ -1068,12 +1058,6 @@ Page {
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1136,12 +1120,6 @@ Page {
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1204,12 +1182,6 @@ Page {
                     //7
                     //8
                     //9
-                    if(level===3){
-                        counter9++;
-                        if(counter9===2&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=2
-                        }
-                    }
                     //10
                     //11
                     //12
@@ -1272,12 +1244,6 @@ Page {
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1340,12 +1306,6 @@ Page {
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1409,12 +1369,6 @@ Page {
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12
@@ -1480,12 +1434,6 @@ Page {
                     //7
                     //8
                     //9
-                    if(level===3){
-                        if(counter9>mMissionModel.get(9).currentThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)){
-                            mMissionModel.get(9).currentThings=counter9
-                        }
-                        counter9=0;
-                    }
                     //10
                     //11
                     //12

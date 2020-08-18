@@ -82,11 +82,11 @@ int main(int argc, char *argv[])
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("kemba22")){
-        dude.writeSettings("kemba22",datastore1);
+    if(!settings.contains("kareeemm")){
+        dude.writeSettings("kareeemm",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("kemba22").toString());
+        extra.setDatastore(SettingsManager::loadSettings("kareeemm").toString());
 
 
     engine.load(QUrl("qrc:/main.qml"));
@@ -124,7 +124,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
 {
     switch (type) {
     case QtWarningMsg: {
-        if (!msg.contains("Unable to assign [undefined] to int")){ // suppress this warning
+        if (!msg.contains("TypeError: Cannot read property 'horizontalCenter' of null")){ // suppress this warning
             (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
         }
     }
