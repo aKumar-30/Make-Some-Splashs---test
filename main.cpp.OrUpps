@@ -84,19 +84,19 @@ int main(int argc, char *argv[])
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("lukagamewinner2222")){
-        dude.writeSettings("lukagamewinner2222",datastore1);
+    if(!settings.contains("jamychal9")){
+        dude.writeSettings("jamychal9",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("lukagamewinner2222").toString());
+        extra.setDatastore(SettingsManager::loadSettings("jamychal9").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
-    if(!settings.contains("walkerfinals2222")){
-        dude.writeSettings("walkerfinals2222",myMissionsRn1);
+    if(!settings.contains("bosa9")){
+        dude.writeSettings("bosa9",myMissionsRn1);
     }
     else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("walkerfinals2222").toString());
+        extra.setMyMissionsRn(SettingsManager::loadSettings("bosa9").toString());
         qDebug()<<(extra.myMissionsRn());
         //        std::string str = x.toStdString();
         //        std::istringstream ss (str);

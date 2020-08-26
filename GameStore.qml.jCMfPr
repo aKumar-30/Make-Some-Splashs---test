@@ -292,7 +292,7 @@ Page {
             type: "bowlingBall";
             name: "Bowling Ball"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/bowling_ball.png"
-            price: 30
+            price: 20
 
         }ListElement{
             index:7
@@ -300,15 +300,15 @@ Page {
             type: "volleyBall";
             name: "Volley Ball"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/volley_ball.png"
-            price: 35
+            price: 25
         }
         ListElement{
             index:8
             isBought: false
             type: "Tire";
-            name: "The Tire"
+            name: "Tire"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/tire_ball.png"
-            price: 39
+            price: 35
         }
         ListElement{
             index:9
@@ -316,15 +316,15 @@ Page {
             type: "Donut";
             name: "The Donut"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/donut_ball.png"
-            price: 45
+            price: 42
         }
         ListElement{
             index:10
             isBought: false
-            type: "Coin";
-            name: "The Coin"
-            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/coin.png"
-            price: 60
+            type: "moon";
+            name: "The Moon"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/moon.png"
+            price: 140
         }
         ListElement{
             index:11
@@ -332,25 +332,64 @@ Page {
             type: "Earth";
             name: "The Earth"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
-            price: 80
+            price: 140
         }
         ListElement{
             index:12
             isBought: false
-            type: "moon";
-            name: "The Moon"
-            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/moon.png"
-            price: 80
+            type: "Earth";
+            name: "The Earth"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
+            price: 140
+        }
+        ListElement{
+            index:13
+            isBought: false
+            type: "Earth";
+            name: "The Earth"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
+            price: 140
+        }
+        ListElement{
+            index:14
+            isBought: false
+            type: "Earth";
+            name: "The Earth"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
+            price: 140
+        }
+        ListElement{
+            index:15
+            isBought: false
+            type: "Earth";
+            name: "The Earth"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
+            price: 140
+        }
+        ListElement{
+            index:16
+            isBought: false
+            type: "Earth";
+            name: "The Earth"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
+            price: 140
+        }
+        ListElement{
+            index:17
+            isBought: false
+            type: "Earth";
+            name: "The Earth"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
+            price: 140
         }
     }
 
     GridView {
-        clip: true
-        ScrollBar.vertical: ScrollBar{}
-        //        boundsBehavior: Flickable.OvershootBounds
+        boundsBehavior: Flickable.OvershootBounds
+        keyNavigationWraps:true
         populate: Transition {
-            NumberAnimation { properties: "x,y"; duration: 400 }
-        }
+                NumberAnimation { properties: "x,y"; duration: 400 }
+            }
         width: cellWidth*4; height: cellHeight*3
         cellWidth: 115; cellHeight: 115
         id:grid

@@ -7,15 +7,23 @@
 #include <QDebug>
 FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
     :QObject(parent), tomorrow(tomorrow1),timer(new QTimer(this)),difference(0),m_whatToPrint("Getting ready..."){
+    //fix tomorrow
+    QDateTime now1 = QDateTime::currentDateTime();
+    if(tomorrow<now1){
+        while(tomorrow<now1)
+            tomorrow=tomorrow.addSecs(86399);
+        emit callUpdateMissions();
+    }
     //Intialize the timer
     srand(time(NULL));
-
     connect(timer,&QTimer::timeout, [=](){
         QDateTime now = QDateTime::currentDateTime();
         difference = now.secsTo(tomorrow);
-        difference += 86400;
+        qDebug()<<(difference);
         display();
         if(difference == 0){
+            qDebug()<<("the difference is zero");
+            tomorrow=tomorrow.addSecs(86399);
             emit callUpdateMissions();
         }
     });

@@ -12,7 +12,37 @@ Page {
     property var gradientGround1: "#00FF00"
     property var gradientGround2: "#00803F"
     property var ball: basketBall
+    function whatHappensWhenClicked(){
+        ball.x = 0;
+        ball.y = root.height-ball.height;
+        ball.rotation = 0;
+        if (chooseBallComboBox.currentIndex===6)
+        {
+            var random_number = Math.floor((Math.random() * 5) + 1);
+            changeBallBasedOnRandomNumber(random_number)
+        }
+        if(startText.visible)
+            startText.visible=false;
+        sequencialAnimation.restart()
+        otherCustomizeButton.visible=true;
+    }
+
+    Connections{
+        target: Extra
+        function onSpaceClickedInCust(){
+            console.log("i got here")
+            whatHappensWhenClicked();
+        }
+    }
+
     //Functions for setting type of ball start
+    MouseArea{
+        anchors.fill: parent
+        onClicked: {
+            whatHappensWhenClicked()
+        }
+    }
+
     Component.onCompleted: {
         startTextTimer.start()
     }
@@ -48,7 +78,7 @@ Page {
             color: "black"
             width: 275;
             wrapMode: Label.Wrap
-            text: "Click the ball or customize to begin"
+            text: "Click anywhere or the customize button to begin"
         }
     }
     Timer{

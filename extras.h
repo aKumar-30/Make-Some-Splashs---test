@@ -2,7 +2,7 @@
 #define EXTRAS_H
 
 #include <QObject>
-
+#include <array>
 class Extras : public QObject
 {
     Q_OBJECT
@@ -14,10 +14,13 @@ class Extras : public QObject
     Q_PROPERTY(int personalBest READ personalBest WRITE setPersonalBest NOTIFY personalBestChanged)
     Q_PROPERTY(QString datastore READ datastore WRITE setDatastore NOTIFY datastoreChanged)
     Q_PROPERTY(QString miniStore READ miniStore WRITE setMiniStore NOTIFY miniStoreChanged)
+    Q_PROPERTY(QString myMissionsRn READ myMissionsRn WRITE setmyMissionsRn NOTIFY myMissionsRnChanged)
 public:
     explicit Extras(QObject *parent = nullptr);
+
     double volume() const;
     void setVolume(double volume);
+
     bool isOpen() const;
     void setIsOpen(bool isOpen);
 
@@ -35,7 +38,14 @@ public:
 
     QString miniStore() const;
     void setMiniStore(QString miniStore);
+    
+    QString myMissionsRn() const;
+    void setMyMissionsRn(QString myMissionsRn);
 
+    Q_INVOKABLE void emittingSwitchFilesSignal();
+    Q_INVOKABLE void emittingSpaceInCompSignal();
+    Q_INVOKABLE void emittingSpaceInCustSignal();
+    
 signals:
     void volumeChanged(double volume);
     void isOpenChanged(bool isOpen);
@@ -44,7 +54,12 @@ signals:
     void personalBestChanged(int personalBest);
     void datastoreChanged(QString datastore);
     void miniStoreChanged(QString miniStore);
+    void myMissionsRnChanged(QString myMissionsRn);
 
+    void somethingCompetitiveChanged();
+    void spaceClickedInComp();
+    void spaceClickedInCust();
+    
 private:
     double m_volume;
     bool m_isOpen;
@@ -53,6 +68,7 @@ private:
     int m_personalBest;
     QString m_datastore;
     QString m_miniStore;
+    QString m_myMissionsRn;
 };
 
 #endif // EXTRAS_H

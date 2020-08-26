@@ -14,26 +14,13 @@ import "test.js" as Global
 
 //New VERSION STARTS HERE
 ApplicationWindow {
-    Item{
-        focus: true
-        Keys.onPressed:{
-            if(event.key===Qt.Key_Space){
-                if(endingPage==="qrc:/CompetitiveMode.qml"){
-                    Extra.emittingSpaceInCompSignal();
-                }
-                else if(endingPage==="qrc:/CustomizationMode.qml"){
-                    Extra.emittingSpaceInCustSignal();
-                }
-            }
-        }
-    }
     visible: true
     width: 708
     height: 785
-    title: qsTr("Shoot some hoops!")
+    title: qsTr("Make some splashs!")
     id: root
     property var p: false
-    property var thisTitle: "Shoot some hoops!"
+    property var thisTitle: "Make some splashs!"
     property var endingPage: " "
     property var mArray:[]
     property var firstTime5: true;
@@ -52,23 +39,13 @@ ApplicationWindow {
         s_manager.writeSettings("numCoins21", Extra.numCoins);
         s_manager.writeSettings("ballSource", Extra.ballSource);
         s_manager.writeSettings("personalBest55",Extra.personalBest);
-        s_manager.writeSettings("lukagamewinner2222",Extra.datastore);
+        s_manager.writeSettings("mavericksIN6666",Extra.datastore);
         //convert array to string
         setCurrentMissions()
-        s_manager.writeSettings("walkerfinals2222",Extra.myMissionsRn);
-        console.log("While being destroyed in main.qml, the Extra.myMissionsRn is : "+Extra.myMissionsRn)
+        s_manager.writeSettings("warriorsAreGodliest",Extra.myMissionsRn);
     }
     SettingsManager{
         id: s_manager
-    }
-    Connections{
-        target: Extra;
-        function onSomethingCompetitiveChanged(){
-            console.log("WHY DID LUKA WIN AND RUIN MY MONEY")
-            stackView.pop()
-            //starting timer
-            thePauseTimer.start()
-        }
     }
 
     onClosing: {
@@ -85,20 +62,19 @@ ApplicationWindow {
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
         Extra.datastore = JSON.stringify(datamodel)
+        console.log(Extra.datastore);
     }
     function getCurrentMissions(){
         let j =0;
         for(let i =0; i < 3; i++){
             var q = "";
-            while(Extra.myMissionsRn[j]!==","){
-                q+=(Extra.myMissionsRn[j]).toString();
-                console.log("I found a comma. Q is currently "+q)
+            while(Extra.mMissionsRn[j]!==","){
+                q+=j.toString();
                 j++
             }
             j++;
-            presentMissions.push(parseInt(q))
+            presentMissions.push(q.toInt())
         }
-        console.log("THe current missions (local) after getting them in the main mode is:"+presentMissions)
     }
     function setCurrentMissions(){
         Extra.myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+presentMissions[2]+","
@@ -106,16 +82,16 @@ ApplicationWindow {
 
     Component.onCompleted: {
         mMusic1.play()
-        console.log(Extra.myMissionsRn)
+        console.log("in here"+"main.qml")
         if ( Extra.datastore) {
             mMissionModel.clear()
             var datamodel = JSON.parse(Extra.datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+            console.log("This is the start:"+Extra.datastore)
         }
-        if(Extra.myMissionsRn){
-            console.log("Guess what? We are in the if statement which means Extra.myMissionsRn is NOT empty, coolio. This is what is in it: "+Extra.myMissionsRn)
+        if(Extra.mMissionsRn){
             getCurrentMissions()
-
+            console.log()
         }
     }
 
@@ -123,12 +99,11 @@ ApplicationWindow {
     function storeForSettings(){
         if(presentMissions.length===0){
             presentMissions.push(displayDelegateModel.items.get(0).model.index);
+            presentMissionsChanged()
             presentMissions.push(displayDelegateModel.items.get(1).model.index);
             presentMissions.push(displayDelegateModel.items.get(2).model.index);
-            setCurrentMissions()
         }
     }
-
     function checkIfButtonNeedsToBeVisible(whatFor){
         let thing = false;
         currentMissionRewards=0;
@@ -153,58 +128,30 @@ ApplicationWindow {
         return thing
         //        }
     }
-    Timer{
-        interval: 1001
-        id: delayTimer
-    }
     Connections{
         target: FlashingTimer
         function onCallUpdateMissions(){
-            if(!delayTimer.running){
-                //changed update missions
-                var rowCount = mMissionModel.count
-                mArray = []
-                for(let i =0;i < rowCount;i++ ) {
-                    let entry = mMissionModel.get(i)
-                    if((!entry.multipleTimes || !entry.completed))
-                        mArray.push(entry)
-                }
-                arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 3)
-                presentMissions=[]
-                for(let h =0; h < arr.length; h++){
-                    //subject to change
-                    arr[h].completed=false
-                    arr[h].currentThings=0;
-                    presentMissions.push(arr[h].index);
-                }
-                //used stored settings to manuelly replace
-                for(let s = 0; s< 3; s++){
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.index=mMissionModel.get(presentMissions[s]).index
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.completed=mMissionModel.get(presentMissions[s]).completed
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.description=mMissionModel.get(presentMissions[s]).description
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.reward=mMissionModel.get(presentMissions[s]).reward
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
-                }
-                delayTimer.start()
-            }
+            updateMissions()
         }
     }
     function updateMissions(){
-        var rowCount = mMissionModel.count
-        mArray = []
-        displayDelegateModel.items.remove(0,displayDelegateModel.items.count)
-
+        var rowCount = mMissionModel.count;
+        mArray = [];
+        if(firstTime5){
+            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+            firstTime5=false;
+        }
+        else
+            displayDelegateModel.items.removeGroups(0, 3, "todaysMissions");
         for(let i =0;i < rowCount;i++ ) {
-            let entry = mMissionModel.get(i)
-            if((!entry.multipleTimes || !entry.completed))
+            let entry = mMissionModel.get(i);
+            if(!(entry.multipleTimes && entry.completed))
                 mArray.push(entry)
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 3)
         for(let h =0; h < arr.length; h++){
             //subject to change
-            arr[h].completed=false
+            arr[h].completed=false;
             arr[h].currentThings=0;
         }
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
@@ -220,14 +167,12 @@ ApplicationWindow {
         width: parent.width*2/3
         height: parent.width*4/5
         anchors.centerIn: parent
-        border.color:"#2e8ddb"
-        border.width:3
         Rectangle{
             anchors.top: parent.top
             id: header
             width: parent.width
             height: 60
-            color: "#2e8ddb"
+            color: "#e6ae60"
             Text{
                 anchors.fill: parent
                 color: "#ffffff"
@@ -243,7 +188,7 @@ ApplicationWindow {
             width: parent.width
             anchors.top:header.bottom
             height: 8
-            color: "#18549e"
+            color: "#c2910c"
         }
         Text{
             id: countdownText
@@ -311,7 +256,7 @@ ApplicationWindow {
                 completed: false;
                 description: "Make at the backboard 9 times in a row in level 2. Record:"
                 multipleTimes: true
-                reward: 12;
+                reward: 8;
                 neededThings: 9
                 currentThings: 0
             }
@@ -484,7 +429,7 @@ ApplicationWindow {
                         width: parent.width
                         height: parent.height-12
                         anchors.verticalCenter: parent.verticalCenter
-                        color: (currentThings>=neededThings)?"#7ae868":"#2e8ddb"
+                        color: (currentThings>=neededThings)?"#7ae868":"#e6ae60"
                         Column{
                             x:16
                             y:10
@@ -572,7 +517,6 @@ ApplicationWindow {
             x: 0;
             spacing: 5
             model: displayDelegateModel             // 6
-            interactive: false;
         }
         DelegateModel {
             id: displayDelegateModel
@@ -584,14 +528,10 @@ ApplicationWindow {
                     includeByDefault: false
                     name: "todaysMissions"
                 }
-//                DelegateModelGroup{
-//                    id: mDelegateGroupModel1
-//                    includeByDefault: false
-//                    name: "tomorrowsMissions"
-//                }
             ]
             filterOnGroup: "todaysMissions"
             Component.onCompleted: {
+                console.log("in here")
                 if(presentMissions.length!==0){
                     displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
                     displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
@@ -609,13 +549,11 @@ ApplicationWindow {
                 if(visible){
                     Extra.numCoins+= currentMissionRewards;
                     //remove delegates for completed missions
-                    let j =0;
                     for(let i =displayDelegateModel.items.count-3; i< displayDelegateModel.items.count;i++){
                         if(displayDelegateModel.items.get(i).model.currentThings>=displayDelegateModel.items.get(i).model.neededThings){
                             displayDelegateModel.items.get(i).model.completed=true;
-                            mMissionModel.get(presentMissions[j]).completed=true
+                            mMissionModel.get(displayDelegateModel.items.get(i).model.index).completed=true
                         }
-                        j++;
                     }
                     visible=false;
                     getRewardsButtonFade.visible=false;
@@ -686,7 +624,7 @@ ApplicationWindow {
         y: mainRect.y+17
         width: mainRect.width
         height:mainRect.height
-        color: "#18549e"
+        color: "#c2910c"
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -873,26 +811,8 @@ ApplicationWindow {
                 }
                 else{
                     stackView.pop()
-                    thisTitle = "Shoot some hoops!"
+                    thisTitle = "Make some splashs!"
                 }
-            }
-        }
-    }
-    Timer{
-        id: thePauseTimer
-        interval: 1000
-        onTriggered: {
-            //update model
-            mMissionModel.clear()
-            var datamodel = JSON.parse(Extra.datastore)
-            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-
-            //update delegate with updated model
-            for(let s = 0; s< 3; s++){
-                //                    if(presentMissions.length===0)
-                //                        displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.index).currentThings
-                //                    else
-                displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[2-s]).currentThings
             }
         }
     }
@@ -912,6 +832,25 @@ ApplicationWindow {
         title: "Warning"
 
         standardButtons: Dialog.Ok | Dialog.Cancel
+        Timer{
+            id: thePauseTimer
+            interval: 1000
+            onTriggered: {
+                //update model
+                mMissionModel.clear()
+                var datamodel = JSON.parse(Extra.datastore)
+                for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+                console.log("From the MAIN MODE:::"+Extra.datastore)
+
+                //update delegate with updated model
+                for(let s = 0; s< 3; s++){
+                    //                    if(presentMissions.length===0)
+                    //                        displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.index).currentThings
+                    //                    else
+                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
+                }
+            }
+        }
 
         onAccepted: {
             stackView.pop()
@@ -1060,12 +999,9 @@ ApplicationWindow {
                 id: buttonToPlayGame
                 width: 320
                 height: 100
-                border.color: "red"
-                border.width: 7
-                color: "#5db0f5"
-                Component.onCompleted: {
-                    switchToGreenTimer.start()
-                }
+                border.color: "#7a0a00"
+                border.width: 5
+                color: "#f0ad30"
                 Text{
                     text: "START"
                     font.family: "Tahoma"
@@ -1075,31 +1011,6 @@ ApplicationWindow {
                     anchors.centerIn: parent
                 }
                 radius: 50
-                Timer{
-                    id: switchToBlueTimer
-                    interval: 500
-                    onTriggered: {
-                        buttonToPlayGame.border.color="#3074c7" //blue
-                        switchToRedTimer.start()
-                    }
-                }
-                Timer{
-                    id: switchToGreenTimer
-                    interval: 600
-                    onTriggered: {
-                        buttonToPlayGame.border.color="#58b853"  //green
-                        switchToBlueTimer.start()
-                    }
-                }
-                Timer{
-                    id: switchToRedTimer
-                    interval: 500
-                    onTriggered: {
-                        buttonToPlayGame.border.color="#cc3f3f"  //red
-                        switchToGreenTimer.restart()
-                    }
-                }
-
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
@@ -1108,7 +1019,7 @@ ApplicationWindow {
                         var datamodel = []
                         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
                         Extra.datastore = JSON.stringify(datamodel)
-                        //update current missions (just double checking)
+                        //update current missions
                         setCurrentMissions()
 
                         mainRect.visible = false;
@@ -1168,7 +1079,7 @@ ApplicationWindow {
                             mainRect.visible = false;
                             mainRectFade.visible = false;
                             stackView.push("qrc:/CustomizationMode.qml");
-                            endingPage="qrc:/CustomizationMode.qml";
+                            endingPage="qrc:/CUstomizationMode.qml";
                             thisTitle="Customization Mode"
                             root.width = 1200
                             root.height= 580
@@ -1198,25 +1109,12 @@ ApplicationWindow {
                         height: 70
                         source: "file:///Users/arjun/Documents/CompetitiveBall/images/missionsIcon.png"
                     }
-                    Rectangle{
-                        visible: thePauseTimer.running
-                        z:-1
-                        anchors.centerIn: parent
-                        width: 70
-                        height: 70
-                        radius: 70
-                        color:"darkgray"
-                        opacity: 0.50
-                    }
-
                     MouseArea{
                         anchors.fill: parent
                         onClicked: {
-                            if(!thePauseTimer.running){
-                                mainRect.visible = true;
-                                mainRectFade.visible = true;
-                                checkIfButtonNeedsToBeVisible(true);
-                            }
+                            mainRect.visible = true;
+                            mainRectFade.visible = true;
+                            checkIfButtonNeedsToBeVisible(true);
                         }
                     }
                 }

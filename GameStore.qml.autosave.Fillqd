@@ -292,7 +292,7 @@ Page {
             type: "bowlingBall";
             name: "Bowling Ball"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/bowling_ball.png"
-            price: 30
+            price: 20
 
         }ListElement{
             index:7
@@ -300,58 +300,36 @@ Page {
             type: "volleyBall";
             name: "Volley Ball"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/volley_ball.png"
-            price: 35
+            price: 25
         }
         ListElement{
             index:8
-            isBought: false
-            type: "Tire";
-            name: "The Tire"
-            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/tire_ball.png"
-            price: 39
-        }
-        ListElement{
-            index:9
-            isBought: false
-            type: "Donut";
-            name: "The Donut"
-            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/donut_ball.png"
-            price: 45
-        }
-        ListElement{
-            index:10
-            isBought: false
-            type: "Coin";
-            name: "The Coin"
-            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/coin.png"
-            price: 60
-        }
-        ListElement{
-            index:11
-            isBought: false
-            type: "Earth";
-            name: "The Earth"
-            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
-            price: 80
-        }
-        ListElement{
-            index:12
             isBought: false
             type: "moon";
             name: "The Moon"
             picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/moon.png"
             price: 80
         }
+        ListElement{
+            index:9
+            isBought: false
+            type: "Earth";
+            name: "The Earth"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/earth.png"
+            price: 85
+        }
+        ListElement{
+            index:10
+            isBought: false
+            type: "Tire";
+            name: "Tire"
+            picSource: "file:///Users/arjun/Documents/CompetitiveBall/images/tire_ball.png"
+            price: 95
+        }
     }
 
     GridView {
-        clip: true
-        ScrollBar.vertical: ScrollBar{}
-        //        boundsBehavior: Flickable.OvershootBounds
-        populate: Transition {
-            NumberAnimation { properties: "x,y"; duration: 400 }
-        }
-        width: cellWidth*4; height: cellHeight*3
+        width: 460; height: 345
         cellWidth: 115; cellHeight: 115
         id:grid
         anchors.horizontalCenter: parent.horizontalCenter

@@ -15,13 +15,13 @@ Page {
     height: 785
     title:"Competitive Mode"
     property int duration: 1000
-    id: root2
+    id: root
     property bool isNewColor: false
     property var gradientGround1: "#00FF00"
     property var gradientGround2: "#00803F"
     property bool whatToDoWhenClicked: false
     property int counterr1 : 0;
-    property var mDuration: 1400
+    property var mDuration: 1500
     property int points: 0;
     property var manyMisses : 0;
     property var manyMakes: 0;
@@ -32,7 +32,6 @@ Page {
     property var firstTime: true;
     property var levelIndicatorDown: (level!==3)?(22-levelIndicator):(50-levelIndicator)
     property var animationWhichIsRunning:1
-    property var wasSecRunning: false;
     property var makingStreakColor: "red"
     property var colors: ["#cf3732","#db8d44","#e3d430","#29c910", "#e3d430", "#db8d44", "#cf3732"]
     property bool haveRandomlyChoosenIfCoinAppears: false;
@@ -45,9 +44,9 @@ Page {
     property var currentIndexForRandom: 0;
     property var mIsOpen: Extra.isOpen
     property var coinsThisRound: 0
-    property var presentMissions: []
+    property var presentMissions
     Component.onDestruction:{
-        if(mMissionModel.count!==0 &&Extra.datastore){
+        if(mMissionModel!==0 &&Extra.datastore){
             var datamodel = []
             for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
             Extra.datastore = JSON.stringify(datamodel)
@@ -55,42 +54,26 @@ Page {
         }
     }
     Component.onCompleted: {
+        console.log("in here"+ "competitive mode.qml")
         if ( Extra.datastore) {
             mMissionModel.clear()
             var datamodel = JSON.parse(Extra.datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
         }
-        console.log("The Extra.myMissionsRn that compeittiveMode.qml got is "+Extra.myMissionsRn)
         getCurrentMissions()
-    }
-    function whatToDoInsideRectangleMA(){
-        if(!retryBox.visible){
-            if(stateRectId.state=="notPaused" && level!==3){
-                if(!seqAnimationId.running&&!pointingFinger.visible){
-                    seqAnimationId.start();
-                    whatToDoWhenClicked=true
-                }
-                else{
-                    seqAnimationId.stop();
-                    insideContainerId.sliderStopped(sliderId.value);
-                }
-            }
-            pointingFinger.visible=false;
-            firstTime2=false;
-        }
+        console.log("Present missions: "+presentMissions)
     }
     function checkIfCurrentMission(num){
-        console.log("i entered the thing")
         for(let i =0; i< 3; i++){
-            if(presentMissions[i]===num){
-                console.log("i returned true with " +num)
-                return true;
+            if([i]===num){
+                return trie
             }
         }
         return false;
     }
     function getCurrentMissions(){
         let j =0;
+        console.log("the mission WHICH ARE HAPPENING FORM GET MISSIONS:  "+Extra.myMissionsRn)
         for(let i =0; i < 3; i++){
             var q = "";
             while(Extra.myMissionsRn[j]!==","){
@@ -98,10 +81,8 @@ Page {
                 j++
             }
             j++;
-            var g = parseInt(q)
-            presentMissions.push(g)
+            presentMissions.push(q.toInteger())
         }
-        console.log("THe current missions (local)after getting them in the compeittive mode is:"+presentMissions)
     }
     function setCurrentMissions(){
         Extra.myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+presentMissions[2]+","
@@ -127,10 +108,9 @@ Page {
 
     onMIsOpenChanged:{
         if(Extra.isOpen===false)
-            whatToDoWhenDoubleClicked()
-        else{
-            whatToDoWhenDoubleClicked()
-        }
+            stateRectId.state= "notPaused"
+        else
+            stateRectId.state = "paused"
     }
 
     function newRandomColors3(){
@@ -215,67 +195,6 @@ Page {
             return colors[6]
         }
     }
-    function whatToDoWhenDoubleClicked(){
-        function pauseAllAnim()
-        {
-            animationWhichIsRunning=-1;
-            wasSecRunning=false;
-            if(levelRectangleAnimation.running){
-                levelRectangleAnimation.pause();
-                animationWhichIsRunning=levelRectangleAnimation
-            }
-            else if(airBallAnimation.running){
-                airBallAnimation.pause()
-                animationWhichIsRunning=airBallAnimation
-            }
-            else if(splashAnimation.running){
-                splashAnimation.pause()
-                animationWhichIsRunning=splashAnimation
-            }
-            else if(rimMakeAnimation.running){
-                rimMakeAnimation.pause()
-                animationWhichIsRunning=rimMakeAnimation
-            }
-            else if(backboardMissAnimation.running){
-                backboardMissAnimation.pause();
-                animationWhichIsRunning=backboardMissAnimation
-            }
-            else if(backboardAnimation.running){
-                backboardAnimation.pause()
-                animationWhichIsRunning=backboardAnimation
-            }
-            if(seqAnimationId.running){
-                seqAnimationId.pause()
-                wasSecRunning=true
-            }
-
-        }
-        function resumeAllAnim()
-        {
-            if(animationWhichIsRunning!=-1)
-            {
-                 animationWhichIsRunning.resume()
-
-            }
-            if(wasSecRunning)
-                seqAnimationId.resume()
-
-        }
-        if(stateRectId.state==="notPaused")
-        {
-            stateRectId.state="paused"
-            //mMusic1.play()
-            pauseAllAnim();
-        }
-        else
-        {
-            if(!levelRectangleAnimationPause.running){
-                stateRectId.state="notPaused"
-                //mMusic1.play()
-                resumeAllAnim();
-            }
-        }
-    }
     //Pause button
     MouseArea{
         anchors.fill: parent
@@ -291,7 +210,60 @@ Page {
         }
 
         onDoubleClicked:{
-            whatToDoWhenDoubleClicked();
+            function pauseAllAnim()
+            {
+                if(levelRectangleAnimation.running){
+                    levelRectangleAnimation.pause();
+                    animationWhichIsRunning=levelRectangleAnimation
+                }
+                else if(airBallAnimation.running){
+                    airBallAnimation.pause()
+                    animationWhichIsRunning=airBallAnimation
+                }
+                else if(splashAnimation.running){
+                    splashAnimation.pause()
+                    animationWhichIsRunning=splashAnimation
+                }
+                else if(rimMakeAnimation.running){
+                    rimMakeAnimation.pause()
+                    animationWhichIsRunning=rimMakeAnimation
+                }
+                else if(backboardMissAnimation.running){
+                    backboardMissAnimation.pause();
+                    animationWhichIsRunning=backboardMissAnimation
+                }
+                else if(backboardAnimation.running){
+                    backboardAnimation.pause()
+                    animationWhichIsRunning=backboardAnimation
+                }
+                else if(seqAnimationId.running){
+                    seqAnimationId.pause()
+                    animationWhichIsRunning=seqAnimationId
+                }
+
+            }
+            function resumeAllAnim()
+            {
+                if(animationWhichIsRunning!=1)
+                {
+                    animationWhichIsRunning.resume()
+
+                }
+            }
+            if(stateRectId.state==="notPaused")
+            {
+                stateRectId.state="paused"
+                //mMusic1.play()
+                pauseAllAnim();
+            }
+            else
+            {
+                if(!levelRectangleAnimationPause.runnning){
+                    stateRectId.state="notPaused"
+                    //mMusic1.play()
+                    resumeAllAnim();
+                }
+            }
         }
     }
 
@@ -338,7 +310,7 @@ Page {
         //fix ball
         basketBall.width=115
         basketBall.height=115
-        basketBall.y = root2.height-basketBall.height-50;
+        basketBall.y = root.height-basketBall.height-50;
         basketBall.x=33;
         basketBall.rotation = 0
 
@@ -348,22 +320,7 @@ Page {
         //If you lose it all...
         if(manyMisses==3)
         {
-            if(seqAnimationId.running)
-                seqAnimationId.pause()
-            if(mPauseAnim.running)
-                mPauseAnim.pause()
-            sliderId.enabled=false;
             if(true){
-                //7
-                if(counter7>mMissionModel.get(7).currentThings&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
-                    mMissionModel.get(7).currentThings=counter7
-                }
-                counter7=0;
-                //8
-                if(counter8>mMissionModel.get(8).currentThings&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)&&checkIfCurrentMission(8)){
-                    mMissionModel.get(8).currentThings=counter8
-                }
-                counter8=0;
                 //10
                 if(coinsThisRound===4){
                     if(!(mMissionModel.get(10).currentThings>=mMissionModel.get(10).neededThings)&&checkIfCurrentMission(10)){
@@ -371,6 +328,7 @@ Page {
                     }
                 }
             }
+
             if(true){
                 //make all counters zero
                 counter0= 0;
@@ -390,6 +348,7 @@ Page {
                 counter14= 0;
             }
             coinsThisRound=0;
+            giantX.visible= true;
             //Just resetting somethings
             flashingScoreText.color="black"
             insideRectangleMouseArea.enabled = true
@@ -405,12 +364,8 @@ Page {
             manyMakes = 0;
             mDuration=1200
             sliderEasingType = Easing.Linear
-
-
-            retryBox.visible= true;
-            fadedRED.visible=true;
-            return;
             // mMusic1.stop()
+            tryAgainDialog.open()
         }
         //General thing to do if MAKE for AFTER THE ANIMATION IS FINISHED
         if(manyMakes>0){
@@ -419,6 +374,7 @@ Page {
                 coinAnim.start()
             }
         }
+
         //Level one stuff
         if(level===1)
         {
@@ -429,22 +385,11 @@ Page {
             if(levelIndicator > 21)
             {
                 whatToDoForNextLevel()
-                mDuration=1300
-                if(true){
-                    //7
-                    if(counter7===21&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
-                        mMissionModel.get(7).currentThings=21
-                    }
-                    if(counter7>mMissionModel.get(7).currentThings&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
-                        mMissionModel.get(7).currentThings=counter7
-                    }
-                    counter7=0;
-                }
+                mDuration=1400
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
-                if(stateRectId.state!="paused")
-                    seqAnimationId.restart();
+                seqAnimationId.restart();
             }
         }
         //Level two stuff
@@ -461,16 +406,7 @@ Page {
                 handleId.visible=false;
                 sliderId.enabled=false;
                 whatToDoForNextLevel()
-                if(true){
-                    //8
-                    if(counter8===21&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)&&checkIfCurrentMission(8)){
-                        mMissionModel.get(8).currentThings=21
-                    }
-                    if(counter8>mMissionModel.get(8).currentThings&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)&&checkIfCurrentMission(8)){
-                        mMissionModel.get(8).currentThings=counter8
-                    }
-                    counter8=0;
-                }
+
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
@@ -753,7 +689,7 @@ Page {
     Image{
         z:3
         id: basketBall
-        y:root2.height-basketBall.height-50;
+        y:root.height-basketBall.height-50;
         x:33;
         width: 115
         height: 115
@@ -840,14 +776,14 @@ Page {
                 property: "width"
                 duration: 800
                 easing.type: Easing.Linear
-                to: (root2.width*4/5)*7/10
+                to: (root.width*4/5)*7/10
             }
             NumberAnimation {
                 target: levelRectangle
                 property: "height"
                 duration: 800
                 easing.type: Easing.Linear
-                to: root2.height*3/7
+                to: root.height*3/7
             }
         }
         PauseAnimation {
@@ -876,105 +812,10 @@ Page {
             duration: 8000
         }
     }
-    //faded Red
-    Rectangle{
-        id:fadedRED
-        z:19
-        anchors.fill: parent
-        color: "red"
-        opacity: 0.26
-        visible: false
-    }
-
-    //retry box
-    signal quitButtonClicked
-    Rectangle{
-        visible: false
-        width: parent.width*2/3
-        height:parent.height*1/3
-        anchors.centerIn: parent
-        z:20
-        id: retryBox
-        radius:20
-        gradient: Gradient{
-            GradientStop{position: 0.0; color: "#f52a2a"}
-            GradientStop{position: 0.5; color: "#ffffff"}
-            GradientStop{position: 1.0; color: "#f52a2a"}
-        }
-        onVisibleChanged: {
-                seqAnimationId.stop
-        }
-
-        Column{
-            x:0
-            y:0
-            width:parent.width
-            spacing:10
-            Text{
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.family: "Rockwell Extra Bold"
-                font.bold: true
-                horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 25
-                width: parent.width
-                text: "You lost!"
-            }
-            Text{
-                x:10
-                width: parent.width-20
-                font.family: "Rockwell Condensed"
-                font.pointSize: 18
-                wrapMode: Text.Wrap
-                text:"     Please try again! Remember 3 missed shots and you are out"
-            }
-            Row{
-                x:60
-                spacing:25
-                Button{
-
-                    height: 110
-                    width: 190
-                    Text{
-                        color: "#ed912f"
-                        text: "RETRY"
-                        font.bold: true
-                        font.pointSize: 20
-                        anchors.centerIn: parent
-                    }
-                    onClicked: {
-                        giantX.visible = false;
-                        seqAnimationId.stop()
-                        levelRectangleAnimation.start()
-                        x1.visible=false; x2.visible = false; x3.visible = false;
-                        retryBox.visible=false
-                        fadedRED.visible=false
-                    }
-                }
-                Button{
-                    id: quitButton
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: 120
-                    Text{
-                        color: "#ed912f"
-                        text: "QUIT"
-                        font.pointSize: 15
-                        anchors.centerIn: parent
-                    }
-                    onClicked: {
-                        retryBox.visible=false
-                        fadedRED.visible=false
-                        Extra.emittingSwitchFilesSignal();
-                    }
-                }
-            }
-        }
-    }
-
     //Giant x
     Image{
-        visible: false
-        z:20
         id: giantX;
+        visible: false;
         anchors.centerIn: parent
         source: "file:///Users/arjun/Documents/CompetitiveBall/images/xSymbol.png"
         height: 600
@@ -1135,7 +976,6 @@ Page {
             to: 1;
         }
     }
-
     //Box in the corner with score and PB
     Rectangle{
         z:2
@@ -1198,7 +1038,7 @@ Page {
             //normal setting upp stuff
             basketBall.width=115
             basketBall.height=115
-            basketBall.y = root2.height-basketBall.height-50;
+            basketBall.y = root.height-basketBall.height-50;
             basketBall.x=33;
             basketBall.rotation = 0
             feedbackLabel.visible= false;
@@ -1224,10 +1064,8 @@ Page {
                     }
                     counter1=0;
                     //2
-                    console.log("useless zaza happened")
                     if(counter2>mMissionModel.get(2).currentThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
                         mMissionModel.get(2).currentThings=counter2
-                        console.log("zaza happened")
                     }
                     counter2=0;
                     //3
@@ -1425,7 +1263,7 @@ Page {
                     }
                     counter0=0;
                     //1
-                    if(counter1>mMissionModel.get(1).currentThings&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings&&checkIfCurrentMission(1))){
+                    if(counter1>mMissionModel.get(1).currentThings&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings&&checkIfCurrentMission(num))){
                         mMissionModel.get(1).currentThings=counter1
                     }
                     counter1=0;
@@ -1707,11 +1545,17 @@ Page {
                         //update mission
                         //7
                         counter7++;
+                        if(counter7===21&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
+                            mMissionModel.get(7).currentThings=21
+                        }
                     }
                     if(level===2){
                         //update missions
                         //8
                         counter8++;
+                        if(counter8===21&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)&&checkIfCurrentMission(8)){
+                            mMissionModel.get(8).currentThings=21
+                        }
                     }
                 }
                 x1.visible=false;
@@ -1797,6 +1641,25 @@ Page {
             }
             //If miss - in general
             else{
+                if(true){
+                    if(level===1){
+                        //update mission
+                        //7
+                        if(counter7>mMissionModel.get(7).currentThings&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
+                            mMissionModel.get(7).currentThings=counter7
+                        }
+                        counter7=0;
+
+                    }
+                    if(level===2){
+                        //update missions
+                        //8
+                        if(counter8>mMissionModel.get(8).currentThings&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)&&checkIfCurrentMission(8)){
+                            mMissionModel.get(8).currentThings=counter8
+                        }
+                        counter8=0;
+                    }
+                }
                 tally1.visible =false; tally2.visible =false; tally3.visible =false;
                 tally4.visible =false; tally5.visible =false; tally6.visible =false;
                 tally7.visible =false; tally3.visible =false; tally8.visible =false;
@@ -1821,31 +1684,24 @@ Page {
 
             insideRectangleMouseArea.enabled = false;
         }
-        Timer{
-            id: isDoubleClickTimer
-            interval:1550 //should be 500 maybe
-        }
-
-        Connections{
-            target: Extra
-            function onSpaceClickedInComp(){
-                if(!isDoubleClickTimer.running){
-                    isDoubleClickTimer.start()
-                    whatToDoInsideRectangleMA();
-                }
-                else{
-                    whatToDoWhenDoubleClicked();
-                }
-            }
-        }
-
         MouseArea{
             id: insideRectangleMouseArea
             enabled: false;
             anchors.fill: parent
             propagateComposedEvents: true
             onClicked: {
-                whatToDoInsideRectangleMA()
+                if(stateRectId.state=="notPaused" && level!==3){
+                    if(!seqAnimationId.running&&!pointingFinger.visible){
+                        seqAnimationId.start();
+                        whatToDoWhenClicked=true
+                    }
+                    else{
+                        seqAnimationId.stop();
+                        insideContainerId.sliderStopped(sliderId.value);
+                    }
+                }
+                pointingFinger.visible=false;
+                firstTime2=false;
             }
             onDoubleClicked:{
                 mouse.accepted=false;
@@ -2493,30 +2349,30 @@ Page {
         }
     }
     //Try again dialog
-    //    MessageDialog{
-    //        id: tryAgainDialog
-    //        title: "You lost!"
-    //        standardButtons: MessageDialog.Retry
-    //        informativeText: "Try Again!"
-    //        detailedText: "If you miss 3 in a row, you are out. Try to beat your personal best score!"
-    //        //Removing giant x added before the dialog was opened
-    //        onAccepted: {
-    //            giantX.visible = false;
-    //            seqAnimationId.stop()
-    //            levelRectangleAnimation.start()
-    //            //mMusic1.stop()
-    //            x1.visible=false; x2.visible = false; x3.visible = false;
-    //        }
-    //        onVisibilityChanged: {
-    //            if(!this.visible){
-    //                giantX.visible = false;
-    //                seqAnimationId.stop()
-    //                levelRectangleAnimation.start()
-    //                //mMusic1.stop()
-    //                x1.visible=false; x2.visible = false; x3.visible = false;
-    //            }
-    //        }
-    //    }
+    MessageDialog{
+        id: tryAgainDialog
+        title: "You lost!"
+        standardButtons: MessageDialog.Retry
+        informativeText: "Try Again!"
+        detailedText: "If you miss 3 in a row, you are out. Try to beat your personal best score!"
+        //Removing giant x added before the dialog was opened
+        onAccepted: {
+            giantX.visible = false;
+            seqAnimationId.stop()
+            levelRectangleAnimation.start()
+            //mMusic1.stop()
+            x1.visible=false; x2.visible = false; x3.visible = false;
+        }
+        onVisibilityChanged: {
+            if(!this.visible){
+                giantX.visible = false;
+                seqAnimationId.stop()
+                levelRectangleAnimation.start()
+                //mMusic1.stop()
+                x1.visible=false; x2.visible = false; x3.visible = false;
+            }
+        }
+    }
 
     Rectangle{
         id: stateRectId

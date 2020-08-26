@@ -84,19 +84,20 @@ int main(int argc, char *argv[])
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("lukagamewinner2222")){
-        dude.writeSettings("lukagamewinner2222",datastore1);
+    if(!settings.contains("jamychal3"
+                          "'")){
+        dude.writeSettings("jamychal3",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("lukagamewinner2222").toString());
+        extra.setDatastore(SettingsManager::loadSettings("jamychal3").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
-    if(!settings.contains("walkerfinals2222")){
-        dude.writeSettings("walkerfinals2222",myMissionsRn1);
+    if(!settings.contains("bosa3")){
+        dude.writeSettings("bosa3",myMissionsRn1);
     }
     else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("walkerfinals2222").toString());
+        extra.setMyMissionsRn(SettingsManager::loadSettings("bosa3").toString());
         qDebug()<<(extra.myMissionsRn());
         //        std::string str = x.toStdString();
         //        std::istringstream ss (str);
@@ -128,6 +129,7 @@ FlashingTimer allTheTimeStuff(){
         dude.writeSettings("jamesHarden?", tomorrow);
     else{
         tomorrow = SettingsManager::loadSettings("jamesHarden?").toDateTime();
+        tomorrow = now.addSecs(10);
     }
     FlashingTimer joe(tomorrow);
     return joe;

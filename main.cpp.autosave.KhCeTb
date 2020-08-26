@@ -13,8 +13,6 @@
 #include <QDateTime>
 #include <array>
 #include "flashingtimer.h"
-#include <sstream>
-#include <string>
 FlashingTimer allTheTimeStuff();
 
 int main(int argc, char *argv[])
@@ -48,8 +46,8 @@ int main(int argc, char *argv[])
     SettingsManager dude;
     qmlRegisterType<SettingsManager>("Arjun", 1, 0, "SettingsManager");
     //one thing to note is that is you want to change something in c++ (say with a timer) and want to automatically have it update in QML use setContextObject with the object instead of setObjectProperty
-    engine.rootContext()->setContextObject(&joe);
-    engine.rootContext()->setContextProperty("FlashingTimer",&joe);
+     engine.rootContext()->setContextObject(&joe);
+     engine.rootContext()->setContextProperty("FlashingTimer",&joe);
     engine.rootContext()->setContextProperty("Extra", &extra);
     engine.rootContext()->setContextProperty("availableStyles", QQuickStyle::availableStyles());
 
@@ -84,32 +82,19 @@ int main(int argc, char *argv[])
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("lukagamewinner2222")){
-        dude.writeSettings("lukagamewinner2222",datastore1);
+    if(!settings.contains("haywardInjurieeeeeeees")){
+        dude.writeSettings("haywardInjurieeeeeeees",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("lukagamewinner2222").toString());
+        extra.setDatastore(SettingsManager::loadSettings("haywardInjurieeeeeeees").toString());
 
-    //set myMissionsRn
-    QString myMissionsRn1{};
-    if(!settings.contains("walkerfinals2222")){
-        dude.writeSettings("walkerfinals2222",myMissionsRn1);
+    //set currentMissions
+    std::array<int,3> currentMission1 = extra.currentMissions();
+    if(!settings.contains("theMissionsRightNow")){
+        dude.writeSettings("theMissionsRightNow",currentMission1);
     }
-    else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("walkerfinals2222").toString());
-        qDebug()<<(extra.myMissionsRn());
-        //        std::string str = x.toStdString();
-        //        std::istringstream ss (str);
-        //        ss>>str;
-        //        int q;
-        //        int y;
-        //        int j;
-        //        ss>>q>>y>>j;
-        //        extra.myMissionsRn().at(0)=q;
-        //        extra.myMissionsRn().at(1)=y;
-        //        extra.myMissionsRn().at(2)=j;
-    }
-
+    else
+        extra.setDatastore(SettingsManager::loadSettings("theMissionsRightNow").toArray());
     engine.load(QUrl("qrc:/main.qml"));
     if (engine.rootObjects().isEmpty())
         return -1;
@@ -119,18 +104,23 @@ int main(int argc, char *argv[])
 
 
 FlashingTimer allTheTimeStuff(){
-    QDateTime now= QDateTime::currentDateTime();
-    //Make and save tomorrow
-    QSettings settings;
-    SettingsManager dude;
-    QDateTime tomorrow=now.addSecs(86399);
-    if(!settings.contains("jamesHarden?"))
-        dude.writeSettings("jamesHarden?", tomorrow);
-    else{
-        tomorrow = SettingsManager::loadSettings("jamesHarden?").toDateTime();
-    }
-    FlashingTimer joe(tomorrow);
-    return joe;
+  QDateTime now= QDateTime::currentDateTime();
+  //Make and save tomorrow
+  QSettings settings;
+  SettingsManager dude;
+  QDateTime tomorrow=now.addSecs(86399);
+  if(!settings.contains("whatIsTomorrow?"))
+      dude.writeSettings("whatIsTomorrow?", tomorrow);
+  else{
+      tomorrow = SettingsManager::loadSettings("whatIsTomorrow?").toDateTime();
+  }
+  if(tomorrow<now){
+      tomorrow=tomorrow.addSecs(86399);
+  }
+  FlashingTimer joe(tomorrow);
+  emit joe.callUpdateMissions();
+
+  return joe;
 }
 
 // Default message handler to be called to bypass all other warnings.
@@ -144,7 +134,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
             (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
         }
     }
-        break;
+    break;
     default:    // Call the default handler.
         (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
         break;
