@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MyAnimation.qml</file>
+        <file>CompetitiveMode.qml</file>
+        <file>CustomizationMode.qml</file>
+        <file>BallImage.qml</file>
+        <file>MyAnimationCustom.qml</file>
+        <file>GameStore.qml</file>
+        <file>test.js</file>
+        <file>GameStoreDelegate.qml</file>
+        <file>GameStoreDelegateNot.qml</file>
+    </qresource>
+</RCC>
