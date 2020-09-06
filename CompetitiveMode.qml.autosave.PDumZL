@@ -725,6 +725,7 @@ Page {
             wrapMode: Text.Wrap
             x: parent.width/2-10
         }
+        
     }
     //Coin counter thingy
     Rectangle{
@@ -779,6 +780,7 @@ Page {
             Behavior on angle {
                 NumberAnimation {
                     duration: 500
+
                 }
             }
         }
@@ -1305,7 +1307,7 @@ Page {
             let level3ShotAccuracy = figureOutShotWithColor(value);
             let pointsThisRound = 0;
 
-            if(level3ShotAccuracy==="airball"|| level3ShotAccuracy==="null"&&(value <80  || value > 920)){
+            if(level3ShotAccuracy==="airball"|| level3ShotAccuracy==="null"&&(value <70  || value > 930)){
                 if(true){
                     //all mission stuff
                     //0
@@ -1379,7 +1381,7 @@ Page {
                 random_number = Math.floor((Math.random() * 6));
                 feedbackLabel.font.italic = true;
             }
-            else if(level3ShotAccuracy==="backboardMiss"|| level3ShotAccuracy==="null"&&(value <180 || value >820)){
+            else if(level3ShotAccuracy==="backboardMiss"|| level3ShotAccuracy==="null"&&(value <160 || value >840)){
                 if(true){
                     //all mission stuff
                     //0
@@ -1451,7 +1453,7 @@ Page {
                 feedback = ["Well, better than an airball", "Atleast you hit the backboard", "Your NBA hopes are dwindling", "Next time, try to hit the rim", "Might want to start taking some basketball lessons", "Not your worst..."]
                 random_number = Math.floor((Math.random() * 6));
             }
-            else if(level3ShotAccuracy==="rimMiss"|| level3ShotAccuracy==="null"&&(value <270 || value >730)){
+            else if(level3ShotAccuracy==="rimMiss"|| level3ShotAccuracy==="null"&&(value <250 || value >750)){
                 if(true){
                     //all mission stuff
                     //0
@@ -1523,7 +1525,7 @@ Page {
                 feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time"]
                 random_number = Math.floor((Math.random() * 5));
             }
-            else if(level3ShotAccuracy==="backboardMake"|| level3ShotAccuracy==="null"&&(value < 350 || value >650)){
+            else if(level3ShotAccuracy==="backboardMake"|| level3ShotAccuracy==="null"&&(value < 340 || value >660)){
                 if(true){
                     //all mission stuff
                     //0
@@ -1595,7 +1597,7 @@ Page {
                 feedback = ["Good shot","A make is a make", "A bucket is a bucket", "Lucky shot??", "Banks don't count...try again", "According to Satvik: Banks don't count...try again", "You can do even better"]
                 random_number = Math.floor((Math.random() * 7));
             }
-            else if(level3ShotAccuracy==="rimMake"|| level3ShotAccuracy==="null"&&(value <415 || value > 585)){
+            else if(level3ShotAccuracy==="rimMake"|| level3ShotAccuracy==="null"&&(value <420 || value > 580)){
                 if(true){
                     //all mission stuff
                     //0
@@ -2801,5 +2803,9 @@ Page {
                 }
             }
         ]
+    }
+    Settings{
+        category: "allOtherStuff1"
+        id: mSettings
     }
 }

@@ -560,6 +560,7 @@ Page {
                     }
                     counter8=0;
                 }
+                Extra.goToHalftime();
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
@@ -1523,7 +1524,7 @@ Page {
                 feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time"]
                 random_number = Math.floor((Math.random() * 5));
             }
-            else if(level3ShotAccuracy==="backboardMake"|| level3ShotAccuracy==="null"&&(value < 350 || value >650)){
+            else if(level3ShotAccuracy==="backboardMake"|| level3ShotAccuracy==="null"&&(value < 345 || value >655)){
                 if(true){
                     //all mission stuff
                     //0
@@ -2801,5 +2802,14 @@ Page {
                 }
             }
         ]
+    }
+    Settings{
+       property alias points1: root2.points;
+       property alias level1: root2.level;
+       property alias levelIndicator1: root2.levelIndicator;
+       property alias extraPoints1: root2.extraPoints;
+       property alias manyMisses1: root2.manyMisses;
+       property alias manyMakes1: root2.manyMakes;
+       property alias mDuration1: root2.mDuration
     }
 }

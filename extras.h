@@ -73,6 +73,10 @@ signals:
 
     void soundChanged(double sound);
 
+    void goToHalftime();
+    void goBackFromHalftime();
+
+
 private:
     double m_volume;
     bool m_isOpen;

@@ -13,7 +13,6 @@
 #include <QDateTime>
 #include <array>
 #include "flashingtimer.h"
-#include <sstream>
 #include <string>
 #include "mytimer.h"
 FlashingTimer allTheTimeStuff();
@@ -92,11 +91,11 @@ int main(int argc, char *argv[])
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("lukagamewinner2222")){
-        dude.writeSettings("lukagamewinner2222",datastore1);
+    if(!settings.contains("lukagamewinner22222")){
+        dude.writeSettings("lukagamewinner22222",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("lukagamewinner2222").toString());
+        extra.setDatastore(SettingsManager::loadSettings("lukagamewinner22222").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
@@ -105,17 +104,6 @@ int main(int argc, char *argv[])
     }
     else{
         extra.setMyMissionsRn(SettingsManager::loadSettings("walkerfinals2222").toString());
-        qDebug()<<(extra.myMissionsRn());
-        //        std::string str = x.toStdString();
-        //        std::istringstream ss (str);
-        //        ss>>str;
-        //        int q;
-        //        int y;
-        //        int j;
-        //        ss>>q>>y>>j;
-        //        extra.myMissionsRn().at(0)=q;
-        //        extra.myMissionsRn().at(1)=y;
-        //        extra.myMissionsRn().at(2)=j;
     }
 
     engine.load(QUrl("qrc:/main.qml"));

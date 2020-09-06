@@ -10,5 +10,7 @@
         <file>test.js</file>
         <file>GameStoreDelegate.qml</file>
         <file>GameStoreDelegateNot.qml</file>
+        <file>HalftimeMode.qml</file>
+        <file>HalftimeBall.qml</file>
     </qresource>
 </RCC>

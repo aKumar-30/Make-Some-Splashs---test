@@ -1,16 +1,15 @@
-import QtQml.Models 2.2
 import QtQuick 2.12
-import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
+import QtQml.Models 2.2
+import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls.Universal 2.12
 import Qt.labs.settings 1.0
-import QtMultimedia 5.15
 import Qt.labs.qmlmodels 1.0
-
-import Arjun 1.0
+import QtMultimedia 5.15
 import "test.js" as Global
 
+import Arjun 1.0
 
 //New VERSION STARTS HERE
 ApplicationWindow {
@@ -42,6 +41,7 @@ ApplicationWindow {
     property var currentMissionRewards: 0;
     property var arr: []
     property var presentMissions: [];
+
     Audio{
         id: mMusic1
         source:"file:///Users/arjun/Documents/CompetitiveBall/images/mMusic1.wav"
@@ -55,7 +55,7 @@ ApplicationWindow {
         s_manager.writeSettings("numCoins21", Extra.numCoins);
         s_manager.writeSettings("ballSource", Extra.ballSource);
         s_manager.writeSettings("personalBest55",Extra.personalBest);
-        s_manager.writeSettings("lukagamewinner2222",Extra.datastore);
+        s_manager.writeSettings("lukagamewinner22222",Extra.datastore);
         //convert array to string
         setCurrentMissions()
         s_manager.writeSettings("walkerfinals2222",Extra.myMissionsRn);
@@ -67,13 +67,17 @@ ApplicationWindow {
     Connections{
         target: Extra;
         function onSomethingCompetitiveChanged(){
-            console.log("WHY DID LUKA WIN AND RUIN MY MONEY")
             stackView.pop()
             //starting timer
             thePauseTimer.start()
         }
+        function onGoBackFromHalftime(){
+            stackView.pop()
+        }
+        function onGoToHalftime(){
+            stackView.push("qrc:/HalftimeMode.qml")
+        }
     }
-
     onClosing: {
         if(Extra.endingPage==="qrc:/CompetitiveMode.qml"){
             stackView.push("qrc:/GameStore.qml");
@@ -95,7 +99,6 @@ ApplicationWindow {
             var q = "";
             while(Extra.myMissionsRn[j]!==","){
                 q+=(Extra.myMissionsRn[j]).toString();
-                console.log("I found a comma. Q is currently "+q)
                 j++
             }
             j++;
@@ -131,7 +134,14 @@ ApplicationWindow {
             setCurrentMissions()
         }
     }
-
+    function checkIfCurrentMission(num){
+        for(let i =0; i< 3; i++){
+            if(presentMissions[i]===num){
+                return true;
+            }
+        }
+        return false;
+    }
     function checkIfButtonNeedsToBeVisible(whatFor){
         let thing = false;
         currentMissionRewards=0;
@@ -254,102 +264,227 @@ ApplicationWindow {
         ListModel{
             id: mMissionModel
             ListElement{//0
+                // @disable-check M16
                 index: 0
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Splash 3 times in a row. Record: "
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 2;
+                // @disable-check M16
                 neededThings: 3
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//1
+                // @disable-check M16
                 index: 1
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Splash 6 times in a row. Record: "
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 4;
+                // @disable-check M16
                 neededThings: 6
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//2
+                // @disable-check M16
                 index: 2
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Splash 11 times in a row. Record: "
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 12;
+                // @disable-check M16
                 neededThings: 11
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//3
+                // @disable-check M16
                 index: 3
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Miss at the backboard two consecutive time. Record: "
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 2;
+                // @disable-check M16
                 neededThings: 2
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//4
+                // @disable-check M16
                 index: 4
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Make at the rim 6 times in a row in level 3. Record:"
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 6;
+                // @disable-check M16
                 neededThings: 6
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//5
+                // @disable-check M16
                 index: 5
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Make at the backboard 9 times in a row in level 2. Record:"
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 12;
+                // @disable-check M16
                 neededThings: 9
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//6
+                // @disable-check M16
                 index: 6
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Splash the ball 8 times in a row during level 3. Record:"
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 7;
+                // @disable-check M16
                 neededThings: 8
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//7
+                // @disable-check M16
                 index: 7
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Make all the shots in level 1. Record"
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 9;
+                // @disable-check M16
                 neededThings: 21
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//8
+                // @disable-check M16
                 index: 8
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Make all the shots in level 2. Record"
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 23;
+                // @disable-check M16
                 neededThings: 21
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//9
+                // @disable-check M16
                 index: 9
+                // @disable-check M16
                 completed: false
+                // @disable-check M16
                 description: "Miss two consecutively at the rim in level 3. Record:"
+                // @disable-check M16
                 multipleTimes: true
-                reward: 6;
+                // @disable-check M16
+                reward: 4;
+                // @disable-check M16
                 neededThings: 2
+                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//10
+                // @disable-check M16
                 index: 10
+                // @disable-check M16
                 completed: false;
+                // @disable-check M16
                 description: "Get exactly 4 coins in a game in a twice"
+                // @disable-check M16
                 multipleTimes: true
+                // @disable-check M16
                 reward: 4;
+                // @disable-check M16
                 neededThings: 2
+                // @disable-check M16
+                currentThings: 0
+            }
+            ListElement{//11
+                // @disable-check M16
+                index: 11
+                // @disable-check M16
+                completed: false;
+                // @disable-check M16
+                description: "Advance to level 3 while earning zero coins in the match"
+                // @disable-check M16
+                multipleTimes: true
+                // @disable-check M16
+                reward: 14;
+                // @disable-check M16
+                neededThings: 1
+                // @disable-check M16
+                currentThings: 0
+            }
+            ListElement{//12
+                // @disable-check M16
+                index: 12
+                // @disable-check M16
+                completed: false;
+                // @disable-check M16
+                description: "Complete the other two challenges."
+                // @disable-check M16
+                multipleTimes: true
+                // @disable-check M16
+                reward: 4;
+                // @disable-check M16
+                neededThings: 2
+                // @disable-check M16
+                currentThings: 0
+            }
+            ListElement{//13
+                // @disable-check M16
+                index: 13
+                // @disable-check M16
+                completed: false;
+                // @disable-check M16
+                description: "Make at the backboard four consecutive times. Record: "
+                // @disable-check M16
+                multipleTimes: true
+                // @disable-check M16
+                reward: 4;
+                // @disable-check M16
+                neededThings: 4
+                // @disable-check M16
                 currentThings: 0
             }
             //            ListElement{//5
@@ -388,17 +523,6 @@ ApplicationWindow {
             //                neededThings: 3
             //                currentThings: 0
             //            }
-
-            //            ListElement{//9
-            //                index: 9
-            //                completed: false;
-            //                name: ""
-            //                description: "Advance to level 3 while earning zero coins in the match"
-            //                multipleTimes: true
-            //                reward: 9;
-            //                neededThings: 1
-            //                currentThings: 0
-            //            }
             //            ListElement{//10
             //                index: 10
             //                completed: false;
@@ -408,24 +532,7 @@ ApplicationWindow {
             //                neededThings: 1
             //                currentThings: 0
             //            }
-            //            ListElement{//11
-            //                index: 11
-            //                completed: false;
-            //                description: "Make at the backboard four consecutive times. Record: "
-            //                multipleTimes: true
-            //                reward: 6;
-            //                neededThings: 4
-            //                currentThings: 0
-            //            }
-            //            ListElement{//12
-            //                index: 12
-            //                completed: false;
-            //                description: "Complete the other two challenges."
-            //                multipleTimes: true
-            //                reward: 4;
-            //                neededThings: 2
-            //                currentThings: 0
-            //            }
+
 
             //            ListElement{//14
             //                index: 14
@@ -977,7 +1084,6 @@ ApplicationWindow {
         enabled: stackView.depth > 1
         onActivated: navigateBackAction.trigger()
     }
-
     Shortcut {
         sequence: StandardKey.HelpContents
         onActivated: help()
@@ -1352,6 +1458,21 @@ ApplicationWindow {
                         anchors.fill: parent
                         onClicked: {
                             if(!thePauseTimer.running){
+                                //                                if(true){
+                                //                                    //12
+                                //                                    let couldTheMissionBeCompleted = 0;
+                                //                                    for(let i =0; i< 3; i++){
+                                //                                        if(presentMissions[i]!==12){
+                                //                                            if ((mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings)){
+                                //                                                couldTheMissionBeCompleted++;
+                                //                                            }
+                                //                                            return true;
+                                //                                        }
+                                //                                    }
+                                //                                    if(couldTheMissionBeCompleted===2&&checkIfCurrentMission(12)){
+                                //                                        mMissionModel.get(12).currentThings++
+                                //                                    }
+                                //                                }
                                 mainRect.visible = true;
                                 mainRectFade.visible = true;
                                 checkIfButtonNeedsToBeVisible(true);
