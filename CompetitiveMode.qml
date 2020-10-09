@@ -5,7 +5,8 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls.Universal 2.12
 import Qt.labs.settings 1.0
-import QtMultimedia 5.15
+//import QtMultimedia 5.15
+import QtMultimedia 5.8
 import Qt.labs.qmlmodels 1.0
 import QtQuick.Dialogs 1.2
 import otherArjun 1.0
@@ -47,6 +48,16 @@ Page {
     property var mIsOpen: Extra.isOpen
     property var coinsThisRound: 0
     property var presentMissions: []
+    property int beforeHalftimeScore: 0;
+    Connections{
+        target: Extra
+        function onGoBackFromHalftime(addedPoints){
+            console.log("the CELTICS VITORY WILL BE GODLY")
+            points+=addedPoints
+            levelRectangleAnimation.start();
+            seqAnimationId.pause()
+        }
+    }
     Component.onDestruction:{
         if(mMissionModel.count!==0 &&Extra.datastore){
             var datamodel = []
@@ -410,6 +421,7 @@ Page {
             manyMakes=0;
             manyMisses=0;
             levelRectangleAnimation.start();
+            seqAnimationId.pause()
         }
         //fix ball
         basketBall.width=115
@@ -542,8 +554,9 @@ Page {
             coinProb = 4;
             var options = [Easing.Linear, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.OutCirc, Easing.OutInCirc, Easing.InOutElastic, Easing.OutElastic, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.InBounce, Easing.OutBounce, Easing.InOutBounce, Easing.OutInBounce, Easing.BezierCurve]
             sliderEasingType=options[Math.floor((Math.random() * 26))];
+            console.log("Easing type"+Math.floor((Math.random() * 26)))
             sliderId.value=200;
-            mDuration-=35;
+            mDuration-=28;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator >21)
             {
@@ -560,10 +573,16 @@ Page {
                     }
                     counter8=0;
                 }
+                if(mvpSoundEffectPlaying){
+                    fadeOut.start();
+                    mvpSoundEffectPlaying=false
+                }
+                Extra.goToHalftime()
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
-                seqAnimationId.restart();
+                if(stateRectId.state!="paused")
+                    seqAnimationId.restart();
             }
         }
         //Level three stuff
@@ -615,13 +634,15 @@ Page {
     Text{
         id: explanationTutorialText
         text: "Click anywhere in the white"
+        wrapMode: Text.Wrap
         font.pointSize: 14
         color: "black"
         font.bold: true
-        width: 75
-        anchors.horizontalCenter: parent.horizontalCenter
+        width: 170
+        horizontalAlignment: Text.AlignHCenter
+        visible: pointingFinger.visible
+        anchors.horizontalCenter: pointingFinger.horizontalCenter
         anchors.bottom: pointingFinger.top
-        visible: false;
         z:5
     }
     Image{
@@ -1375,7 +1396,7 @@ Page {
                 points -= 120;
                 pointsThisRound -= 120;
                 airBallAnimation.start();
-                feedback = ["Seriously, you can do MUCH better", "An airball?", "You are supposed to shoot at the hoop, you know?", "My dog can shoot better than that", "A complete failure...", "Why do you even play this sport?"]
+                feedback = ["Have you ever shot a basketball before?","Seriously, you can do MUCH better", "An airball?", "You are supposed to shoot at the hoop, you know?", "My dog can shoot better than that", "A complete failure...", "Why do you even play this sport?"]
                 random_number = Math.floor((Math.random() * 6));
                 feedbackLabel.font.italic = true;
             }
@@ -1448,7 +1469,7 @@ Page {
                 points -= 50;
                 pointsThisRound -= 50;
                 backboardMissAnimation.start()
-                feedback = ["Well, better than an airball", "Atleast you hit the backboard", "Your NBA hopes are dwindling", "Next time, try to hit the rim", "Might want to start taking some basketball lessons", "Not your worst..."]
+                feedback = ["Well, better than an airball", "Atleast you hit the backboard", "Your NBA hopes are dwindling", "Next time, try to hit the rim", "Might want to start taking some basketball lessons", "Not your worst...", "I think you can do better"]
                 random_number = Math.floor((Math.random() * 6));
             }
             else if(level3ShotAccuracy==="rimMiss"|| level3ShotAccuracy==="null"&&(value <270 || value >730)){
@@ -1520,7 +1541,7 @@ Page {
                 points -= 20;
                 pointsThisRound -= 20;
                 rimMissAnimation.start()
-                feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time"]
+                feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time", "Good try!"]
                 random_number = Math.floor((Math.random() * 5));
             }
             else if(level3ShotAccuracy==="backboardMake"|| level3ShotAccuracy==="null"&&(value < 350 || value >650)){
@@ -1592,7 +1613,7 @@ Page {
                 points +=30;
                 pointsThisRound += 30;
                 backboardAnimation.start()
-                feedback = ["Good shot","A make is a make", "A bucket is a bucket", "Lucky shot??", "Banks don't count...try again", "According to Satvik: Banks don't count...try again", "You can do even better"]
+                feedback = ["Good shot","A make is a make", "A bucket is a bucket", "Lucky shot??", "Banks don't count...try again", "Banks don't count...try again", "You can do even better"]
                 random_number = Math.floor((Math.random() * 7));
             }
             else if(level3ShotAccuracy==="rimMake"|| level3ShotAccuracy==="null"&&(value <415 || value > 585)){
@@ -1812,7 +1833,7 @@ Page {
                 points+= 150
                 pointsThisRound +=150;
                 splashAnimation.start()
-                feedback = ["The GOAT??", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP"]
+                feedback = ["The GOAT?", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP"]
                 random_number = Math.floor((Math.random() * 5));
                 feedbackLabel.font.bold = true;
                 splashAnimation.start()
@@ -1981,14 +2002,12 @@ Page {
                     }
                     if(counterio ==1 && value===500.5){
                         seqAnimationId.stop();
-                        explanationTutorialText.visible=true;
                         pointingFinger.visible=true;
                     }
                 }
                 if(level===3)
                 {
                     mPauseAnim.stop();
-                    explanationTutorialText.visible=false;
                     pointingFinger.visible=false;
                     insideContainerId.sliderStopped(sliderId.value);
                     handleId.visible=true;
@@ -2009,7 +2028,7 @@ Page {
             value: 20;
             width: 440;
             height: 20;
-            enabled:false;
+            enabled:insideRectangleMouseArea.enabled;
             MouseArea{
                 id: insideTheSliderRectangleMouseArea
                 enabled: false;
@@ -2093,7 +2112,6 @@ Page {
                                 pointingFingerAnimBack.to+=34
                                 firstTime3=false;
                                 pointingFinger.visible=true;
-                                explanationTutorialText.visible=true;
                                 break;
                             }
                         }
@@ -2126,7 +2144,6 @@ Page {
         id: splashSoundEffectTimer
         original:  1500
         onTimedOut: {
-            console.log("YAY WE TIMED OUT IN QML, ephasize on qml")
             splashSoundEffect.play()
         }
     }
@@ -2136,9 +2153,7 @@ Page {
         volume: Extra.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
-                console.log("in first if statemnt")
                 if(flipable.visible){
-                    console.log("in second if statemnt")
                     coinClinkSoundEffect.play()
                 }
             }

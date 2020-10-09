@@ -74,7 +74,7 @@ signals:
     void soundChanged(double sound);
 
     void goToHalftime();
-    void goBackFromHalftime();
+    void goBackFromHalftime(int points1 = 0);
 
 
 private:

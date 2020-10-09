@@ -24,7 +24,8 @@ Page {
         if(startText.visible)
             startText.visible=false;
         sequencialAnimation.restart()
-        otherCustomizeButton.visible=true;
+        if(!containerRectId.visible)
+             otherCustomizeButton.visible=true;
     }
 
     Connections{

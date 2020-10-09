@@ -133,7 +133,7 @@ Page {
         width:height
         height: remainingTimeBoxText.implicitHeight+30
         color: "black"
-        z:200
+        z:2000000
         opacity: 0.4
         radius:20
         Text{
@@ -151,52 +151,24 @@ Page {
         visible: false
         id: totalRewardsBox
         anchors.centerIn: parent
-        width:remainingTimeBox.width
-        height: remainingTimeBox.height
+        width:height
+        height: remainingTimeBoxText.implicitHeight+30
         color: "black"
-        z:200
+        z:2000000
         opacity: 0.4
         radius:20
-        Column{
-            anchors.fill: parent
-            anchors.centerIn: parent
-            spacing: 25
-            Text{
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: value +" X " + " 15 = ";
-                property int value: (totalRewardsBox.visible)?(numberOfClicks):(0)
-                Behavior on value {
-                    NumberAnimation { duration: 800; easing.type: Easing.InOutQuad }
-                }
-                id: totalRewardsBoxText
-                font.family: "GENISO"
-                font.bold: true
-                font.pointSize: 40
-                color: "white"
+        Text{
+            property int value: (totalRewardsBox.visible)?(numberOfClicks):(0)
+            text: value +" X " + " 10 = " + (value*10);
+            Behavior on value {
+                NumberAnimation { duration: 500; easing.type: Easing.InOutQuad }
             }
-            Row{
-                anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 10
-                Text{
-                    property int value: (totalRewardsBox.visible)?(numberOfClicks*15):(0)
-                    Behavior on value {
-                        NumberAnimation { duration: 900; easing.type: Easing.InOutQuad }
-                    }
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: value
-                    font.family: "GENISO"
-                    font.bold: true
-                    font.pointSize: 55
-                    color: "white"
-                }
-                Text{
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: " extra points"
-                    font.family: "GENISO"
-                    font.pointSize: 15
-                    color: "white"
-                }
-            }
+            id: totalRewardsBoxText
+            x: parent.width/2-40
+            font.family: "GENISO"
+            font.bold: true
+            font.pointSize: 30
+            color: "white"
         }
     }
     Timer{
@@ -226,7 +198,7 @@ Page {
         duration: 5000
         onStopped: {
             //do something
-            Extra.goBackFromHalftime(numberOfClicks*15);
+            Extra.goBackFromHalftime();
         }
     }
     PauseAnimation {

@@ -133,7 +133,7 @@ Page {
         width:height
         height: remainingTimeBoxText.implicitHeight+30
         color: "black"
-        z:200
+        z:2000000
         opacity: 0.4
         radius:20
         Text{
@@ -160,10 +160,10 @@ Page {
         Column{
             anchors.fill: parent
             anchors.centerIn: parent
-            spacing: 25
+            spacing: 30
             Text{
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: value +" X " + " 15 = ";
+                text: value +" X " + " 10 = ";
                 property int value: (totalRewardsBox.visible)?(numberOfClicks):(0)
                 Behavior on value {
                     NumberAnimation { duration: 800; easing.type: Easing.InOutQuad }
@@ -176,24 +176,24 @@ Page {
             }
             Row{
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 10
+                spacing: 20
                 Text{
-                    property int value: (totalRewardsBox.visible)?(numberOfClicks*15):(0)
+                    property int value: (totalRewardsBox.visible)?(numberOfClicks*10):(0)
                     Behavior on value {
                         NumberAnimation { duration: 900; easing.type: Easing.InOutQuad }
                     }
                     anchors.verticalCenter: parent.verticalCenter
-                    text: value
+                    text: numberOfClicks*10
                     font.family: "GENISO"
                     font.bold: true
-                    font.pointSize: 55
+                    font.pointSize: 65
                     color: "white"
                 }
                 Text{
                     anchors.verticalCenter: parent.verticalCenter
                     text: " extra points"
                     font.family: "GENISO"
-                    font.pointSize: 15
+                    font.pointSize: 20
                     color: "white"
                 }
             }
@@ -218,15 +218,15 @@ Page {
     }
     Timer{
         id: totalTimeTimer
-        interval:  20000
+        interval:  5000
     }
 
     PauseAnimation {
         id: endPauseAnim
-        duration: 5000
+        duration: 500000
         onStopped: {
             //do something
-            Extra.goBackFromHalftime(numberOfClicks*15);
+            Extra.goBackFromHalftime();
         }
     }
     PauseAnimation {

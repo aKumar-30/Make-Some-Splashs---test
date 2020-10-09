@@ -6,7 +6,8 @@ import QtQuick.Controls.Material 2.12
 import QtQuick.Controls.Universal 2.12
 import Qt.labs.settings 1.0
 import Qt.labs.qmlmodels 1.0
-import QtMultimedia 5.15
+import QtMultimedia 5.8
+//import QtMultimedia 5.15
 import "test.js" as Global
 
 import Arjun 1.0
@@ -17,13 +18,10 @@ ApplicationWindow {
         focus: true
         Keys.onPressed:{
             if(event.key===Qt.Key_Space){
-                console.log("in space")
                 if(Extra.endingPage==="qrc:/CompetitiveMode.qml"){
-                    console.log("specific space1")
                     Extra.emittingSpaceInCompSignal();
                 }
                 else if(Extra.endingPage==="qrc:/CustomizationMode.qml"){
-                    console.log("specific space")
                     Extra.emittingSpaceInCustSignal();
                 }
             }
@@ -50,11 +48,18 @@ ApplicationWindow {
     }
     Component.onDestruction: {
         mMusic1.stop()
+        storeForSettings();
+
+        var datamodel = []
+        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
+        Extra.datastore = JSON.stringify(datamodel)
+
         s_manager.writeSettings("volume0100", Extra.volume);
         s_manager.writeSettings("sound0100",Extra.sound);
         s_manager.writeSettings("numCoins21", Extra.numCoins);
         s_manager.writeSettings("ballSource", Extra.ballSource);
         s_manager.writeSettings("personalBest55",Extra.personalBest);
+        console.log("saving to settings tge datastore   "+mMissionModel.get(presentMissions[1]).completed);
         s_manager.writeSettings("lukagamewinner22222",Extra.datastore);
         //convert array to string
         setCurrentMissions()
@@ -74,25 +79,21 @@ ApplicationWindow {
         function onGoBackFromHalftime(){
             stackView.pop()
         }
-        function onGoToHalftime(){
+        function onGoToHalftime(j){
             stackView.push("qrc:/HalftimeMode.qml")
         }
     }
-    onClosing: {
-        if(Extra.endingPage==="qrc:/CompetitiveMode.qml"){
-            stackView.push("qrc:/GameStore.qml");
-            stackView.pop()
-        }
-        stackView.push("qrc:/CompetitiveMode.qml");
-        stackView.pop()
-        //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
+    //    onClosing: {
+    //        if(Extra.endingPage==="qrc:/CompetitiveMode.qml"){
+    //            stackView.push("qrc:/GameStore.qml");
+    //            stackView.pop()
+    //        }
+    //        stackView.push("qrc:/CompetitiveMode.qml");
+    //        stackView.pop()
+    //        //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
 
-        storeForSettings();
 
-        var datamodel = []
-        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-        Extra.datastore = JSON.stringify(datamodel)
-    }
+    //    }
     function getCurrentMissions(){
         let j =0;
         for(let i =0; i < 3; i++){
@@ -264,227 +265,129 @@ ApplicationWindow {
         ListModel{
             id: mMissionModel
             ListElement{//0
-                // @disable-check M16
                 index: 0
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Splash 3 times in a row. Record: "
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 2;
-                // @disable-check M16
                 neededThings: 3
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//1
-                // @disable-check M16
                 index: 1
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Splash 6 times in a row. Record: "
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 4;
-                // @disable-check M16
                 neededThings: 6
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//2
-                // @disable-check M16
                 index: 2
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Splash 11 times in a row. Record: "
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 12;
-                // @disable-check M16
                 neededThings: 11
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//3
-                // @disable-check M16
                 index: 3
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Miss at the backboard two consecutive time. Record: "
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 2;
-                // @disable-check M16
                 neededThings: 2
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//4
-                // @disable-check M16
                 index: 4
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Make at the rim 6 times in a row in level 3. Record:"
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 6;
-                // @disable-check M16
                 neededThings: 6
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//5
-                // @disable-check M16
                 index: 5
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Make at the backboard 9 times in a row in level 2. Record:"
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
-                reward: 12;
-                // @disable-check M16
+                reward: 23;
                 neededThings: 9
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//6
-                // @disable-check M16
                 index: 6
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Splash the ball 8 times in a row during level 3. Record:"
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 7;
-                // @disable-check M16
                 neededThings: 8
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//7
-                // @disable-check M16
                 index: 7
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Make all the shots in level 1. Record"
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 9;
-                // @disable-check M16
                 neededThings: 21
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//8
-                // @disable-check M16
                 index: 8
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Make all the shots in level 2. Record"
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 23;
-                // @disable-check M16
                 neededThings: 21
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//9
-                // @disable-check M16
                 index: 9
-                // @disable-check M16
                 completed: false
-                // @disable-check M16
                 description: "Miss two consecutively at the rim in level 3. Record:"
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 4;
-                // @disable-check M16
                 neededThings: 2
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//10
-                // @disable-check M16
                 index: 10
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Get exactly 4 coins in a game in a twice"
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 4;
-                // @disable-check M16
                 neededThings: 2
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//11
-                // @disable-check M16
                 index: 11
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Advance to level 3 while earning zero coins in the match"
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 14;
-                // @disable-check M16
                 neededThings: 1
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//12
-                // @disable-check M16
                 index: 12
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Complete the other two challenges."
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 4;
-                // @disable-check M16
                 neededThings: 2
-                // @disable-check M16
                 currentThings: 0
             }
             ListElement{//13
-                // @disable-check M16
                 index: 13
-                // @disable-check M16
                 completed: false;
-                // @disable-check M16
                 description: "Make at the backboard four consecutive times. Record: "
-                // @disable-check M16
                 multipleTimes: true
-                // @disable-check M16
                 reward: 4;
-                // @disable-check M16
                 neededThings: 4
-                // @disable-check M16
                 currentThings: 0
             }
             //            ListElement{//5
@@ -698,6 +601,7 @@ ApplicationWindow {
             }
         }
         //Actual model stuff ENDS HERE------------------------------------------------------------
+        //get rewards button
         Button{
             onClicked: {
                 if(visible){
@@ -708,6 +612,8 @@ ApplicationWindow {
                         if(displayDelegateModel.items.get(i).model.currentThings>=displayDelegateModel.items.get(i).model.neededThings){
                             displayDelegateModel.items.get(i).model.completed=true;
                             mMissionModel.get(presentMissions[j]).completed=true
+                            console.log("completed updated");
+                            console.log("Is completed "+ "THis: "+(presentMissions[j])+ "and the result : "+ mMissionModel.get(presentMissions[j]).completed);
                         }
                         j++;
                     }
@@ -770,6 +676,82 @@ ApplicationWindow {
             y: getRewardsButton.y+5
             x: getRewardsButton.x-5
             color: "#188509"
+        }
+
+        //ADS FOR THE MONEY MONEY MONEY
+        Button{
+            //thse re the rwarded ad stuff IGNORE ERRORS FOR NOW
+//            MobRewardedVideo {
+//                id: myRewardedVideo
+
+//                // test ad for rewarded videos
+//                adUnitId: "ca-app-pub-3940256099942544/5224354917"
+
+//                onRewardedVideoRewarded: {
+//                    updateMissions();
+//                }
+
+//                // load interstitial at app start to cache it
+//                Component.onCompleted: {
+//                    loadRewardedVideo()
+//                }
+
+//            }
+            onClicked: {
+                if(visible){
+                    //MAKE AN AD HAPPEN
+                    // show the new video if user is below 10 credits
+                    myRewardedVideo.showRewardedVideoIfLoaded()
+
+                    // load a new video every time it got shown, to give the user a fresh ad
+                    myRewardedVideo.loadRewardedVideo()
+                }
+            }
+            visible: !getRewardsButton.visible;
+            z: 19
+            id: newMissionsAdButton
+            anchors.top: listOfMissions.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: 55
+            width: 140*3
+            Rectangle{
+                anchors.fill: parent
+                color: "#2e8ddb"
+            }
+            Row{
+                x:10
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.centerIn: parent
+                Text{
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: "White"
+                    font.family: "Swis721 Cn BT"
+                    font.bold: true
+                    font.pointSize: 25
+                    text:"New Missions"
+                }
+                Rectangle{
+                    width: 15
+                    height: 2
+                    color: "transparent"
+                }
+                //video pic
+                Image{
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 50*1.2
+                    height: 35*1.2
+                    source: "file:///Users/arjun/Documents/CompetitiveBall/images/PlayAdVideo.png"
+                }
+            }
+        }
+        Rectangle{
+            visible: newMissionsAdButton.visible;
+            id: newMissionsAdButtonFade
+            width: newMissionsAdButton.width
+            height: newMissionsAdButton.height
+            y: newMissionsAdButton.y+5
+            x: newMissionsAdButton.x-5
+            color: "#18549e"
         }
     }
     Rectangle{
@@ -873,6 +855,22 @@ ApplicationWindow {
                         font.bold: true
                         wrapMode: Label.Wrap
                         font.pixelSize: 19
+                        text: "Halftime"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Time to have some fun! Try to click on as many balls as you can as they fall. The more balls you click the more bonus points you earn"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        font.bold: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 19
                         text: "Level 3"
                     }
                 }
@@ -896,7 +894,7 @@ ApplicationWindow {
                 }
                 Label {
                     width: aboutDialog.availableWidth
-                    text: "    Earn coins by completing daily missions, watching ads, or playing the game!"
+                    text: "    Earn coins by completing daily missions, watching ads, or playing the game (randomly appearing)!"
                     wrapMode: Label.Wrap
                     font.pixelSize: 16
                     lineHeight: 1.45
@@ -1050,11 +1048,9 @@ ApplicationWindow {
             }
             RowLayout {
                 spacing: 10
-
                 Label {
                     text: "Style:"
                 }
-
                 ComboBox {
                     id: styleBox
                     property int styleIndex: -1
@@ -1348,19 +1344,21 @@ ApplicationWindow {
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
-                        //store for settings
-                        //update model
-                        var datamodel = []
-                        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-                        Extra.datastore = JSON.stringify(datamodel)
-                        //update current missions (just double checking)
-                        setCurrentMissions()
+                        if(!mainRect.visible){
+                            //store for settings
+                            //update model
+                            var datamodel = []
+                            for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
+                            Extra.datastore = JSON.stringify(datamodel)
+                            //update current missions (just double checking)
+                            setCurrentMissions()
 
-                        mainRect.visible = false;
-                        mainRectFade.visible = false;
-                        stackView.push("qrc:/CompetitiveMode.qml");
-                        Extra.endingPage="qrc:/CompetitiveMode.qml";
-                        thisTitle="Game Mode"
+                            mainRect.visible = false;
+                            mainRectFade.visible = false;
+                            stackView.push("qrc:/CompetitiveMode.qml");
+                            Extra.endingPage="qrc:/CompetitiveMode.qml";
+                            thisTitle="Game Mode"
+                        }
                     }
                 }
             }
@@ -1458,24 +1456,24 @@ ApplicationWindow {
                         anchors.fill: parent
                         onClicked: {
                             if(!thePauseTimer.running){
-                                //                                if(true){
-                                //                                    //12
-                                //                                    let couldTheMissionBeCompleted = 0;
-                                //                                    for(let i =0; i< 3; i++){
-                                //                                        if(presentMissions[i]!==12){
-                                //                                            if ((mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings)){
-                                //                                                couldTheMissionBeCompleted++;
-                                //                                            }
-                                //                                            return true;
-                                //                                        }
-                                //                                    }
-                                //                                    if(couldTheMissionBeCompleted===2&&checkIfCurrentMission(12)){
-                                //                                        mMissionModel.get(12).currentThings++
-                                //                                    }
-                                //                                }
                                 mainRect.visible = true;
                                 mainRectFade.visible = true;
                                 checkIfButtonNeedsToBeVisible(true);
+                                if(true){
+                                    //12
+                                    let couldTheMissionBeCompleted = 0;
+                                    for(let i =0; i< 3; i++){
+                                        if(presentMissions[i]!==12){
+                                            if ((mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings)){
+                                                couldTheMissionBeCompleted++;
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                    if(couldTheMissionBeCompleted===2&&checkIfCurrentMission(12)){
+                                        mMissionModel.get(12).currentThings++
+                                    }
+                                }
                             }
                         }
                     }
