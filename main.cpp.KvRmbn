@@ -16,7 +16,6 @@
 #include <string>
 #include "mytimer.h"
 #include <FelgoLiveClient>
-#include <FelgoApplication>
 
 FlashingTimer allTheTimeStuff();
 
@@ -39,7 +38,7 @@ int main(int argc, char *argv[])
     felgo.setPreservePlatformFonts(true);
     QQmlApplicationEngine engine;
     felgo.initialize(&engine);
-    felgo.setLicenseKey(PRODUCT_LICENSE_KEY);
+    felgo.setLicenseKey(PRODUCT_UNLICENSED);
 
     //All the settings things
     QSettings settings;
@@ -54,8 +53,8 @@ int main(int argc, char *argv[])
     FlashingTimer joe = allTheTimeStuff();
     Extras extra;
     SettingsManager dude;
-    qmlRegisterType<MyTimer>("otherArjun2", 1, 2, "MyTimer");
-    qmlRegisterType<SettingsManager>("Lebron", 1, 0, "SettingsManager");
+    qmlRegisterType<SettingsManager>("Arjun", 1, 0, "SettingsManager");
+    qmlRegisterType<MyTimer>("otherArjun", 1, 0, "MyTimer");
     //one thing to note is that is you want to change something in c++ (say with a timer) and want to automatically have it update in QML use setContextObject with the object instead of setObjectProperty
     engine.rootContext()->setContextObject(&joe);
     engine.rootContext()->setContextProperty("FlashingTimer",&joe);
@@ -91,11 +90,11 @@ int main(int argc, char *argv[])
 
     //save personal best
     int personalBest1 = extra.personalBest();
-    if(!settings.contains("personalBest555")){
-        dude.writeSettings("personalBest555",personalBest1);
+    if(!settings.contains("personalBest55")){
+        dude.writeSettings("personalBest55",personalBest1);
     }
     else
-        extra.setPersonalBest(SettingsManager::loadSettings("personalBest555").toInt());
+        extra.setPersonalBest(SettingsManager::loadSettings("personalBest55").toInt());
 
     //set datastore
     QString datastore1 = extra.datastore();
@@ -146,7 +145,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
             (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
         }
     }
-    break;
+        break;
     default:    // Call the default handler.
         (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
         break;

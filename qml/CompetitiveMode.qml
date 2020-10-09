@@ -1,3 +1,4 @@
+import Felgo 3.0
 import QtQml.Models 2.2
 import QtQuick 2.12
 import QtQuick.Controls 2.12
@@ -5,16 +6,26 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls.Universal 2.12
 import Qt.labs.settings 1.0
-import QtMultimedia 5.15
-import Qt.labs.qmlmodels 1.0
+import QtMultimedia 5.8
+//import Qt.labs.qmlmodels 1.0
 import QtQuick.Dialogs 1.2
-import otherArjun 1.0
-import "test.js" as Global
+import otherArjun2 1.2
+
 Page {
+    //do stuff in main yay
+    function onGoToHalftime(){
+        navigationStack.push(halftimeModeComponent)
+    }
+    function switchFileSignal(){
+        navigationStack.pop()
+        //starting timer
+        thePauseTimer.start()
+    }
     visible: true
-    width: 708
-    height: 785
-    title:"Competitive Mode"
+    y: navigationStack.navigationBar.height
+    width: parent.width
+    height: parent.height+y
+    title:"Game Mode"
     property int duration: 1000
     id: root2
     property bool isNewColor: false
@@ -48,6 +59,8 @@ Page {
     property var coinsThisRound: 0
     property var presentMissions: []
     property int beforeHalftimeScore: 0;
+    //for going back after halftime
+    property bool shouldStartThirdLevel: shouldBeginThirdLevel
     Connections{
         target: Extra
         function onGoBackFromHalftime(addedPoints){
@@ -77,7 +90,7 @@ Page {
     //sound effects start here - coin clink
     Audio{
         id: coinClinkSoundEffect
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/coinSound.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/coinSound.mp3"
         volume: Extra.sound*1
     }
 
@@ -87,7 +100,7 @@ Page {
         target: mvpSoundEffect
         property: "volume"
         from:0.0
-        to:0.8
+        to:0.8*Extra.volume
         duration: 300
         easing.type: Easing.Linear
     }
@@ -95,8 +108,8 @@ Page {
         id: fadeOut
         target: mvpSoundEffect
         property: "volume"
-        from:0.8
-        to:0.001
+        from:0.8*Extra.volume
+        to:0.001*Extra.volume
         duration: 300
         easing.type: Easing.Linear
         onFinished:{
@@ -107,7 +120,7 @@ Page {
     property bool mvpSoundEffectPlaying: false
     Audio{
         id: mvpSoundEffect
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/mvpSoundEffect.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/mvpSoundEffect.mp3"
         loops:Audio.Infinite
         volume: 0.0
         playbackRate: 1.2
@@ -125,8 +138,9 @@ Page {
     }
     //sound effects start here - fans cheering
     function whatToDoInsideRectangleMA(){
-        if(!retryBox.visible){
-            if(stateRectId.state=="notPaused" && level!==3){
+        //        if(!retryBox.visible){
+        if(!newRetryCircle.visible){
+            if(stateRectId.state==="notPaused" && level!==3){
                 if(!seqAnimationId.running&&!pointingFinger.visible){
                     seqAnimationId.start();
                     whatToDoWhenClicked=true
@@ -394,9 +408,17 @@ Page {
             width: 552*4/5
             height: 452*4/5
             anchors.centerIn: parent
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/pauseButton.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/pauseButton.png"
         }
     }
+    onShouldStartThirdLevelChanged: {
+        if(shouldStartThirdLevel===true){
+            sliderId.enabled=true;
+            whatToDoWhenAnimFinished.whatToDoForNextLevel();
+            shouldBeginThirdLevel=false
+        }
+    }
+
     function whatToDoWhenAnimFinished()
     {
         //variable declaration
@@ -422,6 +444,7 @@ Page {
             levelRectangleAnimation.start();
             seqAnimationId.pause()
         }
+        whatToDoWhenAnimFinished.whatToDoForNextLevel = whatToDoForNextLevel;
         //fix ball
         basketBall.width=115
         basketBall.height=115
@@ -500,8 +523,10 @@ Page {
             sliderEasingType = Easing.Linear
 
 
-            retryBox.visible= true;
-            fadedRED.visible=true;
+            //            retryBox.visible= true;
+            newRetryCircle.visible=true
+            //            fadedRED.visible=true;
+            newFadedRed.visible=true
             return;
             // mMusic1.stop()
         }
@@ -551,17 +576,18 @@ Page {
         else if(level===2)
         {
             coinProb = 4;
-            var options = [Easing.Linear, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.OutCirc, Easing.OutInCirc, Easing.InOutElastic, Easing.OutElastic, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.InBounce, Easing.OutBounce, Easing.InOutBounce, Easing.OutInBounce, Easing.BezierCurve]
-            sliderEasingType=options[Math.floor((Math.random() * 26))];
-            console.log("Easing type"+Math.floor((Math.random() * 26)))
+            var options = [Easing.Linear, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.OutCirc, Easing.OutInCirc, Easing.InOutElastic, Easing.OutElastic, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.InBounce, Easing.OutBounce,Easing.InOutBounce, /*Easing.OutInBounce,*/ Easing.BezierCurve]
+            sliderEasingType=options[Math.floor((Math.random() * 4))];
+            console.log("Easing type"+Math.floor((Math.random() * 4)))
             sliderId.value=200;
-            mDuration-=28;
+            mDuration-=39;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator >21)
             {
                 handleId.visible=false;
-                sliderId.enabled=false;
-                whatToDoForNextLevel()
+                //                sliderId.enabled=false;
+                sliderId.enabled=true;
+                insideRectangleMouseArea.enabled = false;insideTheSliderRectangleMouseArea.enabled = false
                 if(true){
                     //8
                     if(counter8===21&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)&&checkIfCurrentMission(8)){
@@ -576,7 +602,8 @@ Page {
                     fadeOut.start();
                     mvpSoundEffectPlaying=false
                 }
-                Extra.goToHalftime()
+                //head to halftime yay!
+                onGoToHalftime()
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
@@ -652,7 +679,7 @@ Page {
         height: 600*1/6;
         x: insideContainerId.x+insideContainerId.width/2-width/2
         y: insideContainerId.y-height;
-        source: "file:///Users/arjun/Documents/CompetitiveBall/images/pointingPicture.png"
+        source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/pointingPicture.png"
         onVisibleChanged: {
             //start the animation once it is visible
             pointingFingerAnim.start()
@@ -709,7 +736,7 @@ Page {
     Image{
         z:4
         id: rim
-        source: "file:///Users/arjun/Documents/CompetitiveBall/images/basketballHoop2.png"
+        source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/basketballHoop2.png"
         anchors.right: backboard.left
         y: backboard.y+(backboard.height*2/3)
         width: 150
@@ -755,7 +782,7 @@ Page {
             Image{
                 width: 25
                 height: 25
-                source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinFront.png"
+                source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coinFront.png"
             }
             Text{
                 property int theText: Extra.numCoins
@@ -777,13 +804,13 @@ Page {
             width: 50
             height: 50
             anchors.centerIn: parent
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinFront.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coinFront.png"
         }
         back: Image { //--> collapse
             width: 50
             height: 50
             anchors.centerIn: parent
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinBack.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coinBack.png"
         } //<-- collapse
 
         transform: Rotation {
@@ -999,10 +1026,158 @@ Page {
         z:19
         anchors.fill: parent
         color: "red"
-        opacity: 0.26
+        opacity: 0.20
         visible: false
     }
+    //new faded fadedRED
+    //faded Red
+    Rectangle{
+        id:newFadedRed
+        z:10
+        anchors.fill: parent
+        color: "#b07979"
+        opacity: 0.4
+        visible: false
+    }
+    //newRetryCircle
+    Rectangle{
+        visible: false
+        id: newRetryCircle
+        color: "transparent"
+        anchors.centerIn: parent
+        CircularProgress{
+            id: circularProgress
+            y: 50
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: -150
+        }
+        Button{
+            //these are the rewarded ad stuff IGNORE ERRORS FOR NOW
+            //                        AdMobRewardedVideo {
+            //                            id: myRewardedVideo
+            //                            // test ad for rewarded videos
+            //                            adUnitId: "ca-app-pub-3940256099942544/5224354917"
 
+            //                            onRewardedVideoRewarded: {
+            //                                updateMissions();
+            //                            }
+            //                            // load rewarded video at app start to cache it
+            //                            Component.onCompleted: {
+            //                                loadRewardedVideo()
+            //                            }
+            //                        }
+            onClicked: {
+                if(visible){
+                    newRetryCircle.visible=false
+                    newFadedRed.visible=false
+                    // show the new video if user is below 10 credits
+                    myRewardedVideo.showRewardedVideoIfLoaded()
+                    // load a new video every time it got shown, to give the user a fresh ad
+                    myRewardedVideo.loadRewardedVideo()
+                }
+            }
+            y: circularProgress.y+circularProgress.height+50
+            id: newMissionsAdButton
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: 55
+            width: 140*2
+            z:5
+            Rectangle{
+                anchors.fill: parent
+                color: "#2e8ddb"
+            }
+            Row{
+                x:10
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.centerIn: parent
+                Text{
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: "White"
+                    font.family: "Swis721 Cn BT"
+                    font.bold: true
+                    font.pointSize: 23
+                    text:"Continue"
+                }
+                Rectangle{
+                    width: 15
+                    height: 2
+                    color: "transparent"
+                }
+                //video pic
+                Image{
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 50
+                    height: 35
+                    source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/PlayAdVideo.png"
+                }
+            }
+        }
+        Rectangle{
+            z:4
+            visible: newMissionsAdButton.visible;
+            id: newMissionsAdButtonFade
+            width: newMissionsAdButton.width
+            height: newMissionsAdButton.height
+            y: newMissionsAdButton.y+5
+            x: newMissionsAdButton.x-5
+            color: "#18549e"
+        }
+        Button{
+            onClicked: {
+                giantX.visible = false;
+                seqAnimationId.stop()
+                levelRectangleAnimation.start()
+                x1.visible=false; x2.visible = false; x3.visible = false;
+                newRetryCircle.visible=false
+                newFadedRed.visible=false
+            }
+            y: newMissionsAdButton.y+newMissionsAdButton.height+50
+            id: quitRetryCircleButton
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: 55
+            width: 140*2
+            z:5
+            Rectangle{
+                anchors.fill: parent
+                color: "#a8aeb3"
+            }
+            Row{
+                x:10
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.centerIn: parent
+                Text{
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: "White"
+                    font.family: "Swis721 Cn BT"
+                    font.bold: true
+                    font.pointSize: 25
+                    text:"Retry"
+                }
+                Rectangle{
+                    width: 15
+                    height: 2
+                    color: "transparent"
+                }
+                //undo button
+                Icon{
+                    anchors.verticalCenter: parent.verticalCenter
+                    size: 45
+                    icon: IconType.undo
+                }
+            }
+        }
+        Rectangle{
+            z:4
+            visible: quitRetryCircleButton.visible;
+            id: quitRetryCircleButtonFade
+            width: quitRetryCircleButton.width
+            height: quitRetryCircleButton.height
+            y: quitRetryCircleButton.y+5
+            x: quitRetryCircleButton.x-5
+            color: "#656a6e"
+        }
+    }
     //retry box
     signal quitButtonClicked
     Rectangle{
@@ -1064,7 +1239,6 @@ Page {
                         levelRectangleAnimation.start()
                         x1.visible=false; x2.visible = false; x3.visible = false;
                         retryBox.visible=false
-                        fadedRED.visible=false
                     }
                 }
                 Button{
@@ -1080,7 +1254,7 @@ Page {
                     onClicked: {
                         retryBox.visible=false
                         fadedRED.visible=false
-                        Extra.emittingSwitchFilesSignal();
+                        switchFileSignal()
                     }
                 }
             }
@@ -1093,7 +1267,7 @@ Page {
         z:20
         id: giantX;
         anchors.centerIn: parent
-        source: "file:///Users/arjun/Documents/CompetitiveBall/images/xSymbol.png"
+        source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/xSymbol.png"
         height: 600
         width: 515
     }
@@ -1108,21 +1282,21 @@ Page {
             id: x1
             height: 45;
             width: 30;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/xSymbol.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/xSymbol.png"
         }
         Image{
             visible: false
             id: x2
             height: 45;
             width: 30;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/xSymbol.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/xSymbol.png"
         }
         Image{
             visible: false
             id: x3
             height: 45;
             width: 30;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/xSymbol.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/xSymbol.png"
         }
     }
     //All ten of the lines
@@ -1135,35 +1309,35 @@ Page {
             id: tally1
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally2
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally3
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false;
             id: tally4
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally5
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
             transform: Rotation{
                 id: rotateImagePhoto
                 angle: 315
@@ -1176,35 +1350,35 @@ Page {
             id: tally6
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false;
             id: tally7
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally8
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally9
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally10
             height: 50;
             width: 10;
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/oneLine1.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
             transform: Rotation{
                 id: rotateImagePhoto2
                 angle: 315
@@ -1217,7 +1391,7 @@ Page {
             id: plus11
             height: 30
             width: 30
-            source: "file:///Users/arjun/Documents/CompetitiveBall/images/plusSign.png"
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/plusSign.png"
         }
     }
 
@@ -2148,7 +2322,7 @@ Page {
     }
     Audio{
         id: splashSoundEffect
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/splashSoundEffectCropped.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/splashSoundEffectCropped.mp3"
         volume: Extra.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
@@ -2307,7 +2481,7 @@ Page {
     }
     Audio{
         id: backboardMakeSoundEffect
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/backboardMissSoundEffectCropped1.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/backboardMissSoundEffectCropped1.mp3"
         volume: Extra.sound*1
 
     }
@@ -2320,7 +2494,7 @@ Page {
     }
     Audio{
         id: backboardMakeSoundEffect2
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/splashSoundEffectCropped.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/splashSoundEffectCropped.mp3"
         volume: Extra.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
@@ -2459,7 +2633,7 @@ Page {
     }
     Audio{
         id: backboardMissSoundEffect
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/backboardMissSoundEffectCropped.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/backboardMissSoundEffectCropped.mp3"
         volume: Extra.sound*0.64
     }
 
@@ -2611,7 +2785,7 @@ Page {
     }
     Audio{
         id: rimMakeSoundEffect
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/rimMakeSoundEffectCropped.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/rimMakeSoundEffectCropped.mp3"
         volume: Extra.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
@@ -2767,7 +2941,7 @@ Page {
     }
     Audio{
         id: rimMissSoundEffect
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/rimMissSoundEffect2.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/rimMissSoundEffect2.mp3"
         volume: Extra.sound*0.8
 
     }
@@ -2780,7 +2954,7 @@ Page {
     }
     Audio{
         id: rimMissSoundEffect2
-        source:"file:///Users/arjun/Documents/CompetitiveBall/sounds/rimMissSoundEffect2.mp3"
+        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/sounds/rimMissSoundEffect2.mp3"
         volume: Extra.sound*0.3
     }
     Rectangle{

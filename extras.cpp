@@ -118,6 +118,7 @@ void Extras::setMyMissionsRn(QString myMissionsRn)
     emit myMissionsRnChanged(m_myMissionsRn);
 }
 
+//no uso
 void Extras::emittingSwitchFilesSignal(){
     emit somethingCompetitiveChanged();
 }
@@ -126,6 +127,12 @@ void Extras::emittingSpaceInCompSignal(){
 }
 void Extras::emittingSpaceInCustSignal(){
     emit spaceClickedInCust();
+}
+void Extras::emittingGoToHalftimeSignal(){
+    emit goToHalftime();
+}
+void Extras::emittingGoBackFromHalftimeSignal(int points1=0){
+    emit goBackFromHalftime(points1);
 }
 
 double Extras::sound() const

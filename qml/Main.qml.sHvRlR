@@ -1,0 +1,227 @@
+import Felgo 3.0
+import QtQml.Models 2.2
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
+import QtQuick.Controls.Material 2.12
+import QtQuick.Controls.Universal 2.12
+import Qt.labs.settings 1.0
+import QtMultimedia 5.8
+
+//import Arjun 1.0
+
+//New VERSION STARTS HERE
+GameWindow {
+
+    visible: true
+    width: root.width+20
+    height: root.height
+    property var p: false
+    property var thisTitle: "Shoot some hoops!"
+    property var mArray:[]
+    property var firstTime5: true;
+    property var currentMissionRewards: 0;
+    property var arr: []
+    property var presentMissions: [];
+    property var widthScale:1
+    property var heightScale:1
+    Scene {
+        id: root
+        width: 1125
+        height: 2436
+        Rectangle{
+            z:-1
+            id: backgroundImage
+            opacity: 1
+            anchors.fill: parent
+            color: "#c4ff99"
+        }
+        Text{
+            x:528
+            y:547
+            text: "PB: " +Extra.personalBest;
+            font.pointSize: 12
+            font.bold: true
+            font.family: "Helventica"
+        }
+        //coin thing in corner
+        Rectangle{
+            id:coinThing
+            Row{
+                spacing: 20;
+                x: 10
+                y:10
+                Image{
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 25
+                    height: 25
+                    source: "file:///Users/arjun/Documents/CompetitiveBall/images/coinFront.png"
+                }
+                Text{
+                    anchors.verticalCenter: parent.verticalCenter
+                    property int value: Extra.numCoins
+                    text: value
+                    font.family: "Stencil"
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pointSize:15
+                    Behavior on value {
+                        NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad}
+                    }
+                }
+
+            }
+        }
+        Label {
+            text: "Shoot some hoops!"
+            font.family:"Impact"
+            font.pointSize: 45
+            width: 450
+            wrapMode: Label.Wrap
+            y:90
+            anchors.horizontalCenter: parent.horizontalCenter
+            horizontalAlignment: Label.AlignHCenter
+        }
+        Rectangle{
+            y: parent.width/2
+            anchors.horizontalCenter: parent.horizontalCenter
+            id: buttonToPlayGame
+            width: 320
+            height: 100
+            border.color: "red"
+            border.width: 7
+            color: "#5db0f5"
+            Component.onCompleted: {
+                switchToGreenTimer.start()
+            }
+            Text{
+                text: "START"
+                font.family: "Tahoma"
+                font.bold: true
+                style: Text.Raised
+                font.pointSize: 31
+                anchors.centerIn: parent
+            }
+            radius: 50
+            Timer{
+                id: switchToBlueTimer
+                interval: 500
+                onTriggered: {
+                    buttonToPlayGame.border.color="#3074c7" //blue
+                    switchToRedTimer.start()
+                }
+            }
+            Timer{
+                id: switchToGreenTimer
+                interval: 600
+                onTriggered: {
+                    buttonToPlayGame.border.color="#58b853"  //green
+                    switchToBlueTimer.start()
+                }
+            }
+            Timer{
+                id: switchToRedTimer
+                interval: 500
+                onTriggered: {
+                    buttonToPlayGame.border.color="#cc3f3f"  //red
+                    switchToGreenTimer.restart()
+                }
+            }
+
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    //store for settings
+                    //update model
+                    var datamodel = []
+                    for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
+                    Extra.datastore = JSON.stringify(datamodel)
+                    //update current missions (just double checking)
+                    setCurrentMissions()
+
+                    mainRect.visible = false;
+                    mainRectFade.visible = false;
+                    stackView.push("qrc:/CompetitiveMode.qml");
+                    Extra.endingPage="qrc:/CompetitiveMode.qml";
+                }
+            }
+        }
+        Column{
+            y: 200
+            x:20
+            spacing: 50
+            Rectangle{
+                color: "transparent"
+                width: 75
+                height: 75
+                radius: 50
+                border.width: 2
+                border.color: "black"
+                Image{
+                    z:-1
+                    anchors.centerIn: parent
+                    width: 70
+                    height: 70
+                    source: "file:///Users/arjun/Documents/CompetitiveBall/images/shopIcon.png"
+                }
+            }
+            Rectangle{
+                color: "transparent"
+                width: 75
+                height: 75
+                radius: 50
+                border.width: 2
+                border.color: "black"
+                Image{
+                    z:-1
+                    anchors.centerIn: parent
+                    width: 70
+                    height: 70
+                    source: "file:///Users/arjun/Documents/CompetitiveBall/images/bouncingBallIcon.png"
+                }
+            }
+            Rectangle{
+                color: "transparent"
+                width: 75
+                height: 75
+                radius: 50
+                border.width: 2
+                border.color: "black"
+                Image{
+                    x: 5
+                    y:5
+                    width: 20
+                    height: 20
+                    source: "file:///Users/arjun/Documents/CompetitiveBall/images/exclamationMark.png"
+                    visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
+                }
+
+                Image{
+                    z:-1
+                    anchors.centerIn: parent
+                    width: 70
+                    height: 70
+                    source: "file:///Users/arjun/Documents/CompetitiveBall/images/missionsIcon.png"
+                }
+                Rectangle{
+                    visible: false
+                    z:-1
+                    anchors.centerIn: parent
+                    width: 70
+                    height: 70
+                    radius: 70
+                    color:"darkgray"
+                    opacity: 0.50
+                }
+            }
+        }
+        Image {
+            id: arrow
+            source: "file:///Users/arjun/Documents/CompetitiveBall/images/arrow1.png"
+            width: 90
+            height: 50
+            rotation: 90
+            y: 10;
+            x: root.width-width+10
+        }
+    }
+}
