@@ -8,6 +8,33 @@ import QtQuick.Controls.Universal 2.12
 import Qt.labs.settings 1.0
 import QtQuick.Controls 2.12
 import QtMultimedia 5.8
+//ListElement{//14
+//    index: 14
+//    completed: false;
+//    description: "Play with three different balls"
+//    multipleTimes: false
+//    reward: 5;
+//    neededThings: 3
+//    currentThings: 0
+//}
+//ListElement{//15
+//    index: 15
+//    completed: false;
+//    description: "Purchase a new ball"
+//    multipleTimes: false
+//    reward: 8;
+//    neededThings: 1
+//    currentThings: 0
+//}
+//ListElement{//16
+//    index: 16
+//    completed: false;
+//    description: "Score "
+//    multipleTimes: false
+//    reward: 0;
+//    neededThings: 0
+//    currentThings: 0
+//}
 Page {
     visible: true
     y: navigationStack.navigationBar.height
@@ -18,7 +45,7 @@ Page {
     property int duration: 1000
     id: root
     property var found: true;
-    property var bought: ["Normal Ball", "Blue", "Green"]
+    property var bought: ["Normal Ball"]
     property int count: 0;
     property var mName: "";
     property var mSource: "";
@@ -26,11 +53,20 @@ Page {
     property bool firstTime: true;
     property bool firstTime1: true;
     property var givenName: "";
+
+    property var counter1: 0
     Component.onCompleted: {
         bigPicText.text =givenName;
 
     }
-
+    function checkIfCurrentMission(num){
+        for(let i =0; i< 3; i++){
+            if(presentMissions[i]===num){
+                return true;
+            }
+        }
+        return false;
+    }
     function findCurrentIndex()
     {
         console.log(bought)
@@ -141,7 +177,7 @@ Page {
         Text{
             text: "Normal Ball"
             id: bigPicText
-            font.family: "Tw Cen MT Condensed Extra Bold"
+            font.family: "Impact"
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 25
@@ -211,6 +247,10 @@ Page {
             bought.push(mName);
             boughtChanged();
             checkIfFound()
+            counter15++;
+            if(counter15===mMisionModel.get(15).neededThings&&!(mMissionModel.get(15).currentThings>=mMissionModel.get(15).neededThings)&&checkIfCurrentMission(15)){
+                mMissionModel.get(15).currentThings=counter15
+            }
             someOfTheStuffToDoWhenClicked();
         }
         onRejected: {
@@ -439,7 +479,7 @@ Page {
                         anchors.horizontalCenter: parent.horizontalCenter
                         id: nameText
                         text: name
-                        font.family: "Palatino Linotype"
+                        font.family: "Century Gothic"
                         font.bold:  (grid.isCurrentItem===true)?"true":"false"
                         horizontalAlignment: Text.AlignHCenter
                         font.pointSize: 8

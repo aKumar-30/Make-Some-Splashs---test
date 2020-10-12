@@ -270,7 +270,7 @@ GameWindow {
     ListModel{
         id: tempModel
         ListElement{//last index of mMissionModel
-            index: 14
+            index: 17
             completed: false;
             description: ""
             multipleTimes: true
@@ -1005,7 +1005,7 @@ GameWindow {
                             ListElement{//14
                                 index: 14
                                 completed: false;
-                                description: "Play with three different balls"
+                                description: "Play a game with three different balls"
                                 multipleTimes: false
                                 reward: 5;
                                 neededThings: 3
@@ -1021,7 +1021,7 @@ GameWindow {
                                 currentThings: 0
                             }
                             ListElement{//16
-                                index: 14
+                                index: 16
                                 completed: false;
                                 description: "Score "
                                 multipleTimes: false

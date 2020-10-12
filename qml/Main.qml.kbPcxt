@@ -227,13 +227,6 @@ GameWindow {
                 mArray.push(entry)
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)
-        if(arr[0]===mMissionModel.get(16)||arr[1]===mMissionModel.get(16)){
-                var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[1000,30]]
-                let randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
-                mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
-                mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
-            mMissionModel.get(16).description = "Score "+pointsScoredAndReward[randomNumberForPointsMission][0] +" points in a game. Record"
-        }
         for(let h =0; h < arr.length; h++){
             //subject to change
             arr[h].completed=false
@@ -849,8 +842,7 @@ GameWindow {
                     horizontalAlignment: Text.AlignHCenter
                     font.pointSize: 28
                     text: "Missions"
-//                    font.family: "Complex"
-                    font.family: "Bodoni MT Black"
+                    font.family: "Complex"
                 }
             }
             Rectangle{
@@ -1002,33 +994,33 @@ GameWindow {
                     neededThings: 4
                     currentThings: 0
                 }
-                            ListElement{//14
-                                index: 14
-                                completed: false;
-                                description: "Play with three different balls"
-                                multipleTimes: false
-                                reward: 5;
-                                neededThings: 3
-                                currentThings: 0
-                            }
-                            ListElement{//15
-                                index: 15
-                                completed: false;
-                                description: "Purchase a new ball"
-                                multipleTimes: false
-                                reward: 8;
-                                neededThings: 1
-                                currentThings: 0
-                            }
-                            ListElement{//16
-                                index: 14
-                                completed: false;
-                                description: "Score "
-                                multipleTimes: false
-                                reward: 0;
-                                neededThings: 0
-                                currentThings: 0
-                            }
+                //            ListElement{//5
+                //                index: 5
+                //                completed: false;
+                //                description: "Play with three different balls"
+                //                multipleTimes: false
+                //                reward: 3;
+                //                neededThings: 3
+                //                currentThings: 0
+                //            }
+                //            ListElement{//6
+                //                index: 6
+                //                completed: false;
+                //                description: "Purchase 'The Moon' ball"
+                //                multipleTimes: false
+                //                reward: 9;
+                //                neededThings: 1
+                //                currentThings: 0
+                //            }
+                //            ListElement{//6
+                //                index: 6
+                //                completed: false;
+                //                description: "Purchase 'The Moon' ball"
+                //                multipleTimes: false
+                //                reward: 9;
+                //                neededThings: 1
+                //                currentThings: 0
+                //            }
                 //            ListElement{//7
                 //                index: 7
                 //                completed: false;
@@ -1400,12 +1392,12 @@ GameWindow {
             }
             navigationBar.titleItem: Text{
                 anchors.horizontalCenter: parent.horizontalCenter
-                y:5
+                y:10
                 anchors.horizontalCenterOffset: 200
-                font.pointSize: 19
+                font.pointSize: 15
                 font.bold: true
                 text:navigationStack.currentPage.title
-                font.family: "Century Gothic"
+                font.family: "Microsoft YaHei Light"
                 color: "white"
             }
 
@@ -1552,7 +1544,7 @@ GameWindow {
                     }
                     Text{
                         text: "START"
-                        font.family: "Tahoma"
+                        font.family: "Stencil"
                         font.bold: true
                         style: Text.Raised
                         font.pointSize: 31
@@ -1590,6 +1582,9 @@ GameWindow {
                                 //update current missions (just double checking)
                                 setCurrentMissions()
                                 missionsScene.visible=false
+                                //                                mainRect.visible = false;
+                                //                                mainRectFade.visible = false;
+                                //                            stackView.push("CompetitiveMode.qml");
                                 navigationStack.push(competitiveModeComponent)
                                 Extra.endingPage="CompetitiveMode.qml";
                                 thisTitle="Game Mode"
@@ -1619,6 +1614,9 @@ GameWindow {
                             anchors.fill: parent
                             onClicked: {
                                 missionsScene.visible=false
+                                //                                mainRect.visible = false;
+                                //                                mainRectFade.visible = false;
+                                //                            stackView.push("GameStore.qml");
                                 navigationStack.push(gameStoreComponent);
                                 Extra.endingPage="GameStore.qml";
                                 thisTitle="The Store"
@@ -1644,6 +1642,7 @@ GameWindow {
                             onClicked: {
                                 mainRect.visible = false;
                                 mainRectFade.visible = false;
+                                //                            stackView.push("CustomizationMode.qml");
                                 navigationStack.push(customizationModeComponent);
                                 Extra.endingPage="CustomizationMode.qml";
                                 thisTitle="Customization Mode"
@@ -1690,6 +1689,8 @@ GameWindow {
                             anchors.fill: parent
                             onClicked: {
                                 if(!thePauseTimer.running){
+                                    //                                mainRect.visible = true;
+                                    //                                mainRectFade.visible = true;
                                     missionsScene.visible=true
                                     checkIfButtonNeedsToBeVisible(true);
                                     if(true){
@@ -1715,6 +1716,54 @@ GameWindow {
             }
         }
     }
+
+    //    /*header: */ToolBar {
+    //        id: toolBar
+    //        Material.foreground: "mintcream"
+    //        width: parent.width
+    //        height: 60
+    //        RowLayout {
+    //            spacing: 20
+    //            anchors.fill: parent
+
+    //            ToolButton {
+    //                visible: stackView.depth>1
+    //                action: navigateBackAction
+    //            }
+
+    //            Label {
+    //                id: titleLabel
+    //                text: thisTitle.toString()
+    //                font.pixelSize: 20
+    //                elide: Label.ElideRight
+    //                horizontalAlignment: Qt.AlignHCenter
+    //                verticalAlignment: Qt.AlignVCenter
+    //                Layout.fillWidth: true
+    //            }
+    //            ToolButton {
+    //                action: optionsMenuAction
+
+    //                Menu {
+    //                    id: optionsMenu1
+    //                    x: parent.width - width
+    //                    transformOrigin: Menu.TopRight
+
+    //                    Action {
+    //                        text: "Settings"
+    //                        onTriggered: settingsDialog.open()
+    //                    }
+    //                    Action {
+    //                        text: "How to play?"
+    //                        onTriggered: aboutDialog.open()
+    //                    }
+    //                    Action {
+    //                        text: "Help"
+    //                        onTriggered: help()
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     Component{
         id: competitiveModeComponent
         CompetitiveMode{

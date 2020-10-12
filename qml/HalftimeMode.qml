@@ -9,6 +9,20 @@ import Qt.labs.qmlmodels 1.0
 import QtQuick.Dialogs 1.2
 //import otherArjun 1.0
 Page {
+    Rectangle{
+        color:"black"
+        x:-40
+        y:0
+        width:40
+        height:parent.height
+    }
+    Rectangle{
+        color:black
+        x:40
+        y:-40
+        width:parent.height
+        height:40
+    }
     function onGoBackFromHalftime(points1){
         navigationStack.pop()
         Extra.points+=points1
@@ -54,7 +68,7 @@ Page {
             id: levelRectangleText
             text: "Click the ball to collect it and earn points - this adds on to your game score"
             font.pointSize: 14;
-            font.family: "Courier New"
+            font.family: "Century Gothic"
             wrapMode: Text.Wrap
             width: parent.width-30
             y: levelRectangleText1.y+levelRectangleText1.implicitHeight+30

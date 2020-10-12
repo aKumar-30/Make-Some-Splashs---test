@@ -27,6 +27,7 @@ Item {
 //            }
 //        }
 //    }
+
     //basketball
     Image{
         visible: totalTimeTimer.running

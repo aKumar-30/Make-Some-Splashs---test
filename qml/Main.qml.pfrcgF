@@ -37,9 +37,6 @@ GameWindow {
     property var presentMissions: [];
 
     property bool shouldBeginThirdLevel: false
-    property var shotRandomNumber: 0;
-    property var levelRandomNumber:0
-    property var levelOptions: []
     id: root
     //        width: 708
     //        height: 785
@@ -63,10 +60,11 @@ GameWindow {
         s_manager.writeSettings("ballSource", Extra.ballSource);
         s_manager.writeSettings("personalBest555",Extra.personalBest);
         console.log("saving to settings tge datastore   "+mMissionModel.get(presentMissions[1]).completed);
-        s_manager.writeSettings("happyy",Extra.datastore);
+        s_manager.writeSettings("gasoltowarriors",Extra.datastore);
         //convert array to string
         setCurrentMissions()
-        s_manager.writeSettings("sadd",Extra.myMissionsRn);
+        s_manager.writeSettings("lebronfinalsMVP1",Extra.myMissionsRn);
+        console.log("While being destroyed in main.qml, the Extra.myMissionsRn is : "+Extra.myMissionsRn)
     }
     SettingsManager{
         id: s_manager
@@ -102,30 +100,7 @@ GameWindow {
         Extra.myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+presentMissions[2]+","
     }
     Component.onCompleted: {
-        //        mMusic1.play()
-        //        if ( Extra.datastore) {
-        //            console.log("Extra.datatstore"+ Extra.datastore)
-        //            mMissionModel.clear()
-        //            var datamodel = JSON.parse(Extra.datastore)
-        //            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        //        }
-        //        presentMissions=[]
-        //        if(Extra.myMissionsRn){
-        //            getCurrentMissions()
-        //            console.log("Present Missions: "+presentMissions)
-        //        }
-        //        //this used to be inside delegate
-        //        if(presentMissions.length!==0){
-        //            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        //        }
-        //        else{
-        //            updateMissions();
-        //        }
         mMusic1.play()
-        console.log(Extra.datastore)
         if ( Extra.datastore) {
             mMissionModel.clear()
             var datamodel = JSON.parse(Extra.datastore)
@@ -134,16 +109,17 @@ GameWindow {
         if(Extra.myMissionsRn){
             getCurrentMissions()
         }
-//        updateMissions()
-                if(presentMissions.length!==0){
-                    displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-                }
-                else{
-                    updateMissions();
-                }
+        //this used to be inside delegate
+        if(presentMissions.length!==0){
+            updateMissions()
+            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+        }
+        else{
+            updateMissions();
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -154,7 +130,6 @@ GameWindow {
             presentMissions.push(displayDelegateModel.items.get(2).model.index);
             setCurrentMissions()
         }
-        console.log("Hellooasjasilj")
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
@@ -216,50 +191,44 @@ GameWindow {
         }
     }
     function updateMissions(){
-//        mMissionModel.remove(mMissionModel.count-1)
         var rowCount = mMissionModel.count
         mArray = []
         displayDelegateModel.items.remove(0,displayDelegateModel.items.count)
 
         for(let i =0;i < rowCount;i++ ) {
             let entry = mMissionModel.get(i)
-            if((!entry.multipleTimes || !entry.completed))
+            if(entry.completed)
                 mArray.push(entry)
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)
-        if(arr[0]===mMissionModel.get(16)||arr[1]===mMissionModel.get(16)){
-                var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[1000,30]]
-                let randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
-                mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
-                mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
-            mMissionModel.get(16).description = "Score "+pointsScoredAndReward[randomNumberForPointsMission][0] +" points in a game. Record"
-        }
+        //we now want two with one extra special at the end
+        var numberOfTimesAndCoins = [[2,2],[3,3],[4,4],[5,4],[6,8],[7,10],[8,12],[9,13]]
+        var typeOfShot = ["backboard","rim", "splash"]
+        var levelOptions = [1,1,1,1,1,1,1,2,2,3,3,0]
+        let thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.count));
+        console.log("this is count"+numberOfTimesAndCoins.count)
+        tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
+        tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
+        let shotRandomNumber = Math.floor((Math.random()*typeOfShot.count));
+        let levelRandomNumber = Math.floor((Math.random()*levelOptions.count));
+        tempModel.get(0).description=(typeOfShot[shotRandomNumber]==="splash")?("Splash "+ tempModel.get(0).neededThings+"times in a row in "):("Make at the " + typeOfShot[shotRandomNumber] + " " +tempModel.get(0).neededThings+" times in a row in");
+        tempModel.get(0).description+=(levelOptions[levelRandomNumber]===0)?("any level"):("level "+levelOptions[levelRandomNumber]);
+
+        //adding it to the end
+        var datamodel = []
+        for (let t = 0; t < tempModel.count; ++t) datamodel.push(tempModel.get(t))
+            var b = JSON.stringify(datamodel)
+        console.log("The thing whn pared id : " + b)
+        datamodel = JSON.parse(b)
+        for (let k = 0; k < datamodel.length; ++k) mMissionModel.append(datamodel[k])
+
+        arr.push(mMissionModel.length-1);
+
         for(let h =0; h < arr.length; h++){
             //subject to change
             arr[h].completed=false
             arr[h].currentThings=0;
         }
-        //        //we now want two with one extra special at the end
-        var numberOfTimesAndCoins = [[2,2],[3,4],[4,6],[5,9],[6,10],[7,12],[8,16],[9,19]]
-        var typeOfShot = ["backboard","rim", "splash"]
-        levelOptions = [1,1,1,1,1,1,1,2,2,3,3,0]
-        var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
-        console.log("this is count"+numberOfTimesAndCoins.length)
-        tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
-        tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
-        shotRandomNumber = Math.floor((Math.random()*typeOfShot.length));
-        levelRandomNumber = Math.floor((Math.random()*levelOptions.length));
-        tempModel.get(0).description=(typeOfShot[shotRandomNumber]==="splash")?("Splash "+ tempModel.get(0).neededThings+" times in a row in "):("Make at the " + typeOfShot[shotRandomNumber] + " " +tempModel.get(0).neededThings+" times in a row in ");
-        tempModel.get(0).description+=(levelOptions[levelRandomNumber]===0)?("any level"):("level "+levelOptions[levelRandomNumber]);
-         tempModel.get(0).description+= ". Record:"
-        //adding it to the end
-        var datamodel = []
-        for (let t = 0; t < tempModel.count; ++t) datamodel.push(tempModel.get(t))
-        let b = JSON.stringify(datamodel)
-        datamodel = JSON.parse(b)
-        for (let k = 0; k < datamodel.length; ++k) mMissionModel.append(datamodel[k])
-        arr.push(mMissionModel.get(mMissionModel.count-1));
-
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
         displayDelegateModel.items.insert(arr[1], "todaysMissions");
         displayDelegateModel.items.insert(arr[2], "todaysMissions");
@@ -270,7 +239,7 @@ GameWindow {
     ListModel{
         id: tempModel
         ListElement{//last index of mMissionModel
-            index: 14
+            index: 20
             completed: false;
             description: ""
             multipleTimes: true
@@ -728,9 +697,7 @@ GameWindow {
                 //                    if(presentMissions.length===0)
                 //                        displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.index).currentThings
                 //                    else
-                //                displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[2-s]).currentThings
-                displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
-                console.log("s is "+s)
+                displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[2-s]).currentThings
             }
         }
     }
@@ -825,7 +792,7 @@ GameWindow {
         id: missionsScene
         width: 708
         height:785
-        anchors.centerIn: mainScene
+        anchors.centerIn: parent
         visible: false;
         //MISSSIONS START HERE+++++++++++++++++++++++++++++++++++
         Rectangle {
@@ -849,8 +816,7 @@ GameWindow {
                     horizontalAlignment: Text.AlignHCenter
                     font.pointSize: 28
                     text: "Missions"
-//                    font.family: "Complex"
-                    font.family: "Bodoni MT Black"
+                    font.family: "Complex"
                 }
             }
             Rectangle{
@@ -1002,33 +968,33 @@ GameWindow {
                     neededThings: 4
                     currentThings: 0
                 }
-                            ListElement{//14
-                                index: 14
-                                completed: false;
-                                description: "Play with three different balls"
-                                multipleTimes: false
-                                reward: 5;
-                                neededThings: 3
-                                currentThings: 0
-                            }
-                            ListElement{//15
-                                index: 15
-                                completed: false;
-                                description: "Purchase a new ball"
-                                multipleTimes: false
-                                reward: 8;
-                                neededThings: 1
-                                currentThings: 0
-                            }
-                            ListElement{//16
-                                index: 14
-                                completed: false;
-                                description: "Score "
-                                multipleTimes: false
-                                reward: 0;
-                                neededThings: 0
-                                currentThings: 0
-                            }
+                //            ListElement{//5
+                //                index: 5
+                //                completed: false;
+                //                description: "Play with three different balls"
+                //                multipleTimes: false
+                //                reward: 3;
+                //                neededThings: 3
+                //                currentThings: 0
+                //            }
+                //            ListElement{//6
+                //                index: 6
+                //                completed: false;
+                //                description: "Purchase 'The Moon' ball"
+                //                multipleTimes: false
+                //                reward: 9;
+                //                neededThings: 1
+                //                currentThings: 0
+                //            }
+                //            ListElement{//6
+                //                index: 6
+                //                completed: false;
+                //                description: "Purchase 'The Moon' ball"
+                //                multipleTimes: false
+                //                reward: 9;
+                //                neededThings: 1
+                //                currentThings: 0
+                //            }
                 //            ListElement{//7
                 //                index: 7
                 //                completed: false;
@@ -1367,7 +1333,6 @@ GameWindow {
     Scene{
         width: 708
         height: 785
-        id: mainScene
         NavigationStack{
             id: navigationStack
             navigationBar.backButtonVisible: false
@@ -1400,12 +1365,12 @@ GameWindow {
             }
             navigationBar.titleItem: Text{
                 anchors.horizontalCenter: parent.horizontalCenter
-                y:5
+                y:10
                 anchors.horizontalCenterOffset: 200
-                font.pointSize: 19
+                font.pointSize: 15
                 font.bold: true
                 text:navigationStack.currentPage.title
-                font.family: "Century Gothic"
+                font.family: "Microsoft YaHei Light"
                 color: "white"
             }
 
@@ -1456,50 +1421,13 @@ GameWindow {
                     anchors.fill: parent
                     source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/background.png"
                 }
-                Rectangle{
-                    id: personalBestBox
-                    width: mainPBText.implicitWidth+30
-                    height: mainPBText.implicitHeight+20
-                    x:450
-                    y:550
-                    border.color: "blue"
-                    border.width: 3
-                    color: "transparent"
-                    Component.onCompleted: {
-                        switchToBlueTimerPB.start()
-                    }
-                    Text{
-                        anchors.centerIn: parent
-                        id: mainPBText
-                        text: "PB: " +Extra.personalBest;
-                        font.pointSize: 15
-                        font.family: "Stencil"
-                    }
-                    radius: 5
-                    Timer{
-                        id: switchToBlueTimerPB
-                        interval: 400
-                        onTriggered: {
-                            personalBestBox.border.color="#3074c7" //blue
-                            switchToRedTimerPB.restart()
-                        }
-                    }
-                    Timer{
-                        id: switchToGreenTimerPB
-                        interval: 400
-                        onTriggered: {
-                            personalBestBox.border.color="#58b853"  //green
-                            switchToBlueTimerPB.restart()
-                        }
-                    }
-                    Timer{
-                        id: switchToRedTimerPB
-                        interval: 400
-                        onTriggered: {
-                            personalBestBox.border.color="#cc3f3f"  //red
-                            switchToGreenTimerPB.restart()
-                        }
-                    }
+                Text{
+                    x:528
+                    y:547
+                    text: "PB: " +Extra.personalBest;
+                    font.pointSize: 12
+                    font.bold: true
+                    font.family: "Helventica"
                 }
                 //coin thing in corner
                 Rectangle{
@@ -1561,10 +1489,10 @@ GameWindow {
                     radius: 50
                     Timer{
                         id: switchToBlueTimer
-                        interval: 550
+                        interval: 500
                         onTriggered: {
                             buttonToPlayGame.border.color="#3074c7" //blue
-                            switchToRedTimer.restart()
+                            switchToRedTimer.start()
                         }
                     }
                     Timer{
@@ -1572,12 +1500,12 @@ GameWindow {
                         interval: 600
                         onTriggered: {
                             buttonToPlayGame.border.color="#58b853"  //green
-                            switchToBlueTimer.restart()
+                            switchToBlueTimer.start()
                         }
                     }
                     Timer{
                         id: switchToRedTimer
-                        interval: 550
+                        interval: 500
                         onTriggered: {
                             buttonToPlayGame.border.color="#cc3f3f"  //red
                             switchToGreenTimer.restart()
@@ -1590,6 +1518,9 @@ GameWindow {
                                 //update current missions (just double checking)
                                 setCurrentMissions()
                                 missionsScene.visible=false
+                                //                                mainRect.visible = false;
+                                //                                mainRectFade.visible = false;
+                                //                            stackView.push("CompetitiveMode.qml");
                                 navigationStack.push(competitiveModeComponent)
                                 Extra.endingPage="CompetitiveMode.qml";
                                 thisTitle="Game Mode"
@@ -1619,6 +1550,9 @@ GameWindow {
                             anchors.fill: parent
                             onClicked: {
                                 missionsScene.visible=false
+                                //                                mainRect.visible = false;
+                                //                                mainRectFade.visible = false;
+                                //                            stackView.push("GameStore.qml");
                                 navigationStack.push(gameStoreComponent);
                                 Extra.endingPage="GameStore.qml";
                                 thisTitle="The Store"
@@ -1644,6 +1578,7 @@ GameWindow {
                             onClicked: {
                                 mainRect.visible = false;
                                 mainRectFade.visible = false;
+                                //                            stackView.push("CustomizationMode.qml");
                                 navigationStack.push(customizationModeComponent);
                                 Extra.endingPage="CustomizationMode.qml";
                                 thisTitle="Customization Mode"
@@ -1690,6 +1625,8 @@ GameWindow {
                             anchors.fill: parent
                             onClicked: {
                                 if(!thePauseTimer.running){
+                                    //                                mainRect.visible = true;
+                                    //                                mainRectFade.visible = true;
                                     missionsScene.visible=true
                                     checkIfButtonNeedsToBeVisible(true);
                                     if(true){
@@ -1715,6 +1652,54 @@ GameWindow {
             }
         }
     }
+
+    //    /*header: */ToolBar {
+    //        id: toolBar
+    //        Material.foreground: "mintcream"
+    //        width: parent.width
+    //        height: 60
+    //        RowLayout {
+    //            spacing: 20
+    //            anchors.fill: parent
+
+    //            ToolButton {
+    //                visible: stackView.depth>1
+    //                action: navigateBackAction
+    //            }
+
+    //            Label {
+    //                id: titleLabel
+    //                text: thisTitle.toString()
+    //                font.pixelSize: 20
+    //                elide: Label.ElideRight
+    //                horizontalAlignment: Qt.AlignHCenter
+    //                verticalAlignment: Qt.AlignVCenter
+    //                Layout.fillWidth: true
+    //            }
+    //            ToolButton {
+    //                action: optionsMenuAction
+
+    //                Menu {
+    //                    id: optionsMenu1
+    //                    x: parent.width - width
+    //                    transformOrigin: Menu.TopRight
+
+    //                    Action {
+    //                        text: "Settings"
+    //                        onTriggered: settingsDialog.open()
+    //                    }
+    //                    Action {
+    //                        text: "How to play?"
+    //                        onTriggered: aboutDialog.open()
+    //                    }
+    //                    Action {
+    //                        text: "Help"
+    //                        onTriggered: help()
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     Component{
         id: competitiveModeComponent
         CompetitiveMode{
@@ -1736,3 +1721,4 @@ GameWindow {
         }
     }
 }
+

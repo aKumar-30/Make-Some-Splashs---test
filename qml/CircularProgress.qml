@@ -156,9 +156,14 @@ Canvas {
         interval: 15
         onTriggered: {
             if(canvas.currentValue<=0){
-                newRetryCircle.visible=false
-                retryBox.visible=true;
-                canvas.currentValue=100;
+                if(quitButtonWasClicked){
+                    quitButtonWasClicked=false
+                }
+                else{
+                    newRetryCircle.visible=false
+                    retryBox.visible=true;
+                    canvas.currentValue=100;
+                }
             }
             else{
             canvas.currentValue-=0.25

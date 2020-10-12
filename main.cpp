@@ -99,19 +99,19 @@ int main(int argc, char *argv[])
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("lukagamewinner22222")){
-        dude.writeSettings("lukagamewinner22222",datastore1);
+    if(!settings.contains("happyy")){
+        dude.writeSettings("happyy",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("lukagamewinner22222").toString());
+        extra.setDatastore(SettingsManager::loadSettings("happyy").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
-    if(!settings.contains("walkerfinals2222")){
-        dude.writeSettings("walkerfinals2222",myMissionsRn1);
+    if(!settings.contains("sadd")){
+        dude.writeSettings("sadd",myMissionsRn1);
     }
     else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("walkerfinals2222").toString());
+        extra.setMyMissionsRn(SettingsManager::loadSettings("sadd").toString());
     }
 
     FelgoLiveClient client (&engine);

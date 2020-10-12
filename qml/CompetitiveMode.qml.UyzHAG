@@ -552,6 +552,7 @@ Page {
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator >21)
             {
+                handleId.visible=false;
                 sliderId.enabled=false;
                 if(true){
                     //8
@@ -579,8 +580,7 @@ Page {
         //Level three stuff
         else if(level===3)
         {
-            delayTimer.start()
-            coinProb = 4;
+            coinProb = 3;
             mPauseAnim.duration-=20;
             //clearling the last times random order
             currentRandomOrder5=[];
@@ -728,24 +728,23 @@ Page {
         color: "yellow"
         Text{
             id: onSunLevelText
-            font.pointSize: 14
+            font.pointSize: 12
             text: "Level: " + level;
             anchors.centerIn: parent
-            color: "black"
-            font.bold: true
             font.underline: true
-            font.family: "Century Gothic"
+            color: "black"
+            font.family: "Blacklight"
             wrapMode: Text.Wrap
         }
         Text{
             id: onSunLevelText1
-            font.pointSize: 15
+            font.pointSize: 12
             text: levelIndicatorDown;
-            y: onSunLevelText.y+onSunLevelText.height+5
+            anchors.top: onSunLevelText.bottom
             color: "black"
-            font.family: "Stencil"
+            font.family: "Athletic"
             wrapMode: Text.Wrap
-            x: parent.width/2-4
+            x: parent.width/2-10
         }
     }
     //Coin counter thingy
@@ -907,7 +906,7 @@ Page {
             id: levelRectangleText1
             text: "Level " + level
             font.pointSize: 1;
-            font.family: "Bodoni MT Black"
+            font.family: "Impact"
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
@@ -927,11 +926,10 @@ Page {
             }
             id: levelRectangleText
             text: levelTextFunc(level)
-            font.pointSize: 16;
-            font.family: "Century Gothic"
+            font.pointSize: 14;
+            font.family: "Courier New"
             wrapMode: Text.Wrap
             width: parent.width-30
-            lineHeight: 1.4
             y: levelRectangleText1.y+levelRectangleText1.implicitHeight+30
             anchors.horizontalCenter: parent.horizontalCenter
             visible:false
@@ -1285,41 +1283,40 @@ Page {
         Image{
             visible: false;
             id: tally1
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally2
-            //            height: 50;
-            //            width: 10;
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"        }
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
+        }
         Image{
             visible: false
             id: tally3
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false;
             id: tally4
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally5
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
             transform: Rotation{
                 id: rotateImagePhoto
-                angle: 326
+                angle: 315
                 origin.x: tally5.width/2
                 origin.y: tally5.height
             }
@@ -1327,50 +1324,49 @@ Page {
         Image{
             visible: false
             id: tally6
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false;
             id: tally7
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally8
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally9
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally10
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
             transform: Rotation{
                 id: rotateImagePhoto2
-                angle: 326
+                angle: 315
                 origin.x: tally10.width/2
                 origin.y: tally10.height
             }
         }
         Image{
-            anchors.verticalCenter: parent.verticalCenter
             visible: false
             id: plus11
-            height: 50
-            width: 50
+            height: 30
+            width: 30
             source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/plusSign.png"
         }
     }
@@ -1430,14 +1426,14 @@ Page {
             y: 10
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
-            font.family: "Impact"
+            font.family: "impact"
         }
 
         Text{
             text: "PB: " + Extra.personalBest;
             font.pointSize: 12
             font.bold: true
-            font.family: "Stencil"
+            font.family: "Helventica"
             anchors.top: pointText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -1459,10 +1455,7 @@ Page {
         color: "#dfedf2"
         opacity: 0.95
         width: 500
-        height: 140
-        radius: 10
-        //        anchors.horizontalCenter: sliderId.horizontalCenter
-        //        anchors.verticalCenter: sliderId.verticalCenter
+        height: 75
         x: parent.width/2-width/2+60
         y: parent.height-ground.height/2-height/2+40
         signal sliderStopped(double value);
@@ -1489,19 +1482,19 @@ Page {
                     }
                     return false;
                 }
-                let last= mMissionModel.get(14)
+                let last= mMissionModel.count-1
                 if(typeOfShot(shotShot)){
                     if(level===levelOptions[levelRandomNumber]){
                         counterLast++;
                         if(counterLast===mMisionModel.get(last).neededThings&&!(mMissionModel.get(last).currentThings>=mMissionModel.get(last).neededThings)){
-                            mMissionModel.get(last).currentThings=counterLast
+                            mMissionModel.get(last).currentThings=mMisionModel.get(last).currentThings
                         }
                     }
                 }
                 else{
                     if(level===levelOptions[levelRandomNumber]){
                         if(counterLast>mMissionModel.get(last).currentThings&&!(mMissionModel.get(last).currentThings>=mMissionModel.get(last).neededThings)){
-                            mMissionModel.get(last).currentThings=counterLast;
+                            mMissionModel.get(last).currentThings=counterlast;
                         }
                         counterLast=0;
                     }
@@ -1579,7 +1572,7 @@ Page {
                 points -= 120;
                 pointsThisRound -= 120;
                 airBallAnimation.start();
-                feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot like that", "A complete failure...", "Practice makes perfect...you definetly need practice!"]
+                feedback = ["Have you ever shot a basketball before?","Seriously, you can do MUCH better", "An airball?", "You are supposed to shoot at the hoop, you know?", "My dog can shoot better than that", "A complete failure...", "Why do you even play this sport?"]
                 random_number = Math.floor((Math.random() * 6));
                 feedbackLabel.font.italic = true;
             }
@@ -1726,7 +1719,7 @@ Page {
                 points -= 20;
                 pointsThisRound -= 20;
                 rimMissAnimation.start()
-                feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time", "Good try!", "Close but not there", "Seems like you have started practicing..."]
+                feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time", "Good try!"]
                 random_number = Math.floor((Math.random() * 5));
             }
             else if(level3ShotAccuracy==="backboardMake"|| level3ShotAccuracy==="null"&&(value < 350 || value >650)){
@@ -1799,7 +1792,7 @@ Page {
                 points +=30;
                 pointsThisRound += 30;
                 backboardAnimation.start()
-                feedback = ["Good shot","A make is a make", "A splash is a splash", "Lucky shot??", "Banks don't count...try again", "You can do even better", "Atleast it made"]
+                feedback = ["Good shot","A make is a make", "A bucket is a bucket", "Lucky shot??", "Banks don't count...try again", "Banks don't count...try again", "You can do even better"]
                 random_number = Math.floor((Math.random() * 7));
             }
             else if(level3ShotAccuracy==="rimMake"|| level3ShotAccuracy==="null"&&(value <415 || value > 585)){
@@ -1872,7 +1865,7 @@ Page {
                 points+=50
                 pointsThisRound += 50;
                 rimMakeAnimation.start()
-                feedback = ["I thought that was going to miss", "The rim was on your side", "Looks like you are on a set path to the NBA", "Amazing shot!", "Pretty nice!", "Actually pretty good"]
+                feedback = ["I thought that was going to miss", "The rim was on your side", "Looks like you are on a set path to the NBA", "Amazing shot!", "Pretty nice!"]
                 random_number = Math.floor((Math.random() * 5));
             }
             else if(level3ShotAccuracy==="splash"|| level3ShotAccuracy==="null"&&(value <485|| value>515)){
@@ -1945,7 +1938,7 @@ Page {
                 points+= 110
                 pointsThisRound += 110;
                 splashAnimation.start()
-                feedback = ["Next MVP?","Future NBA champ","The next Steph Curry?", "Splashing it like Klay Thompson?", "What an amazing shot?", "Making some splashes", "All the way from deep?", "Swish!", "Like a true nba player"]
+                feedback = ["The next Steph Curry?", "Splashing it like Klay Thompson?", "What an amazing shot?", "Making some splashes", "All the way from deep?", "Swish!", "Like a true nba player"]
                 random_number = Math.floor((Math.random() * 7));
             }
             else{
@@ -2019,7 +2012,7 @@ Page {
                 points+= 150
                 pointsThisRound +=150;
                 splashAnimation.start()
-                feedback = ["The GOAT?", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP", "Champion"]
+                feedback = ["The GOAT?", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP"]
                 random_number = Math.floor((Math.random() * 5));
                 feedbackLabel.font.bold = true;
                 splashAnimation.start()

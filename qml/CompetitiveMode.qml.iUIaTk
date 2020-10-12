@@ -552,6 +552,7 @@ Page {
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator >21)
             {
+                handleId.visible=false;
                 sliderId.enabled=false;
                 if(true){
                     //8
@@ -579,8 +580,7 @@ Page {
         //Level three stuff
         else if(level===3)
         {
-            delayTimer.start()
-            coinProb = 4;
+            coinProb = 3;
             mPauseAnim.duration-=20;
             //clearling the last times random order
             currentRandomOrder5=[];
@@ -728,24 +728,23 @@ Page {
         color: "yellow"
         Text{
             id: onSunLevelText
-            font.pointSize: 14
+            font.pointSize: 12
             text: "Level: " + level;
             anchors.centerIn: parent
-            color: "black"
-            font.bold: true
             font.underline: true
-            font.family: "Century Gothic"
+            color: "black"
+            font.family: "Blacklight"
             wrapMode: Text.Wrap
         }
         Text{
             id: onSunLevelText1
-            font.pointSize: 15
+            font.pointSize: 12
             text: levelIndicatorDown;
-            y: onSunLevelText.y+onSunLevelText.height+5
+            anchors.top: onSunLevelText.bottom
             color: "black"
-            font.family: "Stencil"
+            font.family: "Athletic"
             wrapMode: Text.Wrap
-            x: parent.width/2-4
+            x: parent.width/2-10
         }
     }
     //Coin counter thingy
@@ -907,7 +906,7 @@ Page {
             id: levelRectangleText1
             text: "Level " + level
             font.pointSize: 1;
-            font.family: "Bodoni MT Black"
+            font.family: "Impact"
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
@@ -927,11 +926,10 @@ Page {
             }
             id: levelRectangleText
             text: levelTextFunc(level)
-            font.pointSize: 16;
-            font.family: "Century Gothic"
+            font.pointSize: 14;
+            font.family: "Courier New"
             wrapMode: Text.Wrap
             width: parent.width-30
-            lineHeight: 1.4
             y: levelRectangleText1.y+levelRectangleText1.implicitHeight+30
             anchors.horizontalCenter: parent.horizontalCenter
             visible:false
@@ -1285,41 +1283,40 @@ Page {
         Image{
             visible: false;
             id: tally1
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally2
-            //            height: 50;
-            //            width: 10;
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"        }
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
+        }
         Image{
             visible: false
             id: tally3
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false;
             id: tally4
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally5
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
             transform: Rotation{
                 id: rotateImagePhoto
-                angle: 326
+                angle: 315
                 origin.x: tally5.width/2
                 origin.y: tally5.height
             }
@@ -1327,50 +1324,49 @@ Page {
         Image{
             visible: false
             id: tally6
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false;
             id: tally7
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally8
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally9
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
         }
         Image{
             visible: false
             id: tally10
-            height: 250/3.7;
-            width: 37/3.7;
-            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneTallyMark.png"
+            height: 50;
+            width: 10;
+            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/oneLine1.png"
             transform: Rotation{
                 id: rotateImagePhoto2
-                angle: 326
+                angle: 315
                 origin.x: tally10.width/2
                 origin.y: tally10.height
             }
         }
         Image{
-            anchors.verticalCenter: parent.verticalCenter
             visible: false
             id: plus11
-            height: 50
-            width: 50
+            height: 30
+            width: 30
             source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/plusSign.png"
         }
     }
@@ -1430,14 +1426,14 @@ Page {
             y: 10
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
-            font.family: "Impact"
+            font.family: "impact"
         }
 
         Text{
             text: "PB: " + Extra.personalBest;
             font.pointSize: 12
             font.bold: true
-            font.family: "Stencil"
+            font.family: "Helventica"
             anchors.top: pointText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -1459,12 +1455,11 @@ Page {
         color: "#dfedf2"
         opacity: 0.95
         width: 500
-        height: 140
-        radius: 10
-        //        anchors.horizontalCenter: sliderId.horizontalCenter
-        //        anchors.verticalCenter: sliderId.verticalCenter
-        x: parent.width/2-width/2+60
-        y: parent.height-ground.height/2-height/2+40
+        height: 75
+        anchors.horizontalCenter: sliderId.horizontalCenter
+        anchors.verticalCenter: sliderId.verticalCenter
+//        x: parent.width/2-width/2+60
+//        y: parent.height-ground.height/2-height/2+40
         signal sliderStopped(double value);
         onSliderStopped: {
             //normal setting upp stuff
