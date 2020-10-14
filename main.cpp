@@ -15,6 +15,9 @@
 #include "flashingtimer.h"
 #include <string>
 #include "mytimer.h"
+#include <FelgoLiveClient>
+#include <FelgoApplication>
+
 FlashingTimer allTheTimeStuff();
 
 int main(int argc, char *argv[])
@@ -24,15 +27,21 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("someOrganization");
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication app(argc, argv);
+    QGuiApplication appy(argc, argv);
 
     //App information
-    app.setOrganizationName("someOrganization");
-    app.setOrganizationDomain("someOrganization.com");
-    app.setApplicationName("Make some splashs!");
+    appy.setOrganizationName("someOrganization");
+    appy.setOrganizationDomain("someOrganization.com");
+    appy.setApplicationName("Make some splashs!");
 
-    //All the timer things
+    QApplication app(argc, argv);
+    FelgoApplication felgo;
+    felgo.setPreservePlatformFonts(true);
+    QQmlApplicationEngine engine;
+    felgo.initialize(&engine);
+    felgo.setLicenseKey(PRODUCT_LICENSE_KEY);
 
+    //All the settings things
     QSettings settings;
     QString style = QQuickStyle::name();
     if (!style.isEmpty()){
@@ -44,10 +53,9 @@ int main(int argc, char *argv[])
 
     FlashingTimer joe = allTheTimeStuff();
     Extras extra;
-    QQmlApplicationEngine engine;
     SettingsManager dude;
-    qmlRegisterType<SettingsManager>("Arjun", 1, 0, "SettingsManager");
-    qmlRegisterType<MyTimer>("otherArjun", 1, 0, "MyTimer");
+    qmlRegisterType<MyTimer>("otherArjun2", 1, 2, "MyTimer");
+    qmlRegisterType<SettingsManager>("Lebron", 1, 0, "SettingsManager");
     //one thing to note is that is you want to change something in c++ (say with a timer) and want to automatically have it update in QML use setContextObject with the object instead of setObjectProperty
     engine.rootContext()->setContextObject(&joe);
     engine.rootContext()->setContextProperty("FlashingTimer",&joe);
@@ -83,32 +91,30 @@ int main(int argc, char *argv[])
 
     //save personal best
     int personalBest1 = extra.personalBest();
-    if(!settings.contains("personalBest55")){
-        dude.writeSettings("personalBest55",personalBest1);
+    if(!settings.contains("personalBest555")){
+        dude.writeSettings("personalBest555",personalBest1);
     }
     else
-        extra.setPersonalBest(SettingsManager::loadSettings("personalBest55").toInt());
+        extra.setPersonalBest(SettingsManager::loadSettings("personalBest555").toInt());
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("lukagamewinner22222")){
-        dude.writeSettings("lukagamewinner22222",datastore1);
+    if(!settings.contains("happyy")){
+        dude.writeSettings("happyy",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("lukagamewinner22222").toString());
+        extra.setDatastore(SettingsManager::loadSettings("happyy").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
-    if(!settings.contains("walkerfinals2222")){
-        dude.writeSettings("walkerfinals2222",myMissionsRn1);
+    if(!settings.contains("sadd")){
+        dude.writeSettings("sadd",myMissionsRn1);
     }
     else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("walkerfinals2222").toString());
+        extra.setMyMissionsRn(SettingsManager::loadSettings("sadd").toString());
     }
 
-    engine.load(QUrl("qrc:/main.qml"));
-    if (engine.rootObjects().isEmpty())
-        return -1;
+    FelgoLiveClient client (&engine);
 
     return app.exec();
 }
@@ -140,7 +146,7 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
             (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
         }
     }
-        break;
+    break;
     default:    // Call the default handler.
         (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
         break;

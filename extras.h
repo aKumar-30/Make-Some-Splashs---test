@@ -50,10 +50,13 @@ public:
     QString endingPage() const;
     void setEndingPage(QString endingPage);
 
+    //no uso
     Q_INVOKABLE void emittingSwitchFilesSignal();
     Q_INVOKABLE void emittingSpaceInCompSignal();
     Q_INVOKABLE void emittingSpaceInCustSignal();
-    
+    Q_INVOKABLE void emittingGoToHalftimeSignal();
+    Q_INVOKABLE void emittingGoBackFromHalftimeSignal(int points1);
+
 
 signals:
     void volumeChanged(double volume);
@@ -73,6 +76,7 @@ signals:
 
     void soundChanged(double sound);
 
+    //no uso
     void goToHalftime();
     void goBackFromHalftime(int points1 = 0);
 

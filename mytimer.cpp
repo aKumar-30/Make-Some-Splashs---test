@@ -9,6 +9,10 @@
 MyTimer::MyTimer(QObject *parent, int interval1) : QObject(parent), m_timer(new QTimer(this)), m_running(false)
 {
     m_original = interval1;
+    if (m_original<0){
+        qDebug()<<"I went into the new thing arjun made";
+        m_original=m_original-m_original*2;
+    }
     srand(time(NULL));
 
     m_timer->setSingleShot(true);
@@ -29,7 +33,7 @@ int MyTimer::elapsed() const
 void MyTimer::start()
 {
     m_running=true;
-    if(m_elapsed==0){
+    if(m_elapsed<=0){
         m_timer->setInterval(m_original);
     }
     else{
