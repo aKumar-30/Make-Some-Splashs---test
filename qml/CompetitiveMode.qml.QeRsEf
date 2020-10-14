@@ -109,28 +109,13 @@ Page {
                 }
             }
 
-            if(points>=mMissionModel.get(16).neededThings&&checkIfCurrentMission(16)){
-                mMissionModel.get(16).currentThings=mMissionModel.get(16).neededThings
-            }
-            else if((points>mMissionModel.get(16).currentThings&&checkIfCurrentMission(16))){
-                mMissionModel.get(16).currentThings=points
-            }
-            if (checkIfCurrentMission(14)){
-                let x = false
-                for(let i = 0; i < counter14.length; i++){
-                    if(Extra.ballSource===counter14[i]){
-                        x=true;
-                        break;
-                  }
+                if(points>=mMissionModel.get(16).neededThings&&checkIfCurrentMission(16)){
+                    mMissionModel.get(16).currentThings=mMissionModel.get(16).neededThings
                 }
-                if(x===false){
-                    counter14.push(Extra.ballSource);
-                    if(counter14.length===mMissionModel.get(14).neededThings&&!(mMissionModel.get(14).currentThings>=mMissionModel.get(14).neededThings)){
-                        mMissionModel.get(14).currentThings=mMissionModel.get(14).neededThings
-                    }
+                else if((points>=mMissionModel.get(16).currentThings&&checkIfCurrentMission(16))){
+                            mMissionModel.get(16).currentThings=points
                 }
-            }
-         }
+        }
         if(true){
             //make all counters zero
             counter0= 0;
@@ -147,6 +132,8 @@ Page {
             counter11= 0;
             counter12= 0;
             counter13= 0;
+            counter14= 0;
+            counter16=0;
             counterLast=0;
         }
         coinsThisRound=0;
@@ -253,6 +240,8 @@ Page {
     property var counter11: 0;
     property var counter12: 0;
     property var counter13: 0;
+    property var counter14: 0;
+    property var counter16: 0;
     property var counterLast: 0;
 
     onMIsOpenChanged:{
@@ -437,15 +426,13 @@ Page {
     MouseArea{
         anchors.fill: parent
         onClicked: {
-            if(!newFadedRed.visible){
-                if(levelRectangleAnimationPause.running)
-                {
-                    levelRectangleAnimationPause.complete()
-                }
-                else if(levelRectangleAnimation.running){
-                    levelRectangleAnimation.complete()
-                    levelRectangleAnimationPause.complete()
-                }
+            if(levelRectangleAnimationPause.running)
+            {
+                levelRectangleAnimationPause.complete()
+            }
+            else if(levelRectangleAnimation.running){
+                levelRectangleAnimation.complete()
+                levelRectangleAnimationPause.complete()
             }
         }
 
@@ -676,16 +663,12 @@ Page {
         font.pointSize: 14
         color: "black"
         font.bold: true
-        font.family: "Century Gothic"
         width: 170
         horizontalAlignment: Text.AlignHCenter
         visible: pointingFinger.visible
         anchors.horizontalCenter: pointingFinger.horizontalCenter
+        y: pointingFinger.y-width
         z:5
-        y:0                 //doesnt matter
-        Component.onCompleted: {
-            this.y= pointingFinger.y-width+15
-        }
     }
     Image{
         visible: false;
@@ -694,14 +677,14 @@ Page {
         width: 414*1/6;
         height: 600*1/6;
         x: insideContainerId.x+insideContainerId.width/2-width/2
-        y: insideContainerId.y+25-height;
+        y: insideContainerId.y-height;
         source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/pointingPicture.png"
         onVisibleChanged: {
             //start the animation once it is visible
             pointingFingerAnim.start()
         }
         onYChanged: {
-            if(y===(insideContainerId.y+25-height-2)||y===(insideContainerId.y+25-height+32))
+            if(y===(insideContainerId.y-height-2)||y===(insideContainerId.y-height+32))
                 pointingFingerAnim.restart()
         }
 
@@ -711,7 +694,7 @@ Page {
                 id: pointingFingerAnimFront
                 target: pointingFinger
                 property: "y"
-                to:insideContainerId.y+25-pointingFinger.height+20;
+                to:insideContainerId.y-pointingFinger.height+20;
                 duration: 300
                 easing.type: Easing.Linear
             }
@@ -719,7 +702,7 @@ Page {
                 id: pointingFingerAnimBack
                 target: pointingFinger
                 property: "y"
-                to:(insideContainerId.y+25-pointingFinger.height-2)
+                to:(insideContainerId.y-pointingFinger.height-2)
                 duration: 300
                 easing.type: Easing.Linear
             }
@@ -1639,7 +1622,7 @@ Page {
                 points -= 120;
                 pointsThisRound -= 120;
                 airBallAnimation.start();
-                feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot better than that", "A complete fail...", "Practice makes perfect...you need practice!"]
+                feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot like that", "A complete failure...", "Practice makes perfect...you definetly need practice!"]
                 random_number = Math.floor((Math.random() * 6));
                 feedbackLabel.font.italic = true;
             }

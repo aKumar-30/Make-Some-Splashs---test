@@ -40,7 +40,7 @@ Page {
     y: navigationStack.navigationBar.height
     width: parent.width
     height: parent.height
-//    width: 705
+    //    width: 705
     title:"The Store"
     property int duration: 1000
     id: root
@@ -54,7 +54,7 @@ Page {
     property bool firstTime1: true;
     property var givenName: "";
 
-    property var counter1: 0
+    property var counter15: 0
     Component.onCompleted: {
         bigPicText.text =givenName;
 
@@ -431,7 +431,14 @@ Page {
             picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/moon.png"
             price: 80
         }
-
+        ListElement{
+            index:14
+            isBought: false
+            type: "white";
+            name: "The White"
+            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/theGreatWhiteCircle.png"
+            price: 80
+        }
     }
 
     GridView {

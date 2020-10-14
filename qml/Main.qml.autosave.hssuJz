@@ -211,35 +211,31 @@ GameWindow {
         for (let k = 0; k < datamodel.length; ++k) mMissionModel.append(datamodel[k])
         arr.push(mMissionModel.get(mMissionModel.count-1));
     }
-    function updatingMissionsDuringGame(){
-        //make missions invisible here
-        partUpdatingMissions()
-
-        displayDelegateModel.items.remove(0, mMissionModel.count);
-
-        displayDelegateModel.items.insert(arr[0], "todaysMissions");
-        displayDelegateModel.items.insert(arr[1], "todaysMissions");
-        displayDelegateModel.items.insert(arr[2], "todaysMissions");
-        presentMissions=[]
-        storeForSettings();
-        for(let s = 0; s< 3; s++){ //displayDelegateModel.items.count-1-s
-            displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
-            displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
-            displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
-            displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
-            displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
-            displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
-            displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
-        }
-        if(!delayTimer.running)
-            delayTimer.start()
-    }
 
     Connections{
-        id: flashingTimerConnection
         target: FlashingTimer
         function onCallUpdateMissions(){
-            updatingMissionsDuringGame()
+            //make missions invisible here
+            partUpdatingMissions()
+
+            displayDelegateModel.items.remove(0, mMissionModel.count);
+
+            displayDelegateModel.items.insert(arr[0], "todaysMissions");
+            displayDelegateModel.items.insert(arr[1], "todaysMissions");
+            displayDelegateModel.items.insert(arr[2], "todaysMissions");
+            presentMissions=[]
+            storeForSettings();
+            for(let s = 0; s< 3; s++){ //displayDelegateModel.items.count-1-s
+                displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
+                displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
+                displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
+                displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
+                displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
+                displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
+                displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
+            }
+            if(!delayTimer.running)
+                delayTimer.start()
         }
     }
     function updateMissions(){
@@ -1280,7 +1276,8 @@ GameWindow {
                 //                            adUnitId: "ca-app-pub-3940256099942544/5224354917"
 
                 //                            onRewardedVideoRewarded: {
-                //updatingMissionsDuringGame();
+                //                                updateMissions();
+                //                            }
                 //                            // load rewarded video at app start to cache it
                 //                            Component.onCompleted: {
                 //                                loadRewardedVideo()

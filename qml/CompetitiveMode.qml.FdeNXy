@@ -1639,7 +1639,7 @@ Page {
                 points -= 120;
                 pointsThisRound -= 120;
                 airBallAnimation.start();
-                feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot better than that", "A complete fail...", "Practice makes perfect...you need practice!"]
+                feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot like that", "A complete failure...", "Practice makes perfect...you definetly need practice!"]
                 random_number = Math.floor((Math.random() * 6));
                 feedbackLabel.font.italic = true;
             }

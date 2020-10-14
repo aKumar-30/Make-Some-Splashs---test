@@ -274,39 +274,71 @@ Page {
         }
     }
     //Sun
+//    Rectangle{
+//        z:8
+//        visible: true
+//        id: sun
+//        radius: 80
+//        x:-width/2+10
+//        y:-height/2+10
+//        width:130
+//        height:130
+//        color: "yellow"
+//        Text{
+//            id: onSunLevelText
+//            font.pointSize: 10
+//            text: "Count";
+//            x: height*3/5+50
+//            y: width*3/5+30
+//            font.underline: true
+//            color: "black"
+//            font.family: "Blacklight"
+//            wrapMode: Text.Wrap
+//        }
+//        Text{
+//            id: onSunLevelText1
+//            font.pointSize: 18
+//            text: numberOfClicks;
+//            anchors.top: onSunLevelText.bottom
+//            color: "black"
+//            font.family: "Athletic"
+//            wrapMode: Text.Wrap
+//            x: height*3/5+55
+//        }
+//    }
+    //Sun
     Rectangle{
-        z:8
         visible: true
         id: sun
         radius: 80
-        x:-width/2+10
-        y:-height/2+10
+        x:80
+        y:50
         width:130
         height:130
         color: "yellow"
+        z: 17
         Text{
             id: onSunLevelText
-            font.pointSize: 10
+            font.pointSize: 14
             text: "Count";
-            x: height*3/5+50
-            y: width*3/5+30
-            font.underline: true
+            anchors.centerIn: parent
             color: "black"
-            font.family: "Blacklight"
+            font.bold: true
+            font.underline: true
+            font.family: "Century Gothic"
             wrapMode: Text.Wrap
         }
         Text{
             id: onSunLevelText1
-            font.pointSize: 18
+            font.pointSize: 15
             text: numberOfClicks;
-            anchors.top: onSunLevelText.bottom
+            y: onSunLevelText.y+onSunLevelText.height+5
             color: "black"
-            font.family: "Athletic"
+            font.family: "Stencil"
             wrapMode: Text.Wrap
-            x: height*3/5+55
+            anchors.horizontalCenter: onSunLevelText.horizontalCenter
         }
     }
-
     //Sky
     Rectangle {
         id: sky

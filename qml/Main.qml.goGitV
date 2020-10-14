@@ -56,7 +56,7 @@ GameWindow {
         volume: Extra.volume*4/5
     }
     Component.onDestruction: {
-        counter14Changed();
+         counter14Changed();
         mMusic1.stop()
         storeForSettings();
 
@@ -119,16 +119,16 @@ GameWindow {
         if(Extra.myMissionsRn){
             getCurrentMissions()
         }
-        //        updateMissions()
-        if(presentMissions.length!==0){
-            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        }
-        else{
-            updateMissions();
-        }
+//        updateMissions()
+                if(presentMissions.length!==0){
+                    displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+                }
+                else{
+                    updateMissions();
+                }
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -166,7 +166,98 @@ GameWindow {
         interval: 1001
         id: delayTimer
     }
-    function partUpdatingMissions(){
+    Connections{
+        target: FlashingTimer
+        function onCallUpdateMissions(){
+                    var rowCount = mMissionModel.count
+                    mArray = []
+                    displayDelegateModel.items.remove(0,displayDelegateModel.items.count)
+
+                    for(let i =0;i < rowCount;i++ ) {
+                        let entry = mMissionModel.get(i)
+                        if((!entry.multipleTimes || !entry.completed))
+                            mArray.push(entry)
+                    }
+                    arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)
+                    if(arr[0]===mMissionModel.get(16)||arr[1]===mMissionModel.get(16)){
+                            var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[1000,30]]
+                            var randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
+                            mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
+                            mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
+                        mMissionModel.get(16).description = "Score "+pointsScoredAndReward[randomNumberForPointsMission][0] +" points in a game. Record:"
+                    }
+                    counter14=[];
+                    for(let h =0; h < arr.length; h++){
+                        //subject to change
+                        arr[h].completed=false
+                        arr[h].currentThings=0;
+                    }
+                    //        //we now want two with one extra special at the end
+                    var numberOfTimesAndCoins = [[2,2],[3,4],[4,6],[5,9],[6,10],[7,12],[8,16],[9,19]]
+                    var typeOfShot = ["backboard","rim", "splash"]
+                    levelOptions = [1,1,1,1,1,1,1,2,2,3,3,0]
+                    var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
+                    console.log("this is count"+numberOfTimesAndCoins.length)
+                    tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
+                    tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
+                    shotRandomNumber = Math.floor((Math.random()*typeOfShot.length));
+                    levelRandomNumber = Math.floor((Math.random()*levelOptions.length));
+                    tempModel.get(0).description=(typeOfShot[shotRandomNumber]==="splash")?("Splash "+ tempModel.get(0).neededThings+" times in a row in "):("Make at the " + typeOfShot[shotRandomNumber] + " " +tempModel.get(0).neededThings+" times in a row in ");
+                    tempModel.get(0).description+=(levelOptions[levelRandomNumber]===0)?("any level"):("level "+levelOptions[levelRandomNumber]);
+                     tempModel.get(0).description+= ". Record:"
+                    //adding it to the end
+                    var datamodel = []
+                    for (let t = 0; t < tempModel.count; ++t) datamodel.push(tempModel.get(t))
+                    let b = JSON.stringify(datamodel)
+                    datamodel = JSON.parse(b)
+                    for (let k = 0; k < datamodel.length; ++k) mMissionModel.append(datamodel[k])
+                    arr.push(mMissionModel.get(mMissionModel.count-1));
+
+                    displayDelegateModel.items.insert(arr[0], "todaysMissions");
+                    displayDelegateModel.items.insert(arr[1], "todaysMissions");
+                    displayDelegateModel.items.insert(arr[2], "todaysMissions");
+                    presentMissions=[]
+                    storeForSettings();
+//            if(!delayTimer.running){
+//                //changed update missions
+//                var rowCount = mMissionModel.count
+//                mArray = []
+//                for(let i =0;i < rowCount;i++ ) {
+//                    let entry = mMissionModel.get(i)
+//                    if(entry.completed)
+//                        mArray.push(entry)
+//                }
+//                arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 3)
+//                presentMissions=[]
+//                for(let h =0; h < arr.length; h++){
+//                    //subject to change
+//                    arr[h].completed=false
+//                    arr[h].currentThings=0;
+//                    presentMissions.push(arr[h].index);
+//                }
+//                //used stored settings to manuelly replace
+//                for(let s = 0; s< 3; s++){ //displayDelegateModel.items.count-1-s
+//                    displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
+//                    displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
+//                    displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
+//                    displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
+//                    displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
+//                    displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
+//                    displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
+//                }
+//                delayTimer.start()
+//            }
+        }
+    }
+    function updateMissions(){
+//        if(!firstTimeUpdatingMissions){
+//            mMissionModel.remove(mMissionModel.count-1)
+
+//        }
+//        else{
+//            firstTimeUpdatingMissions=false
+//        }
+
         var rowCount = mMissionModel.count
         mArray = []
         displayDelegateModel.items.remove(0,displayDelegateModel.items.count)
@@ -178,10 +269,10 @@ GameWindow {
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)
         if(arr[0]===mMissionModel.get(16)||arr[1]===mMissionModel.get(16)){
-            var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[1000,30]]
-            var randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
-            mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
-            mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
+                var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[1000,30]]
+                var randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
+                mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
+                mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
             mMissionModel.get(16).description = "Score "+pointsScoredAndReward[randomNumberForPointsMission][0] +" points in a game. Record:"
         }
         counter14=[];
@@ -202,7 +293,7 @@ GameWindow {
         levelRandomNumber = Math.floor((Math.random()*levelOptions.length));
         tempModel.get(0).description=(typeOfShot[shotRandomNumber]==="splash")?("Splash "+ tempModel.get(0).neededThings+" times in a row in "):("Make at the " + typeOfShot[shotRandomNumber] + " " +tempModel.get(0).neededThings+" times in a row in ");
         tempModel.get(0).description+=(levelOptions[levelRandomNumber]===0)?("any level"):("level "+levelOptions[levelRandomNumber]);
-        tempModel.get(0).description+= ". Record:"
+         tempModel.get(0).description+= ". Record:"
         //adding it to the end
         var datamodel = []
         for (let t = 0; t < tempModel.count; ++t) datamodel.push(tempModel.get(t))
@@ -210,47 +301,6 @@ GameWindow {
         datamodel = JSON.parse(b)
         for (let k = 0; k < datamodel.length; ++k) mMissionModel.append(datamodel[k])
         arr.push(mMissionModel.get(mMissionModel.count-1));
-    }
-    function updatingMissionsDuringGame(){
-        //make missions invisible here
-        partUpdatingMissions()
-
-        displayDelegateModel.items.remove(0, mMissionModel.count);
-
-        displayDelegateModel.items.insert(arr[0], "todaysMissions");
-        displayDelegateModel.items.insert(arr[1], "todaysMissions");
-        displayDelegateModel.items.insert(arr[2], "todaysMissions");
-        presentMissions=[]
-        storeForSettings();
-        for(let s = 0; s< 3; s++){ //displayDelegateModel.items.count-1-s
-            displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
-            displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
-            displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
-            displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
-            displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
-            displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
-            displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
-        }
-        if(!delayTimer.running)
-            delayTimer.start()
-    }
-
-    Connections{
-        id: flashingTimerConnection
-        target: FlashingTimer
-        function onCallUpdateMissions(){
-            updatingMissionsDuringGame()
-        }
-    }
-    function updateMissions(){
-        if(!firstTimeUpdatingMissions){
-            mMissionModel.remove(mMissionModel.count-1)
-
-        }
-        else{
-            firstTimeUpdatingMissions=false
-        }
-        partUpdatingMissions()
 
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
         displayDelegateModel.items.insert(arr[1], "todaysMissions");
@@ -841,7 +891,7 @@ GameWindow {
                     horizontalAlignment: Text.AlignHCenter
                     font.pointSize: 28
                     text: "Missions"
-                    //                    font.family: "Complex"
+//                    font.family: "Complex"
                     font.family: "Bodoni MT Black"
                 }
             }
@@ -994,33 +1044,33 @@ GameWindow {
                     neededThings: 4
                     currentThings: 0
                 }
-                ListElement{//14
-                    index: 14
-                    completed: false;
-                    description: "Play a game with three different balls"
-                    multipleTimes: false
-                    reward: 5;
-                    neededThings: 3
-                    currentThings: 0
-                }
-                ListElement{//15
-                    index: 15
-                    completed: false;
-                    description: "Purchase a new ball"
-                    multipleTimes: false
-                    reward: 8;
-                    neededThings: 1
-                    currentThings: 0
-                }
-                ListElement{//16
-                    index: 16
-                    completed: false;
-                    description: "Score "
-                    multipleTimes: false
-                    reward: 0;
-                    neededThings: 0
-                    currentThings: 0
-                }
+                            ListElement{//14
+                                index: 14
+                                completed: false;
+                                description: "Play a game with three different balls"
+                                multipleTimes: false
+                                reward: 5;
+                                neededThings: 3
+                                currentThings: 0
+                            }
+                            ListElement{//15
+                                index: 15
+                                completed: false;
+                                description: "Purchase a new ball"
+                                multipleTimes: false
+                                reward: 8;
+                                neededThings: 1
+                                currentThings: 0
+                            }
+                            ListElement{//16
+                                index: 16
+                                completed: false;
+                                description: "Score "
+                                multipleTimes: false
+                                reward: 0;
+                                neededThings: 0
+                                currentThings: 0
+                            }
                 //            ListElement{//7
                 //                index: 7
                 //                completed: false;
@@ -1280,7 +1330,8 @@ GameWindow {
                 //                            adUnitId: "ca-app-pub-3940256099942544/5224354917"
 
                 //                            onRewardedVideoRewarded: {
-                //updatingMissionsDuringGame();
+                //                                updateMissions();
+                //                            }
                 //                            // load rewarded video at app start to cache it
                 //                            Component.onCompleted: {
                 //                                loadRewardedVideo()

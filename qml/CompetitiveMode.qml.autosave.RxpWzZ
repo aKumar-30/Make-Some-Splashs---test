@@ -60,15 +60,10 @@ Page {
     property int beforeHalftimeScore: 0;
     //for going back after halftime
     property bool shouldStartThirdLevel: shouldBeginThirdLevel
-    property bool adScreenHappeningHere: adScreenHappening
-    property bool backButtonClickedWhenAdScreenHere: backButtonClickedWhenAdScreen
-    property bool adUsed: false
-    onBackButtonClickedWhenAdScreenHereChanged: {
-        afterGameIsActuallyOver();
-    }
     Connections{
         target: Extra
         function onGoBackFromHalftime(addedPoints){
+            console.log("the CELTICS VITORY WILL BE GODLY")
             points+=addedPoints
             levelRectangleAnimation.start();
             seqAnimationId.pause()
@@ -108,29 +103,7 @@ Page {
                     mMissionModel.get(11).currentThings++
                 }
             }
-
-            if(points>=mMissionModel.get(16).neededThings&&checkIfCurrentMission(16)){
-                mMissionModel.get(16).currentThings=mMissionModel.get(16).neededThings
-            }
-            else if((points>mMissionModel.get(16).currentThings&&checkIfCurrentMission(16))){
-                mMissionModel.get(16).currentThings=points
-            }
-            if (checkIfCurrentMission(14)){
-                let x = false
-                for(let i = 0; i < counter14.length; i++){
-                    if(Extra.ballSource===counter14[i]){
-                        x=true;
-                        break;
-                  }
-                }
-                if(x===false){
-                    counter14.push(Extra.ballSource);
-                    if(counter14.length===mMissionModel.get(14).neededThings&&!(mMissionModel.get(14).currentThings>=mMissionModel.get(14).neededThings)){
-                        mMissionModel.get(14).currentThings=mMissionModel.get(14).neededThings
-                    }
-                }
-            }
-         }
+        }
         if(true){
             //make all counters zero
             counter0= 0;
@@ -147,6 +120,7 @@ Page {
             counter11= 0;
             counter12= 0;
             counter13= 0;
+            counter14= 0;
             counterLast=0;
         }
         coinsThisRound=0;
@@ -165,7 +139,6 @@ Page {
         manyMakes = 0;
         mDuration=1200
         sliderEasingType = Easing.Linear
-        adUsed = false
         //used to be above ended
     }
 
@@ -253,6 +226,7 @@ Page {
     property var counter11: 0;
     property var counter12: 0;
     property var counter13: 0;
+    property var counter14: 0;
     property var counterLast: 0;
 
     onMIsOpenChanged:{
@@ -437,15 +411,13 @@ Page {
     MouseArea{
         anchors.fill: parent
         onClicked: {
-            if(!newFadedRed.visible){
-                if(levelRectangleAnimationPause.running)
-                {
-                    levelRectangleAnimationPause.complete()
-                }
-                else if(levelRectangleAnimation.running){
-                    levelRectangleAnimation.complete()
-                    levelRectangleAnimationPause.complete()
-                }
+            if(levelRectangleAnimationPause.running)
+            {
+                levelRectangleAnimationPause.complete()
+            }
+            else if(levelRectangleAnimation.running){
+                levelRectangleAnimation.complete()
+                levelRectangleAnimationPause.complete()
             }
         }
 
@@ -528,13 +500,8 @@ Page {
             insideRectangleMouseArea.enabled=false
             insideTheSliderRectangleMouseArea.enabled=false
             //            retryBox.visible= true;
-            if(!adUsed)
-                newRetryCircle.visible=true
+            newRetryCircle.visible=true
             //            fadedRED.visible=true;
-            else{
-                retryBox.visible=true
-            }
-
             newFadedRed.visible=true
             adScreenHappening=true;
             return;
@@ -560,7 +527,7 @@ Page {
             if(levelIndicator > 21)
             {
                 whatToDoForNextLevel()
-                mDuration=1210
+                mDuration=1300
                 if(true){
                     //7
                     if(counter7===21&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
@@ -676,16 +643,12 @@ Page {
         font.pointSize: 14
         color: "black"
         font.bold: true
-        font.family: "Century Gothic"
         width: 170
         horizontalAlignment: Text.AlignHCenter
         visible: pointingFinger.visible
         anchors.horizontalCenter: pointingFinger.horizontalCenter
+        y: pointingFinger.y-width
         z:5
-        y:0                 //doesnt matter
-        Component.onCompleted: {
-            this.y= pointingFinger.y-width+15
-        }
     }
     Image{
         visible: false;
@@ -694,14 +657,14 @@ Page {
         width: 414*1/6;
         height: 600*1/6;
         x: insideContainerId.x+insideContainerId.width/2-width/2
-        y: insideContainerId.y+25-height;
+        y: insideContainerId.y-height;
         source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/pointingPicture.png"
         onVisibleChanged: {
             //start the animation once it is visible
             pointingFingerAnim.start()
         }
         onYChanged: {
-            if(y===(insideContainerId.y+25-height-2)||y===(insideContainerId.y+25-height+32))
+            if(y===(insideContainerId.y-height-2)||y===(insideContainerId.y-height+32))
                 pointingFingerAnim.restart()
         }
 
@@ -711,7 +674,7 @@ Page {
                 id: pointingFingerAnimFront
                 target: pointingFinger
                 property: "y"
-                to:insideContainerId.y+25-pointingFinger.height+20;
+                to:insideContainerId.y-pointingFinger.height+20;
                 duration: 300
                 easing.type: Easing.Linear
             }
@@ -719,7 +682,7 @@ Page {
                 id: pointingFingerAnimBack
                 target: pointingFinger
                 property: "y"
-                to:(insideContainerId.y+25-pointingFinger.height-2)
+                to:(insideContainerId.y-pointingFinger.height-2)
                 duration: 300
                 easing.type: Easing.Linear
             }
@@ -787,7 +750,7 @@ Page {
             color: "black"
             font.family: "Stencil"
             wrapMode: Text.Wrap
-            anchors.horizontalCenter: onSunLevelText.horizontalCenter
+            x: parent.width/2-4
         }
     }
     //Coin counter thingy
@@ -983,7 +946,6 @@ Page {
             id: levelRectangleAnimation
             onStarted: {
                 levelRectangle.visible = true;
-                seqAnimationId.pause();
             }
             onFinished: {
                 //Making bottom text appear
@@ -1088,25 +1050,20 @@ Page {
             //                            }
             //                        }
             onClicked: {
-                adUsed=true
-                quitButtonWasClicked=true
-                newRetryCircle.visible=false
-                newFadedRed.visible=false
-                adScreenHappening=false
-                //                    // show the new video if user is below 10 credits
-                //                    myRewardedVideo.showRewardedVideoIfLoaded()
-                //                    // load a new video every time it got shown, to give the user a fresh ad
-                //                    myRewardedVideo.loadRewardedVideo()
-                //all of this should be after onRewardedVideoRewarded but this is for testing
-                sliderId.enabled=true;
-                insideRectangleMouseArea.enabled=true
-                insideTheSliderRectangleMouseArea.enabled=true
-                flashingScoreText.color="black"
-                manyMisses=0
-                x1.visible=false
-                x2.visible=false
-                x3.visible=false
-                whatToDoWhenAnimFinished()
+                if(visible){
+                    newRetryCircle.visible=false
+                    newFadedRed.visible=false
+                    adScreenHappening=false
+//                    // show the new video if user is below 10 credits
+//                    myRewardedVideo.showRewardedVideoIfLoaded()
+//                    // load a new video every time it got shown, to give the user a fresh ad
+//                    myRewardedVideo.loadRewardedVideo()
+                    //all of this should be after onRewardedVideoRewarded but this is for testing
+                    sliderId.enabled=true;
+                    insideRectangleMouseArea.enabled=true
+                    insideTheSliderRectangleMouseArea.enabled=true
+                    whatToDoWhenAnimFinished()
+                }
             }
             y: circularProgress.y+circularProgress.height+50
             id: newMissionsAdButton
@@ -1214,14 +1171,6 @@ Page {
     //retry box
     signal quitButtonClicked
     Rectangle{
-        onVisibleChanged: {
-            seqAnimationId.stop()
-            if(visible)
-                newFadedRed.visible=true
-            else
-                newFadedRed.visible=false
-        }
-
         visible: false
         width: parent.width*2/3
         height:parent.height*1/3
@@ -1234,6 +1183,10 @@ Page {
             GradientStop{position: 0.5; color: "#ffffff"}
             GradientStop{position: 1.0; color: "#f52a2a"}
         }
+        onVisibleChanged: {
+            seqAnimationId.stop
+        }
+
         Column{
             x:0
             y:0
@@ -1276,7 +1229,6 @@ Page {
                         levelRectangleAnimation.start()
                         x1.visible=false; x2.visible = false; x3.visible = false;
                         retryBox.visible=false
-                        retryScreenHappening=false
                     }
                 }
                 Button{
@@ -1429,8 +1381,8 @@ Page {
             anchors.verticalCenter: parent.verticalCenter
             visible: false
             id: plus11
-            height: 40
-            width: 40
+            height: 50
+            width: 50
             source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/plusSign.png"
         }
     }
@@ -1639,7 +1591,7 @@ Page {
                 points -= 120;
                 pointsThisRound -= 120;
                 airBallAnimation.start();
-                feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot better than that", "A complete fail...", "Practice makes perfect...you need practice!"]
+                feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot like that", "A complete failure...", "Practice makes perfect...you definetly need practice!"]
                 random_number = Math.floor((Math.random() * 6));
                 feedbackLabel.font.italic = true;
             }

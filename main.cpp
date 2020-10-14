@@ -41,6 +41,8 @@ int main(int argc, char *argv[])
     felgo.initialize(&engine);
     felgo.setLicenseKey(PRODUCT_LICENSE_KEY);
 
+    //sends when i break a property binding
+//    QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
     //All the settings things
     QSettings settings;
     QString style = QQuickStyle::name();
@@ -91,27 +93,27 @@ int main(int argc, char *argv[])
 
     //save personal best
     int personalBest1 = extra.personalBest();
-    if(!settings.contains("personalBest555")){
-        dude.writeSettings("personalBest555",personalBest1);
+    if(!settings.contains("personalBest5555")){
+        dude.writeSettings("personalBest5555",personalBest1);
     }
     else
-        extra.setPersonalBest(SettingsManager::loadSettings("personalBest555").toInt());
+        extra.setPersonalBest(SettingsManager::loadSettings("personalBest5555").toInt());
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("happyy")){
-        dude.writeSettings("happyy",datastore1);
+    if(!settings.contains("happyyyyy")){
+        dude.writeSettings("happyyyyy",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("happyy").toString());
+        extra.setDatastore(SettingsManager::loadSettings("happyyyyy").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
-    if(!settings.contains("sadd")){
-        dude.writeSettings("sadd",myMissionsRn1);
+    if(!settings.contains("saddddd")){
+        dude.writeSettings("saddddd",myMissionsRn1);
     }
     else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("sadd").toString());
+        extra.setMyMissionsRn(SettingsManager::loadSettings("saddddd").toString());
     }
 
     FelgoLiveClient client (&engine);

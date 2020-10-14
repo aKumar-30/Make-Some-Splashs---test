@@ -19,11 +19,17 @@ Canvas {
     property real minimumValue: 0
     property real maximumValue: 100
     property real currentValue: 100
-    MouseArea{
-        anchors.fill: parent
-        onClicked:{
-            console.log("clicked")
-            newMissionsAdButton.clicked()
+    Rectangle{
+        anchors.centerIn: parent
+        width: heartIcon.iconSize
+        height: width
+        color:"transparent"
+        MouseArea{
+            anchors.fill: parent
+            onClicked:{
+                console.log("clicked")
+                newMissionsAdButton.clicked()
+            }
         }
     }
     // this is the angle that splits the circle in two arcs
