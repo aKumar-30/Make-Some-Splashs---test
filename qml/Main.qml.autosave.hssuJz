@@ -40,6 +40,12 @@ GameWindow {
     property var shotRandomNumber: 0;
     property var levelRandomNumber:0
     property var levelOptions: []
+
+    property bool adScreenHappening: false;
+    property bool backButtonClickedWhenAdScreen: false;
+    property bool retryScreenHappening: false;
+    property var counter14: [];
+    property bool firstTimeUpdatingMissions: false
     id: root
     //        width: 708
     //        height: 785
@@ -50,6 +56,7 @@ GameWindow {
         volume: Extra.volume*4/5
     }
     Component.onDestruction: {
+        counter14Changed();
         mMusic1.stop()
         storeForSettings();
 
@@ -61,12 +68,12 @@ GameWindow {
         s_manager.writeSettings("sound0100",Extra.sound);
         s_manager.writeSettings("numCoins21", Extra.numCoins);
         s_manager.writeSettings("ballSource", Extra.ballSource);
-        s_manager.writeSettings("personalBest555",Extra.personalBest);
+        s_manager.writeSettings("personalBest5555",Extra.personalBest);
         console.log("saving to settings tge datastore   "+mMissionModel.get(presentMissions[1]).completed);
-        s_manager.writeSettings("happyy",Extra.datastore);
+        s_manager.writeSettings("happyyyyy",Extra.datastore);
         //convert array to string
         setCurrentMissions()
-        s_manager.writeSettings("sadd",Extra.myMissionsRn);
+        s_manager.writeSettings("saddddd",Extra.myMissionsRn);
     }
     SettingsManager{
         id: s_manager
@@ -102,28 +109,6 @@ GameWindow {
         Extra.myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+presentMissions[2]+","
     }
     Component.onCompleted: {
-        //        mMusic1.play()
-        //        if ( Extra.datastore) {
-        //            console.log("Extra.datatstore"+ Extra.datastore)
-        //            mMissionModel.clear()
-        //            var datamodel = JSON.parse(Extra.datastore)
-        //            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        //        }
-        //        presentMissions=[]
-        //        if(Extra.myMissionsRn){
-        //            getCurrentMissions()
-        //            console.log("Present Missions: "+presentMissions)
-        //        }
-        //        //this used to be inside delegate
-        //        if(presentMissions.length!==0){
-        //            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        //        }
-        //        else{
-        //            updateMissions();
-        //        }
         mMusic1.play()
         console.log(Extra.datastore)
         if ( Extra.datastore) {
@@ -134,16 +119,16 @@ GameWindow {
         if(Extra.myMissionsRn){
             getCurrentMissions()
         }
-//        updateMissions()
-                if(presentMissions.length!==0){
-                    displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-                }
-                else{
-                    updateMissions();
-                }
+        //        updateMissions()
+        if(presentMissions.length!==0){
+            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+        }
+        else{
+            updateMissions();
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -181,42 +166,7 @@ GameWindow {
         interval: 1001
         id: delayTimer
     }
-    Connections{
-        target: FlashingTimer
-        function onCallUpdateMissions(){
-            if(!delayTimer.running){
-                //changed update missions
-                var rowCount = mMissionModel.count
-                mArray = []
-                for(let i =0;i < rowCount;i++ ) {
-                    let entry = mMissionModel.get(i)
-                    if(entry.completed)
-                        mArray.push(entry)
-                }
-                arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 3)
-                presentMissions=[]
-                for(let h =0; h < arr.length; h++){
-                    //subject to change
-                    arr[h].completed=false
-                    arr[h].currentThings=0;
-                    presentMissions.push(arr[h].index);
-                }
-                //used stored settings to manuelly replace
-                for(let s = 0; s< 3; s++){
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.index=mMissionModel.get(presentMissions[s]).index
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.completed=mMissionModel.get(presentMissions[s]).completed
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.description=mMissionModel.get(presentMissions[s]).description
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.reward=mMissionModel.get(presentMissions[s]).reward
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
-                    displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
-                }
-                delayTimer.start()
-            }
-        }
-    }
-    function updateMissions(){
-//        mMissionModel.remove(mMissionModel.count-1)
+    function partUpdatingMissions(){
         var rowCount = mMissionModel.count
         mArray = []
         displayDelegateModel.items.remove(0,displayDelegateModel.items.count)
@@ -228,12 +178,13 @@ GameWindow {
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)
         if(arr[0]===mMissionModel.get(16)||arr[1]===mMissionModel.get(16)){
-                var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[1000,30]]
-                let randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
-                mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
-                mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
-            mMissionModel.get(16).description = "Score "+pointsScoredAndReward[randomNumberForPointsMission][0] +" points in a game. Record"
+            var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[1000,30]]
+            var randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
+            mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
+            mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
+            mMissionModel.get(16).description = "Score "+pointsScoredAndReward[randomNumberForPointsMission][0] +" points in a game. Record:"
         }
+        counter14=[];
         for(let h =0; h < arr.length; h++){
             //subject to change
             arr[h].completed=false
@@ -251,7 +202,7 @@ GameWindow {
         levelRandomNumber = Math.floor((Math.random()*levelOptions.length));
         tempModel.get(0).description=(typeOfShot[shotRandomNumber]==="splash")?("Splash "+ tempModel.get(0).neededThings+" times in a row in "):("Make at the " + typeOfShot[shotRandomNumber] + " " +tempModel.get(0).neededThings+" times in a row in ");
         tempModel.get(0).description+=(levelOptions[levelRandomNumber]===0)?("any level"):("level "+levelOptions[levelRandomNumber]);
-         tempModel.get(0).description+= ". Record:"
+        tempModel.get(0).description+= ". Record:"
         //adding it to the end
         var datamodel = []
         for (let t = 0; t < tempModel.count; ++t) datamodel.push(tempModel.get(t))
@@ -259,6 +210,43 @@ GameWindow {
         datamodel = JSON.parse(b)
         for (let k = 0; k < datamodel.length; ++k) mMissionModel.append(datamodel[k])
         arr.push(mMissionModel.get(mMissionModel.count-1));
+    }
+
+    Connections{
+        target: FlashingTimer
+        function onCallUpdateMissions(){
+            //make missions invisible here
+            partUpdatingMissions()
+
+            displayDelegateModel.items.remove(0, mMissionModel.count);
+
+            displayDelegateModel.items.insert(arr[0], "todaysMissions");
+            displayDelegateModel.items.insert(arr[1], "todaysMissions");
+            displayDelegateModel.items.insert(arr[2], "todaysMissions");
+            presentMissions=[]
+            storeForSettings();
+            for(let s = 0; s< 3; s++){ //displayDelegateModel.items.count-1-s
+                displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
+                displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
+                displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
+                displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
+                displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
+                displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
+                displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
+            }
+            if(!delayTimer.running)
+                delayTimer.start()
+        }
+    }
+    function updateMissions(){
+        if(!firstTimeUpdatingMissions){
+            mMissionModel.remove(mMissionModel.count-1)
+
+        }
+        else{
+            firstTimeUpdatingMissions=false
+        }
+        partUpdatingMissions()
 
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
         displayDelegateModel.items.insert(arr[1], "todaysMissions");
@@ -849,7 +837,7 @@ GameWindow {
                     horizontalAlignment: Text.AlignHCenter
                     font.pointSize: 28
                     text: "Missions"
-//                    font.family: "Complex"
+                    //                    font.family: "Complex"
                     font.family: "Bodoni MT Black"
                 }
             }
@@ -1002,33 +990,33 @@ GameWindow {
                     neededThings: 4
                     currentThings: 0
                 }
-                            ListElement{//14
-                                index: 14
-                                completed: false;
-                                description: "Play a game with three different balls"
-                                multipleTimes: false
-                                reward: 5;
-                                neededThings: 3
-                                currentThings: 0
-                            }
-                            ListElement{//15
-                                index: 15
-                                completed: false;
-                                description: "Purchase a new ball"
-                                multipleTimes: false
-                                reward: 8;
-                                neededThings: 1
-                                currentThings: 0
-                            }
-                            ListElement{//16
-                                index: 16
-                                completed: false;
-                                description: "Score "
-                                multipleTimes: false
-                                reward: 0;
-                                neededThings: 0
-                                currentThings: 0
-                            }
+                ListElement{//14
+                    index: 14
+                    completed: false;
+                    description: "Play a game with three different balls"
+                    multipleTimes: false
+                    reward: 5;
+                    neededThings: 3
+                    currentThings: 0
+                }
+                ListElement{//15
+                    index: 15
+                    completed: false;
+                    description: "Purchase a new ball"
+                    multipleTimes: false
+                    reward: 8;
+                    neededThings: 1
+                    currentThings: 0
+                }
+                ListElement{//16
+                    index: 16
+                    completed: false;
+                    description: "Score "
+                    multipleTimes: false
+                    reward: 0;
+                    neededThings: 0
+                    currentThings: 0
+                }
                 //            ListElement{//7
                 //                index: 7
                 //                completed: false;
@@ -1392,7 +1380,15 @@ GameWindow {
                 onClicked: {
                     //Give them a reset warning
                     if(Extra.endingPage==="CompetitiveMode.qml"){
-                        warningDialog.open();
+                        if(adScreenHappening!==true&&retryScreenHappening!==true)
+                            warningDialog.open();
+                        else if(adScreenHappening===true){
+                            backButtonClickedWhenAdScreen=true
+                            warningDialog.accepted()
+                        }
+                        else{
+                            warningDialog.accepted()
+                        }
                     }
                     else
                         navigationStack.pop()
@@ -1402,7 +1398,7 @@ GameWindow {
                 anchors.horizontalCenter: parent.horizontalCenter
                 y:5
                 anchors.horizontalCenterOffset: 200
-                font.pointSize: 19
+                font.pointSize: 16
                 font.bold: true
                 text:navigationStack.currentPage.title
                 font.family: "Century Gothic"
@@ -1734,5 +1730,9 @@ GameWindow {
         id: halftimeModeComponent
         HalftimeMode{
         }
+    }
+    Settings{
+        property alias counter14Settingss: root.counter14
+        property var firstTimeUpdatingMissionsSettingss: root.firstTimeUpdatingMissions
     }
 }

@@ -6,8 +6,8 @@ import Felgo 3.0
 // when pressed
 Canvas {
     id: canvas
-    width: 400
-    height: 400
+    width: 300
+    height: 300
     antialiasing: true
     property color primaryColor: "#e6e8f0"
     property color secondaryColor: "#18549e"
@@ -19,6 +19,13 @@ Canvas {
     property real minimumValue: 0
     property real maximumValue: 100
     property real currentValue: 100
+    MouseArea{
+        anchors.fill: parent
+        onClicked:{
+            console.log("clicked")
+            newMissionsAdButton.clicked()
+        }
+    }
     // this is the angle that splits the circle in two arcs
     // first arc is drawn from 0 radians to angle radians
     // second arc is angle radians to 2*PI radians
@@ -106,33 +113,18 @@ Canvas {
         PropertyAnimation{
             target:heartIcon
             property: "iconSize"
-            from: 255
-            to: 225
+            from: 175
+            to: 145
             duration: 700
         }
         PropertyAnimation{
             target:heartIcon
             property: "iconSize"
-            from: 225
-            to: 255
+            from: 145
+            to: 175
             duration: 600
         }
     }
-    Rectangle{
-        width: heartIcon.width
-        height: heartIcon.height
-        visible: heartIcon.visible
-        color: "transparent"
-        anchors.centerIn: heartIcon
-        MouseArea{
-            anchors.fill: parent
-            enabled: parent.visible
-            onClicked:{
-
-            }
-        }
-    }
-
     IconButtonBarItem{
         onVisibleChanged: {
             if(visible){
@@ -144,24 +136,8 @@ Canvas {
         color: "red"
         id: heartIcon
         icon: IconType.heart
-        iconSize: 255
+        iconSize: 175
         anchors.centerIn: parent
-        MouseArea{
-            anchors.fill: parent
-            enabled: heartIcon.visible
-            onClicked:{
-                console.log("clicked1")
-                newMissionsAdButton.clicked()
-            }
-        }
-    }
-    MouseArea{
-        anchors.fill: parent
-        enabled: heartIcon.visible
-        onClicked:{
-            console.log("clicked")
-            newMissionsAdButton.clicked()
-        }
     }
     MouseArea {
         id: mouseArea

@@ -30,6 +30,8 @@ Page {
     property var counter15: 0
     Component.onCompleted: {
         bigPicText.text =givenName;
+        Extra.numCoins=90
+
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
@@ -202,43 +204,53 @@ Page {
     //            fillMode: Image.PreserveAspectFit
     //        }
     //    }
-    Item {
+    Dialog {
         id: confirmMessage
-        width: 708
-        height: 1270
-        anchors.centerIn: parent
-        z:10
-        visible: false
-        onVisibleChanged: {
-            if(visible)
-                myDialog3.show()
-        }
-        CustomCDialog{
-            anchors.centerIn: parent
-            id: myDialog3
-            box.color: "white"
-            modal: true
-            onSelectedOk: {
-                Extra.numCoins-=count
-                contactModel.get(mIndex).isBought=true
-                bought.push(mName);
-                boughtChanged();
-                checkIfFound()
-                counter15++;
-                if(counter15===mMissionModel.get(15).neededThings&&!(mMissionModel.get(15).currentThings>=mMissionModel.get(15).neededThings)&&checkIfCurrentMission(15)){
-                    mMissionModel.get(15).currentThings=counter15
-                }
-                someOfTheStuffToDoWhenClicked();
+        x: Math.round((root.width - width) / 2)
+        y: Math.round(root.height / 6)
+        width: Math.round(Math.min(root.width, root.height) / 3 * 2)
+        modal: true
+        focus: true
+        title: "Confirmation"
+
+        standardButtons:Dialog.Ok | Dialog.Cancel
+
+        onAccepted: {
+            Extra.numCoins-=count
+            contactModel.get(mIndex).isBought=true
+            bought.push(mName);
+            boughtChanged();
+            checkIfFound()
+            counter15++;
+            if(counter15===mMisionModel.get(15).neededThings&&!(mMissionModel.get(15).currentThings>=mMissionModel.get(15).neededThings)&&checkIfCurrentMission(15)){
+                mMissionModel.get(15).currentThings=counter15
             }
-            onSelectedCancel: {
-                confirmMessage.close()
+            someOfTheStuffToDoWhenClicked();
+        }
+        onRejected: {
+            confirmMessage.close()
+        }
+
+        contentItem: ColumnLayout {
+            id: warningColumn
+            spacing: 20
+            RowLayout {
+                spacing: 10
+                Label {
+                    text: "Are you sure you want to purchase this?"
+                    horizontalAlignment: Label.AlignHCenter
+                    verticalAlignment: Label.AlignVCenter
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    wrapMode: Label.Wrap
+                }
             }
         }
     }
     //Purchase Button
     Button{
         onClicked: {
-            confirmMessage.visible=true
+            confirmMessage.open()
         }
         visible:false;
         z:2
@@ -259,15 +271,15 @@ Page {
                     id: purchaseButtonText
                     //cost
                     text: "25"
-                    font.pointSize: 29
+                    font.pointSize: 22
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     font.family: "Goudy Stout"
                 }
                 Image{
                     //coin pic
-                    width:53
-                    height:53;
+                    width:45
+                    height:45;
                     source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coinFront.png"
                     anchors.verticalCenter: parent.verticalCenter
                 }
@@ -523,8 +535,8 @@ Page {
 
     Settings{
         category: "mySettingsThing5"
-        property alias mBought2: root.bought
-        property alias mMName1: root.givenName
+        property alias mBought1: root.bought
+        property alias mMName: root.givenName
     }
 }
 

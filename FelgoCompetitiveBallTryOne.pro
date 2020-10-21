@@ -72,11 +72,17 @@ HEADERS += \
     settingsmanager.h
 
 DISTFILES += \
+    CustomWDialog.qml \
     code-admob.png \
     logo-admob.png \
     qml/BallImage.qml \
     qml/CircularProgress.qml \
     qml/CompetitiveMode.qml \
+    qml/CustomCDialog.qml \
+    qml/CustomHDialog.qml \
+    qml/CustomSDialog.qml \
+    qml/CustomSettingsDialog.qml \
+    qml/CustomWDialog.qml \
     qml/CustomizationMode.qml \
     qml/HalftimeBall.qml \
     qml/HalftimeMode.qml \

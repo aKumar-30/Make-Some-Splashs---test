@@ -49,24 +49,6 @@ GameWindow {
     id: root
     //        width: 708
     //        height: 785
-    Scene {
-        id: settingsDialog
-        width: mainScene.width
-        height: mainScene.height
-        anchors.centerIn: mainScene
-        z:10
-        visible: false
-        onVisibleChanged: {
-            if(visible)
-                myDialog.show()
-        }
-        CustomSDialog{
-            anchors.centerIn: parent
-            id: myDialog
-            box.color: "white"
-            modal: true
-        }
-    }
     Audio{
         id: mMusic1
         source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/mMusic1.wav"
@@ -82,16 +64,16 @@ GameWindow {
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
         Extra.datastore = JSON.stringify(datamodel)
 
-        s_manager.writeSettings("volume01001", Extra.volume);
-        s_manager.writeSettings("sound01001",Extra.sound);
-        s_manager.writeSettings("numCoins211", Extra.numCoins);
-        s_manager.writeSettings("ballSource1", Extra.ballSource);
-        s_manager.writeSettings("personalBest55551",Extra.personalBest);
+        s_manager.writeSettings("volume0100", Extra.volume);
+        s_manager.writeSettings("sound0100",Extra.sound);
+        s_manager.writeSettings("numCoins21", Extra.numCoins);
+        s_manager.writeSettings("ballSource", Extra.ballSource);
+        s_manager.writeSettings("personalBest5555",Extra.personalBest);
         console.log("saving to settings tge datastore   "+mMissionModel.get(presentMissions[1]).completed);
-        s_manager.writeSettings("zzzz",Extra.datastore);
+        s_manager.writeSettings("happyyyyyy",Extra.datastore);
         //convert array to string
         setCurrentMissions()
-        s_manager.writeSettings("aaaa",Extra.myMissionsRn);
+        s_manager.writeSettings("sadddddd",Extra.myMissionsRn);
     }
     SettingsManager{
         id: s_manager
@@ -128,26 +110,25 @@ GameWindow {
     }
     Component.onCompleted: {
         mMusic1.play()
-        //        console.log(Extra.datastore)
-        //        if ( Extra.datastore) {
-        //            mMissionModel.clear()
-        //            var datamodel = JSON.parse(Extra.datastore)
-        //            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        //        }
-        //        if(Extra.myMissionsRn){
-        //            getCurrentMissions()
-        //        }
-        updateMissions()
-        console.log("missions are : "+presentMissions)
-        //        if(presentMissions.length!==0){
-        //            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        //        }
-        //        else{
-        //            updateMissions();
-        //        }
+        console.log(Extra.datastore)
+        if ( Extra.datastore) {
+            mMissionModel.clear()
+            var datamodel = JSON.parse(Extra.datastore)
+            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+        }
+        if(Extra.myMissionsRn){
+            getCurrentMissions()
+        }
+                updateMissions()
+        if(presentMissions.length!==0){
+            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+        }
+        else{
+            updateMissions();
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -171,30 +152,12 @@ GameWindow {
     function checkIfButtonNeedsToBeVisible(whatFor){
         let thing = false;
         currentMissionRewards=0;
-        //        for(let i =0; i< 3; i++){
-        //            if( mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings && mMissionModel.get(presentMissions[i]).completed!==true){
-        //                if(whatFor)
-        //                    currentMissionRewards+= mMissionModel.get(presentMissions[i]).reward
-        //                thing=true;
-        //            }
-        //        }
-        let i=0;
-        if( mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings && mMissionModel.get(presentMissions[i]).completed!==true){
-            if(whatFor)
-                currentMissionRewards+= mMissionModel.get(presentMissions[i]).reward
-            thing=true;
-        }
-        i=1
-        if( mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings && mMissionModel.get(presentMissions[i]).completed!==true){
-            if(whatFor)
-                currentMissionRewards+= mMissionModel.get(presentMissions[i]).reward
-            thing=true;
-        }
-        i=2
-        if( mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings && mMissionModel.get(presentMissions[i]).completed!==true){
-            if(whatFor)
-                currentMissionRewards+= mMissionModel.get(presentMissions[i]).reward
-            thing=true;
+        for(let i =0; i< 3; i++){
+            if( mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings && mMissionModel.get(presentMissions[i]).completed!==true){
+                if(whatFor)
+                    currentMissionRewards+= mMissionModel.get(presentMissions[i]).reward
+                thing=true;
+            }
         }
         return thing
         //        }
@@ -210,12 +173,12 @@ GameWindow {
 
         for(let i =0;i < rowCount;i++ ) {
             let entry = mMissionModel.get(i)
-            //            if((!entry.multipleTimes || !entry.completed))
-            mArray.push(entry)
+            if((!entry.multipleTimes || !entry.completed))
+                mArray.push(entry)
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)
         if(arr[0]===mMissionModel.get(16)||arr[1]===mMissionModel.get(16)){
-            var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[10555,30]]
+            var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[1000,30]]
             var randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
             mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
             mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
@@ -280,13 +243,13 @@ GameWindow {
         }
     }
     function updateMissions(){
-        //        if(!firstTimeUpdatingMissions){
-        //            mMissionModel.remove(mMissionModel.count-1)
+        if(!firstTimeUpdatingMissions){
+            mMissionModel.remove(mMissionModel.count-1)
 
-        //        }
-        //        else{
-        //            firstTimeUpdatingMissions=false
-        //        }
+        }
+        else{
+            firstTimeUpdatingMissions=false
+        }
         partUpdatingMissions()
 
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
@@ -309,6 +272,198 @@ GameWindow {
         }
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------------
+    Dialog {
+        onOpened: {
+            Extra.isOpen = true;
+        }
+        onClosed: {
+            Extra.isOpen = false;
+        }
+        id: aboutDialog
+        modal: true
+        focus: true
+        anchors.centerIn: parent
+        width: root.width*7/10
+        height: root.height*4/5
+        Label {
+            id: title
+            height: 35
+            Text{
+                id: labelText
+                font.pointSize: 5
+                text: "How to play??"
+                font.family: "Bodoni MT Black"
+                wrapMode: Label.Wrap
+                font.pixelSize:35
+                font.bold:true;
+                horizontalAlignment: "AlignHCenter"
+            }
+        }
+        Flickable{
+            id: howToPlayFlickable
+            y: title.y+title.width+50
+            width: aboutDialog.width-25
+            height: aboutDialog.height-title.width-90
+            contentHeight: parent.height*2
+            contentWidth: aboutColumn.width
+            flickableDirection: Flickable.VerticalFlick
+            clip: true
+            Column {
+                id: aboutColumn
+                spacing: 20
+                anchors.fill:parent
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: true
+                        font.underline: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 23
+                        text: "The Game"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        font.bold: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 19
+                        text: "Level 1"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Click near the slider to get the ball to shoot towards the basketball. The closer the slider is to the green the better the shot. If the ball misses three times in a row, you lose. Be careful, the slider moves faster as you go!"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        font.bold: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 19
+                        text: "Level 2"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Click near the slider to get the ball to shoot towards the basketball. The closer the slider is to the green the better the shot. If the ball misses three times in a row, you lose. Be careful, the slider moves in different speeds and speed patterns as you go!"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        font.bold: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 19
+                        text: "Halftime"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Time to have some fun! Try to click on as many balls as you can as they fall. The more balls you click the more bonus points you earn"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        font.bold: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 19
+                        text: "Level 3"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Try to click on the green part of the slider. The closer you are to a geen color (green then yellow then orange then red) the better the shot! If the ball misses three times in a row, you lose. Be careful, it switches faster as you go!"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: true
+                        font.underline: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 23
+                        text: "Coins"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Earn coins by completing daily missions, watching ads, or playing the game (randomly appearing)!"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: true
+                        font.underline: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 23
+                        text: "Daily Missions"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Complete tasks by playing to game to earn coins. There are 3 missions, which reset and change every day"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: true
+                        font.underline: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 23
+                        text: "The Store"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Use coins to purchase a new ball! These balls provide cool new looks for when you play. Wow!"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    Text{
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: true
+                        font.underline: true
+                        wrapMode: Label.Wrap
+                        font.pixelSize: 23
+                        text: "Customization Mode"
+                    }
+                }
+                Label {
+                    width: aboutDialog.availableWidth
+                    text: "    Bored of playing the game? Take a break in the customization mode where you can expirement with bouncing around different balls. How fun!"
+                    wrapMode: Label.Wrap
+                    font.pixelSize: 16
+                    lineHeight: 1.45
+                }
+            }
+            ScrollBar.vertical: ScrollBar{}
+        }
+    }
     function help() {
         let url = "https://nba.com/"
         Qt.openUrlExternally(url)
@@ -316,6 +471,208 @@ GameWindow {
     Settings {
         id: settings
         property string style: "Default"
+    }
+    property bool shouldExtraVolumeChange: true
+    property bool shouldExtraSoundChange: true
+    Dialog {
+
+        onOpened: {
+            Extra.isOpen = true;
+        }
+        onClosed: {
+            Extra.volume=volumeSlider.volume
+            Extra.sound=soundSlider.sound
+            Extra.isOpen = false;
+        }
+
+        id: settingsDialog
+        x: Math.round((root.width - width) / 2)
+        y: Math.round(root.height / 6)
+        width: Math.round(Math.min(root.width, root.height) / 3 * 2)
+        modal: true
+        focus: true
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        onAccepted: {
+            settings.style = styleBox.displayText
+            settingsDialog.close()
+        }
+        onRejected: {
+            styleBox.currentIndex = styleBox.styleIndex
+            settingsDialog.close()
+        }
+        contentItem: ColumnLayout {
+            id: settingsColumn
+            spacing: 20
+            y:15
+            Text{
+                width: 200
+                text: "Settings"
+                font.family: "Bodoni MT Black"
+                wrapMode: Label.Wrap
+                font.pixelSize: 35
+                font.bold:true;
+                horizontalAlignment: "AlignHCenter"
+            }
+            RowLayout{
+                spacing: 8
+                IconButtonBarItem{
+                    visible:true
+                    color: "black"
+                    id: musicVolumeIcon
+                    icon: (Extra.volume<0.45)?((Extra.volume<0.02)?IconType.volumeoff:IconType.volumeoff):IconType.volumeup
+                    iconSize: 30
+                    Rectangle{
+                        anchors.centerIn: parent
+                        width: 30
+                        height:width
+                        color:"transparent"
+                        MouseArea{
+                            anchors.fill: parent
+                            onClicked:{
+                                musicVolumeIcon.icon=IconType.volumeoff
+                                Extra.volume=0.0;
+                                shouldExtraVolumeChange=false
+                                volumeSlider.valueChanged();
+
+                                //nobody knows why but do it twice
+                                musicVolumeIcon.icon=IconType.volumeoff
+                                Extra.volume=0.0;
+                                shouldExtraVolumeChange=false
+                                volumeSlider.valueChanged();
+                            }
+                        }
+                    }
+                }
+                Label{
+                    text: "Music:"
+                    font.pointSize: 10
+                    font.bold: true
+                }
+                Slider {
+                    id: volumeSlider
+                    from: 0
+                    to: 1
+                    onValueChanged: {
+                        if(value<0.02){
+                            if(!(musicVolumeIcon.icon===IconType.volumeoff)){
+                                musicVolumeIcon.icon=IconType.volumeoff
+                            }
+                        }
+                        else if(value<0.45){
+                            if(!(musicVolumeIcon.icon===IconType.volumedown)){
+                                musicVolumeIcon.icon=IconType.volumedown
+                            }
+                        }
+                        else {
+                            if(!(musicVolumeIcon.icon===IconType.volumeup)){
+                                musicVolumeIcon.icon=IconType.volumeup
+                            }
+                        }
+                        if(shouldExtraVolumeChange){
+                            Extra.volume=volumeSlider.volume
+                        }
+                        else
+                            shouldExtraVolumeChange=true
+                    }
+                    value: QtMultimedia.convertVolume(Extra.volume,QtMultimedia.LinearVolumeScale,QtMultimedia.LogarithmicVolumeScale);
+                    property real volume: QtMultimedia.convertVolume(volumeSlider.value,
+                                                                     QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
+                }
+            }
+            RowLayout{
+                spacing: 8
+                IconButtonBarItem{
+                    visible:true
+                    color: "black"
+                    id: musicSoundIcon
+                    icon: (Extra.sound<0.45)?((Extra.sound<0.02)?IconType.volumeoff:IconType.volumeoff):IconType.volumeup
+                    iconSize: 30
+                    Rectangle{
+                        anchors.centerIn: parent
+                        width: 30
+                        height:width
+                        color:"transparent"
+                        MouseArea{
+                            anchors.fill: parent
+                            onClicked:{
+                                musicSoundIcon.icon=IconType.volumeoff
+                                Extra.sound=0.0;
+                                shouldExtraSoundChange=false
+                                soundSlider.valueChanged();
+
+                                //nobody knows why but do it twice
+                                musicSoundIcon.icon=IconType.volumeoff
+                                Extra.sound=0.0;
+                                shouldExtraSoundChange=false
+                                soundSlider.valueChanged();
+                            }
+                        }
+                    }
+                }
+                Label{
+                    text: "Sound:"
+                    font.pointSize: 10
+                    font.bold: true
+                }
+                Slider {
+                    id: soundSlider
+                    from: 0
+                    to: 1
+                    onValueChanged: {
+                        if(value<0.02){
+                            if(!(musicSoundIcon.icon===IconType.volumeoff)){
+                                musicSoundIcon.icon=IconType.volumeoff
+                            }
+                        }
+                        else if(value<0.45){
+                            if(!(musicSoundIcon.icon===IconType.volumedown)){
+                                musicSoundIcon.icon=IconType.volumedown
+                            }
+                        }
+                        else {
+                            if(!(musicSoundIcon.icon===IconType.volumeup)){
+                                musicSoundIcon.icon=IconType.volumeup
+                            }
+                        }
+                        if(shouldExtraSoundChange){
+                            Extra.sound=soundSlider.sound
+                        }
+                        else
+                            shouldExtraSoundChange=true
+                    }
+                    value: QtMultimedia.convertVolume(Extra.sound,QtMultimedia.LinearVolumeScale,QtMultimedia.LogarithmicVolumeScale);
+                    property real sound: QtMultimedia.convertVolume(soundSlider.value,
+                                                                    QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
+                }
+            }
+            RowLayout {
+                spacing: 10
+                Label {
+                    text: "Style:"
+                }
+                ComboBox {
+                    id: styleBox
+                    property int styleIndex: -1
+                    model: availableStyles
+                    Component.onCompleted: {
+                        styleIndex = find(settings.style, Qt.MatchFixedString)
+                        if (styleIndex !== -1)
+                            currentIndex = styleIndex
+                    }
+                    Layout.fillWidth: true
+                }
+            }
+
+            Label {
+                text: "Restart required"
+                color: "#e41e29"
+                opacity: styleBox.currentIndex !== styleBox.styleIndex ? 1.0 : 0.0
+                horizontalAlignment: Label.AlignHCenter
+                verticalAlignment: Label.AlignVCenter
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+        }
     }
     Shortcut {
         sequences: ["Esc", "Back"]
@@ -369,6 +726,52 @@ GameWindow {
             }
         }
     }
+    Dialog {
+        onOpened: {
+            Extra.isOpen = true;
+        }
+        onClosed: {
+            Extra.isOpen = false;
+        }
+        id: warningDialog
+        x: Math.round((root.width - width) / 2)
+        y: Math.round(root.height / 6)
+        width: Math.round(Math.min(root.width, root.height) / 3 * 2)
+        modal: true
+        focus: true
+        title: "Warning"
+
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        onAccepted: {
+            navigationStack.pop()
+            warningDialog.close()
+            thisTitle = "Shoot Hoops"
+            //starting timer
+            thePauseTimer.start()
+        }
+        onRejected: {
+            warningDialog.close()
+        }
+
+        contentItem: ColumnLayout {
+            id: warningColumn
+            spacing: 20
+
+            RowLayout {
+                spacing: 10
+
+                Label {
+                    text: "Are you sure you would like to leave? All progress in the current game (including missions) may be lost"
+                    horizontalAlignment: Label.AlignHCenter
+                    verticalAlignment: Label.AlignVCenter
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    wrapMode: Label.Wrap
+                }
+            }
+        }
+    }
 
     StackView {
         id: stackView
@@ -409,59 +812,6 @@ GameWindow {
     Settings{
         category: "missions"
     }
-    property bool shouldExtraVolumeChange: true
-    property bool shouldExtraSoundChange: true
-    Scene {
-        id: warningDialog
-        width: mainScene.width
-        height: mainScene.height
-        anchors.centerIn: mainScene
-        z:10
-        visible: false
-        onVisibleChanged: {
-            if(visible)
-                myDialog1.show()
-        }
-        CustomWDialog{
-            anchors.centerIn: parent
-            id: myDialog1
-            box.color: "white"
-            modal: true
-            onSelectedOk: {
-                navigationStack.pop()
-                myDialog1.hide()
-                thisTitle = "Shoot Hoops"
-                //starting timer
-                thePauseTimer.start()
-            }
-            onSelectedCancel: {
-                myDialog1.hide()
-            }
-        }
-    }
-    Scene {
-        id: aboutDialog
-        width: mainScene.width
-        height: mainScene.height
-        anchors.centerIn: mainScene
-        z:10
-        visible: false
-        onVisibleChanged: {
-            if(visible)
-                myDialog2.show()
-        }
-        CustomHDialog{
-            anchors.centerIn: parent
-            id: myDialog2
-            box.color: "white"
-            modal: true
-        }
-    }
-    function makeMissionsInvisible(){
-        missionsScene.visible=false
-        missionsScene.scale=0
-    }
-
     Scene{
         z:4
         id: missionsScene
@@ -470,44 +820,6 @@ GameWindow {
         anchors.centerIn: mainScene
         visible: false;
         //MISSSIONS START HERE+++++++++++++++++++++++++++++++++++
-        // animation to hide the dialog
-        ParallelAnimation {
-            id: showMissionsAnimation
-            onStarted: {
-                missionsScene.visible = true
-            }
-            NumberAnimation {
-                target: missionsScene
-                property: "scale"
-                from: 0
-                to: 1
-                easing.type: Easing.OutBack
-                duration: 250
-            }
-        }
-        ParallelAnimation {
-            id: hideMissionsAnimation
-            NumberAnimation {
-                target: missionsScene
-                property: "scale"
-                from: 1
-                to: 0
-                easing.type: Easing.InBack
-                duration: 250
-            }
-            onStopped: {
-                // set it invisible when the animation has finished to disable MouseAreas again
-                missionsScene.visible = false
-            }
-        }
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                if(missionsScene.visible){
-                    hideMissionsAnimation.start()
-                }
-            }
-        }
         Rectangle {
             z:17
             id: mainRect
@@ -793,7 +1105,7 @@ GameWindow {
                                     font.bold: true
                                     width: parent.width*2/3+15
                                     wrapMode: Text.Wrap
-                                    font.pointSize: 14
+                                    font.pointSize: 15
                                     color: "white"
                                     text:description
                                     //description text
@@ -833,7 +1145,7 @@ GameWindow {
                                     }
                                     //filler space
                                     Rectangle{
-                                        width: 30
+                                        width: 35
                                         height: 2
                                         color: "transparent"
                                     }
@@ -910,7 +1222,7 @@ GameWindow {
                 anchors.top: listOfMissions.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: 80
-                width: 170
+                width: 140
                 Rectangle{
                     anchors.fill: parent
                     color: "#40ad36"
@@ -919,13 +1231,12 @@ GameWindow {
                 Row{
                     x:10
                     anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
                     Text{
                         anchors.verticalCenter: parent.verticalCenter
                         color: "black"
                         font.family: "Swis721 Cn BT"
                         font.bold: true
-                        font.pointSize: 25
+                        font.pointSize: 22
                         text:"Get"
                     }
                     Rectangle{
@@ -940,7 +1251,7 @@ GameWindow {
                         color: "black"
                         font.family: "Swis721 Cn BT"
                         font.bold: true
-                        font.pointSize: 25
+                        font.pointSize: 21
                         text: currentMissionRewards
                     }
                     //coin pic
@@ -990,7 +1301,7 @@ GameWindow {
                 id: newMissionsAdButton
                 anchors.top: listOfMissions.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
-                height: 80
+                height: 55
                 width: 140*3
                 Rectangle{
                     anchors.fill: parent
@@ -1005,7 +1316,7 @@ GameWindow {
                         color: "White"
                         font.family: "Swis721 Cn BT"
                         font.bold: true
-                        font.pointSize: 30
+                        font.pointSize: 25
                         text:"New Missions"
                     }
                     Rectangle{
@@ -1016,8 +1327,8 @@ GameWindow {
                     //video pic
                     Image{
                         anchors.verticalCenter: parent.verticalCenter
-                        width: 50*1.35
-                        height: 35*1.35
+                        width: 50*1.2
+                        height: 35*1.2
                         source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/PlayAdVideo.png"
                     }
                 }
@@ -1050,10 +1361,9 @@ GameWindow {
         width: 708
         height: 1270
         id: mainScene
-        NavigationBar{
-            height: 60
-            width: parent.width
-            id: newNavigationBar
+        NavigationStack{
+            id: navigationStack
+            navigationBar.backButtonVisible: false
             //            navigationBar.onBackButtonItemPressedChanged: {
             //                if (navigationStack.depth > 1) {
             //                    //Give them a reset warning
@@ -1068,7 +1378,7 @@ GameWindow {
             //                    }
             //                }
             //            }
-            leftBarItem: IconButtonBarItem{
+            navigationBar.leftBarItem: IconButtonBarItem{
                 visible:  navigationStack.depth>1
                 icon: IconType.arrowleft
                 color: "white"
@@ -1076,22 +1386,20 @@ GameWindow {
                     //Give them a reset warning
                     if(Extra.endingPage==="CompetitiveMode.qml"){
                         if(adScreenHappening!==true&&retryScreenHappening!==true)
-                            warningDialog.visible=true;
+                            warningDialog.open();
                         else if(adScreenHappening===true){
                             backButtonClickedWhenAdScreen=true
-                            //                            warningDialog.box.accepted()
-                            warningDialog.selectedOk()
+                            warningDialog.accepted()
                         }
                         else{
-                            warningDialog.selectedOk()
-                            //                            warningDialog.box.accepted()
+                            warningDialog.accepted()
                         }
                     }
                     else
                         navigationStack.pop()
                 }
             }
-            titleItem: Text{
+            navigationBar.titleItem: Text{
                 anchors.horizontalCenter: parent.horizontalCenter
                 y:5
                 anchors.horizontalCenterOffset: 200
@@ -1102,7 +1410,7 @@ GameWindow {
                 color: "white"
             }
 
-            rightBarItem:
+            navigationBar.rightBarItem:
                 IconButtonBarItem{
                 color: "white"
                 icon: IconType.ellipsisv
@@ -1113,13 +1421,14 @@ GameWindow {
                     id: optionsMenu
                     x: parent.width - width
                     transformOrigin: Menu.TopRight
+
                     Action {
                         text: "Settings"
-                        onTriggered: settingsDialog.visible=true
+                        onTriggered: settingsDialog.open()
                     }
                     Action {
                         text: "How to play?"
-                        onTriggered: aboutDialog.visible=true
+                        onTriggered: aboutDialog.open()
                     }
                     Action {
                         text: "Help"
@@ -1127,26 +1436,17 @@ GameWindow {
                     }
                 }
             }
-
-        }
-
-        NavigationStack{
-            anchors.top: newNavigationBar.bottom
-            id: navigationStack
-            navigationBar.visible: false
-            width: parent.width
-            height: parent.height
             initialPage:Page {
                 MouseArea{
                     anchors.fill: parent
                     onClicked:{
                         if(missionsScene.visible){
-//                            missionsScene.visible=false
-                            hideMissionsAnimation.start()
+                            missionsScene.visible=false
                         }
                     }
                 }
                 title: "Shoot Hoops"
+                y: navigationStack.navigationBar.height
                 width: parent.width
                 height: parent.height
                 id: pane
@@ -1290,8 +1590,7 @@ GameWindow {
                             if(!missionsScene.visible){
                                 //update current missions (just double checking)
                                 setCurrentMissions()
-//                                missionsScene.visible=false
-                                makeMissionsInvisible()
+                                missionsScene.visible=false
                                 navigationStack.push(competitiveModeComponent)
                                 Extra.endingPage="CompetitiveMode.qml";
                                 thisTitle="Game Mode"
@@ -1300,28 +1599,27 @@ GameWindow {
                     }
                 }
                 Column{
-                    y: 410
-                    x:30
+                    y: 350
+                    x:20
                     spacing: 80
                     Rectangle{
                         color: "transparent"
-                        width: 120
-                        height: 120
-                        radius: 105
+                        width: 110
+                        height: 110
+                        radius: 95
                         border.width: 2
                         border.color: "black"
                         Image{
                             z:-1
                             anchors.centerIn: parent
-                            width: 115
-                            height: 115
+                            width: 105
+                            height: 105
                             source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/shopIcon.png"
                         }
                         MouseArea{
                             anchors.fill: parent
                             onClicked: {
-//                                missionsScene.visible=false
-                                makeMissionsInvisible()
+                                missionsScene.visible=false
                                 navigationStack.push(gameStoreComponent);
                                 Extra.endingPage="GameStore.qml";
                                 thisTitle="The Store"
@@ -1330,16 +1628,43 @@ GameWindow {
                     }
                     Rectangle{
                         color: "transparent"
-                        width: 120
-                        height: 120
-                        radius: 105
+                        width: 110
+                        height: 110
+                        radius: 95
+                        border.width: 2
+                        border.color: "black"
+                        Image{
+                            z:-1
+                            anchors.centerIn: parent
+                            width: 105
+                            height: 105
+                            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/bouncingBallIcon.png"
+                        }
+                        MouseArea{
+                            anchors.fill: parent
+                            onClicked: {
+                                mainRect.visible = false;
+                                mainRectFade.visible = false;
+                                navigationStack.push(customizationModeComponent);
+                                Extra.endingPage="CustomizationMode.qml";
+                                thisTitle="Customization Mode"
+                                root.width = 1200
+                                root.height= 580
+                            }
+                        }
+                    }
+                    Rectangle{
+                        color: "transparent"
+                        width: 110
+                        height: 110
+                        radius: 95
                         border.width: 2
                         border.color: "black"
                         Image{
                             x: 5
                             y:5
-                            width: 35
-                            height: 35
+                            width: 25
+                            height: 25
                             source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/exclamationMark.png"
                             visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
                         }
@@ -1347,16 +1672,16 @@ GameWindow {
                         Image{
                             z:-1
                             anchors.centerIn: parent
-                            width: 115
-                            height: 115
+                            width: 105
+                            height: 105
                             source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/missionsIcon.png"
                         }
                         Rectangle{
                             visible: thePauseTimer.running
                             z:-1
                             anchors.centerIn: parent
-                            width: 120
-                            height: 120
+                            width: 110
+                            height: 110
                             radius: 95
                             color:"darkgray"
                             opacity: 0.50
@@ -1366,8 +1691,7 @@ GameWindow {
                             anchors.fill: parent
                             onClicked: {
                                 if(!thePauseTimer.running){
-//                                    missionsScene.visible=true
-                                    showMissionsAnimation.start()
+                                    missionsScene.visible=true
                                     checkIfButtonNeedsToBeVisible(true);
                                     if(true){
                                         //12
@@ -1413,7 +1737,7 @@ GameWindow {
         }
     }
     Settings{
-        property alias counter14Settingsss: root.counter14
-        property var firstTimeUpdatingMissionsSettingsss: root.firstTimeUpdatingMissions
+        property alias counter14Settingss: root.counter14
+        property var firstTimeUpdatingMissionsSettingss: root.firstTimeUpdatingMissions
     }
 }

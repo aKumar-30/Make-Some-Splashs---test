@@ -30,6 +30,7 @@ Page {
     property var counter15: 0
     Component.onCompleted: {
         bigPicText.text =givenName;
+
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
@@ -140,8 +141,8 @@ Page {
         id: bigPic
         y:lockSign.y+lockSign.height/3-height+8
         anchors.horizontalCenter: parent.horizontalCenter
-        width: (purchaseButton.width)*2.42
-        height: (purchaseButton.width)*1.42
+        width: purchaseButton.width*2.5
+        height: purchaseButton.width*1.5
         border.color: "darkgray"
         border.width: 3
         radius: 4
@@ -160,8 +161,8 @@ Page {
         Image{
             id: bigPicImage
             source: Extra.ballSource
-            width: 240;
-            height: 240;
+            width: 185;
+            height: 185;
             anchors.horizontalCenter: parent.horizontalCenter
             y:bigPicText.y+bigPicText.height+2
         }
@@ -202,51 +203,61 @@ Page {
     //            fillMode: Image.PreserveAspectFit
     //        }
     //    }
-    Item {
+    Dialog {
         id: confirmMessage
-        width: 708
-        height: 1270
-        anchors.centerIn: parent
-        z:10
-        visible: false
-        onVisibleChanged: {
-            if(visible)
-                myDialog3.show()
-        }
-        CustomCDialog{
-            anchors.centerIn: parent
-            id: myDialog3
-            box.color: "white"
-            modal: true
-            onSelectedOk: {
-                Extra.numCoins-=count
-                contactModel.get(mIndex).isBought=true
-                bought.push(mName);
-                boughtChanged();
-                checkIfFound()
-                counter15++;
-                if(counter15===mMissionModel.get(15).neededThings&&!(mMissionModel.get(15).currentThings>=mMissionModel.get(15).neededThings)&&checkIfCurrentMission(15)){
-                    mMissionModel.get(15).currentThings=counter15
-                }
-                someOfTheStuffToDoWhenClicked();
+        x: Math.round((root.width - width) / 2)
+        y: Math.round(root.height / 6)
+        width: Math.round(Math.min(root.width, root.height) / 3 * 2)
+        modal: true
+        focus: true
+        title: "Confirmation"
+
+        standardButtons:Dialog.Ok | Dialog.Cancel
+
+        onAccepted: {
+            Extra.numCoins-=count
+            contactModel.get(mIndex).isBought=true
+            bought.push(mName);
+            boughtChanged();
+            checkIfFound()
+            counter15++;
+            if(counter15===mMisionModel.get(15).neededThings&&!(mMissionModel.get(15).currentThings>=mMissionModel.get(15).neededThings)&&checkIfCurrentMission(15)){
+                mMissionModel.get(15).currentThings=counter15
             }
-            onSelectedCancel: {
-                confirmMessage.close()
+            someOfTheStuffToDoWhenClicked();
+        }
+        onRejected: {
+            confirmMessage.close()
+        }
+
+        contentItem: ColumnLayout {
+            id: warningColumn
+            spacing: 20
+            RowLayout {
+                spacing: 10
+                Label {
+                    text: "Are you sure you want to purchase this?"
+                    horizontalAlignment: Label.AlignHCenter
+                    verticalAlignment: Label.AlignVCenter
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    wrapMode: Label.Wrap
+                }
             }
         }
     }
     //Purchase Button
     Button{
         onClicked: {
-            confirmMessage.visible=true
+            confirmMessage.open()
         }
         visible:false;
         z:2
-        x: buttonFadeRect.x+6
-        y:buttonFadeRect.y-7
+        x: buttonFadeRect.x+4
+        y:buttonFadeRect.y-3
         id: purchaseButton
         height: 100;
-        width:230;
+        width:190;
         Rectangle{
             id: colorRect
             anchors.fill:parent
@@ -259,15 +270,15 @@ Page {
                     id: purchaseButtonText
                     //cost
                     text: "25"
-                    font.pointSize: 29
+                    font.pointSize: 22
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     font.family: "Goudy Stout"
                 }
                 Image{
                     //coin pic
-                    width:53
-                    height:53;
+                    width:45
+                    height:45;
                     source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coinFront.png"
                     anchors.verticalCenter: parent.verticalCenter
                 }
@@ -280,8 +291,8 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: grid.top
         id: buttonFadeRect
-        height: purchaseButton.height;
-        width:purchaseButton.width;
+        height: 70;
+        width:150;
         color: "#93a8c4"
     }
     //List model for all the different things
@@ -300,7 +311,7 @@ Page {
             type: "blueBall";
             name: "Blue"
             picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/blueBall.png"
-            price: 5
+            price: 10
         } ListElement{
             index:2
             isBought: false
@@ -343,66 +354,42 @@ Page {
             type: "volleyBall";
             name: "Volley Ball"
             picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/volley_ball.png"
-            price: 30
+            price: 35
         }
         ListElement{
             index:8
             isBought: false
-            type: "Cookie";
-            name: "The Cookie"
-            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/cookieBall.png"
-            price: 40
+            type: "Tire";
+            name: "The Tire"
+            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/tire_ball.png"
+            price: 39
         }
         ListElement{
             index:9
             isBought: false
-            type: "Pancake";
-            name: "The Pancake"
-            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/pancakeBall.png"
-            price: 50
+            type: "Donut";
+            name: "The Donut"
+            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/donut_ball.png"
+            price: 45
         }
         ListElement{
             index:10
             isBought: false
-            type: "Tire";
-            name: "The Tire"
-            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/tire_ball.png"
+            type: "Coin";
+            name: "The Coin"
+            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coin.png"
             price: 50
         }
         ListElement{
             index:11
             isBought: false
-            type: "Donut";
-            name: "The Donut"
-            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/donut_ball.png"
-            price: 62
-        }
-        ListElement{
-            index:12
-            isBought: false
-            type: "Coin";
-            name: "The Coin"
-            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coin.png"
-            price: 62
-        }
-        ListElement{
-            index:13
-            isBought: false
-            type: "Dartboard";
-            name: "The Dartboard"
-            picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/dartBoardBall.png"
-            price: 70
-        }
-        ListElement{
-            index:14
-            isBought: false
             type: "clock";
             name: "The Clock"
             picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/clockBall.png"
-            price: 70
+            price: 55
         }
         ListElement{
-            index:15
+            index:12
             isBought: false
             type: "Earth";
             name: "The Earth"
@@ -410,7 +397,7 @@ Page {
             price: 80
         }
         ListElement{
-            index:16
+            index:13
             isBought: false
             type: "moon";
             name: "The Moon"
@@ -418,12 +405,12 @@ Page {
             price: 80
         }
         ListElement{
-            index:17
+            index:14
             isBought: false
             type: "white";
             name: "The White"
             picSource: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/theGreatWhiteCircle.png"
-            price: 500
+            price: 80
         }
     }
 
@@ -434,8 +421,8 @@ Page {
         populate: Transition {
             NumberAnimation { properties: "x,y"; duration: 400 }
         }
-        width: cellWidth*4; height: cellHeight*4
-        cellWidth: 140; cellHeight: 140
+        width: cellWidth*3; height: cellHeight*4
+        cellWidth: 135; cellHeight: 135
         id:grid
         anchors.horizontalCenter: parent.horizontalCenter
         y:root.height-height-40
@@ -448,8 +435,8 @@ Page {
                 height: grid.cellHeight
                 color: "transparent"
                 Rectangle {
-                    width: grid.cellWidth-25
-                    height: grid.cellHeight-25
+                    width: grid.cellWidth-20
+                    height: grid.cellHeight-20
                     id: wrapper
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
@@ -462,7 +449,7 @@ Page {
                         x:parent.x
                         y:6
                         width: 85
-                        height:85;
+                        height:65;
                         source: picSource
 
                     }
@@ -475,7 +462,7 @@ Page {
                         font.family: "Century Gothic"
                         font.bold:  (grid.isCurrentItem===true)?"true":"false"
                         horizontalAlignment: Text.AlignHCenter
-                        font.pointSize: 10
+                        font.pointSize: 12
                         color:"#050027"
                     }
                     MouseArea{
@@ -523,8 +510,8 @@ Page {
 
     Settings{
         category: "mySettingsThing5"
-        property alias mBought2: root.bought
-        property alias mMName1: root.givenName
+        property alias mBought1: root.bought
+        property alias mMName: root.givenName
     }
 }
 

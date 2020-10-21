@@ -41,6 +41,8 @@ int main(int argc, char *argv[])
     felgo.initialize(&engine);
     felgo.setLicenseKey(PRODUCT_LICENSE_KEY);
 
+    //sends when i break a property binding
+//    QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
     //All the settings things
     QSettings settings;
     QString style = QQuickStyle::name();
@@ -64,54 +66,54 @@ int main(int argc, char *argv[])
 
     //save volume
     double volume1 = extra.volume();
-    if(!settings.contains("volume0100"))
-        dude.writeSettings("volume0100", volume1);
+    if(!settings.contains("volume01001"))
+        dude.writeSettings("volume01001", volume1);
     else
-        extra.setVolume(SettingsManager::loadSettings("volume0100").toDouble());
+        extra.setVolume(SettingsManager::loadSettings("volume01001").toDouble());
 
     //save sound
     double sound1 = extra.sound();
-    if(!settings.contains("sound0100"))
-        dude.writeSettings("sound0100", sound1);
+    if(!settings.contains("sound01001"))
+        dude.writeSettings("sound01001", sound1);
     else
-        extra.setSound(SettingsManager::loadSettings("sound0100").toDouble());
+        extra.setSound(SettingsManager::loadSettings("sound01001").toDouble());
     //save coins
     double numCoins1 = extra.numCoins();
-    if(!settings.contains("numCoins21"))
-        dude.writeSettings("numCoins21", numCoins1);
+    if(!settings.contains("numCoins211"))
+        dude.writeSettings("numCoins211", numCoins1);
     else
-        extra.setNumCoins(SettingsManager::loadSettings("numCoins21").toInt());
+        extra.setNumCoins(SettingsManager::loadSettings("numCoins211").toInt());
 
     //save ball source
     QString ballSource1 = extra.ballSource();
-    if(!settings.contains("ballSource"))
-        dude.writeSettings("ballSource", ballSource1);
+    if(!settings.contains("ballSource1"))
+        dude.writeSettings("ballSource1", ballSource1);
     else
-        extra.setBallSource(SettingsManager::loadSettings("ballSource").toString());
+        extra.setBallSource(SettingsManager::loadSettings("ballSource1").toString());
 
     //save personal best
     int personalBest1 = extra.personalBest();
-    if(!settings.contains("personalBest555")){
-        dude.writeSettings("personalBest555",personalBest1);
+    if(!settings.contains("personalBest55551")){
+        dude.writeSettings("personalBest55551",personalBest1);
     }
     else
-        extra.setPersonalBest(SettingsManager::loadSettings("personalBest555").toInt());
+        extra.setPersonalBest(SettingsManager::loadSettings("personalBest55551").toInt());
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("happyy")){
-        dude.writeSettings("happyy",datastore1);
+    if(!settings.contains("zzzz")){
+        dude.writeSettings("zzzz",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("happyy").toString());
+        extra.setDatastore(SettingsManager::loadSettings("zzzz").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
-    if(!settings.contains("sadd")){
-        dude.writeSettings("sadd",myMissionsRn1);
+    if(!settings.contains("aaaa")){
+        dude.writeSettings("aaaa",myMissionsRn1);
     }
     else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("sadd").toString());
+        extra.setMyMissionsRn(SettingsManager::loadSettings("aaaa").toString());
     }
 
     FelgoLiveClient client (&engine);
@@ -126,10 +128,10 @@ FlashingTimer allTheTimeStuff(){
     QSettings settings;
     SettingsManager dude;
     QDateTime tomorrow=now.addSecs(86399);
-    if(!settings.contains("jamesHarden?"))
-        dude.writeSettings("jamesHarden?", tomorrow);
+    if(!settings.contains("jamesHarden?1"))
+        dude.writeSettings("jamesHarden?1", tomorrow);
     else{
-        tomorrow = SettingsManager::loadSettings("jamesHarden?").toDateTime();
+        tomorrow = SettingsManager::loadSettings("jamesHarden?1").toDateTime();
     }
     FlashingTimer joe(tomorrow);
     return joe;

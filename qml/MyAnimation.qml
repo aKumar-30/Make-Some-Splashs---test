@@ -25,14 +25,14 @@ SequentialAnimation {
                 NumberAnimation {
                     target: basketBall
                     property: "width"
-                    to: (shrink==true)?72:(basketBall.width)
+                    to: (shrink==true)?(72+25-10):(basketBall.width)
                     duration: animationDuration*percentageSmall
                     easing.type: Easing.InQuad
                 }
                 NumberAnimation {
                     target: basketBall
                     property: "height"
-                    to: (shrink==true)?72:(basketBall.height)
+                    to: (shrink==true)?(72+25-10):(basketBall.height)
                     duration: animationDuration*percentageSmall
                     easing.type: Easing.InQuad
                 }
