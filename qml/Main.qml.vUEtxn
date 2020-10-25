@@ -213,6 +213,7 @@ GameWindow {
             console.log("NOOOOOTTTTTTTTT  this is inside the iffffyyyy statement")
             firstTimeUpdatingMissions=false
         }
+        console.log("this is AFFFTTTTERRRRR the iffffyyyy statement")
         var rowCount = mMissionModel.count
         mArray = []
 
@@ -1042,65 +1043,32 @@ GameWindow {
             //                    }
             //                }
             //            }
-            leftBarItem: NavigationBarItem{
+            leftBarItem: IconButtonBarItem{
                 visible:  navigationStack.depth>1
-                contentWidth: 38
-                IconButtonBarItem{
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "white"
-                    icon: IconType.arrowleft
-                    iconSize: 38
-                }
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: {
-                        if(Extra.endingPage==="CompetitiveMode.qml"){
-                            if(adScreenHappening!==true&&retryScreenHappening!==true)
-                                warningDialog.visible=true;
-                            else if(adScreenHappening===true){
-                                backButtonClickedWhenAdScreen=true
-                                //                            warningDialog.box.accepted()
-                                //                            warningDialog.box.selectedOk()
-                                myDialog1.selectedOk()
-                            }
-                            else{
-                                //                            warningDialog.box.selectedOk()
-                                myDialog1.selectedOk()
-                                //                            warningDialog.box.accepted()
-                            }
+                icon: IconType.arrowleft
+                color: "white"
+                iconSize: newNavigationBar.size-10
+                onClicked: {
+                    //Give them a reset warning
+                    if(Extra.endingPage==="CompetitiveMode.qml"){
+                        if(adScreenHappening!==true&&retryScreenHappening!==true)
+                            warningDialog.visible=true;
+                        else if(adScreenHappening===true){
+                            backButtonClickedWhenAdScreen=true
+                            //                            warningDialog.box.accepted()
+                            //                            warningDialog.box.selectedOk()
+                            myDialog1.selectedOk()
                         }
-                        else
-                            navigationStack.pop()
+                        else{
+                            //                            warningDialog.box.selectedOk()
+                            myDialog1.selectedOk()
+                            //                            warningDialog.box.accepted()
+                        }
                     }
+                    else
+                        navigationStack.pop()
                 }
             }
-
-            //                IconButtonBarItem{
-            //                visible:  navigationStack.depth>1
-            //                icon: IconType.arrowleft
-            //                color: "white"
-            //                iconSize: newNavigationBar.size-10
-            //                onClicked: {
-            //                    //Give them a reset warning
-            //                    if(Extra.endingPage==="CompetitiveMode.qml"){
-            //                        if(adScreenHappening!==true&&retryScreenHappening!==true)
-            //                            warningDialog.visible=true;
-            //                        else if(adScreenHappening===true){
-            //                            backButtonClickedWhenAdScreen=true
-            //                            //                            warningDialog.box.accepted()
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                        }
-            //                        else{
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                            //                            warningDialog.box.accepted()
-            //                        }
-            //                    }
-            //                    else
-            //                        navigationStack.pop()
-            //                }
-            //            }
             titleItem: Text{
                 x:165
                 y:8
@@ -1112,12 +1080,12 @@ GameWindow {
             }
 
             rightBarItem:NavigationBarItem{
-                contentWidth: 20
-                IconButtonBarItem{
+                contentWidth: 25
+                Icon{
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: "white"
                     icon: IconType.ellipsisv
-                    iconSize: 40
+                    size: 40
                 }
                 MouseArea{
                     anchors.fill: parent;
@@ -1459,7 +1427,7 @@ GameWindow {
     }
     Settings{
         id: something
-        property alias leadsbadasdasdssdadsfrondasnnio: root.counter14
-        property alias isnaadtsasadsaasdsdfgoadsattted: root.firstTimeUpdatingMissions
+        property alias leadsbadssdadsfrondasnnio: root.counter14
+        property alias isnaadtsaasdsdfgoadsattted: root.firstTimeUpdatingMissions
     }
 }

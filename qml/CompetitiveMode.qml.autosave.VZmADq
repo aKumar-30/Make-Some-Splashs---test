@@ -443,12 +443,6 @@ Page {
         color: "#000000"
         opacity: 0.81
         anchors.centerIn: parent
-        onVisibleChanged: {
-            if(visible&&(retryBox.visible||newRetryCircle.visible)){
-                visible=false
-            }
-        }
-
         Image{
             width: 552*4/5*1.45
             height: 452*4/5*1.45
@@ -542,7 +536,7 @@ Page {
         {
             coinProb = 6;
             sliderId.value=100;
-            mDuration-=18/*29*/ /*42*/
+            mDuration-=29 /*42*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator > 29)
             {
@@ -1231,27 +1225,25 @@ Page {
             spacing:10
             Text{
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.family: "Bodoni MT Black"
+                font.family: "Rockwell Extra Bold"
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 34
+                font.pointSize: 32
                 width: parent.width
                 text: "You lost!"
             }
             Text{
                 x:10
                 width: parent.width-20
-                font.family: "Century Gothic"
-                font.pointSize: 17.5
+                font.family: "Rockwell Condensed"
+                font.pointSize: 22
                 wrapMode: Text.Wrap
                 text:"     Please try again! Remember 3 missed shots and you are out"
             }
             Row{
                 x:60
                 spacing:25
-                anchors.horizontalCenter: parent.horizontalCenter
                 Button {
-                    anchors.verticalCenter: parent.verticalCenter
                     Rectangle{
                         anchors.fill: parent
                         color: okButton.pressed?"#233ab8" : "#3F51B5"
@@ -1264,8 +1256,8 @@ Page {
                         font.family: "Century Gothic"
                     }
                     id: okButton
-                    height: 115
-                    width: 200
+                                        height: 130
+                                        width: 180
                     onClicked: {
                         seqAnimationId.stop()
                         levelRectangleAnimation.start()
@@ -1295,41 +1287,41 @@ Page {
                         switchFileSignal()
                     }
                 }
-                //                Button{
+//                Button{
 
-                //                    height: 150
-                //                    width: 220
-                //                    Text{
-                //                        color: "#ed912f"
-                //                        text: "RETRY"
-                //                        font.bold: true
-                //                        font.pointSize: 23
-                //                        anchors.centerIn: parent
-                //                    }
-                //                    onClicked: {
-                //                        seqAnimationId.stop()
-                //                        levelRectangleAnimation.start()
-                //                        x1.visible=false; x2.visible = false; x3.visible = false;
-                //                        retryBox.visible=false
-                //                        retryScreenHappening=false
-                //                    }
-                //                }
-                //                Button{
-                //                    id: quitButton
-                //                    anchors.verticalCenter: parent.verticalCenter
-                //                    width: 140
-                //                    Text{
-                //                        color: "#ed912f"
-                //                        text: "QUIT"
-                //                        font.pointSize: 20
-                //                        anchors.centerIn: parent
-                //                    }
-                //                    onClicked: {
-                //                        retryBox.visible=false
-                //                        fadedRED.visible=false
-                //                        switchFileSignal()
-                //                    }
-                //                }
+//                    height: 150
+//                    width: 220
+//                    Text{
+//                        color: "#ed912f"
+//                        text: "RETRY"
+//                        font.bold: true
+//                        font.pointSize: 23
+//                        anchors.centerIn: parent
+//                    }
+//                    onClicked: {
+//                        seqAnimationId.stop()
+//                        levelRectangleAnimation.start()
+//                        x1.visible=false; x2.visible = false; x3.visible = false;
+//                        retryBox.visible=false
+//                        retryScreenHappening=false
+//                    }
+//                }
+//                Button{
+//                    id: quitButton
+//                    anchors.verticalCenter: parent.verticalCenter
+//                    width: 140
+//                    Text{
+//                        color: "#ed912f"
+//                        text: "QUIT"
+//                        font.pointSize: 20
+//                        anchors.centerIn: parent
+//                    }
+//                    onClicked: {
+//                        retryBox.visible=false
+//                        fadedRED.visible=false
+//                        switchFileSignal()
+//                    }
+//                }
             }
         }
     }
@@ -1588,7 +1580,7 @@ Page {
                 if(typeOfShot(shotShot)){
                     if(level===levelOptions[levelRandomNumber]){
                         counterLast++;
-                        if(counterLast===mMissionModel.get(last).neededThings&&!(mMissionModel.get(last).currentThings>=mMissionModel.get(last).neededThings)){
+                        if(counterLast===mMisionModel.get(last).neededThings&&!(mMissionModel.get(last).currentThings>=mMissionModel.get(last).neededThings)){
                             mMissionModel.get(last).currentThings=counterLast
                         }
                     }
@@ -1891,7 +1883,7 @@ Page {
 
                 manyMakes++;
                 manyMisses=0
-                points +=30*level;
+                points +=30;
                 pointsThisRound += 30;
                 backboardAnimation.start()
                 feedback = ["Good shot","A make is a make", "A splash is a splash", "Lucky shot??", "Banks don't count...try again", "You can do even better", "Atleast it made"]
@@ -1964,7 +1956,7 @@ Page {
 
                 manyMakes++;
                 manyMisses=0
-                points+=50*level
+                points+=50
                 pointsThisRound += 50;
                 rimMakeAnimation.start()
                 feedback = ["I thought that was going to miss", "The rim was on your side", "Looks like you are on a set path to the NBA", "Amazing shot!", "Pretty nice!", "Actually pretty good"]
@@ -2037,7 +2029,7 @@ Page {
 
                 manyMakes++;
                 manyMisses=0
-                points+= 110*level
+                points+= 110
                 pointsThisRound += 110;
                 splashAnimation.start()
                 feedback = ["Next MVP?","Future NBA champ","The next Steph Curry?", "Splashing it like Klay Thompson?", "What an amazing shot?", "Making some splashes", "All the way from deep?", "Swish!", "Like a true nba player"]
@@ -2111,7 +2103,7 @@ Page {
 
                 manyMakes++;
                 manyMisses=0
-                points+= 150*level
+                points+= 150
                 pointsThisRound +=150;
                 splashAnimation.start()
                 feedback = ["The GOAT?", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP", "Champion"]

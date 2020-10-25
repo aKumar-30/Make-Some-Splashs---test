@@ -44,7 +44,7 @@ void MyTimer::start()
     connect(m_timer,&QTimer::timeout, [=](){
         if(m_elapsed==0){
             emit timedOut();
-            m_running=false
+            m_running=false;
         }
     });
 }
@@ -56,7 +56,8 @@ void MyTimer::pause()
     connect(m_timer,&QTimer::timeout, [=](){
         if(m_elapsed==0){
             emit timedOut();
-            m_running=false}
+            m_running=false;
+        }
     });
 }
 
@@ -68,7 +69,8 @@ void MyTimer::restart()
     connect(m_timer,&QTimer::timeout, [=](){
         if(m_elapsed==0){
             emit timedOut();
-            m_running=false}
+            m_running=false;
+        }
     });
 }
 

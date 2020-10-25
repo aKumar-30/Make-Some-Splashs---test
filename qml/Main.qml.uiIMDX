@@ -213,6 +213,7 @@ GameWindow {
             console.log("NOOOOOTTTTTTTTT  this is inside the iffffyyyy statement")
             firstTimeUpdatingMissions=false
         }
+        console.log("this is AFFFTTTTERRRRR the iffffyyyy statement")
         var rowCount = mMissionModel.count
         mArray = []
 
@@ -1459,7 +1460,7 @@ GameWindow {
     }
     Settings{
         id: something
-        property alias leadsbadasdasdssdadsfrondasnnio: root.counter14
-        property alias isnaadtsasadsaasdsdfgoadsattted: root.firstTimeUpdatingMissions
+        property alias leadsbadssdadsfrondasnnio: root.counter14
+        property alias isnaadtsaasdsdfgoadsattted: root.firstTimeUpdatingMissions
     }
 }

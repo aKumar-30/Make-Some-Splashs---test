@@ -46,7 +46,6 @@ GameWindow {
     property bool retryScreenHappening: false;
     property var counter14: [];
     property bool firstTimeUpdatingMissions: true
-    property int countingUpdatingMissions: 0;
     id: root
     //        width: 708
     //        height: 785
@@ -129,26 +128,26 @@ GameWindow {
     }
     Component.onCompleted: {
         mMusic1.play()
-        //        console.log(Extra.datastore)
-        //        Extra.datastore="";
-        //        if ( Extra.datastore) {
-        //            mMissionModel.clear()
-        //            var datamodel = JSON.parse(Extra.datastore)
-        //            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        //        }
-        //        Extra.myMissionsRn="";
-        //        if(Extra.myMissionsRn){
-        //            getCurrentMissions()
-        //        }
-        //        if(presentMissions.length!==0){
-        //            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        //        }
-        //        else{
-        updateMissions();
-        //        }
+                console.log(Extra.datastore)
+        Extra.datastore="";
+                if ( Extra.datastore) {
+                    mMissionModel.clear()
+                    var datamodel = JSON.parse(Extra.datastore)
+                    for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+                }
+                Extra.myMissionsRn="";
+                if(Extra.myMissionsRn){
+                    getCurrentMissions()
+                }
+                if(presentMissions.length!==0){
+                    displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+                    displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+                }
+                else{
+                    updateMissions();
+                }
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -159,6 +158,7 @@ GameWindow {
             presentMissions.push(displayDelegateModel.items.get(2).model.index);
             setCurrentMissions()
         }
+        console.log("Hellooasjasilj")
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
@@ -213,8 +213,10 @@ GameWindow {
             console.log("NOOOOOTTTTTTTTT  this is inside the iffffyyyy statement")
             firstTimeUpdatingMissions=false
         }
+
         var rowCount = mMissionModel.count
         mArray = []
+        displayDelegateModel.items.remove(0,displayDelegateModel.items.count)
 
         for(let i =0;i < rowCount;i++ ) {
             let entry = mMissionModel.get(i)
@@ -240,7 +242,7 @@ GameWindow {
         var typeOfShot = ["backboard","rim", "splash"]
         levelOptions = [1,1,1,1,1,1,1,2,2,3,3,0]
         var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
-        console.log("our random NUMBER IS" + thisRandomNumber);
+        console.log("this is count"+numberOfTimesAndCoins.length)
         tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
         tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
         shotRandomNumber = Math.floor((Math.random()*typeOfShot.length));
@@ -253,45 +255,31 @@ GameWindow {
         for (let t = 0; t < tempModel.count; ++t) datamodel.push(tempModel.get(t))
         let b = JSON.stringify(datamodel)
         datamodel = JSON.parse(b)
-        for (let k = 0; k < datamodel.length; ++k){
-            mMissionModel.append(datamodel[k])
-        }
+        for (let k = 0; k < datamodel.length; ++k) mMissionModel.append(datamodel[k])
         arr.push(mMissionModel.get(mMissionModel.count-1));
     }
     function updatingMissionsDuringGame(){
-        countingUpdatingMissions++;
         //make missions invisible here
         partUpdatingMissions()
 
-        //        displayDelegateModel.items.insert(arr[0], "todaysMissions");
-        //        displayDelegateModel.items.insert(arr[1], "todaysMissions");
-        //        displayDelegateModel.items.insert(arr[2], "todaysMissions");
-        //        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
-        //        presentMissions=[]
-        //        storeForSettings();
-        //        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
-        presentMissions=[]
-        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
-        presentMissions.push(arr[0].index);
-        presentMissions.push(arr[1].index);
-        presentMissions.push(arr[2].index);
-        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
-        setCurrentMissions()
-        let s = 0
-        for(s = 0; s<4; s++){ //displayDelegateModel.items.count-1-s
-            displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
-            displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
-            console.log("EL FINAL DIESCRIPTCION ES"+mMissionModel.get(presentMissions[s]).description)
-            displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
-            displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
-            displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
-            displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
-            displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
-        }
+//        displayDelegateModel.items.remove(0,displayDelegateModel.items.count)
 
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
         displayDelegateModel.items.insert(arr[1], "todaysMissions");
         displayDelegateModel.items.insert(arr[2], "todaysMissions");
+        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
+        presentMissions=[]
+        storeForSettings();
+        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)        
+        for(let s = 0; s< 3; s++){ //displayDelegateModel.items.count-1-s
+            displayDelegateModel.items.get(s).model.index=Qt.binding(mMissionModel.get(presentMissions[s]).index)
+            displayDelegateModel.items.get(s).model.completed=Qt.binding(mMissionModel.get(presentMissions[s]).completed)
+            displayDelegateModel.items.get(s).model.description=Qt.binding(mMissionModel.get(presentMissions[s]).description)
+            displayDelegateModel.items.get(s).model.multipleTimes=Qt.binding(mMissionModel.get(presentMissions[s]).multipleThings)
+            displayDelegateModel.items.get(s).model.reward=Qt.binding(mMissionModel.get(presentMissions[s]).reward)
+            displayDelegateModel.items.get(s).model.neededThings=Qt.binding(mMissionModel.get(presentMissions[s]).neededThings)
+            displayDelegateModel.items.get(s).model.currentThings=Qt.binding(mMissionModel.get(presentMissions[s]).currentThings)
+        }
         if(!delayTimer.running)
             delayTimer.start()
     }
@@ -304,7 +292,6 @@ GameWindow {
         }
     }
     function updateMissions(){
-        displayDelegateModel.items.remove(0,displayDelegateModel.items.count)
         partUpdatingMissions()
 
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
@@ -331,6 +318,28 @@ GameWindow {
         let url = "https://akumar-30.github.io/ShootHoops/"
         Qt.openUrlExternally(url)
     }
+    //        Action {
+    //            id: navigateBackAction
+    //            icon.name: stackView.depth > 1 ? "back" : ""
+    //            icon.source: stackView.depth > 1? "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/icons/splashs/back.png":""
+    //            onTriggered: {
+    //                if (stackView.depth > 1) {
+    //                    //Give them a reset warning
+    //                    if(root.width!=708){
+    //                        root.width = 708;
+    //                        root.height = 785;
+    //                    }
+
+    //                    if(Extra.endingPage==="CompetitiveMode.qml"){
+    //                        warningDialog.open();
+    //                    }
+    //                    else{
+    //                        stackView.pop()
+    //                        thisTitle = "Shoot some hoops!"
+    //                    }
+    //                }
+    //            }
+    //        }
     Timer{
         id: thePauseTimer
         interval: 1000
@@ -346,6 +355,11 @@ GameWindow {
                 console.log("s is "+s)
             }
         }
+    }
+
+    StackView {
+        id: stackView
+        anchors.fill: parent
     }
     Item{
         id: clicker
@@ -952,14 +966,14 @@ GameWindow {
                 //                        }
                 onClicked: {
                     if(visible){
-                        //                        // show the new video if user is below 10 credits
-                        //                        myRewardedVideo.showRewardedVideoIfLoaded()
-                        //                        // load a new video every time it got shown, to give the user a fresh ad
-                        //                        myRewardedVideo.loadRewardedVideo()
+//                        // show the new video if user is below 10 credits
+//                        myRewardedVideo.showRewardedVideoIfLoaded()
+//                        // load a new video every time it got shown, to give the user a fresh ad
+//                        myRewardedVideo.loadRewardedVideo()
                         updatingMissionsDuringGame();
                     }
                 }
-                visible: (!getRewardsButton.visible&&countingUpdatingMissions<1);
+                visible: !getRewardsButton.visible;
                 z: 19
                 id: newMissionsAdButton
                 anchors.top: listOfMissions.bottom
@@ -1025,7 +1039,7 @@ GameWindow {
         height: 1270
         id: mainScene
         NavigationBar{
-            height: /*60*/85
+            height: 60
             width: parent.width
             id: newNavigationBar
             //            navigationBar.onBackButtonItemPressedChanged: {
@@ -1042,97 +1056,49 @@ GameWindow {
             //                    }
             //                }
             //            }
-            leftBarItem: NavigationBarItem{
+            leftBarItem: IconButtonBarItem{
                 visible:  navigationStack.depth>1
-                contentWidth: 38
-                IconButtonBarItem{
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "white"
-                    icon: IconType.arrowleft
-                    iconSize: 38
-                }
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: {
-                        if(Extra.endingPage==="CompetitiveMode.qml"){
-                            if(adScreenHappening!==true&&retryScreenHappening!==true)
-                                warningDialog.visible=true;
-                            else if(adScreenHappening===true){
-                                backButtonClickedWhenAdScreen=true
-                                //                            warningDialog.box.accepted()
-                                //                            warningDialog.box.selectedOk()
-                                myDialog1.selectedOk()
-                            }
-                            else{
-                                //                            warningDialog.box.selectedOk()
-                                myDialog1.selectedOk()
-                                //                            warningDialog.box.accepted()
-                            }
+                icon: IconType.arrowleft
+                color: "white"
+                onClicked: {
+                    //Give them a reset warning
+                    if(Extra.endingPage==="CompetitiveMode.qml"){
+                        if(adScreenHappening!==true&&retryScreenHappening!==true)
+                            warningDialog.visible=true;
+                        else if(adScreenHappening===true){
+                            backButtonClickedWhenAdScreen=true
+                            //                            warningDialog.box.accepted()
+                            //                            warningDialog.box.selectedOk()
+                            myDialog1.selectedOk()
                         }
-                        else
-                            navigationStack.pop()
+                        else{
+                            //                            warningDialog.box.selectedOk()
+                            myDialog1.selectedOk()
+                            //                            warningDialog.box.accepted()
+                        }
                     }
+                    else
+                        navigationStack.pop()
                 }
             }
-
-            //                IconButtonBarItem{
-            //                visible:  navigationStack.depth>1
-            //                icon: IconType.arrowleft
-            //                color: "white"
-            //                iconSize: newNavigationBar.size-10
-            //                onClicked: {
-            //                    //Give them a reset warning
-            //                    if(Extra.endingPage==="CompetitiveMode.qml"){
-            //                        if(adScreenHappening!==true&&retryScreenHappening!==true)
-            //                            warningDialog.visible=true;
-            //                        else if(adScreenHappening===true){
-            //                            backButtonClickedWhenAdScreen=true
-            //                            //                            warningDialog.box.accepted()
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                        }
-            //                        else{
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                            //                            warningDialog.box.accepted()
-            //                        }
-            //                    }
-            //                    else
-            //                        navigationStack.pop()
-            //                }
-            //            }
             titleItem: Text{
-                x:165
-                y:8
-                font.pointSize: 25
+                anchors.horizontalCenter: parent.horizontalCenter
+                y:5
+                anchors.horizontalCenterOffset: 200
+                font.pointSize: 16
                 font.bold: true
                 text:navigationStack.currentPage.title
                 font.family: "Century Gothic"
                 color: "white"
             }
 
-            rightBarItem:NavigationBarItem{
-                contentWidth: 20
+            rightBarItem:
                 IconButtonBarItem{
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "white"
-                    icon: IconType.ellipsisv
-                    iconSize: 40
+                color: "white"
+                icon: IconType.ellipsisv
+                onClicked: {
+                    optionsMenu.open()
                 }
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: {
-                        optionsMenu.open()
-
-                    }
-                }
-                //                IconButtonBarItem{
-                //                color: "white"
-                //                icon: IconType.ellipsisv
-                //                iconSize: newNavigationBar.size-10
-                //                onClicked: {
-                //                    optionsMenu.open()
-                //                }
                 Menu {
                     id: optionsMenu
                     x: parent.width - width
@@ -1151,7 +1117,9 @@ GameWindow {
                     }
                 }
             }
+
         }
+
         NavigationStack{
             anchors.top: newNavigationBar.bottom
             id: navigationStack
@@ -1290,7 +1258,7 @@ GameWindow {
                     height: 120
                     border.color: "red"
                     border.width: 7
-                    color: (buttonToPlayGameMouseArea.pressed)?"#44a3f2":"#5db0f5"
+                    color: "#5db0f5"
                     Component.onCompleted: {
                         switchToGreenTimer.start()
                     }
@@ -1328,7 +1296,6 @@ GameWindow {
                         }
                     }
                     MouseArea{
-                        id: buttonToPlayGameMouseArea
                         anchors.fill: parent
                         onClicked: {
                             if(!missionsScene.visible){
@@ -1459,7 +1426,7 @@ GameWindow {
     }
     Settings{
         id: something
-        property alias leadsbadasdasdssdadsfrondasnnio: root.counter14
-        property alias isnaadtsasadsaasdsdfgoadsattted: root.firstTimeUpdatingMissions
+        property alias countsdfer14asddsaSetasdstingshhhhhss: root.counter14
+        property var firstTsfdissssamdkmtingasdsshhhs: root.firstTimeUpdatingMissions
     }
 }

@@ -273,24 +273,6 @@ Item {
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
-                Label {
-                    font.family: "Century Gothic"; width: parent.width
-                    Text{
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        font.bold: true
-                        font.underline: true
-                        wrapMode: Label.Wrap
-                        font.pointSize: 18
-                        text: "Customization Mode"
-                    }
-                }
-                Label {
-                    font.family: "Century Gothic"; width: parent.width
-                    text: "    Bored of playing the game? Take a break in the customization mode where you can expirement with bouncing around different balls. How fun!"
-                    wrapMode: Label.Wrap
-                    font.pointSize: 12.5
-                    lineHeight: 1.45
-                }
             }
         }
     }

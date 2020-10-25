@@ -9,6 +9,10 @@ import Qt.labs.qmlmodels 1.0
 import QtQuick.Dialogs 1.2
 //import otherArjun 1.0
 Page {
+    visible: true
+    width: parent.width
+    height: parent.height
+    anchors.fill: parent
     Rectangle{
         color:"black"
         x:-40
@@ -28,10 +32,7 @@ Page {
         Extra.points+=points1
         shouldBeginThirdLevel=true
     }
-    visible: true
-    y: navigationStack.navigationBar.height
-    width: parent.width
-    height: parent.height+y
+
     title:"Halftime!"
     id: root2
     property int timeRemaining: totalTimeTimer.interval/1000
@@ -75,21 +76,51 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             visible:false
         }
-        Button{
+        //        Button{
+        //            visible: false
+        //            id: startGameButton
+        //            text: "Start"
+        //            font.pointSize: 14;
+        //            width: parent.width-90
+        //            height: 120
+        //            y: levelRectangleText.y+levelRectangleText.implicitHeight+30
+        //            anchors.horizontalCenter: parent.horizontalCenter
+        //            onClicked: {
+        //                levelRectangle.visible=false;
+        //                remainingTimeBox.visible=true
+        //                ballTriggerTimer.start()
+        //                totalTimeTimer.start()
+        //            }
+        //        }
+        Button {
             visible: false
+            Rectangle{
+                anchors.fill: parent
+                color: startGameButton.pressed?"#233ab8" : "#3F51B5"
+            }
+            Text{
+                anchors.centerIn: parent
+                font.pointSize: 20
+                text: "Start"
+                color: "White"
+                font.family: "Century Gothic"
+            }
             id: startGameButton
-            text: "Start"
+            width: templateButton.width+140
+            height: templateButton.height+38
             font.pointSize: 14;
-            width: parent.width-90
-            height: 120
-            y: levelRectangleText.y+levelRectangleText.implicitHeight+30
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
+                // emit signal and hide dialog if button is selected
                 levelRectangle.visible=false;
                 remainingTimeBox.visible=true
                 ballTriggerTimer.start()
                 totalTimeTimer.start()
             }
+        }
+        Button{
+            visible: false
+            id: templateButton
         }
         ParallelAnimation {
             id: levelRectangleAnimation
@@ -274,38 +305,38 @@ Page {
         }
     }
     //Sun
-//    Rectangle{
-//        z:8
-//        visible: true
-//        id: sun
-//        radius: 80
-//        x:-width/2+10
-//        y:-height/2+10
-//        width:130
-//        height:130
-//        color: "yellow"
-//        Text{
-//            id: onSunLevelText
-//            font.pointSize: 10
-//            text: "Count";
-//            x: height*3/5+50
-//            y: width*3/5+30
-//            font.underline: true
-//            color: "black"
-//            font.family: "Blacklight"
-//            wrapMode: Text.Wrap
-//        }
-//        Text{
-//            id: onSunLevelText1
-//            font.pointSize: 18
-//            text: numberOfClicks;
-//            anchors.top: onSunLevelText.bottom
-//            color: "black"
-//            font.family: "Athletic"
-//            wrapMode: Text.Wrap
-//            x: height*3/5+55
-//        }
-//    }
+    //    Rectangle{
+    //        z:8
+    //        visible: true
+    //        id: sun
+    //        radius: 80
+    //        x:-width/2+10
+    //        y:-height/2+10
+    //        width:130
+    //        height:130
+    //        color: "yellow"
+    //        Text{
+    //            id: onSunLevelText
+    //            font.pointSize: 10
+    //            text: "Count";
+    //            x: height*3/5+50
+    //            y: width*3/5+30
+    //            font.underline: true
+    //            color: "black"
+    //            font.family: "Blacklight"
+    //            wrapMode: Text.Wrap
+    //        }
+    //        Text{
+    //            id: onSunLevelText1
+    //            font.pointSize: 18
+    //            text: numberOfClicks;
+    //            anchors.top: onSunLevelText.bottom
+    //            color: "black"
+    //            font.family: "Athletic"
+    //            wrapMode: Text.Wrap
+    //            x: height*3/5+55
+    //        }
+    //    }
     //Sun
     Rectangle{
         visible: true

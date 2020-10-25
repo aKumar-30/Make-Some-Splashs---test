@@ -129,26 +129,26 @@ GameWindow {
     }
     Component.onCompleted: {
         mMusic1.play()
-        //        console.log(Extra.datastore)
-        //        Extra.datastore="";
-        //        if ( Extra.datastore) {
-        //            mMissionModel.clear()
-        //            var datamodel = JSON.parse(Extra.datastore)
-        //            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        //        }
-        //        Extra.myMissionsRn="";
-        //        if(Extra.myMissionsRn){
-        //            getCurrentMissions()
-        //        }
-        //        if(presentMissions.length!==0){
-        //            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        //        }
-        //        else{
-        updateMissions();
-        //        }
+//        console.log(Extra.datastore)
+//        Extra.datastore="";
+//        if ( Extra.datastore) {
+//            mMissionModel.clear()
+//            var datamodel = JSON.parse(Extra.datastore)
+//            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+//        }
+//        Extra.myMissionsRn="";
+//        if(Extra.myMissionsRn){
+//            getCurrentMissions()
+//        }
+//        if(presentMissions.length!==0){
+//            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+//            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+//            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+//            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+//        }
+//        else{
+            updateMissions();
+//        }
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -213,6 +213,7 @@ GameWindow {
             console.log("NOOOOOTTTTTTTTT  this is inside the iffffyyyy statement")
             firstTimeUpdatingMissions=false
         }
+        console.log("this is AFFFTTTTERRRRR the iffffyyyy statement")
         var rowCount = mMissionModel.count
         mArray = []
 
@@ -263,13 +264,13 @@ GameWindow {
         //make missions invisible here
         partUpdatingMissions()
 
-        //        displayDelegateModel.items.insert(arr[0], "todaysMissions");
-        //        displayDelegateModel.items.insert(arr[1], "todaysMissions");
-        //        displayDelegateModel.items.insert(arr[2], "todaysMissions");
-        //        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
-        //        presentMissions=[]
-        //        storeForSettings();
-        //        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
+//        displayDelegateModel.items.insert(arr[0], "todaysMissions");
+//        displayDelegateModel.items.insert(arr[1], "todaysMissions");
+//        displayDelegateModel.items.insert(arr[2], "todaysMissions");
+//        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
+//        presentMissions=[]
+//        storeForSettings();
+//        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
         presentMissions=[]
         console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
         presentMissions.push(arr[0].index);
@@ -1042,97 +1043,49 @@ GameWindow {
             //                    }
             //                }
             //            }
-            leftBarItem: NavigationBarItem{
+            leftBarItem: IconButtonBarItem{
                 visible:  navigationStack.depth>1
-                contentWidth: 38
-                IconButtonBarItem{
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "white"
-                    icon: IconType.arrowleft
-                    iconSize: 38
-                }
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: {
-                        if(Extra.endingPage==="CompetitiveMode.qml"){
-                            if(adScreenHappening!==true&&retryScreenHappening!==true)
-                                warningDialog.visible=true;
-                            else if(adScreenHappening===true){
-                                backButtonClickedWhenAdScreen=true
-                                //                            warningDialog.box.accepted()
-                                //                            warningDialog.box.selectedOk()
-                                myDialog1.selectedOk()
-                            }
-                            else{
-                                //                            warningDialog.box.selectedOk()
-                                myDialog1.selectedOk()
-                                //                            warningDialog.box.accepted()
-                            }
+                icon: IconType.arrowleft
+                color: "white"
+                onClicked: {
+                    //Give them a reset warning
+                    if(Extra.endingPage==="CompetitiveMode.qml"){
+                        if(adScreenHappening!==true&&retryScreenHappening!==true)
+                            warningDialog.visible=true;
+                        else if(adScreenHappening===true){
+                            backButtonClickedWhenAdScreen=true
+                            //                            warningDialog.box.accepted()
+                            //                            warningDialog.box.selectedOk()
+                            myDialog1.selectedOk()
                         }
-                        else
-                            navigationStack.pop()
+                        else{
+                            //                            warningDialog.box.selectedOk()
+                            myDialog1.selectedOk()
+                            //                            warningDialog.box.accepted()
+                        }
                     }
+                    else
+                        navigationStack.pop()
                 }
             }
-
-            //                IconButtonBarItem{
-            //                visible:  navigationStack.depth>1
-            //                icon: IconType.arrowleft
-            //                color: "white"
-            //                iconSize: newNavigationBar.size-10
-            //                onClicked: {
-            //                    //Give them a reset warning
-            //                    if(Extra.endingPage==="CompetitiveMode.qml"){
-            //                        if(adScreenHappening!==true&&retryScreenHappening!==true)
-            //                            warningDialog.visible=true;
-            //                        else if(adScreenHappening===true){
-            //                            backButtonClickedWhenAdScreen=true
-            //                            //                            warningDialog.box.accepted()
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                        }
-            //                        else{
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                            //                            warningDialog.box.accepted()
-            //                        }
-            //                    }
-            //                    else
-            //                        navigationStack.pop()
-            //                }
-            //            }
             titleItem: Text{
-                x:165
+                anchors.horizontalCenter: newNavigationBar.horizontalCenter
                 y:8
-                font.pointSize: 25
+//                anchors.horizontalCenterOffset: 200
+                font.pointSize: 21
                 font.bold: true
                 text:navigationStack.currentPage.title
                 font.family: "Century Gothic"
                 color: "white"
             }
 
-            rightBarItem:NavigationBarItem{
-                contentWidth: 20
+            rightBarItem:
                 IconButtonBarItem{
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "white"
-                    icon: IconType.ellipsisv
-                    iconSize: 40
+                color: "white"
+                icon: IconType.ellipsisv
+                onClicked: {
+                    optionsMenu.open()
                 }
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: {
-                        optionsMenu.open()
-
-                    }
-                }
-                //                IconButtonBarItem{
-                //                color: "white"
-                //                icon: IconType.ellipsisv
-                //                iconSize: newNavigationBar.size-10
-                //                onClicked: {
-                //                    optionsMenu.open()
-                //                }
                 Menu {
                     id: optionsMenu
                     x: parent.width - width
@@ -1151,7 +1104,9 @@ GameWindow {
                     }
                 }
             }
+
         }
+
         NavigationStack{
             anchors.top: newNavigationBar.bottom
             id: navigationStack
@@ -1459,7 +1414,7 @@ GameWindow {
     }
     Settings{
         id: something
-        property alias leadsbadasdasdssdadsfrondasnnio: root.counter14
-        property alias isnaadtsasadsaasdsdfgoadsattted: root.firstTimeUpdatingMissions
+        property alias leadsbadssdadsfrondasnnio: root.counter14
+        property alias isnaadtsaasdsdfgoadsattted: root.firstTimeUpdatingMissions
     }
 }

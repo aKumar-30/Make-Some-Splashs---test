@@ -101,19 +101,19 @@ int main(int argc, char *argv[])
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("zzzz")){
-        dude.writeSettings("zzzz",datastore1);
+    if(!settings.contains("zzzzz")){
+        dude.writeSettings("zzzzz",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("zzzz").toString());
+        extra.setDatastore(SettingsManager::loadSettings("zzzzz").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
-    if(!settings.contains("aaaa")){
-        dude.writeSettings("aaaa",myMissionsRn1);
+    if(!settings.contains("aaaaa")){
+        dude.writeSettings("aaaaa",myMissionsRn1);
     }
     else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("aaaa").toString());
+        extra.setMyMissionsRn(SettingsManager::loadSettings("aaaaa").toString());
     }
 
     FelgoLiveClient client (&engine);

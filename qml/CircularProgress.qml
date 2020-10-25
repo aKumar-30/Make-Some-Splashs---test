@@ -122,15 +122,16 @@ Canvas {
         width: heartIcon.width
         height: heartIcon.height
         visible: heartIcon.visible
-        color: "transparent"
         anchors.centerIn: heartIcon
+        color: "transparent"
         MouseArea{
             anchors.fill: parent
             enabled: parent.visible
             onClicked:{
-
+                newMissionsAdButton.clicked()
             }
         }
+        z:12
     }
 
     IconButtonBarItem{
@@ -185,7 +186,7 @@ Canvas {
                     retryScreenHappening=true
                 }
                 canvas.currentValue=100
-                circleTimer.pause();
+                circleTimer.stop();
             }
             else{
                 canvas.currentValue-=0.25

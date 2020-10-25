@@ -134,7 +134,9 @@ Item {
                 color: "white"
                 height: 20
                 width:parent.width
+                anchors.horizontalCenter: parent.horizontalCenter                
                 IconButtonBarItem{
+                    anchors.horizontalCenter: parent.horizontalCenter                    
                     anchors.verticalCenter: parent.verticalCenter
                     x:10
                     visible:true
@@ -165,6 +167,7 @@ Item {
                     }
                 }
                 Label{
+                    anchors.horizontalCenter: parent.horizontalCenter                    
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted: {
                         x= musicVolumeIcon.width+musicVolumeIcon.x+20
@@ -176,6 +179,7 @@ Item {
                     id: musicText
                 }
                 AppSlider {
+                    anchors.horizontalCenter: parent.horizontalCenter                    
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
                         x=musicText.width+musicText.x+18
@@ -238,10 +242,12 @@ Item {
             }
 
             Rectangle{
+                anchors.horizontalCenter: parent.horizontalCenter                
                 color: "white"
                 height: 20
                 width:parent.width
                 IconButtonBarItem{
+                    anchors.horizontalCenter: parent.horizontalCenter                    
                     x:10
                     anchors.verticalCenter: parent.verticalCenter;
                     visible:true
@@ -272,6 +278,7 @@ Item {
                     }
                 }
                 Label{
+                    anchors.horizontalCenter: parent.horizontalCenter                    
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted: {
                         x=musicSoundIcon.width+musicSoundIcon.x+20
@@ -283,6 +290,7 @@ Item {
                     id: soundText
                 }
                 AppSlider {
+                    anchors.horizontalCenter: parent.horizontalCenter                    
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
                         x=soundText.width+soundText.x+18
