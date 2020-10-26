@@ -11,8 +11,8 @@ import QtQuick.Controls 2.12
 import QtMultimedia 5.8
 
 ////New VERSION STARTS HERE
-GameWindow {
-    Item{
+GameWindow { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_10519"; property string __felgo_live_id_element: "FELGO_ID_10519_1178";
+    Item{ property string __felgo_live_id_element: "FELGO_ID_10519_1179";
         focus: true
         Keys.onPressed:{
             if(event.key===Qt.Key_Space){
@@ -50,7 +50,7 @@ GameWindow {
     id: root
     //        width: 708
     //        height: 785
-    Scene {
+    Scene { property string __felgo_live_id_element: "FELGO_ID_10519_1180";
         id: settingsDialog
         width: mainScene.width
         height: mainScene.height
@@ -61,16 +61,16 @@ GameWindow {
             if(visible)
                 myDialog.show()
         }
-        CustomSDialog{
+        CustomSDialog{ property string __felgo_live_id_element: "FELGO_ID_10519_1181";
             anchors.centerIn: parent
             id: myDialog
             box.color: "white"
             modal: true
         }
     }
-    Audio{
+    Audio{ property string __felgo_live_id_element: "FELGO_ID_10519_1182";
         id: mMusic1
-        source:"file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/mMusic1.wav"
+        source:"images/mMusic1.wav"
         loops:Audio.Infinite
         volume: Extra.volume*4/5
     }
@@ -94,11 +94,11 @@ GameWindow {
         setCurrentMissions()
         s_manager.writeSettings("aaaa",Extra.myMissionsRn);
     }
-    SettingsManager{
+    SettingsManager{ property string __felgo_live_id_element: "FELGO_ID_10519_1183";
         id: s_manager
     }
     //may no longer be used
-    Connections{
+    Connections{ property string __felgo_live_id_element: "FELGO_ID_10519_1184";
         target: Extra;
         function onSomethingCompetitiveChanged(){
             navigationStack.pop()
@@ -199,7 +199,7 @@ GameWindow {
         return thing
         //        }
     }
-    Timer{
+    Timer{ property string __felgo_live_id_element: "FELGO_ID_10519_1185";
         interval: 1001
         id: delayTimer
     }
@@ -296,7 +296,7 @@ GameWindow {
             delayTimer.start()
     }
 
-    Connections{
+    Connections{ property string __felgo_live_id_element: "FELGO_ID_10519_1186";
         id: flashingTimerConnection
         target: FlashingTimer
         function onCallUpdateMissions(){
@@ -314,9 +314,9 @@ GameWindow {
         storeForSettings();
     }
     //temp model
-    ListModel{
+    ListModel{ property string __felgo_live_id_element: "FELGO_ID_10519_1187";
         id: tempModel
-        ListElement{//last index of mMissionModel
+        ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1188";//last index of mMissionModel
             index: 17
             completed: false;
             description: ""
@@ -331,7 +331,7 @@ GameWindow {
         let url = "https://akumar-30.github.io/ShootHoops/"
         Qt.openUrlExternally(url)
     }
-    Timer{
+    Timer{ property string __felgo_live_id_element: "FELGO_ID_10519_1189";
         id: thePauseTimer
         interval: 1000
         onTriggered: {
@@ -347,7 +347,7 @@ GameWindow {
             }
         }
     }
-    Item{
+    Item{ property string __felgo_live_id_element: "FELGO_ID_10519_1190";
         id: clicker
         anchors.fill: parent
         focus: true
@@ -357,7 +357,7 @@ GameWindow {
             }
         }
     }
-    TextField{
+    TextField{ property string __felgo_live_id_element: "FELGO_ID_10519_1191";
         z:5
         color: "white"
         id: verification
@@ -374,17 +374,17 @@ GameWindow {
             clicker.focus=true;
         }
     }
-    Settings{
+    Settings{ property string __felgo_live_id_element: "FELGO_ID_10519_1192";
         category: "windows"
         property alias x: root.x
         property alias y: root.y
     }
-    Settings{
+    Settings{ property string __felgo_live_id_element: "FELGO_ID_10519_1193";
         category: "missions"
     }
     property bool shouldExtraVolumeChange: true
     property bool shouldExtraSoundChange: true
-    Scene {
+    Scene { property string __felgo_live_id_element: "FELGO_ID_10519_1194";
         id: warningDialog
         width: mainScene.width
         height: mainScene.height
@@ -395,7 +395,7 @@ GameWindow {
             if(visible)
                 myDialog1.show()
         }
-        CustomWDialog{
+        CustomWDialog{ property string __felgo_live_id_element: "FELGO_ID_10519_1195";
             anchors.centerIn: parent
             id: myDialog1
             box.color: "white"
@@ -412,7 +412,7 @@ GameWindow {
             }
         }
     }
-    Scene {
+    Scene { property string __felgo_live_id_element: "FELGO_ID_10519_1196";
         id: aboutDialog
         width: mainScene.width
         height: mainScene.height
@@ -423,7 +423,7 @@ GameWindow {
             if(visible)
                 myDialog2.show()
         }
-        CustomHDialog{
+        CustomHDialog{ property string __felgo_live_id_element: "FELGO_ID_10519_1197";
             anchors.centerIn: parent
             id: myDialog2
             box.color: "white"
@@ -435,7 +435,7 @@ GameWindow {
         missionsScene.scale=0
     }
 
-    Scene{
+    Scene{ property string __felgo_live_id_element: "FELGO_ID_10519_1198";
         z:4
         id: missionsScene
         width: 708
@@ -444,12 +444,12 @@ GameWindow {
         visible: false;
         //MISSSIONS START HERE+++++++++++++++++++++++++++++++++++
         // animation to hide the dialog
-        ParallelAnimation {
+        ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_10519_1199";
             id: showMissionsAnimation
             onStarted: {
                 missionsScene.visible = true
             }
-            NumberAnimation {
+            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_10519_1200";
                 target: missionsScene
                 property: "scale"
                 from: 0
@@ -458,9 +458,9 @@ GameWindow {
                 duration: 250
             }
         }
-        ParallelAnimation {
+        ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_10519_1201";
             id: hideMissionsAnimation
-            NumberAnimation {
+            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_10519_1202";
                 target: missionsScene
                 property: "scale"
                 from: 1
@@ -473,7 +473,7 @@ GameWindow {
                 missionsScene.visible = false
             }
         }
-        MouseArea{
+        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_10519_1203";
             anchors.fill: parent
             onClicked: {
                 if(missionsScene.visible){
@@ -481,7 +481,7 @@ GameWindow {
                 }
             }
         }
-        Rectangle {
+        Rectangle { property string __felgo_live_id_element: "FELGO_ID_10519_1204";
             z:17
             id: mainRect
             width: parent.width*2/3
@@ -489,13 +489,13 @@ GameWindow {
             anchors.centerIn: parent
             border.color:"#2e8ddb"
             border.width:3
-            Rectangle{
+            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1205";
                 anchors.top: parent.top
                 id: header
                 width: parent.width
                 height: 100
                 color: "#2e8ddb"
-                Text{
+                Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1206";
                     anchors.fill: parent
                     color: "#ffffff"
                     font.bold: true
@@ -507,14 +507,14 @@ GameWindow {
                     font.family: "Bodoni MT Black"
                 }
             }
-            Rectangle{
+            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1207";
                 id: headerFade
                 width: parent.width
                 anchors.top:header.bottom
                 height: 15
                 color: "#18549e"
             }
-            Text{
+            Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1208";
                 id: countdownText
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width
@@ -528,9 +528,9 @@ GameWindow {
                 font.pointSize: 16
             }
             //Actual model stuff START HERE-----------------------------------
-            ListModel{
+            ListModel{ property string __felgo_live_id_element: "FELGO_ID_10519_1209";
                 id: mMissionModel
-                ListElement{//0
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1210";//0
                     index: 0
                     completed: false;
                     description: "Splash 3 times in a row. Record: "
@@ -539,7 +539,7 @@ GameWindow {
                     neededThings: 3
                     currentThings: 0
                 }
-                ListElement{//1
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1211";//1
                     index: 1
                     completed: false;
                     description: "Splash 6 times in a row. Record: "
@@ -548,7 +548,7 @@ GameWindow {
                     neededThings: 6
                     currentThings: 0
                 }
-                ListElement{//2
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1212";//2
                     index: 2
                     completed: false;
                     description: "Splash 11 times in a row. Record: "
@@ -557,7 +557,7 @@ GameWindow {
                     neededThings: 11
                     currentThings: 0
                 }
-                ListElement{//3
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1213";//3
                     index: 3
                     completed: false;
                     description: "Miss at the backboard two consecutive time. Record: "
@@ -566,7 +566,7 @@ GameWindow {
                     neededThings: 2
                     currentThings: 0
                 }
-                ListElement{//4
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1214";//4
                     index: 4
                     completed: false;
                     description: "Make at the rim 6 times in a row in level 3. Record:"
@@ -575,7 +575,7 @@ GameWindow {
                     neededThings: 6
                     currentThings: 0
                 }
-                ListElement{//5
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1215";//5
                     index: 5
                     completed: false;
                     description: "Make at the backboard 9 times in a row in level 2. Record:"
@@ -584,7 +584,7 @@ GameWindow {
                     neededThings: 9
                     currentThings: 0
                 }
-                ListElement{//6
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1216";//6
                     index: 6
                     completed: false;
                     description: "Splash the ball 8 times in a row during level 3. Record:"
@@ -593,7 +593,7 @@ GameWindow {
                     neededThings: 8
                     currentThings: 0
                 }
-                ListElement{//7
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1217";//7
                     index: 7
                     completed: false;
                     description: "Make all the shots in level 1. Record"
@@ -602,7 +602,7 @@ GameWindow {
                     neededThings: 21
                     currentThings: 0
                 }
-                ListElement{//8
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1218";//8
                     index: 8
                     completed: false;
                     description: "Make all the shots in level 2. Record"
@@ -611,7 +611,7 @@ GameWindow {
                     neededThings: 21
                     currentThings: 0
                 }
-                ListElement{//9
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1219";//9
                     index: 9
                     completed: false
                     description: "Miss two consecutively at the rim in level 3. Record:"
@@ -620,7 +620,7 @@ GameWindow {
                     neededThings: 2
                     currentThings: 0
                 }
-                ListElement{//10
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1220";//10
                     index: 10
                     completed: false;
                     description: "Get exactly 4 coins in a game in a twice"
@@ -629,7 +629,7 @@ GameWindow {
                     neededThings: 2
                     currentThings: 0
                 }
-                ListElement{//11
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1221";//11
                     index: 11
                     completed: false;
                     description: "Advance to level 3 while earning zero coins in the match"
@@ -638,7 +638,7 @@ GameWindow {
                     neededThings: 1
                     currentThings: 0
                 }
-                ListElement{//12
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1222";//12
                     index: 12
                     completed: false;
                     description: "Complete the other two challenges."
@@ -647,7 +647,7 @@ GameWindow {
                     neededThings: 2
                     currentThings: 0
                 }
-                ListElement{//13
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1223";//13
                     index: 13
                     completed: false;
                     description: "Make at the backboard four consecutive times. Record: "
@@ -656,7 +656,7 @@ GameWindow {
                     neededThings: 4
                     currentThings: 0
                 }
-                ListElement{//14
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1224";//14
                     index: 14
                     completed: false;
                     description: "Play a game with three different balls"
@@ -665,7 +665,7 @@ GameWindow {
                     neededThings: 3
                     currentThings: 0
                 }
-                ListElement{//15
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1225";//15
                     index: 15
                     completed: false;
                     description: "Purchase a new ball"
@@ -674,7 +674,7 @@ GameWindow {
                     neededThings: 1
                     currentThings: 0
                 }
-                ListElement{//16
+                ListElement{ property string __felgo_live_id_element: "FELGO_ID_10519_1226";//16
                     index: 16
                     completed: false;
                     description: "Score "
@@ -717,12 +717,12 @@ GameWindow {
             Component{
                 id: mMissionDelegate
 
-                Rectangle{
+                Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1227";
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: mainRect.width-25
                     height: width*1/4+50
                     id: outsideComponentRect
-                    Rectangle{
+                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1228";
                         visible: (completed)
                         width: outsideComponentRect.width
                         height: outsideComponentRect.height
@@ -730,7 +730,7 @@ GameWindow {
                         color: "white"
                         border.width: 12
                         border.color: "#7ae868"
-                        Text{
+                        Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1229";
                             anchors.centerIn: parent
                             text: "COMPLETED"
                             font.family: "Segoe UI Light"
@@ -742,24 +742,24 @@ GameWindow {
 
                         }
                     }
-                    Rectangle{
+                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1230";
                         visible: !completed
                         width: outsideComponentRect.width
                         height: outsideComponentRect.height
                         anchors.horizontalCenter: parent.horizontalCenter
                         color: "transparent"
-                        Rectangle{
+                        Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1231";
                             id: mainDelegateRect
                             width: parent.width
                             height: parent.height-12
                             anchors.verticalCenter: parent.verticalCenter
                             color: (currentThings>=neededThings)?"#7ae868":"#2e8ddb"
-                            Column{
+                            Column{ property string __felgo_live_id_element: "FELGO_ID_10519_1232";
                                 x:16
                                 y:10
                                 spacing: 12;
                                 width: parent.width
-                                Text{
+                                Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1233";
                                     id: theText
                                     y:15
                                     font.family: "Swis721 Cn BT"
@@ -771,14 +771,14 @@ GameWindow {
                                     text:description
                                     //description text
                                 }
-                                Row{
+                                Row{ property string __felgo_live_id_element: "FELGO_ID_10519_1234";
                                     spacing:2
                                     //progress bar
-                                    ProgressBar {
+                                    ProgressBar { property string __felgo_live_id_element: "FELGO_ID_10519_1235";
                                         id: thingsLeft
                                         value: currentThings/neededThings
                                         padding: 2
-                                        Text{
+                                        Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1236";
                                             z:3
                                             anchors.centerIn: parent
                                             color: "white"
@@ -787,16 +787,16 @@ GameWindow {
                                             font.pointSize: 18
                                             text:(currentThings>=neededThings)?(neededThings+"/"+neededThings):(currentThings+"/"+neededThings)
                                         }
-                                        background: Rectangle {
+                                        background: Rectangle { property string __felgo_live_id_element: "FELGO_ID_10519_1237";
                                             implicitWidth: theText.width
                                             implicitHeight: 40
                                             color: "#000000"
                                             radius: 2
                                         }
-                                        contentItem: Item {
+                                        contentItem: Item { property string __felgo_live_id_element: "FELGO_ID_10519_1238";
                                             implicitWidth: theText.width
                                             implicitHeight: 30
-                                            Rectangle {
+                                            Rectangle { property string __felgo_live_id_element: "FELGO_ID_10519_1239";
                                                 width: thingsLeft.visualPosition * parent.width
                                                 height: parent.height
                                                 radius: 2
@@ -805,13 +805,13 @@ GameWindow {
                                         }
                                     }
                                     //filler space
-                                    Rectangle{
+                                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1240";
                                         width: 30
                                         height: 2
                                         color: "transparent"
                                     }
                                     //reward
-                                    Text{
+                                    Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1241";
                                         anchors.verticalCenter: parent.verticalCenter
                                         color: "black"
                                         font.family: "Swis721 Cn BT"
@@ -820,11 +820,11 @@ GameWindow {
                                         text:reward
                                     }
                                     //coin pic
-                                    Image{
+                                    Image{ property string __felgo_live_id_element: "FELGO_ID_10519_1242";
                                         anchors.verticalCenter: parent.verticalCenter
                                         width: 40
                                         height: 40
-                                        source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coinFront.png"
+                                        source: "images/coinFront.png"
                                     }
                                 }
                             }
@@ -832,7 +832,7 @@ GameWindow {
                     }
                 }
             }
-            ListView {
+            ListView { property string __felgo_live_id_element: "FELGO_ID_10519_1243";
                 id: listOfMissions
                 z:18
                 anchors.top: countdownText.bottom
@@ -843,12 +843,12 @@ GameWindow {
                 model: displayDelegateModel             // 6
                 interactive: false;
             }
-            DelegateModel {
+            DelegateModel { property string __felgo_live_id_element: "FELGO_ID_10519_1244";
                 id: displayDelegateModel
                 delegate:  mMissionDelegate
                 model: mMissionModel
                 groups: [
-                    DelegateModelGroup   {
+                    DelegateModelGroup   { property string __felgo_live_id_element: "FELGO_ID_10519_1245";
                         id: mDelegateGroupModel
                         includeByDefault: false
                         name: "todaysMissions"
@@ -858,7 +858,7 @@ GameWindow {
             }
             //Actual model stuff ENDS HERE------------------------------------------------------------
             //get rewards button
-            Button{
+            Button{ property string __felgo_live_id_element: "FELGO_ID_10519_1246";
                 onClicked: {
                     if(visible){
                         Extra.numCoins+= currentMissionRewards;
@@ -884,16 +884,16 @@ GameWindow {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: 80
                 width: 170
-                Rectangle{
+                Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1247";
                     anchors.fill: parent
                     color: "#40ad36"
 
                 }
-                Row{
+                Row{ property string __felgo_live_id_element: "FELGO_ID_10519_1248";
                     x:10
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    Text{
+                    Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1249";
                         anchors.verticalCenter: parent.verticalCenter
                         color: "black"
                         font.family: "Swis721 Cn BT"
@@ -901,14 +901,14 @@ GameWindow {
                         font.pointSize: 25
                         text:"Get"
                     }
-                    Rectangle{
+                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1250";
                         width: 15
                         height: 3
                         color: "transparent"
                     }
 
                     //text
-                    Text{
+                    Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1251";
                         anchors.verticalCenter: parent.verticalCenter
                         color: "black"
                         font.family: "Swis721 Cn BT"
@@ -917,15 +917,15 @@ GameWindow {
                         text: currentMissionRewards
                     }
                     //coin pic
-                    Image{
+                    Image{ property string __felgo_live_id_element: "FELGO_ID_10519_1252";
                         anchors.verticalCenter: parent.verticalCenter
                         width: 40
                         height: 40
-                        source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coinFront.png"
+                        source: "images/coinFront.png"
                     }
                 }
             }
-            Rectangle{
+            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1253";
                 visible: currentMissionRewards!=0;
                 id: getRewardsButtonFade
                 width: getRewardsButton.width
@@ -936,7 +936,7 @@ GameWindow {
             }
 
             //ADS FOR THE MONEY MONEY MONEY
-            Button{
+            Button{ property string __felgo_live_id_element: "FELGO_ID_10519_1254";
                 //these are the rewarded ad stuff IGNORE ERRORS FOR NOW
                 //                        AdMobRewardedVideo {
                 //                            id: myRewardedVideo
@@ -966,15 +966,15 @@ GameWindow {
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: 80
                 width: 140*3
-                Rectangle{
+                Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1255";
                     anchors.fill: parent
                     color: "#2e8ddb"
                 }
-                Row{
+                Row{ property string __felgo_live_id_element: "FELGO_ID_10519_1256";
                     x:10
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.centerIn: parent
-                    Text{
+                    Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1257";
                         anchors.verticalCenter: parent.verticalCenter
                         color: "White"
                         font.family: "Swis721 Cn BT"
@@ -982,21 +982,21 @@ GameWindow {
                         font.pointSize: 30
                         text:"New Missions"
                     }
-                    Rectangle{
+                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1258";
                         width: 15
                         height: 2
                         color: "transparent"
                     }
                     //video pic
-                    Image{
+                    Image{ property string __felgo_live_id_element: "FELGO_ID_10519_1259";
                         anchors.verticalCenter: parent.verticalCenter
                         width: 50*1.35
                         height: 35*1.35
-                        source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/PlayAdVideo.png"
+                        source: "images/PlayAdVideo.png"
                     }
                 }
             }
-            Rectangle{
+            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1260";
                 visible: newMissionsAdButton.visible;
                 id: newMissionsAdButtonFade
                 width: newMissionsAdButton.width
@@ -1006,7 +1006,7 @@ GameWindow {
                 color: "#18549e"
             }
         }
-        Rectangle{
+        Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1261";
             visible:true;
             z:16
             id: mainRectFade
@@ -1020,11 +1020,11 @@ GameWindow {
     //MISSIOSN ENDS HERE_________________________________
 
     //cool kids style with the navigation toolBar
-    Scene{
+    Scene{ property string __felgo_live_id_element: "FELGO_ID_10519_1262";
         width: 708
         height: 1270
         id: mainScene
-        NavigationBar{
+        NavigationBar{ property string __felgo_live_id_element: "FELGO_ID_10519_1263";
             height: /*60*/85
             width: parent.width
             id: newNavigationBar
@@ -1042,16 +1042,16 @@ GameWindow {
             //                    }
             //                }
             //            }
-            leftBarItem: NavigationBarItem{
+            leftBarItem: NavigationBarItem{ property string __felgo_live_id_element: "FELGO_ID_10519_11354";
                 visible:  navigationStack.depth>1
                 contentWidth: 38
-                IconButtonBarItem{
+                IconButtonBarItem{ property string __felgo_live_id_element: "FELGO_ID_10519_11355";
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: "white"
                     icon: IconType.arrowleft
                     iconSize: 38
                 }
-                MouseArea{
+                MouseArea{ property string __felgo_live_id_element: "FELGO_ID_10519_11356";
                     anchors.fill: parent;
                     onClicked: {
                         if(Extra.endingPage==="CompetitiveMode.qml"){
@@ -1101,7 +1101,7 @@ GameWindow {
             //                        navigationStack.pop()
             //                }
             //            }
-            titleItem: Text{
+            titleItem: Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1265";
                 x:165
                 y:8
                 font.pointSize: 25
@@ -1111,15 +1111,15 @@ GameWindow {
                 color: "white"
             }
 
-            rightBarItem:NavigationBarItem{
+            rightBarItem:NavigationBarItem{ property string __felgo_live_id_element: "FELGO_ID_10519_1266";
                 contentWidth: 20
-                IconButtonBarItem{
+                IconButtonBarItem{ property string __felgo_live_id_element: "FELGO_ID_10519_8685";
                     anchors.horizontalCenter: parent.horizontalCenter
                     color: "white"
                     icon: IconType.ellipsisv
                     iconSize: 40
                 }
-                MouseArea{
+                MouseArea{ property string __felgo_live_id_element: "FELGO_ID_10519_3342";
                     anchors.fill: parent;
                     onClicked: {
                         optionsMenu.open()
@@ -1133,33 +1133,33 @@ GameWindow {
                 //                onClicked: {
                 //                    optionsMenu.open()
                 //                }
-                Menu {
+                Menu { property string __felgo_live_id_element: "FELGO_ID_10519_1269";
                     id: optionsMenu
                     x: parent.width - width
                     transformOrigin: Menu.TopRight
-                    Action {
+                    Action { property string __felgo_live_id_element: "FELGO_ID_10519_1270";
                         text: "Settings"
                         onTriggered: settingsDialog.visible=true
                     }
-                    Action {
+                    Action { property string __felgo_live_id_element: "FELGO_ID_10519_1271";
                         text: "How to play?"
                         onTriggered: aboutDialog.visible=true
                     }
-                    Action {
+                    Action { property string __felgo_live_id_element: "FELGO_ID_10519_1272";
                         text: "Help"
                         onTriggered: help()
                     }
                 }
             }
         }
-        NavigationStack{
+        NavigationStack{ property string __felgo_live_id_element: "FELGO_ID_10519_1273";
             anchors.top: newNavigationBar.bottom
             id: navigationStack
             navigationBar.visible: false
             width: parent.width
             height: parent.height
-            initialPage:Page {
-                MouseArea{
+            initialPage:Page { property string __felgo_live_id_element: "FELGO_ID_10519_1274";
+                MouseArea{ property string __felgo_live_id_element: "FELGO_ID_10519_1275";
                     anchors.fill: parent
                     onClicked:{
                         if(missionsScene.visible){
@@ -1172,14 +1172,14 @@ GameWindow {
                 width: parent.width
                 height: parent.height
                 id: pane
-                Image{
+                Image{ property string __felgo_live_id_element: "FELGO_ID_10519_1276";
                     z:-1
                     id: backgroundImage
                     opacity: 0.4
                     anchors.fill: parent
-                    source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/background.png"
+                    source: "images/background.png"
                 }
-                Rectangle{
+                Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1277";
                     id: personalBestBox
                     width: mainPBText.implicitWidth+30
                     height: mainPBText.implicitHeight+mainPBText2.implicitHeight+20
@@ -1191,7 +1191,7 @@ GameWindow {
                     Component.onCompleted: {
                         switchToBlueTimerPB.start()
                     }
-                    Text{
+                    Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1278";
                         visible:false
                         id:templateText
                         text:"Personal Best: "
@@ -1199,7 +1199,7 @@ GameWindow {
                         font.family: "Stencil"
                     }
 
-                    Text{
+                    Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1279";
                         anchors.horizontalCenter: parent.horizontalCenter
                         y:10
                         id: mainPBText
@@ -1209,7 +1209,7 @@ GameWindow {
                         font.family: "Stencil"
                         wrapMode: Text.Wrap
                     }
-                    Text{
+                    Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1280";
                         id: mainPBText2
                         anchors.horizontalCenter: mainPBText.horizontalCenter
                         anchors.top:mainPBText.bottom
@@ -1219,7 +1219,7 @@ GameWindow {
                         font.family: "Stencil"
                     }
                     radius: 5
-                    Timer{
+                    Timer{ property string __felgo_live_id_element: "FELGO_ID_10519_1281";
                         id: switchToBlueTimerPB
                         interval: 400
                         onTriggered: {
@@ -1227,7 +1227,7 @@ GameWindow {
                             switchToRedTimerPB.restart()
                         }
                     }
-                    Timer{
+                    Timer{ property string __felgo_live_id_element: "FELGO_ID_10519_1282";
                         id: switchToGreenTimerPB
                         interval: 400
                         onTriggered: {
@@ -1235,7 +1235,7 @@ GameWindow {
                             switchToBlueTimerPB.restart()
                         }
                     }
-                    Timer{
+                    Timer{ property string __felgo_live_id_element: "FELGO_ID_10519_1283";
                         id: switchToRedTimerPB
                         interval: 400
                         onTriggered: {
@@ -1245,33 +1245,33 @@ GameWindow {
                     }
                 }
                 //coin thing in corner
-                Rectangle{
+                Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1284";
                     id:coinThing
-                    Row{
+                    Row{ property string __felgo_live_id_element: "FELGO_ID_10519_1285";
                         spacing: 20;
                         x: 10
                         y:10
-                        Image{
+                        Image{ property string __felgo_live_id_element: "FELGO_ID_10519_1286";
                             anchors.verticalCenter: parent.verticalCenter
                             width: 35
                             height: 35
-                            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/coinFront.png"
+                            source: "images/coinFront.png"
                         }
-                        Text{
+                        Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1287";
                             anchors.verticalCenter: parent.verticalCenter
                             property int value: Extra.numCoins
                             text: value
                             font.family: "Stencil"
                             horizontalAlignment: Text.AlignHCenter
                             font.pointSize:21
-                            Behavior on value {
-                                NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad}
+                            Behavior on value { property string __felgo_live_id_element: "FELGO_ID_10519_1288";
+                                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_10519_1289"; duration: 1000; easing.type: Easing.InOutQuad}
                             }
                         }
 
                     }
                 }
-                Label {
+                Label { property string __felgo_live_id_element: "FELGO_ID_10519_1290";
                     text: "Shoot Hoops!"
                     font.family:"Impact"
                     font.pointSize: 70
@@ -1281,7 +1281,7 @@ GameWindow {
                     anchors.horizontalCenter: parent.horizontalCenter
                     horizontalAlignment: Label.AlignHCenter
                 }
-                Rectangle{
+                Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1291";
                     //                    y: parent.width/2+40
                     anchors.verticalCenter: smallCirclesColumn.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1294,7 +1294,7 @@ GameWindow {
                     Component.onCompleted: {
                         switchToGreenTimer.start()
                     }
-                    Text{
+                    Text{ property string __felgo_live_id_element: "FELGO_ID_10519_1292";
                         text: "START"
                         font.family: "Tahoma"
                         font.bold: true
@@ -1303,7 +1303,7 @@ GameWindow {
                         anchors.centerIn: parent
                     }
                     radius: 50
-                    Timer{
+                    Timer{ property string __felgo_live_id_element: "FELGO_ID_10519_1293";
                         id: switchToBlueTimer
                         interval: 550
                         onTriggered: {
@@ -1311,7 +1311,7 @@ GameWindow {
                             switchToRedTimer.restart()
                         }
                     }
-                    Timer{
+                    Timer{ property string __felgo_live_id_element: "FELGO_ID_10519_1294";
                         id: switchToGreenTimer
                         interval: 600
                         onTriggered: {
@@ -1319,7 +1319,7 @@ GameWindow {
                             switchToBlueTimer.restart()
                         }
                     }
-                    Timer{
+                    Timer{ property string __felgo_live_id_element: "FELGO_ID_10519_1295";
                         id: switchToRedTimer
                         interval: 550
                         onTriggered: {
@@ -1327,7 +1327,7 @@ GameWindow {
                             switchToGreenTimer.restart()
                         }
                     }
-                    MouseArea{
+                    MouseArea{ property string __felgo_live_id_element: "FELGO_ID_10519_1296";
                         id: buttonToPlayGameMouseArea
                         anchors.fill: parent
                         onClicked: {
@@ -1343,26 +1343,26 @@ GameWindow {
                         }
                     }
                 }
-                Column{
+                Column{ property string __felgo_live_id_element: "FELGO_ID_10519_1297";
                     y: 410
                     x:30
                     spacing: 125
                     id: smallCirclesColumn
-                    Rectangle{
+                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1298";
                         color: "transparent"
                         width: 120
                         height: 120
                         radius: 105
                         border.width: 2
                         border.color: "black"
-                        Image{
+                        Image{ property string __felgo_live_id_element: "FELGO_ID_10519_1299";
                             z:-1
                             anchors.centerIn: parent
                             width: 115
                             height: 115
-                            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/shopIcon.png"
+                            source: "images/shopIcon.png"
                         }
-                        MouseArea{
+                        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_10519_1300";
                             anchors.fill: parent
                             onClicked: {
                                 //                                missionsScene.visible=false
@@ -1373,30 +1373,30 @@ GameWindow {
                             }
                         }
                     }
-                    Rectangle{
+                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1301";
                         color: "transparent"
                         width: 120
                         height: 120
                         radius: 105
                         border.width: 2
                         border.color: "black"
-                        Image{
+                        Image{ property string __felgo_live_id_element: "FELGO_ID_10519_1302";
                             x: 5
                             y:5
                             width: 35
                             height: 35
-                            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/exclamationMark.png"
+                            source: "images/exclamationMark.png"
                             visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
                         }
 
-                        Image{
+                        Image{ property string __felgo_live_id_element: "FELGO_ID_10519_1303";
                             z:-1
                             anchors.centerIn: parent
                             width: 115
                             height: 115
-                            source: "file:///Users/arjun/Documents/FelgoCompetitiveBallTryOne/images/missionsIcon.png"
+                            source: "images/missionsIcon.png"
                         }
-                        Rectangle{
+                        Rectangle{ property string __felgo_live_id_element: "FELGO_ID_10519_1304";
                             visible: thePauseTimer.running
                             z:-1
                             anchors.centerIn: parent
@@ -1407,7 +1407,7 @@ GameWindow {
                             opacity: 0.50
                         }
 
-                        MouseArea{
+                        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_10519_1305";
                             anchors.fill: parent
                             onClicked: {
                                 if(!thePauseTimer.running){
@@ -1439,25 +1439,25 @@ GameWindow {
     }
     Component{
         id: competitiveModeComponent
-        CompetitiveMode{
+        CompetitiveMode{ property string __felgo_live_id_element: "FELGO_ID_10519_1306";
         }
     }
     Component{
         id: gameStoreComponent
-        GameStore{
+        GameStore{ property string __felgo_live_id_element: "FELGO_ID_10519_1307";
         }
     }
     Component{
         id: customizationModeComponent
-        CustomizationMode{
+        CustomizationMode{ property string __felgo_live_id_element: "FELGO_ID_10519_1308";
         }
     }
     Component{
         id: halftimeModeComponent
-        HalftimeMode{
+        HalftimeMode{ property string __felgo_live_id_element: "FELGO_ID_10519_1309";
         }
     }
-    Settings{
+    Settings{ property string __felgo_live_id_element: "FELGO_ID_10519_1310";
         id: something
         property alias leadsbadasdasdssdadsfrondasnnio: root.counter14
         property alias isnaadtsasadsaasdsdfgoadsattted: root.firstTimeUpdatingMissions

@@ -35,7 +35,7 @@ import QtMultimedia 5.9
 
 */
 
-Item {
+Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_21888"; property string __felgo_live_id_element: "FELGO_ID_21888_11476";
     z:20
     id: dialog
     // we need to disable this item if it is invisible, then all the contained MouseAreas are also disabled
@@ -68,7 +68,7 @@ Item {
     }
 
     // this component prevents selecting anything behind the dialog, only enabled if it's a modal dialog
-    MouseArea {
+    MouseArea { property string __felgo_live_id_element: "FELGO_ID_21888_11477";
         anchors.fill: parent
         enabled: dialog.modal
         onClicked: {
@@ -77,7 +77,7 @@ Item {
     }
 
     // visible overlay, only visible if it's a modal dialog
-    Rectangle {
+    Rectangle { property string __felgo_live_id_element: "FELGO_ID_21888_11478";
         id: overlay
         visible: dialog.modal
         anchors.fill: parent
@@ -85,8 +85,8 @@ Item {
     }
 
     // the box containing dialog text and buttons
-    Rectangle {
-        MouseArea{
+    Rectangle { property string __felgo_live_id_element: "FELGO_ID_21888_11479";
+        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_21888_11480";
             anchors.fill: parent
             enabled: dialog.modal
         }
@@ -112,7 +112,7 @@ Item {
         width: 630
         height: 330
         focus: true
-        Label{
+        Label{ property string __felgo_live_id_element: "FELGO_ID_21888_11481";
             anchors.horizontalCenter: parent.horizontalCenter
             x:20
             y:20
@@ -127,7 +127,7 @@ Item {
             font.family: "Bodoni MT Black"
         }
 
-        Label {
+        Label { property string __felgo_live_id_element: "FELGO_ID_21888_56673";
             x:20
             y:60
             anchors.horizontalCenter: parent.horizontalCenter
@@ -141,12 +141,12 @@ Item {
             font.pointSize: 16.5
             font.family: "Century Gothic"
         }
-        Button {
-            Rectangle{
+        Button { property string __felgo_live_id_element: "FELGO_ID_21888_11482";
+            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_21888_11483";
                 anchors.fill: parent
                 color: okButton.pressed?"#233ab8" : "#3F51B5"
             }
-            Text{
+            Text{ property string __felgo_live_id_element: "FELGO_ID_21888_11484";
                 anchors.centerIn: parent
                 font.pointSize: 20
                 text: "Ok"
@@ -166,12 +166,12 @@ Item {
                 dialog.hide()
             }
         }
-        Button {
-            Rectangle{
+        Button { property string __felgo_live_id_element: "FELGO_ID_21888_11485";
+            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_21888_11486";
                 anchors.fill: parent
                 color: cancelButton.pressed?"#233ab8" : "#3F51B5"
             }
-            Text{
+            Text{ property string __felgo_live_id_element: "FELGO_ID_21888_11487";
                 anchors.centerIn: parent
                 font.pointSize: 20
                 text: "Cancel"
@@ -191,16 +191,16 @@ Item {
                 dialog.hide()
             }
         }
-        Button{
+        Button{ property string __felgo_live_id_element: "FELGO_ID_21888_11488";
             visible: false
             id: templateButton
         }
     }
 
     // animation to show the dialog
-    ParallelAnimation {
+    ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_21888_11489";
         id: showAnimation
-        NumberAnimation {
+        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_21888_11490";
             target: box
             property: "scale"
             from: 0
@@ -208,7 +208,7 @@ Item {
             easing.type: Easing.OutBack
             duration: 250
         }
-        NumberAnimation {
+        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_21888_11491";
             target: overlay
             property: "opacity"
             from: 0
@@ -218,9 +218,9 @@ Item {
     }
 
     // animation to hide the dialog
-    ParallelAnimation {
+    ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_21888_11492";
         id: hideAnimation
-        NumberAnimation {
+        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_21888_11493";
             target: box
             property: "scale"
             from: 1
@@ -228,7 +228,7 @@ Item {
             easing.type: Easing.InBack
             duration: 250
         }
-        NumberAnimation {
+        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_21888_11494";
             target: overlay
             property: "opacity"
             from: 0.2

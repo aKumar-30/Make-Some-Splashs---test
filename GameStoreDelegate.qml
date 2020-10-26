@@ -1,10 +1,10 @@
 import QtQuick 2.0
 
-Rectangle{
+Rectangle{ property string __felgo_live_id_component: "FELGO_COMPONENT_ID_31327"; property string __felgo_live_id_element: "FELGO_ID_31327_359";
     width: grid.cellWidth
     height: grid.cellHeight
     color: "transparent"
-    Rectangle {
+    Rectangle { property string __felgo_live_id_element: "FELGO_ID_31327_360";
         width: grid.cellWidth-20
         height: grid.cellHeight-20
         id: wrapper
@@ -14,7 +14,7 @@ Rectangle{
         border.color: "black"
         radius: 5;
         color: "white"
-        Image{
+        Image{ property string __felgo_live_id_element: "FELGO_ID_31327_361";
             id: mImage
             x:parent.x
             y:6
@@ -23,7 +23,7 @@ Rectangle{
             source: picSource
 
         }
-        Text{
+        Text{ property string __felgo_live_id_element: "FELGO_ID_31327_362";
             width: grid.cellWidth-15
             y: mImage.y+mImage.height+4
             anchors.horizontalCenter: parent.horizontalCenter
@@ -35,7 +35,7 @@ Rectangle{
             font.pointSize: 8
             color:"#050027"
         }
-        MouseArea{
+        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_31327_363";
             anchors.fill: parent
             onClicked:{
                 count = price;

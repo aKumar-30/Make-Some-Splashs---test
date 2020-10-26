@@ -3,7 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.2
 import QtQuick.Dialogs 1.2
-Page {
+Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_14491"; property string __felgo_live_id_element: "FELGO_ID_14491_252";
     //width: 1200
     //height: 580
     property int duration: 1000
@@ -28,7 +28,7 @@ Page {
              otherCustomizeButton.visible=true;
     }
 
-    Connections{
+    Connections{ property string __felgo_live_id_element: "FELGO_ID_14491_253";
         target: Extra
         function onSpaceClickedInCust(){
             console.log("i got here")
@@ -37,7 +37,7 @@ Page {
     }
 
     //Functions for setting type of ball start
-    MouseArea{
+    MouseArea{ property string __felgo_live_id_element: "FELGO_ID_14491_254";
         anchors.fill: parent
         onClicked: {
             whatHappensWhenClicked()
@@ -47,13 +47,13 @@ Page {
     Component.onCompleted: {
         startTextTimer.start()
     }
-    SequentialAnimation{
+    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_14491_255";
         id: startAnim
-        PauseAnimation {
+        PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_14491_256";
             duration: 1000
 
         }
-        NumberAnimation {
+        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_14491_257";
             target: startText
             property: "opacity"
             duration: 500
@@ -61,7 +61,7 @@ Page {
             from: 0;
         }
     }
-    Rectangle{
+    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_14491_258";
         id: startText
         color: "transparent"
         border.color: "brown"
@@ -72,7 +72,7 @@ Page {
         z:9
         opacity:0;
         anchors.centerIn: parent
-        Text{
+        Text{ property string __felgo_live_id_element: "FELGO_ID_14491_259";
             id: text
             anchors.centerIn: parent
             font.pointSize: 20
@@ -83,7 +83,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
         }
     }
-    Timer{
+    Timer{ property string __felgo_live_id_element: "FELGO_ID_14491_260";
         id: startTextTimer
         interval: 3000
         onTriggered: {
@@ -141,7 +141,7 @@ Page {
             index5func()
     }
     //Functions for setting type of ball end
-    Button{
+    Button{ property string __felgo_live_id_element: "FELGO_ID_14491_261";
         id: otherCustomizeButton
         text: "Customize!"
         z:60
@@ -155,7 +155,7 @@ Page {
     }
 
     Rectangle
-    {
+    { property string __felgo_live_id_element: "FELGO_ID_14491_262";
         id: containerRectId
         color: "silver"
         opacity: 0.8
@@ -165,20 +165,20 @@ Page {
         z: 100
         visible: false
         RowLayout
-        {
+        { property string __felgo_live_id_element: "FELGO_ID_14491_263";
             x: 10
             anchors.centerIn: parent
-            Column{
+            Column{ property string __felgo_live_id_element: "FELGO_ID_14491_264";
                 Layout.fillWidth: true
                 id: durationSliderColumn
-                Label{
+                Label{ property string __felgo_live_id_element: "FELGO_ID_14491_265";
                     text: "Choose duration (0-5 sec.)"
                     wrapMode: Label.WordWrap
                     font.bold: true
                     font.pointSize: 10
                 }
 
-                Slider{
+                Slider{ property string __felgo_live_id_element: "FELGO_ID_14491_266";
                     Layout.fillWidth: true
                     id: durationSlider;
                     to: 5000
@@ -189,7 +189,7 @@ Page {
                 }
             }
 
-            Button{
+            Button{ property string __felgo_live_id_element: "FELGO_ID_14491_267";
                 Layout.fillWidth: true
                 id: chooseColorButton
                 text: "Change ground color"
@@ -198,7 +198,7 @@ Page {
                 {
                     messageDialog.open()
                 }
-                MessageDialog{
+                MessageDialog{ property string __felgo_live_id_element: "FELGO_ID_14491_268";
                     width: 150
                     id: messageDialog
                     text: "Please choose a color. This color will appear as the color of
@@ -207,7 +207,7 @@ Page {
                     onAccepted: colorDialogId.open()
                 }
 
-                ColorDialog{
+                ColorDialog{ property string __felgo_live_id_element: "FELGO_ID_14491_269";
                     id: colorDialogId
                     title: "Please choose a color"
                     onAccepted: {
@@ -215,29 +215,29 @@ Page {
                     }
                 }
             }
-            ComboBox{
+            ComboBox{ property string __felgo_live_id_element: "FELGO_ID_14491_270";
                 Layout.fillWidth: true
                 id: chooseBallComboBox
                 model: ["Balls","Basket Ball","Volley Ball","Tennis Ball", "Soccer Ball", "Bowling ball", "Random"]
             }
-            ComboBox{
+            ComboBox{ property string __felgo_live_id_element: "FELGO_ID_14491_271";
                 Layout.fillWidth: true
                 id: bouncesComboBox
                 model: ["Bounces",1,2,3]
             }
-            GroupBox{
+            GroupBox{ property string __felgo_live_id_element: "FELGO_ID_14491_272";
                 id: groupBoxforChecks
                 Layout.fillWidth: true
                 title: "Options"
 
-                CheckBox{
+                CheckBox{ property string __felgo_live_id_element: "FELGO_ID_14491_273";
                     text: "Become night"
                     id: changeStateCheckBox
                 }
             }
 
 
-            Button{
+            Button{ property string __felgo_live_id_element: "FELGO_ID_14491_274";
                 Layout.fillWidth: true
                 id: submitButton
                 text: "Make changes"
@@ -362,29 +362,29 @@ Page {
         }
     }
 
-    Rectangle {
+    Rectangle { property string __felgo_live_id_element: "FELGO_ID_14491_275";
         id: sky
         width: parent.width
         height: 370
         color:"blue"
-        gradient: Gradient {
-            GradientStop { id: skyStartGradient ;position: 0.0; color: gradientGround1 }
-            GradientStop { id: skyEndGradient ;position: 1.0; color: gradientGround2 }
+        gradient: Gradient { property string __felgo_live_id_element: "FELGO_ID_14491_276";
+            GradientStop { property string __felgo_live_id_element: "FELGO_ID_14491_277"; id: skyStartGradient ;position: 0.0; color: gradientGround1 }
+            GradientStop { property string __felgo_live_id_element: "FELGO_ID_14491_278"; id: skyEndGradient ;position: 1.0; color: gradientGround2 }
         }
     }
 
-    Rectangle{
+    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_14491_279";
         id: ground
         anchors.top: sky.bottom
         anchors.bottom: parent.bottom
         height: 20
         width: parent.width
-        gradient: Gradient {
-            GradientStop { id: groundStartGradient; position: 0.0; color: "#00FF00"}
-            GradientStop {id: groundEndGradient; position: 1.0; color: "#00803F"}
+        gradient: Gradient { property string __felgo_live_id_element: "FELGO_ID_14491_280";
+            GradientStop { property string __felgo_live_id_element: "FELGO_ID_14491_281"; id: groundStartGradient; position: 0.0; color: "#00FF00"}
+            GradientStop { property string __felgo_live_id_element: "FELGO_ID_14491_282";id: groundEndGradient; position: 1.0; color: "#00803F"}
         }
     }
-    Rectangle{
+    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_14491_283";
         visible: true
         id: sun
         radius: 80
@@ -394,7 +394,7 @@ Page {
         height:130
         color: "yellow"
     }
-    Image{
+    Image{ property string __felgo_live_id_element: "FELGO_ID_14491_284";
         visible: false
         id: moon
         x: parent.width-width-100
@@ -403,24 +403,24 @@ Page {
         height:130
         source:"file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/moon.png"
     }
-    BallImage{
+    BallImage{ property string __felgo_live_id_element: "FELGO_ID_14491_285";
         id: soccerBall
         source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/soccer_ball.png"
     }
-    BallImage{
+    BallImage{ property string __felgo_live_id_element: "FELGO_ID_14491_286";
         myVisible: true
         id: basketBall
         source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"
     }
-    BallImage{
+    BallImage{ property string __felgo_live_id_element: "FELGO_ID_14491_287";
         id: tennisBall
         source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/tennis_ball.png"
     }
-    BallImage{
+    BallImage{ property string __felgo_live_id_element: "FELGO_ID_14491_288";
         id: volleyBall
         source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/volley_ball.png"
     }
-    BallImage{
+    BallImage{ property string __felgo_live_id_element: "FELGO_ID_14491_289";
         id: bowlingBall
         source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/bowling_ball.png"
     }
@@ -430,7 +430,7 @@ Page {
     property int secondBounceDuration: 0
     property int thirdBounceDuration: 0
     SequentialAnimation
-    {
+    { property string __felgo_live_id_element: "FELGO_ID_14491_290";
         id: sequencialAnimation
         onFinished: {
             startText.visible = true;
@@ -438,7 +438,7 @@ Page {
             startTextTimer.restart()
         }
 
-        MyAnimationCustom{
+        MyAnimationCustom{ property string __felgo_live_id_element: "FELGO_ID_14491_291";
             id: firstBounce
             upEasingHeight: 20
             toX: (root.width-ball.width)
@@ -446,90 +446,90 @@ Page {
             upEasingType: Easing.OutCirc
             downEasingType: Easing.OutBounce
         }
-        MyAnimationCustom{
+        MyAnimationCustom{ property string __felgo_live_id_element: "FELGO_ID_14491_292";
             id: secondBounce
             upEasingHeight: 150
             toX: (root.width-ball.width)
             animationDuration: secondBounceDuration
         }
-        MyAnimationCustom{
+        MyAnimationCustom{ property string __felgo_live_id_element: "FELGO_ID_14491_293";
             id: thirdBounce
             upEasingHeight: 400
             toX: (root.width-ball.width)
             animationDuration: thirdBounceDuration
         }
     }
-    Rectangle{
+    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_14491_294";
         id: stateRectId
         state: "day"
         states: [
-            State {
+            State { property string __felgo_live_id_element: "FELGO_ID_14491_295";
                 name: "night"
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_296";
                     target: skyStartGradient
                     color: "#292485"
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_297";
                     target: skyEndGradient
                     color: "#2045b3"
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_298";
                     id: propertyGroundStartGradientStateDay
                     target: groundStartGradient
                     color: "#287d27"
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_299";
                     id: propertyGroundEndGradientStateDay
                     target: groundEndGradient
                     color: "#1a4f19"
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_300";
                     target: sun
                     visible: false
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_301";
                     target: moon
                     visible: true
                 }
             },
-            State {
+            State { property string __felgo_live_id_element: "FELGO_ID_14491_302";
                 name: "day"
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_303";
                     target: skyStartGradient
                     color: "#0080FF"
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_304";
                     target: skyEndGradient
                     color: "#66CCFF"
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_305";
                     id: propertyGroundStartGradientStateNight
                     target: groundStartGradient
                     color:"#00FF00"
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_306";
                     id: propertyGroundEndGradientStateNight
                     target: groundEndGradient
                     color: "#00803F"
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_307";
                     target: sun
                     visible: true
                 }
-                PropertyChanges {
+                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_14491_308";
                     target: moon
                     visible: false
                 }
             }
         ]
         transitions: [
-            Transition {
+            Transition { property string __felgo_live_id_element: "FELGO_ID_14491_309";
                 from: "*"
                 to: "*"
-                ColorAnimation {
+                ColorAnimation { property string __felgo_live_id_element: "FELGO_ID_14491_310";
                     duration: 500
                 }
-                NumberAnimation{
+                NumberAnimation{ property string __felgo_live_id_element: "FELGO_ID_14491_311";
                     property: opacity
                     duration: 500
                 }

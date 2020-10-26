@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-Image {
+Image { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_52446"; property string __felgo_live_id_element: "FELGO_ID_52446_576";
     property var myId: soccerBall
     property string mySource: ""
     property var myVisible: false
@@ -11,7 +11,7 @@ Image {
     width:150
     height:150
     source: mySource
-    MouseArea {
+    MouseArea { property string __felgo_live_id_element: "FELGO_ID_52446_577";
         anchors.fill: parent
         onClicked: {
             myId.x = 0;
