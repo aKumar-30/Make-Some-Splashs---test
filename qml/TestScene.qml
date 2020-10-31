@@ -1,10 +1,10 @@
 import QtQuick 2.0
 import Felgo 3.0
 
-Scene { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19452"; property string __felgo_live_id_element: "FELGO_ID_19452_1112";
+Scene {
     id: scene
 
-    PhysicsWorld { property string __felgo_live_id_element: "FELGO_ID_19452_1113";
+    PhysicsWorld {
         id: world
         running: true
         gravity.y: 9.81 // earth gravity
@@ -15,7 +15,7 @@ Scene { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19452"; p
         debugDrawVisible: true
     }
 
-    EntityManager { property string __felgo_live_id_element: "FELGO_ID_19452_1114";
+    EntityManager {
         id: entityManager
         entityContainer: scene
     }
@@ -23,22 +23,22 @@ Scene { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19452"; p
     // TODO add your own entities here!
 
     // Just a simple box
-    EntityBase { property string __felgo_live_id_element: "FELGO_ID_19452_1115";
+    EntityBase {
         entityType: "box"
 
-        Rectangle { property string __felgo_live_id_element: "FELGO_ID_19452_1116";
+        Rectangle {
             id: rect
             color: "red"
             width: 20
             height: 20
         }
-        BoxCollider { property string __felgo_live_id_element: "FELGO_ID_19452_1117";
+        BoxCollider {
             anchors.fill: rect
         }
     }
 
     // The ground, so the box doesn't fall out of the screen
-    EntityBase { property string __felgo_live_id_element: "FELGO_ID_19452_1118";
+    EntityBase {
         entityId: "ground1"
         entityType: "ground"
         height: 20
@@ -48,12 +48,12 @@ Scene { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19452"; p
             right: scene.right
         }
 
-        Rectangle { property string __felgo_live_id_element: "FELGO_ID_19452_1119";
+        Rectangle {
             anchors.fill: parent
             color: "blue"
         }
 
-        BoxCollider { property string __felgo_live_id_element: "FELGO_ID_19452_1120";
+        BoxCollider {
             anchors.fill: parent
             bodyType: Body.Static // the body shouldn't move
         }

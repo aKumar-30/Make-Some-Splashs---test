@@ -35,7 +35,7 @@ import QtMultimedia 5.9
 
 */
 
-Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; property string __felgo_live_id_element: "FELGO_ID_214_874";
+Item {
     z:20
     id: dialog
     anchors.fill: parent
@@ -68,7 +68,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
     }
 
     // this component prevents selecting anything behind the dialog, only enabled if it's a modal dialog
-    MouseArea { property string __felgo_live_id_element: "FELGO_ID_214_875";
+    MouseArea {
         anchors.fill: parent
         enabled: dialog.modal
         onClicked: {
@@ -77,7 +77,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
     }
 
     // visible overlay, only visible if it's a modal dialog
-    Rectangle { property string __felgo_live_id_element: "FELGO_ID_214_876";
+    Rectangle {
         id: overlay
         visible: dialog.modal
         anchors.fill: parent
@@ -85,8 +85,8 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
     }
 
     // the box containing dialog text and buttons
-    Rectangle { property string __felgo_live_id_element: "FELGO_ID_214_877";
-        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_214_878";
+    Rectangle {
+        MouseArea{
             anchors.fill: parent
             enabled: dialog.modal
         }
@@ -111,11 +111,11 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
         width: 550
         height: 900
         focus: true
-        Label { property string __felgo_live_id_element: "FELGO_ID_214_879";
+        Label {
             id: title
             height: 35
             anchors.horizontalCenter: parent.horizontalCenter
-            Text{ property string __felgo_live_id_element: "FELGO_ID_214_880";
+            Text{
                 anchors.horizontalCenter: parent.horizontalCenter
                 id: labelText
                 text: "How to play??"
@@ -126,7 +126,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
                 horizontalAlignment: "AlignHCenter"
             }
         }
-        Flickable{ property string __felgo_live_id_element: "FELGO_ID_214_22448";
+        Flickable{
             id: howToPlayFlickable
             y: title.y+title.width+75
             width: box.width-25
@@ -135,17 +135,17 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
             contentWidth: aboutColumn.width-5
             flickableDirection: Flickable.VerticalFlick
             clip: true
-            ScrollBar.vertical: ScrollBar{ property string __felgo_live_id_element: "FELGO_ID_214_4294";
+            ScrollBar.vertical: ScrollBar{
                 x:box.width-width
             }
-            Column { property string __felgo_live_id_element: "FELGO_ID_214_22449";
+            Column {
                 x:10
                 id: aboutColumn
                 spacing: 20
                 width:parent.width
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22450";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_214_22451";
+                    Text{
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
                         font.underline: true
@@ -154,73 +154,73 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
                         text: "The Game"
                     }
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22452";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_214_22453";
+                    Text{
                         font.bold: true
                         wrapMode: Label.Wrap
                         font.pointSize: 15
                         text: "Level 1"
                     }
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22454";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
                     text: "    Click near the slider to get the ball to shoot towards the basketball. The closer the slider is to the green the better the shot. If the ball misses three times in a row, you lose. Be careful, the slider moves faster as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22455";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_214_22456";
+                    Text{
                         font.bold: true
                         wrapMode: Label.Wrap
                         font.pointSize: 15
                         text: "Level 2"
                     }
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22457";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
                     text: "    Click near the slider to get the ball to shoot towards the basketball. The closer the slider is to the green the better the shot. If the ball misses three times in a row, you lose. Be careful, the slider moves in different speeds and speed patterns as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22458";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_214_22459";
+                    Text{
                         font.bold: true
                         wrapMode: Label.Wrap
                         font.pointSize: 15
                         text: "Halftime"
                     }
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22460";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
                     text: "    Time to have some fun! Try to click on as many balls as you can as they fall. The more balls you click the more bonus points you earn"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22461";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_214_22462";
+                    Text{
                         font.bold: true
                         wrapMode: Label.Wrap
                         font.pointSize: 15
                         text: "Level 3"
                     }
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22463";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
                     text: "    Try to click on the green part of the slider. The closer you are to a geen color (green then yellow then orange then red) the better the shot! If the ball misses three times in a row, you lose. Be careful, it switches faster as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22464";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_214_22465";
+                    Text{
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
                         font.underline: true
@@ -229,16 +229,16 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
                         text: "Coins"
                     }
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22466";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
                     text: "    Earn coins by completing daily missions, watching ads, or playing the game (randomly appearing)!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22467";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_214_22468";
+                    Text{
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
                         font.underline: true
@@ -247,16 +247,16 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
                         text: "Daily Missions"
                     }
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22469";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
                     text: "    Complete tasks by playing to game to earn coins. There are 3 missions, which reset and change every day"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22470";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_214_22471";
+                    Text{
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
                         font.underline: true
@@ -265,7 +265,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
                         text: "The Store"
                     }
                 }
-                Label { property string __felgo_live_id_element: "FELGO_ID_214_22472";
+                Label {
                     font.family: "Century Gothic"; width: parent.width
                     text: "    Use coins to purchase a new ball! These balls provide cool new looks for when you play. Wow!"
                     wrapMode: Label.Wrap
@@ -277,9 +277,9 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
     }
 
     // animation to show the dialog
-    ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_214_910";
+    ParallelAnimation {
         id: showAnimation
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_214_911";
+        NumberAnimation {
             target: box
             property: "scale"
             from: 0
@@ -287,7 +287,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
             easing.type: Easing.OutBack
             duration: 250
         }
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_214_912";
+        NumberAnimation {
             target: overlay
             property: "opacity"
             from: 0
@@ -297,9 +297,9 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
     }
 
     // animation to hide the dialog
-    ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_214_913";
+    ParallelAnimation {
         id: hideAnimation
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_214_914";
+        NumberAnimation {
             target: box
             property: "scale"
             from: 1
@@ -307,7 +307,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_214"; prop
             easing.type: Easing.InBack
             duration: 250
         }
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_214_915";
+        NumberAnimation {
             target: overlay
             property: "opacity"
             from: 0.2

@@ -1,7 +1,7 @@
 import QtQuick 2.11
 
 
-ParallelAnimation { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_10853"; property string __felgo_live_id_element: "FELGO_ID_10853_1106";
+ParallelAnimation {
     property var upEasingType: Easing.OutCirc
     property int upEasingHeight: 20
     property var downEasingType: Easing.OutBounce
@@ -9,15 +9,15 @@ ParallelAnimation { property string __felgo_live_id_component: "FELGO_COMPONENT_
     property var toY: 20
     property int animationDuration: rootDuration
     property int rotationNumber : 750
-    SequentialAnimation { property string __felgo_live_id_element: "FELGO_ID_10853_1107";
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_10853_1108";
+    SequentialAnimation {
+        NumberAnimation {
             target: ball
             properties: "y"
             to: toY
             duration: animationDuration * 0.4
             easing.type: upEasingType
         }
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_10853_1109";
+        NumberAnimation {
             target: ball
             properties: "y"
             to: root.height-ball.height
@@ -25,13 +25,13 @@ ParallelAnimation { property string __felgo_live_id_component: "FELGO_COMPONENT_
             easing.type: downEasingType
         }
     }
-    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_10853_1110";
+    NumberAnimation {
         target: ball
         properties: "x"
         to: toX
         duration: animationDuration
     }
-    RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_10853_1111";
+    RotationAnimation{
         target: ball
         properties: "rotation"
         direction: RotationAnimation.Clockwise

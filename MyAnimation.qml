@@ -1,5 +1,5 @@
 import QtQuick 2.11
-SequentialAnimation { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38589"; property string __felgo_live_id_element: "FELGO_ID_38589_565";
+SequentialAnimation {
     property var upEasingType: Easing.OutCirc
     property int upEasingHeight: 20
     property var downEasingType: Easing.OutBounce
@@ -11,32 +11,32 @@ SequentialAnimation { property string __felgo_live_id_component: "FELGO_COMPONEN
     property var percentageSmall: 0.27
     property var percentageLarge: 0.73
     property bool shrink: true
-    ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_38589_566";
-        SequentialAnimation { property string __felgo_live_id_element: "FELGO_ID_38589_567";
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38589_568";
+    ParallelAnimation {
+        SequentialAnimation {
+            NumberAnimation {
                 target: basketBall
                 properties: "y"
                 to: toY
                 duration: animationDuration * percentageLarge
                 easing.type: upEasingType
             }
-            ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38589_569";
+            ParallelAnimation{
 
-                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38589_570";
+                NumberAnimation {
                     target: basketBall
                     property: "width"
                     to: (shrink==true)?72:(basketBall.width)
                     duration: animationDuration*percentageSmall
                     easing.type: Easing.InQuad
                 }
-                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38589_571";
+                NumberAnimation {
                     target: basketBall
                     property: "height"
                     to: (shrink==true)?72:(basketBall.height)
                     duration: animationDuration*percentageSmall
                     easing.type: Easing.InQuad
                 }
-                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38589_572";
+                NumberAnimation {
                     target: basketBall
                     properties: "y"
                     to: otherToY
@@ -45,13 +45,13 @@ SequentialAnimation { property string __felgo_live_id_component: "FELGO_COMPONEN
                 }
             }
         }
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38589_573";
+        NumberAnimation {
             target: basketBall
             properties: "x"
             to: toX
             duration: animationDuration
         }
-        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38589_574";
+        RotationAnimation{
             target: basketBall
             properties: "rotation"
             direction: RotationAnimation.Clockwise
@@ -59,7 +59,7 @@ SequentialAnimation { property string __felgo_live_id_component: "FELGO_COMPONEN
             duration: animationDuration
         }
     }
-    PauseAnimation{ property string __felgo_live_id_element: "FELGO_ID_38589_575";
+    PauseAnimation{
         duration: 400
     }
 }

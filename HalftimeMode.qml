@@ -8,7 +8,7 @@ import QtMultimedia 5.15
 import Qt.labs.qmlmodels 1.0
 import QtQuick.Dialogs 1.2
 import otherArjun 1.0
-Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; property string __felgo_live_id_element: "FELGO_ID_49226_373";
+Page {
     visible: true
     width: 708
     height: 785
@@ -22,7 +22,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
         numberOfClicks++
     }
 
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_49226_374";
+    Rectangle{
         id: levelRectangle
         anchors.centerIn: parent
         width: 1
@@ -34,7 +34,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
         Component.onCompleted: {
             levelRectangleAnimation.start()
         }
-        Text{ property string __felgo_live_id_element: "FELGO_ID_49226_375";
+        Text{
             anchors.horizontalCenter: parent.horizontalCenter
             id: levelRectangleText1
             text: "It's HALFTIME!"
@@ -44,7 +44,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
         }
-        Text{ property string __felgo_live_id_element: "FELGO_ID_49226_376";
+        Text{
             id: levelRectangleText
             text: "Click the ball to collect it and earn points - this adds on to your game score"
             font.pointSize: 14;
@@ -55,7 +55,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
             anchors.horizontalCenter: parent.horizontalCenter
             visible:false
         }
-        Button{ property string __felgo_live_id_element: "FELGO_ID_49226_377";
+        Button{
             visible: false
             id: startGameButton
             text: "Start"
@@ -71,7 +71,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
                 totalTimeTimer.start()
             }
         }
-        ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_49226_378";
+        ParallelAnimation {
             id: levelRectangleAnimation
             onStarted: {
                 levelRectangle.visible = true;
@@ -81,21 +81,21 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
                 levelRectangleText.visible=true
                 startGameButton.visible=true;
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_49226_379";
+            NumberAnimation {
                 target: levelRectangleText1
                 property: "font.pointSize"
                 duration: 800
                 easing.type: Easing.Linear
                 to:30
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_49226_380";
+            NumberAnimation {
                 target: levelRectangle
                 property: "width"
                 duration: 800
                 easing.type: Easing.Linear
                 to: (root2.width*4/5)*7/10
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_49226_381";
+            NumberAnimation {
                 target: levelRectangle
                 property: "height"
                 duration: 800
@@ -126,7 +126,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
         else
             component.statusChanged.connect(finishCreation);
     }
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_49226_382";
+    Rectangle{
         visible: false
         id: remainingTimeBox
         anchors.centerIn: parent
@@ -136,7 +136,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
         z:200
         opacity: 0.4
         radius:20
-        Text{ property string __felgo_live_id_element: "FELGO_ID_49226_383";
+        Text{
             id: remainingTimeBoxText
             x: parent.width/2-40
             anchors.centerIn: parent
@@ -147,7 +147,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
             color: "white"
         }
     }
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_49226_384";
+    Rectangle{
         visible: false
         id: totalRewardsBox
         anchors.centerIn: parent
@@ -157,16 +157,16 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
         z:200
         opacity: 0.4
         radius:20
-        Column{ property string __felgo_live_id_element: "FELGO_ID_49226_385";
+        Column{
             anchors.fill: parent
             anchors.centerIn: parent
             spacing: 25
-            Text{ property string __felgo_live_id_element: "FELGO_ID_49226_386";
+            Text{
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: value +" X " + " 15 = ";
                 property int value: (totalRewardsBox.visible)?(numberOfClicks):(0)
-                Behavior on value { property string __felgo_live_id_element: "FELGO_ID_49226_387";
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_49226_388"; duration: 800; easing.type: Easing.InOutQuad }
+                Behavior on value {
+                    NumberAnimation { duration: 800; easing.type: Easing.InOutQuad }
                 }
                 id: totalRewardsBoxText
                 font.family: "GENISO"
@@ -174,13 +174,13 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
                 font.pointSize: 40
                 color: "white"
             }
-            Row{ property string __felgo_live_id_element: "FELGO_ID_49226_389";
+            Row{
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 10
-                Text{ property string __felgo_live_id_element: "FELGO_ID_49226_390";
+                Text{
                     property int value: (totalRewardsBox.visible)?(numberOfClicks*15):(0)
-                    Behavior on value { property string __felgo_live_id_element: "FELGO_ID_49226_391";
-                        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_49226_392"; duration: 900; easing.type: Easing.InOutQuad }
+                    Behavior on value {
+                        NumberAnimation { duration: 900; easing.type: Easing.InOutQuad }
                     }
                     anchors.verticalCenter: parent.verticalCenter
                     text: value
@@ -189,7 +189,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
                     font.pointSize: 55
                     color: "white"
                 }
-                Text{ property string __felgo_live_id_element: "FELGO_ID_49226_393";
+                Text{
                     anchors.verticalCenter: parent.verticalCenter
                     text: " extra points"
                     font.family: "GENISO"
@@ -199,7 +199,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
             }
         }
     }
-    Timer{ property string __felgo_live_id_element: "FELGO_ID_49226_394";
+    Timer{
         id: ballTriggerTimer
         interval: 500
         running: totalTimeTimer.running; repeat: true
@@ -216,12 +216,12 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
             }
         }
     }
-    Timer{ property string __felgo_live_id_element: "FELGO_ID_49226_395";
+    Timer{
         id: totalTimeTimer
         interval:  20000
     }
 
-    PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_49226_396";
+    PauseAnimation {
         id: endPauseAnim
         duration: 5000
         onStopped: {
@@ -229,7 +229,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
             Extra.goBackFromHalftime(numberOfClicks*15);
         }
     }
-    PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_49226_397";
+    PauseAnimation {
         id: endPauseAnim2
         duration: 2500
         onStopped:{
@@ -238,7 +238,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
             endPauseAnim.start()
         }
     }
-    Timer{ property string __felgo_live_id_element: "FELGO_ID_49226_398";
+    Timer{
         id: countdownUpdateTimer
         interval: 1000
         running: totalTimeTimer.running; repeat: true
@@ -254,7 +254,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
         }
     }
     //Sun
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_49226_399";
+    Rectangle{
         z:8
         visible: true
         id: sun
@@ -264,7 +264,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
         width:130
         height:130
         color: "yellow"
-        Text{ property string __felgo_live_id_element: "FELGO_ID_49226_400";
+        Text{
             id: onSunLevelText
             font.pointSize: 10
             text: "Count";
@@ -275,7 +275,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
             font.family: "Blacklight"
             wrapMode: Text.Wrap
         }
-        Text{ property string __felgo_live_id_element: "FELGO_ID_49226_401";
+        Text{
             id: onSunLevelText1
             font.pointSize: 18
             text: numberOfClicks;
@@ -288,28 +288,28 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_49226"; pr
     }
 
     //Sky
-    Rectangle { property string __felgo_live_id_element: "FELGO_ID_49226_402";
+    Rectangle {
         id: sky
         anchors.top: parent.top
         anchors.bottom: ground.top
         width: parent.width
         color:"blue"
-        gradient: Gradient { property string __felgo_live_id_element: "FELGO_ID_49226_403";
-            GradientStop { property string __felgo_live_id_element: "FELGO_ID_49226_404"; id: skyStartGradient ;position: 0.0; color: "#0080FF" }
-            GradientStop { property string __felgo_live_id_element: "FELGO_ID_49226_405"; id: skyEndGradient ;position: 1.0; color: "#66CCFF"}
+        gradient: Gradient {
+            GradientStop { id: skyStartGradient ;position: 0.0; color: "#0080FF" }
+            GradientStop { id: skyEndGradient ;position: 1.0; color: "#66CCFF"}
         }
     }
 
     //Ground
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_49226_406";
+    Rectangle{
         id: ground
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         height: 300
         width: parent.width
-        gradient: Gradient { property string __felgo_live_id_element: "FELGO_ID_49226_407";
-            GradientStop { property string __felgo_live_id_element: "FELGO_ID_49226_408"; id: groundStartGradient; position: 0.0; color: "#00FF00"}
-            GradientStop { property string __felgo_live_id_element: "FELGO_ID_49226_409";id: groundEndGradient; position: 1.0; color: "#00803F"}
+        gradient: Gradient {
+            GradientStop { id: groundStartGradient; position: 0.0; color: "#00FF00"}
+            GradientStop {id: groundEndGradient; position: 1.0; color: "#00803F"}
         }
     }
 

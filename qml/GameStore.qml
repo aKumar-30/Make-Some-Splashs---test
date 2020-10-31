@@ -8,7 +8,7 @@ import QtQuick.Controls.Universal 2.12
 import Qt.labs.settings 1.0
 import QtQuick.Controls 2.12
 import QtMultimedia 5.8
-Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; property string __felgo_live_id_element: "FELGO_ID_23485_5088";
+Page {
     visible: true
 //    y: navigationStack.navigationBar.height
 //    width: parent.width
@@ -99,44 +99,44 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         bigPicImage.source= mSource;
         bigPicText.text =mName;
     }
-    Image{ property string __felgo_live_id_element: "FELGO_ID_23485_5089";
+    Image{
         x:0.1
         anchors.fill: parent
         opacity: 0.2
         source: "images/gameStoreBackground.jpg"
     }
     //Number of coins thingy
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_23485_5090";
+    Rectangle{
         Component.onCompleted: {
             bigPicAnim.start()
         }
 
-        Row{ property string __felgo_live_id_element: "FELGO_ID_23485_5091";
+        Row{
             spacing: 20;
             x: 10
             y:10
-            Image{ property string __felgo_live_id_element: "FELGO_ID_23485_5092";
+            Image{
                 anchors.verticalCenter: parent.verticalCenter
                 width: 35
                 height: 35
                 source: "images/coinFront.png"
             }
-            Text{ property string __felgo_live_id_element: "FELGO_ID_23485_5093";
+            Text{
                 anchors.verticalCenter: parent.verticalCenter
                 property int value: Extra.numCoins
                 text: value
                 font.family: "Stencil"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize:21
-                Behavior on value { property string __felgo_live_id_element: "FELGO_ID_23485_5094";
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_23485_5095"; duration: (firstTime)?1:1000; easing.type: Easing.InOutQuad}
+                Behavior on value {
+                    NumberAnimation { duration: (firstTime)?1:1000; easing.type: Easing.InOutQuad}
                 }
             }
 
         }
     }
     //Big Pic
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_23485_5096";
+    Rectangle{
         id: bigPic
         y:lockSign.y+lockSign.height/3-height+8
         anchors.horizontalCenter: parent.horizontalCenter
@@ -146,7 +146,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         border.width: 3
         radius: 4
         color: "transparent"
-        Text{ property string __felgo_live_id_element: "FELGO_ID_23485_5097";
+        Text{
             text: "Normal Ball"
             id: bigPicText
             font.family: "Impact"
@@ -157,7 +157,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             y:2
             color: "black"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_23485_5098";
+        Image{
             id: bigPicImage
             source: Extra.ballSource
             width: 240;
@@ -166,7 +166,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             y:bigPicText.y+bigPicText.height+2
         }
 
-        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_23485_5099";
+        RotationAnimation{
             id: bigPicAnim
             target: bigPicImage
             property: "rotation"
@@ -181,7 +181,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
     }
 
     //lockSign sign
-    Image{ property string __felgo_live_id_element: "FELGO_ID_23485_5100";
+    Image{
         visible: false
         id: lockSign
         width: purchaseButton.width/2
@@ -202,7 +202,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
     //            fillMode: Image.PreserveAspectFit
     //        }
     //    }
-    Item { property string __felgo_live_id_element: "FELGO_ID_23485_7144";
+    Item {
         id: confirmMessage
         width: 708
         height: parent.height
@@ -213,7 +213,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             if(visible)
                 myDialog3.show()
         }
-        CustomCDialog{ property string __felgo_live_id_element: "FELGO_ID_23485_7145";
+        CustomCDialog{
             anchors.centerIn: parent
             id: myDialog3
             box.color: "white"
@@ -236,7 +236,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         }
     }
     //Purchase Button
-    Button{ property string __felgo_live_id_element: "FELGO_ID_23485_5101";
+    Button{
         onClicked: {
             confirmMessage.visible=true
         }
@@ -247,15 +247,15 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         id: purchaseButton
         height: 100;
         width:230;
-        Rectangle{ property string __felgo_live_id_element: "FELGO_ID_23485_5106";
+        Rectangle{
             id: colorRect
             anchors.fill:parent
             color:"yellow"
-            Row{ property string __felgo_live_id_element: "FELGO_ID_23485_5107";
+            Row{
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 20
-                Text{ property string __felgo_live_id_element: "FELGO_ID_23485_5108";
+                Text{
                     id: purchaseButtonText
                     //cost
                     text: "25"
@@ -264,7 +264,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
                     horizontalAlignment: Text.AlignHCenter
                     font.family: "Goudy Stout"
                 }
-                Image{ property string __felgo_live_id_element: "FELGO_ID_23485_5109";
+                Image{
                     //coin pic
                     width:53
                     height:53;
@@ -275,7 +275,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         }
 
     }
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_23485_5110";
+    Rectangle{
         visible: false;
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: grid.top
@@ -285,51 +285,51 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         color: "#93a8c4"
     }
     //List model for all the different things
-    ListModel{ property string __felgo_live_id_element: "FELGO_ID_23485_5111";
+    ListModel{
         id: contactModel
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5112";
+        ListElement{
             index:0
             isBought: false
             type: "regularBall";
             name: "Normal Ball"
             picSource: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"
             price: 0;
-        } ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5113";
+        } ListElement{
             index:1
             isBought: false
             type: "blueBall";
             name: "Blue"
             picSource: "images/blueBall.png"
             price: 5
-        } ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5114";
+        } ListElement{
             index:2
             isBought: false
             type: "greenBall";
             name: "Green"
             picSource: "images/greenBall.png";
             price: 10
-        } ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5115";
+        } ListElement{
             index:3
             isBought: false
             type: "redBall";
             name: "Red"
             picSource: "images/redBall.png"
             price: 15
-        }ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5116";
+        }ListElement{
             index:4
             isBought: false
             type: "tennisBall";
             name: "Tennis Ball"
             picSource: "images/tennis_ball.png"
             price: 15
-        }ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5117";
+        }ListElement{
             index:5
             isBought: false
             type: "soccerBall";
             name: "Soccer Ball"
             picSource: "images/soccer_ball.png"
             price: 20
-        }ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5118";
+        }ListElement{
             index:6
             isBought: false
             type: "bowlingBall";
@@ -337,7 +337,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/bowling_ball.png"
             price: 30
 
-        }ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5119";
+        }ListElement{
             index:7
             isBought: false
             type: "volleyBall";
@@ -345,7 +345,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/volley_ball.png"
             price: 30
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5120";
+        ListElement{
             index:8
             isBought: false
             type: "Cookie";
@@ -353,7 +353,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/cookieBall.png"
             price: 40
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5121";
+        ListElement{
             index:9
             isBought: false
             type: "Pancake";
@@ -361,7 +361,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/pancakeBall.png"
             price: 50
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5122";
+        ListElement{
             index:10
             isBought: false
             type: "Tire";
@@ -369,7 +369,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/tire_ball.png"
             price: 50
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5123";
+        ListElement{
             index:11
             isBought: false
             type: "Donut";
@@ -377,7 +377,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/donut_ball.png"
             price: 62
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_5124";
+        ListElement{
             index:12
             isBought: false
             type: "Coin";
@@ -385,7 +385,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/coin.png"
             price: 62
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_2165";
+        ListElement{
             index:13
             isBought: false
             type: "Dartboard";
@@ -393,7 +393,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/dartBoardBall.png"
             price: 70
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_22248";
+        ListElement{
             index:14
             isBought: false
             type: "clock";
@@ -401,7 +401,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/clockBall.png"
             price: 70
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_22359";
+        ListElement{
             index:15
             isBought: false
             type: "Earth";
@@ -409,7 +409,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/earth.png"
             price: 80
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_973";
+        ListElement{
             index:16
             isBought: false
             type: "moon";
@@ -417,7 +417,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
             picSource: "images/moon.png"
             price: 80
         }
-        ListElement{ property string __felgo_live_id_element: "FELGO_ID_23485_974";
+        ListElement{
             index:17
             isBought: false
             type: "white";
@@ -427,12 +427,12 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         }
     }
 
-    GridView { property string __felgo_live_id_element: "FELGO_ID_23485_5125";
+    GridView {
         clip: true
-        ScrollBar.vertical: ScrollBar{ property string __felgo_live_id_element: "FELGO_ID_23485_5126";}
+        ScrollBar.vertical: ScrollBar{}
         //        boundsBehavior: Flickable.OvershootBounds
-        populate: Transition { property string __felgo_live_id_element: "FELGO_ID_23485_5127";
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_23485_5128"; properties: "x,y"; duration: 400 }
+        populate: Transition {
+            NumberAnimation { properties: "x,y"; duration: 400 }
         }
         width: cellWidth*4; height: cellHeight*4
         cellWidth: 140; cellHeight: 140
@@ -443,11 +443,11 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         model: contactModel
         Component{
             id: foundDel
-            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_23485_5129";
+            Rectangle{
                 width: grid.cellWidth
                 height: grid.cellHeight
                 color: "transparent"
-                Rectangle { property string __felgo_live_id_element: "FELGO_ID_23485_5130";
+                Rectangle {
                     width: grid.cellWidth-25
                     height: grid.cellHeight-25
                     id: wrapper
@@ -457,7 +457,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
                     border.color: "black"
                     radius: 5;
                     color: (isBought)?"white":"#a1a1a1"
-                    Image{ property string __felgo_live_id_element: "FELGO_ID_23485_5131";
+                    Image{
                         id: mImage
                         x:parent.x
                         y:6
@@ -466,7 +466,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
                         source: picSource
 
                     }
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_23485_5132";
+                    Text{
                         width: grid.cellWidth-15
                         y: mImage.y+mImage.height+4
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -478,7 +478,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
                         font.pointSize: 10
                         color:"#050027"
                     }
-                    MouseArea{ property string __felgo_live_id_element: "FELGO_ID_23485_5133";
+                    MouseArea{
                         anchors.fill: parent
                         onClicked:{
                             mIndex=index
@@ -496,12 +496,12 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         }
         delegate: foundDel
         highlight:
-            Rectangle { property string __felgo_live_id_element: "FELGO_ID_23485_5134";
+            Rectangle {
             z:8
             color: "steelblue";
             radius: 5;
             opacity: 0.6
-            Image{ property string __felgo_live_id_element: "FELGO_ID_23485_5135";
+            Image{
                 id: checkMark
                 visible: found;
                 anchors.centerIn: parent
@@ -509,7 +509,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
                 height: 120;
                 source: "images/checkMark.png"
             }
-            Image{ property string __felgo_live_id_element: "FELGO_ID_23485_5136";
+            Image{
                 id: theXofDoom
                 visible: !found;
                 anchors.centerIn: parent
@@ -521,7 +521,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_23485"; pr
         focus: true
     }
 
-    Settings{ property string __felgo_live_id_element: "FELGO_ID_23485_5137";
+    Settings{
         category: "mySettingsThing5"
         property alias mBought2: root.bought
         property alias mMName1: root.givenName

@@ -16,11 +16,11 @@ import QtQuick 2.0
 
 /////////////////////////////////////*/
 
-Rectangle { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19093"; property string __felgo_live_id_element: "FELGO_ID_19093_956";
+Rectangle {
     anchors.fill: parent
 
     // Plugin Item
-    AdMobBanner { property string __felgo_live_id_element: "FELGO_ID_19093_957";
+    AdMobBanner {
         id: adMobBanner
         adUnitId: "	ca-app-pub-3940256099942544/6300978111" // replace with your AdMob adUnitId
         banner: AdMobBanner.Smart
@@ -30,29 +30,29 @@ Rectangle { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19093
     }
 
     // Plugin Item
-    AdMobInterstitial { property string __felgo_live_id_element: "FELGO_ID_19093_958";
+    AdMobInterstitial {
         id: interstitial
         adUnitId: "	ca-app-pub-3940256099942544/1033173712" // replace with your AdMob adUnitId
     }
 
     // AppListView for Plugin Overview and Example Usage
-    AppListView { property string __felgo_live_id_element: "FELGO_ID_19093_959";
+    AppListView {
         id: listView
         anchors.fill: parent
         backgroundColor: parent.color
 
         // Plugin Overview
-        header: Column { property string __felgo_live_id_element: "FELGO_ID_19093_960";
+        header: Column {
             id: contentCol
             width: parent.width
             spacing: dp(16)
 
             // Description Text
-            Rectangle { property string __felgo_live_id_element: "FELGO_ID_19093_961";
+            Rectangle {
                 width: parent.width
                 height: descriptionText.height + 2 * contentCol.spacing
                 color: "lightgrey"
-                AppText { property string __felgo_live_id_element: "FELGO_ID_19093_962";
+                AppText {
                     id: descriptionText
                     width: parent.width - 2 * contentCol.spacing
                     text: "Integrate with AdMob to monetize and promote your apps & games with ads on Android and iOS."
@@ -63,7 +63,7 @@ Rectangle { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19093
             }
 
             // Image of Code Sample
-            Image { property string __felgo_live_id_element: "FELGO_ID_19093_963";
+            Image {
                 width: sourceSize.width * dp(1) * 0.75
                 height: width / sourceSize.width * sourceSize.height
                 source: Qt.resolvedUrl("code-admob.png")
@@ -71,7 +71,7 @@ Rectangle { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19093
             }
 
             // Image of Plugin Logo
-            Image { property string __felgo_live_id_element: "FELGO_ID_19093_964";
+            Image {
                 width: sourceSize.width * dp(1) * 0.5
                 height: width / sourceSize.width * sourceSize.height
                 source: Qt.resolvedUrl("logo-admob.png")
@@ -79,11 +79,11 @@ Rectangle { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19093
             }
 
             // Example Headline
-            Rectangle { property string __felgo_live_id_element: "FELGO_ID_19093_965";
+            Rectangle {
                 width: parent.width
                 height: exampleHeadline.height + 2 * contentCol.spacing
                 color: "lightgrey"
-                AppText { property string __felgo_live_id_element: "FELGO_ID_19093_966";
+                AppText {
                     id: exampleHeadline
                     width: parent.width - 2 * contentCol.spacing
                     text: "Example"
@@ -94,29 +94,29 @@ Rectangle { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19093
         }
 
         // Example Actions (Content of List)
-        model: ListModel { property string __felgo_live_id_element: "FELGO_ID_19093_967";
+        model: ListModel {
             id: listModel
 
-            ListElement { property string __felgo_live_id_element: "FELGO_ID_19093_968"; section: "Visibility"; current: false; name: "Display banner" }
-            ListElement { property string __felgo_live_id_element: "FELGO_ID_19093_969"; section: "Visibility"; current: false; name: "Hide banner" }
+            ListElement { section: "Visibility"; current: false; name: "Display banner" }
+            ListElement { section: "Visibility"; current: false; name: "Hide banner" }
 
-            ListElement { property string __felgo_live_id_element: "FELGO_ID_19093_970"; section: "Banner Type"; current: false; name: "Standard (320 x 50)" }
-            ListElement { property string __felgo_live_id_element: "FELGO_ID_19093_971"; section: "Banner Type"; current: false; name: "Medium Rectangle (300x250)" }
-            ListElement { property string __felgo_live_id_element: "FELGO_ID_19093_972"; section: "Banner Type"; current: false; name: "Large (320x100)" }
-            ListElement { property string __felgo_live_id_element: "FELGO_ID_19093_973"; section: "Banner Type"; current: false; name: "Leaderboard (728x90) - Tablet Only" }
-            ListElement { property string __felgo_live_id_element: "FELGO_ID_19093_974"; section: "Banner Type"; current: true; name: "Smart (auto-size)" }
+            ListElement { section: "Banner Type"; current: false; name: "Standard (320 x 50)" }
+            ListElement { section: "Banner Type"; current: false; name: "Medium Rectangle (300x250)" }
+            ListElement { section: "Banner Type"; current: false; name: "Large (320x100)" }
+            ListElement { section: "Banner Type"; current: false; name: "Leaderboard (728x90) - Tablet Only" }
+            ListElement { section: "Banner Type"; current: true; name: "Smart (auto-size)" }
 
-            ListElement { property string __felgo_live_id_element: "FELGO_ID_19093_975"; section: "Interstitial"; active: false; name: "Load and show" }
+            ListElement { section: "Interstitial"; active: false; name: "Load and show" }
         }
 
         // Styling of ListView Delegate (List Items)
-        delegate: SimpleRow { property string __felgo_live_id_element: "FELGO_ID_19093_976";
+        delegate: SimpleRow {
             id: row
 
             text: name
             property bool isSelected: current || (index === 0 && adMobBanner.visible || index === 1 && !adMobBanner.visible)
 
-            Icon { property string __felgo_live_id_element: "FELGO_ID_19093_977";
+            Icon {
                 anchors.right: parent.right
                 anchors.rightMargin: dp(10)
                 anchors.verticalCenter: parent.verticalCenter
@@ -169,7 +169,7 @@ Rectangle { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_19093
 
         // Styling of List Sections
         section.property: "section"
-        section.delegate: SimpleSection { property string __felgo_live_id_element: "FELGO_ID_19093_978"; }
+        section.delegate: SimpleSection { }
     }
 
     Component.onCompleted: {

@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_55963"; property string __felgo_live_id_element: "FELGO_ID_55963_369";
+Item {
 //    Text{
 //        anchors.right: mId.left
 //        anchors.top: mId.Top
@@ -28,7 +28,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_55963"; pr
 //        }
 //    }
     //basketball
-    Image{ property string __felgo_live_id_element: "FELGO_ID_55963_370";
+    Image{
         visible: totalTimeTimer.running
         z:3
         id: mId
@@ -37,7 +37,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_55963"; pr
         width: 115
         height: 115
         source: Extra.ballSource
-        NumberAnimation{ property string __felgo_live_id_element: "FELGO_ID_55963_371";
+        NumberAnimation{
             onStopped: {
                 mId.visible=false
             }
@@ -52,7 +52,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_55963"; pr
         Component.onCompleted: {
             fallingAnim.start()
         }
-        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_55963_372";
+        MouseArea{
             anchors.fill: parent
             onClicked: {
                 if(mId.visible&&totalTimeTimer.running){

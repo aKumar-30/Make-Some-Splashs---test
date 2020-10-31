@@ -10,7 +10,7 @@ import QtMultimedia 5.8
 //import Qt.labs.qmlmodels 1.0
 import QtQuick.Dialogs 1.2
 import otherArjun2 1.2
-Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; property string __felgo_live_id_element: "FELGO_ID_38469_6773";
+Page {
     //do stuff in main yay
     function onGoToHalftime(){
         navigationStack.push(halftimeModeComponent)
@@ -66,7 +66,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     onBackButtonClickedWhenAdScreenHereChanged: {
         afterGameIsActuallyOver();
     }
-    Connections{ property string __felgo_live_id_element: "FELGO_ID_38469_6774";
+    Connections{
         target: Extra
         function onGoBackFromHalftime(addedPoints){
             points+=addedPoints
@@ -79,7 +79,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         getCurrentMissions()
     }
     //sound effects start here - coin clink
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_6775";
+    Audio{
         id: coinClinkSoundEffect
         source:"sounds/coinSound.mp3"
         volume: Extra.sound*1
@@ -174,7 +174,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
 
     //sound effects start here - mvp
-    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6776";
+    NumberAnimation {
         id: fadeIn
         target: mvpSoundEffect
         property: "volume"
@@ -183,7 +183,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         duration: 300
         easing.type: Easing.Linear
     }
-    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6777";
+    NumberAnimation {
         id: fadeOut
         target: mvpSoundEffect
         property: "volume"
@@ -197,7 +197,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     property bool mvpSoundEffectPlaying: false
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_6778";
+    Audio{
         id: mvpSoundEffect
         source:"sounds/mvpSoundEffect.mp3"
         loops:Audio.Infinite
@@ -415,7 +415,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //Pause button
-    MouseArea{ property string __felgo_live_id_element: "FELGO_ID_38469_6779";
+    MouseArea{
         anchors.fill: parent
         onClicked: {
             if(!newFadedRed.visible){
@@ -435,7 +435,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //Pause state rectangle
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6780";
+    Rectangle{
         anchors.fill: parent
         id: pauseRectangle
         z: 100
@@ -449,7 +449,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             }
         }
 
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6781";
+        Image{
             width: 552*4/5*1.45
             height: 452*4/5*1.45
             anchors.centerIn: parent
@@ -628,7 +628,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //delay timer
-    Timer{ property string __felgo_live_id_element: "FELGO_ID_38469_6782";
+    Timer{
         id: delayTimer
         interval: 1000
         onTriggered: {
@@ -639,7 +639,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
 
     //Images start here
     //Sky
-    Rectangle { property string __felgo_live_id_element: "FELGO_ID_38469_6783";
+    Rectangle {
         Component.onCompleted: {
             //Used to show level one message
             levelRectangleAnimation.start()
@@ -649,14 +649,14 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         anchors.bottom: ground.top
         width: parent.width
         color:"blue"
-        gradient: Gradient { property string __felgo_live_id_element: "FELGO_ID_38469_6784";
-            GradientStop { property string __felgo_live_id_element: "FELGO_ID_38469_6785"; id: skyStartGradient ;position: 0.0; color: "#0080FF" }
-            GradientStop { property string __felgo_live_id_element: "FELGO_ID_38469_6786"; id: skyEndGradient ;position: 1.0; color: "#66CCFF"}
+        gradient: Gradient {
+            GradientStop { id: skyStartGradient ;position: 0.0; color: "#0080FF" }
+            GradientStop { id: skyEndGradient ;position: 1.0; color: "#66CCFF"}
         }
     }
     //pointing finger
     //pointer finger associated text
-    Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6787";
+    Text{
         id: explanationTutorialText
         text: "Click anywhere in the white"
         wrapMode: Text.Wrap
@@ -675,7 +675,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             this.y= pointingFinger.y-width+15
         }
     }
-    Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6788";
+    Image{
         visible: false;
         z:5
         id: pointingFinger
@@ -693,9 +693,9 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 pointingFingerAnim.restart()
         }
 
-        SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6789";
+        SequentialAnimation{
             id: pointingFingerAnim
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6790";
+            NumberAnimation {
                 id: pointingFingerAnimFront
                 target: pointingFinger
                 property: "y"
@@ -703,7 +703,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 duration: 300
                 easing.type: Easing.Linear
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6791";
+            NumberAnimation {
                 id: pointingFingerAnimBack
                 target: pointingFinger
                 property: "y"
@@ -714,19 +714,19 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //Ground
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6792";
+    Rectangle{
         id: ground
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         height: 500
         width: parent.width
-        gradient: Gradient { property string __felgo_live_id_element: "FELGO_ID_38469_6793";
-            GradientStop { property string __felgo_live_id_element: "FELGO_ID_38469_6794"; id: groundStartGradient; position: 0.0; color: "#00FF00"}
-            GradientStop { property string __felgo_live_id_element: "FELGO_ID_38469_6795";id: groundEndGradient; position: 1.0; color: "#00803F"}
+        gradient: Gradient {
+            GradientStop { id: groundStartGradient; position: 0.0; color: "#00FF00"}
+            GradientStop {id: groundEndGradient; position: 1.0; color: "#00803F"}
         }
     }
     //Hoop
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6796";
+    Rectangle{
         z:4
         y:200
         id: backboard;
@@ -737,7 +737,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         border.color: "black"
         anchors.right: parent.right
     }
-    Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6797";
+    Image{
         z:4
         id: rim
         source: "images/basketballHoop2.png"
@@ -747,7 +747,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         height: 110*1.38
     }
     //Sun
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6798";
+    Rectangle{
         visible: true
         id: sun
         radius: 130
@@ -756,7 +756,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         width:180
         height:180
         color: "yellow"
-        Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6799";
+        Text{
             id: onSunLevelText
             font.pointSize: 22
             text: "Level: " + level;
@@ -767,7 +767,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             font.family: "Century Gothic"
             wrapMode: Text.Wrap
         }
-        Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6800";
+        Text{
             id: onSunLevelText1
             font.pointSize: 23
             text: levelIndicatorDown;
@@ -779,17 +779,17 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //Coin counter thingy
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6801";
-        Row{ property string __felgo_live_id_element: "FELGO_ID_38469_6802";
+    Rectangle{
+        Row{
             spacing: 20;
             x: 10
             y:10
-            Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6803";
+            Image{
                 width: 35
                 height: 35
                 source: "images/coinFront.png"
             }
-            Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6804";
+            Text{
                 property int theText: Extra.numCoins
                 text: theText
                 font.family: "Stencil"
@@ -799,26 +799,26 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //the coin with anim
-    Flipable { property string __felgo_live_id_element: "FELGO_ID_38469_6805";
+    Flipable {
         visible: false
         x: rim.x+90
         y:rim.y+17
         id: flipable
         property bool flipped: false
-        front: Image { property string __felgo_live_id_element: "FELGO_ID_38469_6806"; //--> collapse
+        front: Image { //--> collapse
             width: 62.5
             height: 62.5
             anchors.centerIn: parent
             source: "images/coinFront.png"
         }
-        back: Image { property string __felgo_live_id_element: "FELGO_ID_38469_6807"; //--> collapse
+        back: Image { //--> collapse
             width: 62.5
             height: 62.5
             anchors.centerIn: parent
             source: "images/coinBack.png"
         } //<-- collapse
 
-        transform: Rotation { property string __felgo_live_id_element: "FELGO_ID_38469_6808";
+        transform: Rotation {
             axis.x: 0; axis.y: 1; axis.z: 0
             angle: flipable.flipped ? 180 : 0
             onAngleChanged: {
@@ -828,14 +828,14 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 }
             }
 
-            Behavior on angle { property string __felgo_live_id_element: "FELGO_ID_38469_6809";
-                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6810";
+            Behavior on angle {
+                NumberAnimation {
                     duration: 500
                 }
             }
         }
 
-        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6811";
+        ParallelAnimation{
             id: coinAnim
             onFinished:{
                 flipable.visible = false;
@@ -856,40 +856,40 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                     flipable.visible=false;
             }
 
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6812";
+            NumberAnimation {
                 target: flipable.back
                 property: "width"
                 duration: 500
                 to:35
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6813";
+            NumberAnimation {
                 target: flipable.back
                 property: "height"
                 duration: 500
                 to:35
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6814";
+            NumberAnimation {
                 target: flipable.front
                 property: "width"
                 duration: 500
                 to:35
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6815";
+            NumberAnimation {
                 target: flipable.front
                 property: "height"
                 duration: 500
                 to:35
             }
-            PathAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6816";
+            PathAnimation {
                 id: pathAnim
                 duration: 1000
                 target: flipable
                 orientation: PathAnimation.TopFirst
                 anchorPoint: Qt.point(flipable.width/2,
                                       flipable.height/2)
-                path: Path { property string __felgo_live_id_element: "FELGO_ID_38469_6817";
+                path: Path {
                     startX:rim.x+90 ; startY: rim.y+17
-                    PathCurve { property string __felgo_live_id_element: "FELGO_ID_38469_6818";
+                    PathCurve {
                         x: 22
                         y: 22
                     }
@@ -899,7 +899,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
 
     }
     //basketball
-    Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6819";
+    Image{
         z:3
         id: basketBall
         y:root2.height-basketBall.height-50
@@ -909,7 +909,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         source: Extra.ballSource
     }
     //feedback label
-    Label{ property string __felgo_live_id_element: "FELGO_ID_38469_6820";
+    Label{
         id: feedbackLabel
         font.family: "Century Gothic"
         text: "dda"
@@ -922,7 +922,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         visible: false
     }
     //level animation/rectangle
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6821";
+    Rectangle{
         id: levelRectangle
         anchors.centerIn: parent
         width: 1
@@ -932,7 +932,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         radius: 20;
         visible: false;
 
-        Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6822";
+        Text{
             anchors.horizontalCenter: parent.horizontalCenter
             id: levelRectangleText1
             text: "Level " + level
@@ -942,7 +942,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
         }
-        Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6823";
+        Text{
             function levelTextFunc(level)
             {
                 if(level===1){
@@ -967,7 +967,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             visible:false
         }
 
-        ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6824";
+        ParallelAnimation {
             id: levelRectangleAnimation
             onStarted: {
                 levelRectangle.visible = true;
@@ -979,21 +979,21 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 levelRectangleAnimationPause.start()
 
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6825";
+            NumberAnimation {
                 target: levelRectangleText1
                 property: "font.pointSize"
                 duration: 800
                 easing.type: Easing.Linear
                 to:36
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6826";
+            NumberAnimation {
                 target: levelRectangle
                 property: "width"
                 duration: 800
                 easing.type: Easing.Linear
                 to: (root2.width*4/5)*7/10
             }
-            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6827";
+            NumberAnimation {
                 target: levelRectangle
                 property: "height"
                 duration: 800
@@ -1001,7 +1001,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 to: root2.height*3/7
             }
         }
-        PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6828";
+        PauseAnimation {
             id: levelRectangleAnimationPause
             onStarted: {
                 stateRectId.state = "paused"
@@ -1028,7 +1028,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //faded Red
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6829";
+    Rectangle{
         id:fadedRED
         z:19
         anchors.fill: parent
@@ -1038,7 +1038,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
     //new faded fadedRED
     //faded Red
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6830";
+    Rectangle{
         id:newFadedRed
         z:10
         anchors.fill: parent
@@ -1048,20 +1048,20 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
     property bool quitButtonWasClicked: false
     //newRetryCircle
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6831";
+    Rectangle{
         z:30
         visible: false
         id: newRetryCircle
         color: "transparent"
         anchors.centerIn: parent
-        CircularProgress{ property string __felgo_live_id_element: "FELGO_ID_38469_6832";
+        CircularProgress{
             id: circularProgress
             y: 50
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             anchors.verticalCenterOffset: -150
         }
-        Button{ property string __felgo_live_id_element: "FELGO_ID_38469_6833";
+        Button{
             //these are the rewarded ad stuff IGNORE ERRORS FOR NOW
             //                        AdMobRewardedVideo {
             //                            id: myRewardedVideo
@@ -1103,15 +1103,15 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             height: 55*1.3
             width: 140*2*1.3
             z:5
-            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6834";
+            Rectangle{
                 anchors.fill: parent
                 color: "#2e8ddb"
             }
-            Row{ property string __felgo_live_id_element: "FELGO_ID_38469_6835";
+            Row{
                 x:10
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.centerIn: parent
-                Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6836";
+                Text{
                     anchors.verticalCenter: parent.verticalCenter
                     color: "White"
                     font.family: "Swis721 Cn BT"
@@ -1119,13 +1119,13 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                     font.pointSize: 28
                     text:"Continue"
                 }
-                Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6837";
+                Rectangle{
                     width: 15*1.3
                     height: 2*1.3
                     color: "transparent"
                 }
                 //video pic
-                Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6838";
+                Image{
                     anchors.verticalCenter: parent.verticalCenter
                     width: 50*1.3
                     height: 35*1.3
@@ -1133,7 +1133,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 }
             }
         }
-        Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6839";
+        Rectangle{
             z:4
             visible: newMissionsAdButton.visible;
             id: newMissionsAdButtonFade
@@ -1143,7 +1143,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             x: newMissionsAdButton.x-5
             color: "#18549e"
         }
-        Button{ property string __felgo_live_id_element: "FELGO_ID_38469_6840";
+        Button{
             onClicked: {
                 afterGameIsActuallyOver()
                 quitButtonWasClicked=true
@@ -1160,15 +1160,15 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             height: newMissionsAdButton.height
             width: newMissionsAdButton.width
             z:5
-            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6841";
+            Rectangle{
                 anchors.fill: parent
                 color: "#a8aeb3"
             }
-            Row{ property string __felgo_live_id_element: "FELGO_ID_38469_6842";
+            Row{
                 x:10
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.centerIn: parent
-                Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6843";
+                Text{
                     anchors.verticalCenter: parent.verticalCenter
                     color: "White"
                     font.family: "Swis721 Cn BT"
@@ -1177,20 +1177,20 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
 
                     text:"Retry"
                 }
-                Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6844";
+                Rectangle{
                     width: 15*1.3
                     height: 2*1.3
                     color: "transparent"
                 }
                 //undo button
-                Icon{ property string __felgo_live_id_element: "FELGO_ID_38469_6845";
+                Icon{
                     anchors.verticalCenter: parent.verticalCenter
                     size: 45*1.3
                     icon: IconType.undo
                 }
             }
         }
-        Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6846";
+        Rectangle{
             z:4
             visible: quitRetryCircleButton.visible;
             id: quitRetryCircleButtonFade
@@ -1203,7 +1203,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
     //retry box
     signal quitButtonClicked
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6847";
+    Rectangle{
         onVisibleChanged: {
             seqAnimationId.stop()
             if(visible)
@@ -1219,17 +1219,17 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         z:20
         id: retryBox
         radius:20
-        gradient: Gradient{ property string __felgo_live_id_element: "FELGO_ID_38469_6848";
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6849";position: 0.0; color: "#2e8ddb"/*"#f52a2a"*/}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6850";position: 0.5; color: "#ffffff"}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6851";position: 1.0; color: "#2e8ddb"/*"#f52a2a"*/}
+        gradient: Gradient{
+            GradientStop{position: 0.0; color: "#2e8ddb"/*"#f52a2a"*/}
+            GradientStop{position: 0.5; color: "#ffffff"}
+            GradientStop{position: 1.0; color: "#2e8ddb"/*"#f52a2a"*/}
         }
-        Column{ property string __felgo_live_id_element: "FELGO_ID_38469_6852";
+        Column{
             x:0
             y:0
             width:parent.width
             spacing:10
-            Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6853";
+            Text{
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.family: "Bodoni MT Black"
                 font.bold: true
@@ -1238,7 +1238,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 width: parent.width
                 text: "You lost!"
             }
-            Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6854";
+            Text{
                 x:10
                 width: parent.width-20
                 font.family: "Century Gothic"
@@ -1246,17 +1246,17 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 wrapMode: Text.Wrap
                 text:"     Please try again! Remember 3 missed shots and you are out"
             }
-            Row{ property string __felgo_live_id_element: "FELGO_ID_38469_6855";
+            Row{
                 x:60
                 spacing:25
                 anchors.horizontalCenter: parent.horizontalCenter
-                Button { property string __felgo_live_id_element: "FELGO_ID_38469_6856";
+                Button {
                     anchors.verticalCenter: parent.verticalCenter
-                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6857";
+                    Rectangle{
                         anchors.fill: parent
                         color: okButton.pressed?"#233ab8" : "#3F51B5"
                     }
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6858";
+                    Text{
                         anchors.centerIn: parent
                         font.pointSize: 20
                         text: "Retry"
@@ -1274,12 +1274,12 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                         retryScreenHappening=false
                     }
                 }
-                Button { property string __felgo_live_id_element: "FELGO_ID_38469_6859";
-                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6860";
+                Button {
+                    Rectangle{
                         anchors.fill: parent
                         color: cancelButton.pressed?"#233ab8" : "#3F51B5"
                     }
-                    Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6861";
+                    Text{
                         anchors.centerIn: parent
                         font.pointSize: 20
                         text: "Quit"
@@ -1346,25 +1346,25 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     //    }
 
     //All three of the x's
-    Row{ property string __felgo_live_id_element: "FELGO_ID_38469_6862";
+    Row{
         id: threeMissesX
         anchors.bottom: scoreId.top
         x: scoreId.x +35
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6863";
+        Image{
             visible: false;
             id: x1
             height: 45*1.4;
             width: 30*1.4;
             source: "images/xSymbol.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6864";
+        Image{
             visible: false
             id: x2
             height: 45*1.4;
             width: 30*1.4;
             source: "images/xSymbol.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6865";
+        Image{
             visible: false
             id: x3
             height: 45*1.4;
@@ -1373,18 +1373,18 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //All ten of the lines
-    Row{ property string __felgo_live_id_element: "FELGO_ID_38469_6866";
+    Row{
         id: allMakeTallies11
         anchors.bottom: scoreId.top
         x: scoreId.x +35
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6867";
+        Image{
             visible: false;
             id: tally1
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6868";
+        Image{
             visible: false
             id: tally2
             //            height: 50;
@@ -1392,75 +1392,75 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"        }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6869";
+        Image{
             visible: false
             id: tally3
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6870";
+        Image{
             visible: false;
             id: tally4
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6871";
+        Image{
             visible: false
             id: tally5
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
-            transform: Rotation{ property string __felgo_live_id_element: "FELGO_ID_38469_6872";
+            transform: Rotation{
                 id: rotateImagePhoto
                 angle: 326
                 origin.x: tally5.width/2
                 origin.y: tally5.height
             }
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6873";
+        Image{
             visible: false
             id: tally6
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6874";
+        Image{
             visible: false;
             id: tally7
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6875";
+        Image{
             visible: false
             id: tally8
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6876";
+        Image{
             visible: false
             id: tally9
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6877";
+        Image{
             visible: false
             id: tally10
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "images/oneTallyMark.png"
-            transform: Rotation{ property string __felgo_live_id_element: "FELGO_ID_38469_6878";
+            transform: Rotation{
                 id: rotateImagePhoto2
                 angle: 326
                 origin.x: tally10.width/2
                 origin.y: tally10.height
             }
         }
-        Image{ property string __felgo_live_id_element: "FELGO_ID_38469_6879";
+        Image{
             anchors.verticalCenter: parent.verticalCenter
             visible: false
             id: plus11
@@ -1471,7 +1471,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
 
     //Score and PB rectangle
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6880";
+    Rectangle{
         id: flashingScore
         width: scoreId.width*1/2
         height: scoreId.height*3/2
@@ -1480,7 +1480,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         //border.color: "black" //no need for border
         x: scoreId.x-scoreId.width/2-10
         anchors.verticalCenter: scoreId.verticalCenter
-        Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6881";
+        Text{
             id: flashingScoreText
             opacity: 0;
             color: "black"
@@ -1492,7 +1492,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             font.pointSize: 19
         }
 
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6882";
+        NumberAnimation {
             id: flashingScoreAnim
             target: flashingScoreText
             property: "opacity"
@@ -1503,7 +1503,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
 
     //Box in the corner with score and PB
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6883";
+    Rectangle{
         z:2
         id: scoreId
         width: 180
@@ -1514,12 +1514,12 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         x: rim.x-30
         y: ground.y + 24
 
-        Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6884";
+        Text{
             property int value: points
             id: pointText
             text: value
-            Behavior on value { property string __felgo_live_id_element: "FELGO_ID_38469_6885";
-                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6886"; duration: 500; easing.type: Easing.InOutQuad }
+            Behavior on value {
+                NumberAnimation { duration: 500; easing.type: Easing.InOutQuad }
             }
             font.pointSize: 28
             y: 10
@@ -1528,7 +1528,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             font.family: "Impact"
         }
 
-        Text{ property string __felgo_live_id_element: "FELGO_ID_38469_6887";
+        Text{
             text: "PB: " + Extra.personalBest;
             font.pointSize: 20
             font.bold: true
@@ -1537,19 +1537,19 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        gradient: Gradient{ property string __felgo_live_id_element: "FELGO_ID_38469_6888";
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6889";position: 0 ;color: "#faf5f5"}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6890";position: 1/7 ;color: "#bfe6b1"}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6891";position: 2/7 ;color: "#faf5f5"}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6892";position: 3/7 ;color: "#bfe6b1"}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6893";position: 4/7 ;color: "#faf5f5"}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6894";position: 5/7 ;color: "#bfe6b1"}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6895";position: 6/7 ;color: "#faf5f5"}
-            GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6896";position: 1 ;color: "#bfe6b1"}
+        gradient: Gradient{
+            GradientStop{position: 0 ;color: "#faf5f5"}
+            GradientStop{position: 1/7 ;color: "#bfe6b1"}
+            GradientStop{position: 2/7 ;color: "#faf5f5"}
+            GradientStop{position: 3/7 ;color: "#bfe6b1"}
+            GradientStop{position: 4/7 ;color: "#faf5f5"}
+            GradientStop{position: 5/7 ;color: "#bfe6b1"}
+            GradientStop{position: 6/7 ;color: "#faf5f5"}
+            GradientStop{position: 1 ;color: "#bfe6b1"}
         }
     }
 
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6897";
+    Rectangle{
         id: insideContainerId
         color: "#dfedf2"
         opacity: 0.95
@@ -2246,12 +2246,12 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
 
             insideRectangleMouseArea.enabled = false; insideTheSliderRectangleMouseArea.enabled = false
         }
-        Timer{ property string __felgo_live_id_element: "FELGO_ID_38469_6898";
+        Timer{
             id: isDoubleClickTimer
             interval:1550 //should be 500 maybe
         }
 
-        Connections{ property string __felgo_live_id_element: "FELGO_ID_38469_6899";
+        Connections{
             target: Extra
             function onSpaceClickedInComp(){
                 if(!isDoubleClickTimer.running){
@@ -2263,7 +2263,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 }
             }
         }
-        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_38469_6900";
+        MouseArea{
             id: insideRectangleMouseArea
             enabled: false;
             anchors.fill: parent
@@ -2275,7 +2275,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 mouse.accepted=false;
             }
         }
-        Slider{ property string __felgo_live_id_element: "FELGO_ID_38469_6901";
+        Slider{
             onValueChanged: {
                 if(firstTime2){
                     if(value===1){
@@ -2310,7 +2310,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             width: 480;
             height: 30;
             enabled:insideRectangleMouseArea.enabled;
-            MouseArea{ property string __felgo_live_id_element: "FELGO_ID_38469_6902";
+            MouseArea{
                 id: insideTheSliderRectangleMouseArea
                 enabled: false;
                 anchors.fill: parent
@@ -2326,35 +2326,35 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                     mouse.accepted=false;
                 }
             }
-            background: Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_6903";
+            background: Rectangle{
                 implicitHeight: 6
                 height: implicitHeight
                 radius: 8
-                gradient: Gradient{ property string __felgo_live_id_element: "FELGO_ID_38469_6904";
+                gradient: Gradient{
                     orientation: Gradient.Horizontal
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6905";position: 0.0; color: (level===3)?colors[0]:"#cf3732"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6906";position: (level===3)?0.1428:0.2; color:(level===3)?colors[0]:"#db8d44"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6907";position: (level===3)?0.1429:0.35; color:(level===3)?colors[1]:"#e3d430"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6908";position: (level===3)?0.2857:0.5; color:(level===3)?colors[1]:"#29c910"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6909";position: (level===3)?0.2858:0.65; color:(level===3)?colors[2]:"#e3d430"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6910";position: (level===3)?0.4286:0.8; color:(level===3)?colors[2]:"#db8d44"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6911";position: (level===3)?0.4287:1.0; color:(level===3)?colors[3]:"#cf3732"}
+                    GradientStop{position: 0.0; color: (level===3)?colors[0]:"#cf3732"}
+                    GradientStop{position: (level===3)?0.1428:0.2; color:(level===3)?colors[0]:"#db8d44"}
+                    GradientStop{position: (level===3)?0.1429:0.35; color:(level===3)?colors[1]:"#e3d430"}
+                    GradientStop{position: (level===3)?0.2857:0.5; color:(level===3)?colors[1]:"#29c910"}
+                    GradientStop{position: (level===3)?0.2858:0.65; color:(level===3)?colors[2]:"#e3d430"}
+                    GradientStop{position: (level===3)?0.4286:0.8; color:(level===3)?colors[2]:"#db8d44"}
+                    GradientStop{position: (level===3)?0.4287:1.0; color:(level===3)?colors[3]:"#cf3732"}
                     //below ones not used until level 3
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6912";position: (level===3)?0.5714:1.1; color:(level===3)?colors[3]:"#000000"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6913";position: (level===3)?0.5715:1.1; color:(level===3)?colors[4]:"#000000"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6914";position: (level===3)?0.7143:1.1; color:(level===3)?colors[4]:"#000000"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6915";position: (level===3)?0.7144:1.1; color:(level===3)?colors[5]:"#000000"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6916";position: (level===3)?0.8571:1.1; color:(level===3)?colors[5]:"#000000"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6917";position: (level===3)?0.8572:1.1; color:(level===3)?colors[6]:"#000000"}
-                    GradientStop{ property string __felgo_live_id_element: "FELGO_ID_38469_6918";position: (level===3)?1:1.1; color:(level===3)?colors[6]:"#000000"}
+                    GradientStop{position: (level===3)?0.5714:1.1; color:(level===3)?colors[3]:"#000000"}
+                    GradientStop{position: (level===3)?0.5715:1.1; color:(level===3)?colors[4]:"#000000"}
+                    GradientStop{position: (level===3)?0.7143:1.1; color:(level===3)?colors[4]:"#000000"}
+                    GradientStop{position: (level===3)?0.7144:1.1; color:(level===3)?colors[5]:"#000000"}
+                    GradientStop{position: (level===3)?0.8571:1.1; color:(level===3)?colors[5]:"#000000"}
+                    GradientStop{position: (level===3)?0.8572:1.1; color:(level===3)?colors[6]:"#000000"}
+                    GradientStop{position: (level===3)?1:1.1; color:(level===3)?colors[6]:"#000000"}
                 }
-                Rectangle { property string __felgo_live_id_element: "FELGO_ID_38469_6919";
+                Rectangle {
                     height: parent.height
                     color: "#21be2b"
                     radius: 3
                 }
             }
-            handle: Rectangle { property string __felgo_live_id_element: "FELGO_ID_38469_6920";
+            handle: Rectangle {
                 id: handleId
                 x: sliderId.leftPadding + sliderId.visualPosition * (sliderId.availableWidth - width)
                 y: sliderId.topPadding + sliderId.availableHeight / 2 - height / 2
@@ -2364,16 +2364,16 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 color: sliderId.pressed ? "#f0f0f0" : "#ededed"
                 border.color: "#9e9e9e"
             }
-            SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6921";
+            SequentialAnimation{
                 id: seqAnimationId
-                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6922";
+                NumberAnimation {
                     target: sliderId
                     property: "value"
                     to:1000
                     duration: mDuration
                     easing.type: sliderEasingType
                 }
-                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6923";
+                NumberAnimation {
                     target: sliderId
                     property: "value"
                     to:0
@@ -2382,7 +2382,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
 
                 }
             }
-            PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6924";
+            PauseAnimation {
                 onFinished: {
                     if(currentIndexForRandom===5)
                         currentIndexForRandom=0;
@@ -2411,7 +2411,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
         }
     }
     //splash animation
-    MyAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6925";
+    MyAnimation{
         id: splashAnimation
         toX: rim.x+41;
         downEasingType: Easing.InQuad;
@@ -2426,14 +2426,14 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             splashSoundEffectTimer.start()
         }
     }
-    MyTimer{ property string __felgo_live_id_element: "FELGO_ID_38469_6926";
+    MyTimer{
         id: splashSoundEffectTimer
         original:  1500
         onTimedOut: {
             splashSoundEffect.play()
         }
     }
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_6927";
+    Audio{
         id: splashSoundEffect
         source:"sounds/splashSoundEffectCropped.mp3"
         volume: Extra.sound*1
@@ -2447,7 +2447,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
 
     //air ball animation
-    MyAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6928";
+    MyAnimation{
         id: airBallAnimation
         toX: rim.x-75;
         downEasingType: Easing.InQuad;
@@ -2465,7 +2465,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
 
     //Backboard make
-    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6929";
+    SequentialAnimation{
         onStopped:{
             whatToDoWhenAnimFinished()
         }
@@ -2473,33 +2473,33 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             backboardMakeSoundEffectTimer.start()
         }
         id: backboardAnimation
-        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6930";
-            RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6931";
+        ParallelAnimation{
+            RotationAnimation{
                 target: basketBall
                 properties: "rotation"
                 direction: RotationAnimation.Clockwise
                 to: 800
                 duration: 1600
             }
-            SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6932";
-                ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6933";
-                    SequentialAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6934";
-                        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6935";
+            SequentialAnimation{
+                ParallelAnimation {
+                    SequentialAnimation {
+                        NumberAnimation {
                             target: basketBall
                             properties: "y"
                             to: 50
                             duration: 1600 * 0.5
                             easing.type: Easing.OutCirc
                         }
-                        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6936";
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6937";
+                        ParallelAnimation{
+                            NumberAnimation {
                                 target: basketBall
                                 property: "width"
                                 to: 92.5
                                 duration: 1600*0.3
                                 easing.type: Easing.InQuad
                             }
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6938";
+                            NumberAnimation {
                                 target: basketBall
                                 property: "height"
                                 to: 92.5
@@ -2507,7 +2507,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                                 easing.type: Easing.InQuad
                             }
 
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6939";
+                            NumberAnimation {
                                 target: basketBall
                                 properties: "y"
                                 to: backboard.y-20
@@ -2516,50 +2516,50 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                             }
                         }
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6940";
+                    NumberAnimation {
                         target: basketBall
                         properties: "x"
                         to: backboard.x-basketBall.width+20
                         duration: 1600*0.8
                     }
                 }
-                ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6941";
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6942";
+                ParallelAnimation{
+                    NumberAnimation {
                         target: basketBall
                         property: "y"
                         to: rim.y-15
                         duration: 1600*0.2
                         easing.type: Easing.Linear
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6943";
+                    NumberAnimation {
                         target: basketBall
                         property: "x"
                         duration: 1600*0.2
                         to: rim.x+41
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6944";
+                    NumberAnimation {
                         target: basketBall
                         property: "width"
                         to: 65+20
                         duration: 1600*0.2
                         easing.type: Easing.Linear
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6945";
+                    NumberAnimation {
                         target: basketBall
                         property: "height"
                         to: 65+20
                         duration: 1600*0.2
                         easing.type: Easing.Linear
                     }
-                    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6946";
+                    SequentialAnimation{
                         id: rimRockId
-                        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6947";
+                        RotationAnimation{
                             target: rim
                             property: "rotation"
                             to: 3
                             duration: 1600*0.05
                         }
-                        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6948";
+                        RotationAnimation{
                             target: rim
                             property: "rotation"
                             to: 0
@@ -2579,12 +2579,12 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 }
             }
         }
-        PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6949";
+        PauseAnimation {
             duration: 400
         }
     }
     //SE
-    MyTimer{ property string __felgo_live_id_element: "FELGO_ID_38469_6950";
+    MyTimer{
         id: backboardMakeSoundEffectTimer
         original:  1280
         onTimedOut: {
@@ -2592,20 +2592,20 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             backboardMakeSoundEffectTimer2.start()
         }
     }
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_6951";
+    Audio{
         id: backboardMakeSoundEffect
         source:"sounds/backboardMissSoundEffectCropped1.mp3"
         volume: Extra.sound*1
 
     }
-    MyTimer{ property string __felgo_live_id_element: "FELGO_ID_38469_6952";
+    MyTimer{
         id: backboardMakeSoundEffectTimer2
         original:  180
         onTimedOut: {
             backboardMakeSoundEffect2.play()
         }
     }
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_6953";
+    Audio{
         id: backboardMakeSoundEffect2
         source:"sounds/splashSoundEffectCropped.mp3"
         volume: Extra.sound*1
@@ -2619,7 +2619,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
 
     //Backboard miss
-    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6954";
+    SequentialAnimation{
         onStopped:{
             whatToDoWhenAnimFinished()
         }
@@ -2627,40 +2627,40 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             backboardMissSoundEffectTimer.start()
         }
         id: backboardMissAnimation
-        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6955";
-            RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6956";
+        ParallelAnimation{
+            RotationAnimation{
                 target: basketBall
                 properties: "rotation"
                 direction: RotationAnimation.Clockwise
                 to: 800
                 duration: 1600*(0.8+0.65)
             }
-            SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6957";
-                ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6958";
-                    SequentialAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6959";
-                        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6960";
+            SequentialAnimation{
+                ParallelAnimation {
+                    SequentialAnimation {
+                        NumberAnimation {
                             target: basketBall
                             properties: "y"
                             to: 50
                             duration: 1600 * 0.5
                             easing.type: Easing.OutCirc
                         }
-                        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6961";
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6962";
+                        ParallelAnimation{
+                            NumberAnimation {
                                 target: basketBall
                                 property: "width"
                                 to: 90+20-5
                                 duration: 1600*0.3
                                 easing.type: Easing.InQuad
                             }
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6963";
+                            NumberAnimation {
                                 target: basketBall
                                 property: "height"
                                 to: 90+20-5
                                 duration: 1600*0.3
                                 easing.type: Easing.InQuad
                             }
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6964";
+                            NumberAnimation {
                                 target: basketBall
                                 properties: "y"
                                 to: backboard.y-20
@@ -2669,50 +2669,50 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                             }
                         }
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6965";
+                    NumberAnimation {
                         target: basketBall
                         properties: "x"
                         to: backboard.x-basketBall.width+20
                         duration: 1600*0.8
                     }
                 }
-                ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6966";
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6967";
+                ParallelAnimation{
+                    NumberAnimation {
                         target: basketBall
                         property: "y"
                         to: rim.y+200
                         duration: 1600*0.65
                         easing.type: Easing.InCubic
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6968";
+                    NumberAnimation {
                         target: basketBall
                         property: "x"
                         duration: 1600*0.65
                         to: rim.x-300
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6969";
+                    NumberAnimation {
                         target: basketBall
                         property: "width"
                         to: 110+20-5
                         duration: 1600*0.65
                         easing.type: Easing.InCubic
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6970";
+                    NumberAnimation {
                         target: basketBall
                         property: "height"
                         to: 110+20-5
                         duration: 1600*0.65
                         easing.type: Easing.InCubic
                     }
-                    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6971";
+                    SequentialAnimation{
                         id: rimRockId1
-                        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6972";
+                        RotationAnimation{
                             target: rim
                             property: "rotation"
                             to: 3
                             duration: 1600*0.05
                         }
-                        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6973";
+                        RotationAnimation{
                             target: rim
                             property: "rotation"
                             to: 0
@@ -2732,26 +2732,26 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 }
             }
         }
-        PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6974";
+        PauseAnimation {
             duration: 400
         }
     }
     //SE
-    MyTimer{ property string __felgo_live_id_element: "FELGO_ID_38469_6975";
+    MyTimer{
         id: backboardMissSoundEffectTimer
         original:  1200
         onTimedOut: {
             backboardMissSoundEffect.play()
         }
     }
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_6976";
+    Audio{
         id: backboardMissSoundEffect
         source:"sounds/backboardMissSoundEffectCropped.mp3"
         volume: Extra.sound*0.64
     }
 
     //Rim make
-    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6977";
+    SequentialAnimation{
         onStarted: {
             rimMakeSoundEffectTimer.start()
         }
@@ -2759,33 +2759,33 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             whatToDoWhenAnimFinished()
         }
         id: rimMakeAnimation
-        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6978";
-            RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6979";
+        ParallelAnimation{
+            RotationAnimation{
                 target: basketBall
                 properties: "rotation"
                 direction: RotationAnimation.Clockwise
                 to: 800
                 duration: 1600
             }
-            SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6980";
-                ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6981";
-                    SequentialAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6982";
-                        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6983";
+            SequentialAnimation{
+                ParallelAnimation {
+                    SequentialAnimation {
+                        NumberAnimation {
                             target: basketBall
                             properties: "y"
                             to: 50
                             duration: 1600 * 0.5
                             easing.type: Easing.OutCirc
                         }
-                        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6984";
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6985";
+                        ParallelAnimation{
+                            NumberAnimation {
                                 target: basketBall
                                 property: "width"
                                 to: 90+20-5
                                 duration: 1600*0.25
                                 easing.type: Easing.InQuad
                             }
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6986";
+                            NumberAnimation {
                                 target: basketBall
                                 property: "height"
                                 to: 90+20-5
@@ -2793,7 +2793,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                                 easing.type: Easing.InQuad
                             }
 
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6987";
+                            NumberAnimation {
                                 target: basketBall
                                 properties: "y"
                                 to: rim.y-basketBall.height+25
@@ -2802,23 +2802,23 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                             }
                         }
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6988";
+                    NumberAnimation {
                         target: basketBall
                         properties: "x"
                         to: rim.x-basketBall.width/2+25
                         duration: 1600*0.75
                     }
                 }
-                ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6989";
-                    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6990";
+                ParallelAnimation{
+                    SequentialAnimation{
                         id: rimRockId2
-                        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6991";
+                        RotationAnimation{
                             target: rim
                             property: "rotation"
                             to: 3
                             duration: 1600*0.05
                         }
-                        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6992";
+                        RotationAnimation{
                             target: rim
                             property: "rotation"
                             to: 0
@@ -2835,30 +2835,30 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                             }
                         }
                     }
-                    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6993";
-                        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6994";
+                    SequentialAnimation{
+                        NumberAnimation {
                             target: basketBall
                             property: "y"
                             to: 150
                             duration: (1600*0.25)*0.65
                             easing.type: Easing.OutQuad
                         }
-                        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_6995";
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6996";
+                        ParallelAnimation{
+                            NumberAnimation {
                                 target: basketBall
                                 property: "width"
                                 to: 70+20-5
                                 duration: 1600*0.25*0.75
                                 easing.type: Easing.Linear
                             }
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6997";
+                            NumberAnimation {
                                 target: basketBall
                                 property: "height"
                                 to: 70+20-5
                                 duration: 1600*0.25*0.75
                                 easing.type: Easing.Linear
                             }
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6998";
+                            NumberAnimation {
                                 target: basketBall
                                 property: "y"
                                 to: rim.y-20
@@ -2867,7 +2867,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                             }
                         }
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_6999";
+                    NumberAnimation {
                         target: basketBall
                         property: "x"
                         to: rim.x+41
@@ -2875,28 +2875,28 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                         easing.type: Easing.Linear
                     }
                 }
-                PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7000";
+                PauseAnimation {
                     duration: 400
                 }
             }
         }
     }
     //SE
-    MyTimer{ property string __felgo_live_id_element: "FELGO_ID_38469_7001";
+    MyTimer{
         id: rimMakeSoundEffectTimer
         original:  1200
         onTimedOut: {
             rimMakeSoundEffect.play()
         }
     }
-    MyTimer{ property string __felgo_live_id_element: "FELGO_ID_38469_7002";
+    MyTimer{
         id: coinClinkSoundEffectForRimMakeTimer
         original: 300
         onTimedOut: {
             coinClinkSoundEffect.play()
         }
     }
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_7003";
+    Audio{
         id: rimMakeSoundEffect
         source:"sounds/rimMakeSoundEffectCropped.mp3"
         volume: Extra.sound*1
@@ -2910,7 +2910,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
     }
 
     //Rim miss
-    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7004";
+    SequentialAnimation{
         onStopped:{
             whatToDoWhenAnimFinished()
         }
@@ -2918,33 +2918,33 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             rimMissSoundEffectTimer.start()
         }
         id: rimMissAnimation
-        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7005";
-            RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7006";
+        ParallelAnimation{
+            RotationAnimation{
                 target: basketBall
                 properties: "rotation"
                 direction: RotationAnimation.Clockwise
                 to: 800
                 duration: 1600*1.7
             }
-            SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7007";
-                ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7008";
-                    SequentialAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7009";
-                        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7010";
+            SequentialAnimation{
+                ParallelAnimation {
+                    SequentialAnimation {
+                        NumberAnimation {
                             target: basketBall
                             properties: "y"
                             to: 50
                             duration: 1600 * 0.5
                             easing.type: Easing.OutCirc
                         }
-                        ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7011";
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7012";
+                        ParallelAnimation{
+                            NumberAnimation {
                                 target: basketBall
                                 property: "width"
                                 to: 75+20-5
                                 duration: 1600*0.35
                                 easing.type: Easing.InQuad
                             }
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7013";
+                            NumberAnimation {
                                 target: basketBall
                                 property: "height"
                                 to: 75+20-5
@@ -2952,7 +2952,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                                 easing.type: Easing.InQuad
                             }
 
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7014";
+                            NumberAnimation {
                                 target: basketBall
                                 properties: "y"
                                 to: rim.y-60
@@ -2961,7 +2961,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                             }
                         }
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7015";
+                    NumberAnimation {
                         target: basketBall
                         properties: "x"
                         to: rim.x+50
@@ -2969,16 +2969,16 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                     }
                 }
 
-                ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7016";
-                    SequentialAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7017";
+                ParallelAnimation {
+                    SequentialAnimation{
                         id: rimRockId3
-                        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7018";
+                        RotationAnimation{
                             target: rim
                             property: "rotation"
                             to: 3
                             duration: 1600*0.05
                         }
-                        RotationAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7019";
+                        RotationAnimation{
                             target: rim
                             property: "rotation"
                             to: 0
@@ -2995,16 +2995,16 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                                 }
                             }
                         }
-                        SequentialAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7020";
-                            ParallelAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7021";
-                                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7022";
+                        SequentialAnimation {
+                            ParallelAnimation{
+                                NumberAnimation {
                                     target: basketBall
                                     property: "width"
                                     to: 115+20-5
                                     duration: 1600*0.4
                                     easing.type: Easing.Linear
                                 }
-                                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7023";
+                                NumberAnimation {
                                     target: basketBall
                                     property: "height"
                                     to: 115+20-5
@@ -3012,7 +3012,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                                     easing.type: Easing.Linear
                                 }
 
-                                NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7024";
+                                NumberAnimation {
                                     target: basketBall
                                     properties: "y"
                                     to: 140
@@ -3020,7 +3020,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                                     easing.type: Easing.OutQuad
                                 }
                             }
-                            NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7025";
+                            NumberAnimation {
                                 target: basketBall
                                 properties: "y"
                                 to: rim.y+150
@@ -3029,7 +3029,7 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                             }
                         }
                     }
-                    NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7026";
+                    NumberAnimation {
                         target: basketBall
                         properties: "x"
                         to: rim.x-350
@@ -3039,12 +3039,12 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
                 }
             }
         }
-        PauseAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7027";
+        PauseAnimation {
             duration: 400
         }
     }
     //SE
-    MyTimer{ property string __felgo_live_id_element: "FELGO_ID_38469_7028";
+    MyTimer{
         id: rimMissSoundEffectTimer
         original:  1290
         onTimedOut: {
@@ -3052,51 +3052,51 @@ Page { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_38469"; pr
             rimMissSoundEffectTimer2.start()
         }
     }
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_7029";
+    Audio{
         id: rimMissSoundEffect
         source:"sounds/rimMissSoundEffect2.mp3"
         volume: Extra.sound*0.8
 
     }
-    MyTimer{ property string __felgo_live_id_element: "FELGO_ID_38469_7030";
+    MyTimer{
         id: rimMissSoundEffectTimer2
         original:  100
         onTimedOut: {
             rimMissSoundEffect2.play()
         }
     }
-    Audio{ property string __felgo_live_id_element: "FELGO_ID_38469_7031";
+    Audio{
         id: rimMissSoundEffect2
         source:"sounds/rimMissSoundEffect2.mp3"
         volume: Extra.sound*0.3
     }
-    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_38469_7032";
+    Rectangle{
         id: stateRectId
         state: "notPaused"
         states: [
-            State { property string __felgo_live_id_element: "FELGO_ID_38469_7033";
+            State {
                 name: "paused"
-                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_38469_7034";
+                PropertyChanges {
                     target: pauseRectangle
                     visible: true
                 }
             },
-            State { property string __felgo_live_id_element: "FELGO_ID_38469_7035";
+            State {
                 name: "notPaused"
-                PropertyChanges { property string __felgo_live_id_element: "FELGO_ID_38469_7036";
+                PropertyChanges {
                     target: pauseRectangle
                     visible: false
                 }
             }
         ]
         transitions: [
-            Transition { property string __felgo_live_id_element: "FELGO_ID_38469_7037";
+            Transition {
                 from: "*"
                 to: "*"
-                ColorAnimation { property string __felgo_live_id_element: "FELGO_ID_38469_7038";
+                ColorAnimation {
                     duration: 500
                 }
-                NumberAnimation{ property string __felgo_live_id_element: "FELGO_ID_38469_7039";
+                NumberAnimation{
                     property: opacity
                     duration: 500
                 }

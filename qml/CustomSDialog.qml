@@ -35,7 +35,7 @@ import QtMultimedia 5.9
 
 */
 
-Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; property string __felgo_live_id_element: "FELGO_ID_50555_14193";
+Item {
     z:20
     id: dialog
     anchors.fill: parent
@@ -68,7 +68,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
     }
 
     // this component prevents selecting anything behind the dialog, only enabled if it's a modal dialog
-    MouseArea { property string __felgo_live_id_element: "FELGO_ID_50555_14194";
+    MouseArea {
         anchors.fill: parent
         enabled: dialog.modal
         onClicked: {
@@ -77,7 +77,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
     }
 
     // visible overlay, only visible if it's a modal dialog
-    Rectangle { property string __felgo_live_id_element: "FELGO_ID_50555_14195";
+    Rectangle {
         id: overlay
         visible: dialog.modal
         anchors.fill: parent
@@ -85,8 +85,8 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
     }
 
     // the box containing dialog text and buttons
-    Rectangle { property string __felgo_live_id_element: "FELGO_ID_50555_14196";
-        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_50555_14197";
+    Rectangle {
+        MouseArea{
             anchors.fill: parent
             enabled: dialog.modal
         }
@@ -115,11 +115,11 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
         width: 620
         height: 550
         focus: true
-        ColumnLayout { property string __felgo_live_id_element: "FELGO_ID_50555_14198";
+        ColumnLayout {
             id: settingsColumn
             spacing: 80
             y:15
-            Text{ property string __felgo_live_id_element: "FELGO_ID_50555_21741";
+            Text{
                 width: 400
                 text: "          Settings                      "
                 font.family: "Bodoni MT Black"
@@ -128,11 +128,11 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                 font.bold:true;
                 id: setttingsTitle
             }
-            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_50555_14200";
+            Rectangle{
                 color: "white"
                 height: 20
                 width:parent.width
-                IconButtonBarItem{ property string __felgo_live_id_element: "FELGO_ID_50555_14201";
+                IconButtonBarItem{
                     anchors.verticalCenter: parent.verticalCenter
                     x:10
                     visible:true
@@ -140,12 +140,12 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                     id: musicVolumeIcon
                     icon: (Extra.volume<0.45)?((Extra.volume<0.02)?IconType.volumeoff:IconType.volumeoff):IconType.volumeup
                     iconSize: 50
-                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_50555_14202";
+                    Rectangle{
                         anchors.centerIn: parent
                         width: 50
                         height:width
                         color:"transparent"
-                        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_50555_14203";
+                        MouseArea{
                             anchors.fill: parent
                             onClicked:{
                                 musicVolumeIcon.icon=IconType.volumeoff
@@ -162,7 +162,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                         }
                     }
                 }
-                Label{ property string __felgo_live_id_element: "FELGO_ID_50555_14204";
+                Label{
                     anchors.verticalCenter: parent.verticalCenter
                     x:98
                     text: "Music:"
@@ -170,7 +170,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                     font.bold: true
                     id: musicText
                 }
-                AppSlider { property string __felgo_live_id_element: "FELGO_ID_50555_14205";
+                AppSlider {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
                         x=musicText.width+musicText.x+18
@@ -178,7 +178,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                     x:musicText.width+musicText.x+18
                     from: 0
                     to: 1
-                    handle:Rectangle{ property string __felgo_live_id_element: "FELGO_ID_50555_14206";
+                    handle:Rectangle{
                         x: volumeSlider.leftPadding + volumeSlider.visualPosition * (volumeSlider.availableWidth - width)
                         y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
                         implicitWidth: volumeSlider.pressed ? 34: 28
@@ -187,7 +187,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                         color: volumeSlider.pressed ? "#233ab8" : "#3F51B5"
                         border.color:  volumeSlider.pressed ? "#233ab8" : "#3F51B5"
                     }
-                    background: Rectangle { property string __felgo_live_id_element: "FELGO_ID_50555_14207";
+                    background: Rectangle {
                         x: volumeSlider.leftPadding
                         y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
                         implicitWidth: 320
@@ -196,7 +196,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                         height: implicitHeight
                         radius: 12
                         color: "#7C7C7C"
-                        Rectangle { property string __felgo_live_id_element: "FELGO_ID_50555_14208";
+                        Rectangle {
                             width: volumeSlider.visualPosition * parent.width
                             height: parent.height
                             color: "#3F51B5"
@@ -232,11 +232,11 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                 }
             }
 
-            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_50555_14209";
+            Rectangle{
                 color: "white"
                 height: 20
                 width:parent.width
-                IconButtonBarItem{ property string __felgo_live_id_element: "FELGO_ID_50555_14210";
+                IconButtonBarItem{
                     x:10
                     anchors.verticalCenter: parent.verticalCenter;
                     visible:true
@@ -244,12 +244,12 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                     id: musicSoundIcon
                     icon: (Extra.sound<0.45)?((Extra.sound<0.02)?IconType.volumeoff:IconType.volumeoff):IconType.volumeup
                     iconSize: 50
-                    Rectangle{ property string __felgo_live_id_element: "FELGO_ID_50555_14211";
+                    Rectangle{
                         anchors.centerIn: parent
                         width: 40
                         height:width
                         color:"transparent"
-                        MouseArea{ property string __felgo_live_id_element: "FELGO_ID_50555_14212";
+                        MouseArea{
                             anchors.fill: parent
                             onClicked:{
                                 musicSoundIcon.icon=IconType.volumeoff
@@ -266,7 +266,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                         }
                     }
                 }
-                Label{ property string __felgo_live_id_element: "FELGO_ID_50555_14213";
+                Label{
                     anchors.verticalCenter: parent.verticalCenter
                     x:98
                     text: "Sound:"
@@ -274,7 +274,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                     font.bold: true
                     id: soundText
                 }
-                AppSlider { property string __felgo_live_id_element: "FELGO_ID_50555_14214";
+                AppSlider {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
                         x=soundText.width+soundText.x+18
@@ -283,7 +283,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                     id: soundSlider
                     from: 0
                     to: 1
-                    handle:Rectangle{ property string __felgo_live_id_element: "FELGO_ID_50555_14215";
+                    handle:Rectangle{
                         x: soundSlider.leftPadding + soundSlider.visualPosition * (soundSlider.availableWidth - width)
                         y: soundSlider.topPadding + soundSlider.availableHeight / 2 - height / 2
                         implicitWidth: soundSlider.pressed ? 34: 28
@@ -292,7 +292,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                         color: soundSlider.pressed ? "#233ab8" : "#3F51B5"
                         border.color:  soundSlider.pressed ? "#233ab8" : "#3F51B5"
                     }
-                    background: Rectangle { property string __felgo_live_id_element: "FELGO_ID_50555_14216";
+                    background: Rectangle {
                         x: soundSlider.leftPadding
                         y: soundSlider.topPadding + soundSlider.availableHeight / 2 - height / 2
                         implicitWidth: 320
@@ -301,7 +301,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                         height: implicitHeight
                         radius: 12
                         color: "#7C7C7C"
-                        Rectangle { property string __felgo_live_id_element: "FELGO_ID_50555_14217";
+                        Rectangle {
                             width: soundSlider.visualPosition * parent.width
                             height: parent.height
                             color: "#3F51B5"
@@ -335,17 +335,17 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                                                                     QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
                 }
             }
-            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_50555_14218";
+            Rectangle{
                 width: 3
                 height: 38-soundSlider.implicitHeight
             }
         }
-        Button { property string __felgo_live_id_element: "FELGO_ID_50555_14219";
-            Rectangle{ property string __felgo_live_id_element: "FELGO_ID_50555_14220";
+        Button {
+            Rectangle{
                 anchors.fill: parent
                 color: okButton.pressed?"#233ab8" : "#3F51B5"
             }
-            Text{ property string __felgo_live_id_element: "FELGO_ID_50555_14221";
+            Text{
                 anchors.centerIn: parent
                 font.pointSize: 20
                 text: "Ok"
@@ -365,16 +365,16 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
                 dialog.hide()
             }
         }
-        Button{ property string __felgo_live_id_element: "FELGO_ID_50555_14222";
+        Button{
             visible: false
             id: templateButton
         }
     }
 
     // animation to show the dialog
-    ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_50555_14223";
+    ParallelAnimation {
         id: showAnimation
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_50555_14224";
+        NumberAnimation {
             target: box
             property: "scale"
             from: 0
@@ -382,7 +382,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
             easing.type: Easing.OutBack
             duration: 250
         }
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_50555_14225";
+        NumberAnimation {
             target: overlay
             property: "opacity"
             from: 0
@@ -392,9 +392,9 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
     }
 
     // animation to hide the dialog
-    ParallelAnimation { property string __felgo_live_id_element: "FELGO_ID_50555_14226";
+    ParallelAnimation {
         id: hideAnimation
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_50555_14227";
+        NumberAnimation {
             target: box
             property: "scale"
             from: 1
@@ -402,7 +402,7 @@ Item { property string __felgo_live_id_component: "FELGO_COMPONENT_ID_50555"; pr
             easing.type: Easing.InBack
             duration: 250
         }
-        NumberAnimation { property string __felgo_live_id_element: "FELGO_ID_50555_14228";
+        NumberAnimation {
             target: overlay
             property: "opacity"
             from: 0.2
