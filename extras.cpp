@@ -1,7 +1,7 @@
 #include "extras.h"
 #include <QDebug>
-Extras::Extras(QObject *parent) : QObject(parent), m_volume(0.0), m_isOpen(false), m_numCoins(64),
-    m_ballSource("file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"),m_personalBest(1243), m_datastore(""), m_miniStore(""), m_myMissionsRn(""), m_endingPage(""), m_sound(0.0)
+Extras::Extras(QObject *parent) : QObject(parent), m_volume(0.0), m_isOpen(false), m_numCoins(5),
+    m_ballSource("file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"),m_personalBest(0), m_datastore(""), m_miniStore(""), m_myMissionsRn(""), m_endingPage(""), m_sound(0.0)
 {
 
 }

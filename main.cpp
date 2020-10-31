@@ -16,7 +16,7 @@
 #include <string>
 #include "mytimer.h"
 #include <FelgoApplication>
-
+#include <QApplication>
 //FlashingTimer allTheTimeStuff();
 
 //int main(int argc, char *argv[])
@@ -164,14 +164,20 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("someOrganization");
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication appy(argc, argv);
+//    QGuiApplication appy(argc, argv);
 
-    //App information
-    appy.setOrganizationName("someOrganization");
-    appy.setOrganizationDomain("someOrganization.com");
-    appy.setApplicationName("Make some splashs!");
+//    //App information
+//    appy.setOrganizationName("someOrganization");
+//    appy.setOrganizationDomain("someOrganization.com");
+//    appy.setApplicationName("Make some splashs!");
 
     QApplication app(argc, argv);
+    //App information
+    app.setOrganizationName("someOrganization");
+    app.setOrganizationDomain("someOrganization.com");
+    app.setApplicationName("Make some splashs!");
+
+
     FelgoApplication felgo;
     felgo.setPreservePlatformFonts(true);
     QQmlApplicationEngine engine;
