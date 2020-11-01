@@ -14,7 +14,7 @@ class Extras : public QObject
     Q_PROPERTY(int personalBest READ personalBest WRITE setPersonalBest NOTIFY personalBestChanged)
     Q_PROPERTY(QString datastore READ datastore WRITE setDatastore NOTIFY datastoreChanged)
     Q_PROPERTY(QString miniStore READ miniStore WRITE setMiniStore NOTIFY miniStoreChanged)
-    Q_PROPERTY(QString myMissionsRn READ myMissionsRn WRITE setmyMissionsRn NOTIFY myMissionsRnChanged)
+    Q_PROPERTY(QString myMissionsRn READ myMissionsRn WRITE setMyMissionsRn NOTIFY myMissionsRnChanged)
     Q_PROPERTY(QString endingPage READ endingPage WRITE setEndingPage NOTIFY endingPageChanged)
     Q_PROPERTY(double sound READ sound WRITE setSound NOTIFY soundChanged)
 public:

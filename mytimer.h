@@ -6,7 +6,6 @@
 class MyTimer : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QTimer timer READ m_timer WRITE setM_timer NOTIFY m_timerChanged);
     Q_PROPERTY(int elapsed READ elapsed WRITE setElapsed NOTIFY elapsedChanged);
     Q_PROPERTY(int original READ original WRITE setOriginal NOTIFY originalChanged)
     Q_PROPERTY(bool running READ running WRITE setRunning NOTIFY runningChanged)
@@ -36,7 +35,7 @@ signals:
     void elapsedChanged(int elapsed);
     void runningChanged(bool running);
     void originalChanged(int original);
-    void m_timerChanged(QTimer timer);
+//    void m_timerChanged(QTimer timer);
     void timedOut();
 };
 
