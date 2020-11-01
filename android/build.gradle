@@ -21,7 +21,7 @@ apply plugin: 'com.android.application'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'net.vplay.plugins:plugin-admob:3.+'
+//    implementation 'net.vplay.plugins:plugin-admob:3.+'
 
     implementation "com.android.support:support-core-utils:28.0.0"
     implementation "com.android.support:appcompat-v7:28.0.0"

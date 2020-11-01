@@ -281,21 +281,21 @@ FlashingTimer allTheTimeStuff(){
     return joe;
 }
 
-// Default message handler to be called to bypass all other warnings.
-static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
-// a custom message handler to intercept warnings
-void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString & msg)
-{
-    switch (type) {
-    case QtWarningMsg: {
-        if (!msg.contains("Unable to assign [undefined] to int")){ // suppress this warning
-            (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
-        }
-    }
-    break;
-    default:    // Call the default handler.
-        (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
-        break;
-    }
-}
+//// Default message handler to be called to bypass all other warnings.
+//static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
+//// a custom message handler to intercept warnings
+//void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString & msg)
+//{
+//    switch (type) {
+//    case QtWarningMsg: {
+//        if (!msg.contains("Unable to assign [undefined] to int")){ // suppress this warning
+//            (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
+//        }
+//    }
+//    break;
+//    default:    // Call the default handler.
+//        (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
+//        break;
+//    }
+//}
 
