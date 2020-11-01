@@ -164,11 +164,11 @@ Page {
                 sprite = component.createObject(root2);
                 if (sprite === null) {
                     // Error Handling
-                    console.log("Error creating object");
+//                    console.log("Error creating object");
                 }
             } else if (component.status === Component.Error) {
                 // Error Handling
-                console.log("Error loading component:", component.errorString());
+//                console.log("Error loading component:", component.errorString());
             }
         }
         component = Qt.createComponent("HalftimeBall.qml");

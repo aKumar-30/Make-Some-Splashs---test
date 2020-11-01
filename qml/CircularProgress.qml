@@ -131,10 +131,16 @@ Canvas {
                 newMissionsAdButton.clicked()
             }
         }
-        z:12
+        z:15
     }
-
+    Image{
+        anchors.centerIn: parent
+        width: parent.height-50
+        height: parent.height-50
+        source: "images/coinFrontTranslucent.png"
+    }
     IconButtonBarItem{
+        z:10
         onVisibleChanged: {
             if(visible){
                 beatingHeartAnim.start()
@@ -151,20 +157,20 @@ Canvas {
             anchors.fill: parent
             enabled: heartIcon.visible
             onClicked:{
-                console.log("clicked1")
                 newMissionsAdButton.clicked()
             }
         }
     }
     MouseArea{
+        z:11
         anchors.fill: parent
         enabled: heartIcon.visible
         onClicked:{
-            console.log("clicked")
             newMissionsAdButton.clicked()
         }
     }
     MouseArea {
+        z:11
         id: mouseArea
         anchors.fill: parent
         onClicked: canvas.clicked()

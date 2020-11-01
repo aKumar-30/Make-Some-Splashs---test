@@ -75,7 +75,6 @@ Page {
         }
     }
     Component.onCompleted: {
-        console.log("the height is"+root2.height)
         getCurrentMissions()
     }
     //sound effects start here - coin clink
@@ -204,9 +203,7 @@ Page {
         volume: 0.0
         playbackRate: 1.2
         onPlaying:{
-            console.log("in here1")
             if(volume===0.0){
-                console.log("in here")
                 fadeIn.start();
                 mvpSoundEffectPlaying= true
             }
@@ -234,10 +231,8 @@ Page {
         }
     }
     function checkIfCurrentMission(num){
-        console.log("i entered the thing")
         for(let i =0; i< 3; i++){
             if(presentMissions[i]===num){
-                console.log("i returned true with " +num)
                 return true;
             }
         }
@@ -370,7 +365,6 @@ Page {
             timersToReplay=[]
             for (let q = 0; q< timerToCheck.length; q++){
                 if(timerToCheck[q].running){
-                    console.log("One timer running here"+ "this is a q value"+ q+ "       "+timerToCheck[q])
                     timerToCheck[q].pause();
                     timersToReplay.push(timerToCheck[q])
                 }
@@ -571,7 +565,6 @@ Page {
             coinProb = 4;
             var options = [Easing.Linear, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.OutCirc, Easing.OutInCirc, Easing.InOutElastic, Easing.OutElastic, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.InBounce, Easing.OutBounce,Easing.InOutBounce, /*Easing.OutInBounce,*/ Easing.BezierCurve]
             sliderEasingType=options[Math.floor((Math.random() * 28))];
-            console.log("Easing type"+Math.floor((Math.random() * 28)))
             sliderId.value=200;
             mDuration-=26/*39*/;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
@@ -1077,25 +1070,28 @@ Page {
             //                            }
             //                        }
             onClicked: {
-                adUsed=true
-                quitButtonWasClicked=true
-                newRetryCircle.visible=false
-                newFadedRed.visible=false
-                adScreenHappening=false
-                //                    // show the new video if user is below 10 credits
-                //                    myRewardedVideo.showRewardedVideoIfLoaded()
-                //                    // load a new video every time it got shown, to give the user a fresh ad
-                //                    myRewardedVideo.loadRewardedVideo()
-                //all of this should be after onRewardedVideoRewarded but this is for testing
-                sliderId.enabled=true;
-                insideRectangleMouseArea.enabled=true
-                insideTheSliderRectangleMouseArea.enabled=true
-                flashingScoreText.color="black"
-                manyMisses=0
-                x1.visible=false
-                x2.visible=false
-                x3.visible=false
-                whatToDoWhenAnimFinished()
+                if(Extra.numCoins>=10){
+                    Extra.numCoins=Extra.numCoins-10;
+                    adUsed=true
+                    quitButtonWasClicked=true
+                    newRetryCircle.visible=false
+                    newFadedRed.visible=false
+                    adScreenHappening=false
+                    //                    // show the new video if user is below 10 credits
+                    //                    myRewardedVideo.showRewardedVideoIfLoaded()
+                    //                    // load a new video every time it got shown, to give the user a fresh ad
+                    //                    myRewardedVideo.loadRewardedVideo()
+                    //all of this should be after onRewardedVideoRewarded but this is for testing
+                    sliderId.enabled=true;
+                    insideRectangleMouseArea.enabled=true
+                    insideTheSliderRectangleMouseArea.enabled=true
+                    flashingScoreText.color="black"
+                    manyMisses=0
+                    x1.visible=false
+                    x2.visible=false
+                    x3.visible=false
+                    whatToDoWhenAnimFinished()
+                }
             }
             y: circularProgress.y+circularProgress.height+50
             id: newMissionsAdButton
@@ -1105,7 +1101,7 @@ Page {
             z:5
             Rectangle{
                 anchors.fill: parent
-                color: "#2e8ddb"
+                color: (Extra.numCoins>=10)?"#2e8ddb":"#6e7a85"
             }
             Row{
                 x:10
@@ -1124,12 +1120,29 @@ Page {
                     height: 2*1.3
                     color: "transparent"
                 }
-                //video pic
-                Image{
+//                //video pic
+//                Image{
+//                    anchors.verticalCenter: parent.verticalCenter
+//                    width: 50*1.3
+//                    height: 35*1.3
+//                    source: "images/PlayAdVideo.png"
+//                }
+                //coin pic
+                Row{
                     anchors.verticalCenter: parent.verticalCenter
-                    width: 50*1.3
-                    height: 35*1.3
-                    source: "images/PlayAdVideo.png"
+                    spacing: 15;
+                    Image{
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: height
+                        height: (50+35)/2*1.3
+                        source: "images/coinFront.png"
+                    }
+                    Text{
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "10"
+                        font.family: "Stencil"
+                        font.pointSize:23
+                    }
                 }
             }
         }
@@ -1618,10 +1631,8 @@ Page {
                     }
                     counter1=0;
                     //2
-                    console.log("useless zaza happened")
                     if(counter2>mMissionModel.get(2).currentThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
                         mMissionModel.get(2).currentThings=counter2
-                        console.log("zaza happened")
                     }
                     counter2=0;
                     //3
@@ -2422,7 +2433,6 @@ Page {
             whatToDoWhenAnimFinished()
         }
         onStarted: {
-            console.log("onStartedEmittedHDKHJKDFJKHKJDhskjhfkh")
             splashSoundEffectTimer.start()
         }
     }

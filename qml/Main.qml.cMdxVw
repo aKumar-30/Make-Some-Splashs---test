@@ -83,15 +83,16 @@ GameWindow {
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
         Extra.datastore = JSON.stringify(datamodel)
 
-        s_manager.writeSettings("VolumEE", Extra.volume);
-        s_manager.writeSettings("SounDD",Extra.sound);
-        s_manager.writeSettings("CoinSS", Extra.numCoins);
-        s_manager.writeSettings("BallSourcEE", Extra.ballSource);
-        s_manager.writeSettings("PersonalBesTT",Extra.personalBest);
-        s_manager.writeSettings("Datastory",Extra.datastore);
+        s_manager.writeSettings("volume01001", Extra.volume);
+        s_manager.writeSettings("sound01001",Extra.sound);
+        s_manager.writeSettings("numCoins211", Extra.numCoins);
+        s_manager.writeSettings("ballSource1", Extra.ballSource);
+        s_manager.writeSettings("personalBest55551",Extra.personalBest);
+        console.log("saving to settings tge datastore   "+mMissionModel.get(presentMissions[1]).completed);
+        s_manager.writeSettings("zzzz",Extra.datastore);
         //convert array to string
         setCurrentMissions()
-        s_manager.writeSettings("Missionsy",Extra.myMissionsRn);
+        s_manager.writeSettings("aaaa",Extra.myMissionsRn);
     }
     SettingsManager{
         id: s_manager
@@ -107,6 +108,7 @@ GameWindow {
             Extra.points+=points1
         }
         function onGoToHalftime(){
+            console.log("should go to halftime now")
             navigationStack.push(halftimeModeComponent)
         }
     }
@@ -127,23 +129,26 @@ GameWindow {
     }
     Component.onCompleted: {
         mMusic1.play()
-        if ( Extra.datastore) {
-            mMissionModel.clear()
-            var datamodel = JSON.parse(Extra.datastore)
-            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        }
-        if(Extra.myMissionsRn){
-            getCurrentMissions()
-        }
-        if(presentMissions.length!==0){
-            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        }
-        else{
-            updateMissions();
-        }
+        //        console.log(Extra.datastore)
+        //        Extra.datastore="";
+        //        if ( Extra.datastore) {
+        //            mMissionModel.clear()
+        //            var datamodel = JSON.parse(Extra.datastore)
+        //            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+        //        }
+        //        Extra.myMissionsRn="";
+        //        if(Extra.myMissionsRn){
+        //            getCurrentMissions()
+        //        }
+        //        if(presentMissions.length!==0){
+        //            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+        //            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+        //        }
+        //        else{
+        updateMissions();
+        //        }
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -201,8 +206,11 @@ GameWindow {
     function partUpdatingMissions(){
         if(!firstTimeUpdatingMissions){
             mMissionModel.remove(mMissionModel.count-1)
+            console.log("this is inside the iffffyyyy statement")
+
         }
         else{
+            console.log("NOOOOOTTTTTTTTT  this is inside the iffffyyyy statement")
             firstTimeUpdatingMissions=false
         }
         var rowCount = mMissionModel.count
@@ -232,6 +240,7 @@ GameWindow {
         var typeOfShot = ["backboard","rim", "splash"]
         levelOptions = [1,1,1,1,1,1,1,2,2,3,3,0]
         var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
+        console.log("our random NUMBER IS" + thisRandomNumber);
         tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
         tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
         shotRandomNumber = Math.floor((Math.random()*typeOfShot.length));
@@ -257,17 +266,22 @@ GameWindow {
         //        displayDelegateModel.items.insert(arr[0], "todaysMissions");
         //        displayDelegateModel.items.insert(arr[1], "todaysMissions");
         //        displayDelegateModel.items.insert(arr[2], "todaysMissions");
+        //        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
         //        presentMissions=[]
         //        storeForSettings();
+        //        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
         presentMissions=[]
+        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
         presentMissions.push(arr[0].index);
         presentMissions.push(arr[1].index);
         presentMissions.push(arr[2].index);
+        console.log("THESE ARE PRESENT MISSIONS"+presentMissions)
         setCurrentMissions()
         let s = 0
         for(s = 0; s<4; s++){ //displayDelegateModel.items.count-1-s
             displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
             displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
+            console.log("EL FINAL DIESCRIPTCION ES"+mMissionModel.get(presentMissions[s]).description)
             displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
             displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
             displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
@@ -329,6 +343,7 @@ GameWindow {
                 //                    else
                 //                displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[2-s]).currentThings
                 displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
+                console.log("s is "+s)
             }
         }
     }
@@ -853,6 +868,8 @@ GameWindow {
                             if(displayDelegateModel.items.get(i).model.currentThings>=displayDelegateModel.items.get(i).model.neededThings){
                                 displayDelegateModel.items.get(i).model.completed=true;
                                 mMissionModel.get(presentMissions[i]).completed=true
+                                console.log("completed updated");
+                                console.log("Is completed "+ "THis: "+(presentMissions[i])+ "and the result : "+ mMissionModel.get(presentMissions[j]).completed);
                             }
                             j++;
                         }
@@ -918,7 +935,7 @@ GameWindow {
                 color: "#188509"
             }
 
-            //            //ADS FOR THE MONEY MONEY MONEY
+            //ADS FOR THE MONEY MONEY MONEY
             //            Button{
             //                //these are the rewarded ad stuff IGNORE ERRORS FOR NOW
             //                //                        AdMobRewardedVideo {
@@ -996,428 +1013,429 @@ GameWindow {
             //                x: newMissionsAdButton.x-5
             //                color: "#18549e"
             //            }
-        }
-        Rectangle{
-            visible:true;
-            z:16
-            id: mainRectFade
-            x: mainRect.x-10
-            y: mainRect.y+17
-            width: mainRect.width
-            height:mainRect.height
-            color: "#18549e"
-        }
-    }
-    //MISSIOSN ENDS HERE_________________________________
-
-    //cool kids style with the navigation toolBar
-    Scene{
-        width: 708
-        height: 1270
-        id: mainScene
-        NavigationBar{
-            height: /*60*/85
-            width: parent.width
-            id: newNavigationBar
-            //            navigationBar.onBackButtonItemPressedChanged: {
-            //                if (navigationStack.depth > 1) {
-            //                    //Give them a reset warning
-            //                    if(root.width!=708){
-            //                        root.width = 708;
-            //                        root.height = 785;
-            //                    }
-            //                    Extra.endingPage==="CompetitiveMode.qml"
-
-            //                    if(Extra.endingPage==="CompetitiveMode.qml"){
-            //                        warningDialog.open();
-            //                    }
-            //                }
-            //            }
-            leftBarItem: NavigationBarItem{
-                visible:  navigationStack.depth>1
-                contentWidth: 38
-                IconButtonBarItem{
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "white"
-                    icon: IconType.arrowleft
-                    iconSize: 38
-                }
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: {
-                        if(Extra.endingPage==="CompetitiveMode.qml"){
-                            if(adScreenHappening!==true&&retryScreenHappening!==true)
-                                warningDialog.visible=true;
-                            else if(adScreenHappening===true){
-                                backButtonClickedWhenAdScreen=true
-                                //                            warningDialog.box.accepted()
-                                //                            warningDialog.box.selectedOk()
-                                myDialog1.selectedOk()
-                            }
-                            else{
-                                //                            warningDialog.box.selectedOk()
-                                myDialog1.selectedOk()
-                                //                            warningDialog.box.accepted()
-                            }
-                        }
-                        else
-                            navigationStack.pop()
-                    }
-                }
-            }
-
-            //                IconButtonBarItem{
-            //                visible:  navigationStack.depth>1
-            //                icon: IconType.arrowleft
-            //                color: "white"
-            //                iconSize: newNavigationBar.size-10
-            //                onClicked: {
-            //                    //Give them a reset warning
-            //                    if(Extra.endingPage==="CompetitiveMode.qml"){
-            //                        if(adScreenHappening!==true&&retryScreenHappening!==true)
-            //                            warningDialog.visible=true;
-            //                        else if(adScreenHappening===true){
-            //                            backButtonClickedWhenAdScreen=true
-            //                            //                            warningDialog.box.accepted()
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                        }
-            //                        else{
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                            //                            warningDialog.box.accepted()
-            //                        }
-            //                    }
-            //                    else
-            //                        navigationStack.pop()
-            //                }
-            //            }
-            titleItem: Text{
-                x:165
-                y:8
-                font.pointSize: 25
-                font.bold: true
-                text:navigationStack.currentPage.title
-                font.family: "Century Gothic"
-                color: "white"
-            }
-
-            rightBarItem:NavigationBarItem{
-                contentWidth: 20
-                IconButtonBarItem{
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    color: "white"
-                    icon: IconType.ellipsisv
-                    iconSize: 40
-                }
-                MouseArea{
-                    anchors.fill: parent;
-                    onClicked: {
-                        optionsMenu.open()
-
-                    }
-                }
-                //                IconButtonBarItem{
-                //                color: "white"
-                //                icon: IconType.ellipsisv
-                //                iconSize: newNavigationBar.size-10
-                //                onClicked: {
-                //                    optionsMenu.open()
-                //                }
-                Menu {
-                    id: optionsMenu
-                    x: parent.width - width
-                    transformOrigin: Menu.TopRight
-                    Action {
-                        text: "Settings"
-                        onTriggered: settingsDialog.visible=true
-                    }
-                    Action {
-                        text: "How to play?"
-                        onTriggered: aboutDialog.visible=true
-                    }
-                    Action {
-                        text: "Help"
-                        onTriggered: help()
-                    }
-                }
+            //        }
+            Rectangle{
+                visible:true;
+                z:16
+                id: mainRectFade
+                x: mainRect.x-10
+                y: mainRect.y+17
+                width: mainRect.width
+                height:mainRect.height
+                color: "#18549e"
             }
         }
-        NavigationStack{
-            anchors.top: newNavigationBar.bottom
-            id: navigationStack
-            navigationBar.visible: false
-            width: parent.width
-            height: parent.height
-            initialPage:Page {
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked:{
-                        if(missionsScene.visible){
-                            //                            missionsScene.visible=false
-                            hideMissionsAnimation.start()
-                        }
-                    }
-                }
-                title: "Shoot Hoops"
+        //MISSIOSN ENDS HERE_________________________________
+
+        //cool kids style with the navigation toolBar
+        Scene{
+            width: 708
+            height: 1270
+            id: mainScene
+            NavigationBar{
+                height: /*60*/85
                 width: parent.width
-                height: parent.height
-                id: pane
-                Image{
-                    z:-1
-                    id: backgroundImage
-                    opacity: 0.4
-                    anchors.fill: parent
-                    source: "images/background.png"
-                }
-                Rectangle{
-                    id: personalBestBox
-                    width: mainPBText.implicitWidth+30
-                    height: mainPBText.implicitHeight+mainPBText2.implicitHeight+20
-                    x:350
-                    y:800
-                    border.color: "blue"
-                    border.width: 3
-                    color: "transparent"
-                    Component.onCompleted: {
-                        switchToBlueTimerPB.start()
-                    }
-                    Text{
-                        visible:false
-                        id:templateText
-                        text:"Personal Best: "
-                        font.pointSize: 20
-                        font.family: "Stencil"
-                    }
+                id: newNavigationBar
+                //            navigationBar.onBackButtonItemPressedChanged: {
+                //                if (navigationStack.depth > 1) {
+                //                    //Give them a reset warning
+                //                    if(root.width!=708){
+                //                        root.width = 708;
+                //                        root.height = 785;
+                //                    }
+                //                    Extra.endingPage==="CompetitiveMode.qml"
 
-                    Text{
+                //                    if(Extra.endingPage==="CompetitiveMode.qml"){
+                //                        warningDialog.open();
+                //                    }
+                //                }
+                //            }
+                leftBarItem: NavigationBarItem{
+                    visible:  navigationStack.depth>1
+                    contentWidth: 38
+                    IconButtonBarItem{
                         anchors.horizontalCenter: parent.horizontalCenter
-                        y:10
-                        id: mainPBText
-                        width: templateText.width+5
-                        text: "Personal Best: ";
-                        font.pointSize: 20
-                        font.family: "Stencil"
-                        wrapMode: Text.Wrap
-                    }
-                    Text{
-                        id: mainPBText2
-                        anchors.horizontalCenter: mainPBText.horizontalCenter
-                        anchors.top:mainPBText.bottom
-                        anchors.bottomMargin: 10
-                        text: Extra.personalBest
-                        font.pointSize: 27
-                        font.family: "Stencil"
-                    }
-                    radius: 5
-                    Timer{
-                        id: switchToBlueTimerPB
-                        interval: 400
-                        onTriggered: {
-                            personalBestBox.border.color="#3074c7" //blue
-                            switchToRedTimerPB.restart()
-                        }
-                    }
-                    Timer{
-                        id: switchToGreenTimerPB
-                        interval: 400
-                        onTriggered: {
-                            personalBestBox.border.color="#58b853"  //green
-                            switchToBlueTimerPB.restart()
-                        }
-                    }
-                    Timer{
-                        id: switchToRedTimerPB
-                        interval: 400
-                        onTriggered: {
-                            personalBestBox.border.color="#cc3f3f"  //red
-                            switchToGreenTimerPB.restart()
-                        }
-                    }
-                }
-                //coin thing in corner
-                Rectangle{
-                    id:coinThing
-                    Row{
-                        spacing: 20;
-                        x: 10
-                        y:10
-                        Image{
-                            anchors.verticalCenter: parent.verticalCenter
-                            width: 35
-                            height: 35
-                            source: "images/coinFront.png"
-                        }
-                        Text{
-                            anchors.verticalCenter: parent.verticalCenter
-                            property int value: Extra.numCoins
-                            text: value
-                            font.family: "Stencil"
-                            horizontalAlignment: Text.AlignHCenter
-                            font.pointSize:21
-                            Behavior on value {
-                                NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad}
-                            }
-                        }
-
-                    }
-                }
-                Label {
-                    text: "Shoot Hoops!"
-                    font.family:"Impact"
-                    font.pointSize: 70
-                    width: 500
-                    wrapMode: Label.Wrap
-                    y:150
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    horizontalAlignment: Label.AlignHCenter
-                }
-                Rectangle{
-                    //                    y: parent.width/2+40
-                    anchors.verticalCenter: smallCirclesColumn.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    id: buttonToPlayGame
-                    width: 370
-                    height: 120
-                    border.color: "red"
-                    border.width: 7
-                    color: (buttonToPlayGameMouseArea.pressed)?"#44a3f2":"#5db0f5"
-                    Component.onCompleted: {
-                        switchToGreenTimer.start()
-                    }
-                    Text{
-                        text: "START"
-                        font.family: "Tahoma"
-                        font.bold: true
-                        style: Text.Raised
-                        font.pointSize: 34
-                        anchors.centerIn: parent
-                    }
-                    radius: 50
-                    Timer{
-                        id: switchToBlueTimer
-                        interval: 550
-                        onTriggered: {
-                            buttonToPlayGame.border.color="#3074c7" //blue
-                            switchToRedTimer.restart()
-                        }
-                    }
-                    Timer{
-                        id: switchToGreenTimer
-                        interval: 600
-                        onTriggered: {
-                            buttonToPlayGame.border.color="#58b853"  //green
-                            switchToBlueTimer.restart()
-                        }
-                    }
-                    Timer{
-                        id: switchToRedTimer
-                        interval: 550
-                        onTriggered: {
-                            buttonToPlayGame.border.color="#cc3f3f"  //red
-                            switchToGreenTimer.restart()
-                        }
+                        color: "white"
+                        icon: IconType.arrowleft
+                        iconSize: 38
                     }
                     MouseArea{
-                        id: buttonToPlayGameMouseArea
-                        anchors.fill: parent
+                        anchors.fill: parent;
                         onClicked: {
-                            if(!missionsScene.visible){
-                                //update current missions (just double checking)
-                                setCurrentMissions()
-                                //                                missionsScene.visible=false
-                                makeMissionsInvisible()
-                                navigationStack.push(competitiveModeComponent)
-                                Extra.endingPage="CompetitiveMode.qml";
-                                thisTitle="Game Mode"
+                            if(Extra.endingPage==="CompetitiveMode.qml"){
+                                if(adScreenHappening!==true&&retryScreenHappening!==true)
+                                    warningDialog.visible=true;
+                                else if(adScreenHappening===true){
+                                    backButtonClickedWhenAdScreen=true
+                                    //                            warningDialog.box.accepted()
+                                    //                            warningDialog.box.selectedOk()
+                                    myDialog1.selectedOk()
+                                }
+                                else{
+                                    //                            warningDialog.box.selectedOk()
+                                    myDialog1.selectedOk()
+                                    //                            warningDialog.box.accepted()
+                                }
                             }
+                            else
+                                navigationStack.pop()
                         }
                     }
                 }
-                Column{
-                    y: 410
-                    x:30
-                    spacing: 125
-                    id: smallCirclesColumn
-                    Rectangle{
-                        color: "transparent"
-                        width: 120
-                        height: 120
-                        radius: 105
-                        border.width: 2
-                        border.color: "black"
-                        Image{
-                            z:-1
-                            anchors.centerIn: parent
-                            width: 115
-                            height: 115
-                            source: "images/shopIcon.png"
+
+                //                IconButtonBarItem{
+                //                visible:  navigationStack.depth>1
+                //                icon: IconType.arrowleft
+                //                color: "white"
+                //                iconSize: newNavigationBar.size-10
+                //                onClicked: {
+                //                    //Give them a reset warning
+                //                    if(Extra.endingPage==="CompetitiveMode.qml"){
+                //                        if(adScreenHappening!==true&&retryScreenHappening!==true)
+                //                            warningDialog.visible=true;
+                //                        else if(adScreenHappening===true){
+                //                            backButtonClickedWhenAdScreen=true
+                //                            //                            warningDialog.box.accepted()
+                //                            //                            warningDialog.box.selectedOk()
+                //                            myDialog1.selectedOk()
+                //                        }
+                //                        else{
+                //                            //                            warningDialog.box.selectedOk()
+                //                            myDialog1.selectedOk()
+                //                            //                            warningDialog.box.accepted()
+                //                        }
+                //                    }
+                //                    else
+                //                        navigationStack.pop()
+                //                }
+                //            }
+                titleItem: Text{
+                    x:165
+                    y:8
+                    font.pointSize: 25
+                    font.bold: true
+                    text:navigationStack.currentPage.title
+                    font.family: "Century Gothic"
+                    color: "white"
+                }
+
+                rightBarItem:NavigationBarItem{
+                    contentWidth: 20
+                    IconButtonBarItem{
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        color: "white"
+                        icon: IconType.ellipsisv
+                        iconSize: 40
+                    }
+                    MouseArea{
+                        anchors.fill: parent;
+                        onClicked: {
+                            optionsMenu.open()
+
                         }
-                        MouseArea{
-                            anchors.fill: parent
-                            onClicked: {
-                                //                                missionsScene.visible=false
-                                makeMissionsInvisible()
-                                navigationStack.push(gameStoreComponent);
-                                Extra.endingPage="GameStore.qml";
-                                thisTitle="The Store"
+                    }
+                    //                IconButtonBarItem{
+                    //                color: "white"
+                    //                icon: IconType.ellipsisv
+                    //                iconSize: newNavigationBar.size-10
+                    //                onClicked: {
+                    //                    optionsMenu.open()
+                    //                }
+                    Menu {
+                        id: optionsMenu
+                        x: parent.width - width
+                        transformOrigin: Menu.TopRight
+                        Action {
+                            text: "Settings"
+                            onTriggered: settingsDialog.visible=true
+                        }
+                        Action {
+                            text: "How to play?"
+                            onTriggered: aboutDialog.visible=true
+                        }
+                        Action {
+                            text: "Help"
+                            onTriggered: help()
+                        }
+                    }
+                }
+            }
+            NavigationStack{
+                anchors.top: newNavigationBar.bottom
+                id: navigationStack
+                navigationBar.visible: false
+                width: parent.width
+                height: parent.height
+                initialPage:Page {
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked:{
+                            if(missionsScene.visible){
+                                //                            missionsScene.visible=false
+                                hideMissionsAnimation.start()
                             }
                         }
                     }
+                    title: "Shoot Hoops"
+                    width: parent.width
+                    height: parent.height
+                    id: pane
+                    Image{
+                        z:-1
+                        id: backgroundImage
+                        opacity: 0.4
+                        anchors.fill: parent
+                        source: "images/background.png"
+                    }
                     Rectangle{
+                        id: personalBestBox
+                        width: mainPBText.implicitWidth+30
+                        height: mainPBText.implicitHeight+mainPBText2.implicitHeight+20
+                        x:350
+                        y:800
+                        border.color: "blue"
+                        border.width: 3
                         color: "transparent"
-                        width: 120
+                        Component.onCompleted: {
+                            switchToBlueTimerPB.start()
+                        }
+                        Text{
+                            visible:false
+                            id:templateText
+                            text:"Personal Best: "
+                            font.pointSize: 20
+                            font.family: "Stencil"
+                        }
+
+                        Text{
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            y:10
+                            id: mainPBText
+                            width: templateText.width+5
+                            text: "Personal Best: ";
+                            font.pointSize: 20
+                            font.family: "Stencil"
+                            wrapMode: Text.Wrap
+                        }
+                        Text{
+                            id: mainPBText2
+                            anchors.horizontalCenter: mainPBText.horizontalCenter
+                            anchors.top:mainPBText.bottom
+                            anchors.bottomMargin: 10
+                            text: Extra.personalBest
+                            font.pointSize: 27
+                            font.family: "Stencil"
+                        }
+                        radius: 5
+                        Timer{
+                            id: switchToBlueTimerPB
+                            interval: 400
+                            onTriggered: {
+                                personalBestBox.border.color="#3074c7" //blue
+                                switchToRedTimerPB.restart()
+                            }
+                        }
+                        Timer{
+                            id: switchToGreenTimerPB
+                            interval: 400
+                            onTriggered: {
+                                personalBestBox.border.color="#58b853"  //green
+                                switchToBlueTimerPB.restart()
+                            }
+                        }
+                        Timer{
+                            id: switchToRedTimerPB
+                            interval: 400
+                            onTriggered: {
+                                personalBestBox.border.color="#cc3f3f"  //red
+                                switchToGreenTimerPB.restart()
+                            }
+                        }
+                    }
+                    //coin thing in corner
+                    Rectangle{
+                        id:coinThing
+                        Row{
+                            spacing: 20;
+                            x: 10
+                            y:10
+                            Image{
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: 35
+                                height: 35
+                                source: "images/coinFront.png"
+                            }
+                            Text{
+                                anchors.verticalCenter: parent.verticalCenter
+                                property int value: Extra.numCoins
+                                text: value
+                                font.family: "Stencil"
+                                horizontalAlignment: Text.AlignHCenter
+                                font.pointSize:21
+                                Behavior on value {
+                                    NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad}
+                                }
+                            }
+
+                        }
+                    }
+                    Label {
+                        text: "Shoot Hoops!"
+                        font.family:"Impact"
+                        font.pointSize: 70
+                        width: 500
+                        wrapMode: Label.Wrap
+                        y:150
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        horizontalAlignment: Label.AlignHCenter
+                    }
+                    Rectangle{
+                        //                    y: parent.width/2+40
+                        anchors.verticalCenter: smallCirclesColumn.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        id: buttonToPlayGame
+                        width: 370
                         height: 120
-                        radius: 105
-                        border.width: 2
-                        border.color: "black"
-                        Image{
-                            x: 5
-                            y:5
-                            width: 35
-                            height: 35
-                            source: "images/exclamationMark.png"
-                            visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
+                        border.color: "red"
+                        border.width: 7
+                        color: (buttonToPlayGameMouseArea.pressed)?"#44a3f2":"#5db0f5"
+                        Component.onCompleted: {
+                            switchToGreenTimer.start()
                         }
-
-                        Image{
-                            z:-1
+                        Text{
+                            text: "START"
+                            font.family: "Tahoma"
+                            font.bold: true
+                            style: Text.Raised
+                            font.pointSize: 34
                             anchors.centerIn: parent
-                            width: 115
-                            height: 115
-                            source: "images/missionsIcon.png"
                         }
-                        Rectangle{
-                            visible: thePauseTimer.running
-                            z:-1
-                            anchors.centerIn: parent
-                            width: 120
-                            height: 120
-                            radius: 95
-                            color:"darkgray"
-                            opacity: 0.50
+                        radius: 50
+                        Timer{
+                            id: switchToBlueTimer
+                            interval: 550
+                            onTriggered: {
+                                buttonToPlayGame.border.color="#3074c7" //blue
+                                switchToRedTimer.restart()
+                            }
                         }
-
+                        Timer{
+                            id: switchToGreenTimer
+                            interval: 600
+                            onTriggered: {
+                                buttonToPlayGame.border.color="#58b853"  //green
+                                switchToBlueTimer.restart()
+                            }
+                        }
+                        Timer{
+                            id: switchToRedTimer
+                            interval: 550
+                            onTriggered: {
+                                buttonToPlayGame.border.color="#cc3f3f"  //red
+                                switchToGreenTimer.restart()
+                            }
+                        }
                         MouseArea{
+                            id: buttonToPlayGameMouseArea
                             anchors.fill: parent
                             onClicked: {
-                                if(!thePauseTimer.running){
-                                    //                                    missionsScene.visible=true
-                                    showMissionsAnimation.start()
-                                    checkIfButtonNeedsToBeVisible(true);
-                                    if(true){
-                                        //12
-                                        let couldTheMissionBeCompleted = 0;
-                                        for(let i =0; i< 3; i++){
-                                            if(presentMissions[i]!==12){
-                                                if ((mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings)){
-                                                    couldTheMissionBeCompleted++;
+                                if(!missionsScene.visible){
+                                    //update current missions (just double checking)
+                                    setCurrentMissions()
+                                    //                                missionsScene.visible=false
+                                    makeMissionsInvisible()
+                                    navigationStack.push(competitiveModeComponent)
+                                    Extra.endingPage="CompetitiveMode.qml";
+                                    thisTitle="Game Mode"
+                                }
+                            }
+                        }
+                    }
+                    Column{
+                        y: 410
+                        x:30
+                        spacing: 125
+                        id: smallCirclesColumn
+                        Rectangle{
+                            color: "transparent"
+                            width: 120
+                            height: 120
+                            radius: 105
+                            border.width: 2
+                            border.color: "black"
+                            Image{
+                                z:-1
+                                anchors.centerIn: parent
+                                width: 115
+                                height: 115
+                                source: "images/shopIcon.png"
+                            }
+                            MouseArea{
+                                anchors.fill: parent
+                                onClicked: {
+                                    //                                missionsScene.visible=false
+                                    makeMissionsInvisible()
+                                    navigationStack.push(gameStoreComponent);
+                                    Extra.endingPage="GameStore.qml";
+                                    thisTitle="The Store"
+                                }
+                            }
+                        }
+                        Rectangle{
+                            color: "transparent"
+                            width: 120
+                            height: 120
+                            radius: 105
+                            border.width: 2
+                            border.color: "black"
+                            Image{
+                                x: 5
+                                y:5
+                                width: 35
+                                height: 35
+                                source: "images/exclamationMark.png"
+                                visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
+                            }
+
+                            Image{
+                                z:-1
+                                anchors.centerIn: parent
+                                width: 115
+                                height: 115
+                                source: "images/missionsIcon.png"
+                            }
+                            Rectangle{
+                                visible: thePauseTimer.running
+                                z:-1
+                                anchors.centerIn: parent
+                                width: 120
+                                height: 120
+                                radius: 95
+                                color:"darkgray"
+                                opacity: 0.50
+                            }
+
+                            MouseArea{
+                                anchors.fill: parent
+                                onClicked: {
+                                    if(!thePauseTimer.running){
+                                        //                                    missionsScene.visible=true
+                                        showMissionsAnimation.start()
+                                        checkIfButtonNeedsToBeVisible(true);
+                                        if(true){
+                                            //12
+                                            let couldTheMissionBeCompleted = 0;
+                                            for(let i =0; i< 3; i++){
+                                                if(presentMissions[i]!==12){
+                                                    if ((mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings)){
+                                                        couldTheMissionBeCompleted++;
+                                                    }
+                                                    return true;
                                                 }
-                                                return true;
                                             }
-                                        }
-                                        if(couldTheMissionBeCompleted===2&&checkIfCurrentMission(12)){
-                                            mMissionModel.get(12).currentThings++
+                                            if(couldTheMissionBeCompleted===2&&checkIfCurrentMission(12)){
+                                                mMissionModel.get(12).currentThings++
+                                            }
                                         }
                                     }
                                 }
@@ -1427,30 +1445,30 @@ GameWindow {
                 }
             }
         }
-    }
-    Component{
-        id: competitiveModeComponent
-        CompetitiveMode{
+        Component{
+            id: competitiveModeComponent
+            CompetitiveMode{
+            }
         }
-    }
-    Component{
-        id: gameStoreComponent
-        GameStore{
+        Component{
+            id: gameStoreComponent
+            GameStore{
+            }
         }
-    }
-    Component{
-        id: customizationModeComponent
-        CustomizationMode{
+        Component{
+            id: customizationModeComponent
+            CustomizationMode{
+            }
         }
-    }
-    Component{
-        id: halftimeModeComponent
-        HalftimeMode{
+        Component{
+            id: halftimeModeComponent
+            HalftimeMode{
+            }
         }
-    }
-    Settings{
-        id: something
-        property alias counterNumber14: root.counter14
-        property alias firstTimeUpdatingMissionsSettings: root.firstTimeUpdatingMissions
+        Settings{
+            id: something
+            property alias leadsbadasdasdssdadsfrondasnnio: root.counter14
+            property alias isnaadtsasadsaasdsdfgoadsattted: root.firstTimeUpdatingMissions
+        }
     }
 }

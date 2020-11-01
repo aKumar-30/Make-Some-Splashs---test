@@ -5,19 +5,16 @@
 #include <QDateTime>
 #include <string>
 #include <sstream>
-#include <QDebug>
 MyTimer::MyTimer(QObject *parent, int interval1) : QObject(parent), m_timer(new QTimer(this)), m_running(false)
 {
     m_original = interval1;
     if (m_original<0){
-        qDebug()<<"I went into the new thing arjun made";
         m_original=m_original-m_original*2;
     }
     srand(time(NULL));
 
     m_timer->setSingleShot(true);
 
-    qDebug()<<"We here in the conturctor rn";
 }
 
 int MyTimer::original() const

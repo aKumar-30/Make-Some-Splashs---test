@@ -17,6 +17,7 @@
 #include "mytimer.h"
 #include <FelgoApplication>
 #include <QApplication>
+#include <FelgoLiveClient>
 //FlashingTimer allTheTimeStuff();
 
 //int main(int argc, char *argv[])
@@ -41,7 +42,7 @@
 //    felgo.setLicenseKey(PRODUCT_LICENSE_KEY);
 
 //    //sends when i break a property binding
-////    QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
+//    //    QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
 //    //All the settings things
 //    QSettings settings;
 //    QString style = QQuickStyle::name();
@@ -65,54 +66,54 @@
 
 //    //save volume
 //    double volume1 = extra.volume();
-//    if(!settings.contains("volume01001"))
-//        dude.writeSettings("volume01001", volume1);
+//    if(!settings.contains("VolumE"))
+//        dude.writeSettings("VolumE", volume1);
 //    else
-//        extra.setVolume(SettingsManager::loadSettings("volume01001").toDouble());
+//        extra.setVolume(SettingsManager::loadSettings("VolumE").toDouble());
 
 //    //save sound
 //    double sound1 = extra.sound();
-//    if(!settings.contains("sound01001"))
-//        dude.writeSettings("sound01001", sound1);
+//    if(!settings.contains("SounD"))
+//        dude.writeSettings("SounD", sound1);
 //    else
-//        extra.setSound(SettingsManager::loadSettings("sound01001").toDouble());
+//        extra.setSound(SettingsManager::loadSettings("SounD").toDouble());
 //    //save coins
 //    double numCoins1 = extra.numCoins();
-//    if(!settings.contains("numCoins211"))
-//        dude.writeSettings("numCoins211", numCoins1);
+//    if(!settings.contains("CoinS"))
+//        dude.writeSettings("CoinS", numCoins1);
 //    else
-//        extra.setNumCoins(SettingsManager::loadSettings("numCoins211").toInt());
+//        extra.setNumCoins(SettingsManager::loadSettings("CoinS").toInt());
 
 //    //save ball source
 //    QString ballSource1 = extra.ballSource();
-//    if(!settings.contains("ballSource1"))
-//        dude.writeSettings("ballSource1", ballSource1);
+//    if(!settings.contains("BallSourcE"))
+//        dude.writeSettings("BallSourcE", ballSource1);
 //    else
-//        extra.setBallSource(SettingsManager::loadSettings("ballSource1").toString());
+//        extra.setBallSource(SettingsManager::loadSettings("BallSourcE").toString());
 
 //    //save personal best
 //    int personalBest1 = extra.personalBest();
-//    if(!settings.contains("personalBest55551")){
-//        dude.writeSettings("personalBest55551",personalBest1);
+//    if(!settings.contains("PersonalBesT")){
+//        dude.writeSettings("PersonalBesT",personalBest1);
 //    }
 //    else
-//        extra.setPersonalBest(SettingsManager::loadSettings("personalBest55551").toInt());
+//        extra.setPersonalBest(SettingsManager::loadSettings("PersonalBesT").toInt());
 
 //    //set datastore
 //    QString datastore1 = extra.datastore();
-//    if(!settings.contains("zzzzz")){
-//        dude.writeSettings("zzzzz",datastore1);
+//    if(!settings.contains("DatastorEEEEEE")){
+//        dude.writeSettings("DatastorEEEEEE",datastore1);
 //    }
 //    else
-//        extra.setDatastore(SettingsManager::loadSettings("zzzzz").toString());
+//        extra.setDatastore(SettingsManager::loadSettings("DatastorEEEEEE").toString());
 
 //    //set myMissionsRn
 //    QString myMissionsRn1{};
-//    if(!settings.contains("aaaaa")){
-//        dude.writeSettings("aaaaa",myMissionsRn1);
+//    if(!settings.contains("MissionSSSSSS")){
+//        dude.writeSettings("MissionSSSSSS",myMissionsRn1);
 //    }
 //    else{
-//        extra.setMyMissionsRn(SettingsManager::loadSettings("aaaaa").toString());
+//        extra.setMyMissionsRn(SettingsManager::loadSettings("MissionSSSSSS").toString());
 //    }
 
 //    FelgoLiveClient client (&engine);
@@ -127,10 +128,10 @@
 //    QSettings settings;
 //    SettingsManager dude;
 //    QDateTime tomorrow=now.addSecs(86399);
-//    if(!settings.contains("jamesHarden?1"))
-//        dude.writeSettings("jamesHarden?1", tomorrow);
+//    if(!settings.contains("TimE"))
+//        dude.writeSettings("TimE", tomorrow);
 //    else{
-//        tomorrow = SettingsManager::loadSettings("jamesHarden?1").toDateTime();
+//        tomorrow = SettingsManager::loadSettings("TimE").toDateTime();
 //    }
 //    FlashingTimer joe(tomorrow);
 //    return joe;
@@ -164,12 +165,12 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("someOrganization");
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-//    QGuiApplication appy(argc, argv);
+    //    QGuiApplication appy(argc, argv);
 
-//    //App information
-//    appy.setOrganizationName("someOrganization");
-//    appy.setOrganizationDomain("someOrganization.com");
-//    appy.setApplicationName("Make some splashs!");
+    //    //App information
+    //    appy.setOrganizationName("someOrganization");
+    //    appy.setOrganizationDomain("someOrganization.com");
+    //    appy.setApplicationName("Make some splashs!");
 
     QApplication app(argc, argv);
     //App information
@@ -209,58 +210,59 @@ int main(int argc, char *argv[])
 
     //save volume
     double volume1 = extra.volume();
-    if(!settings.contains("volume01001"))
-        dude.writeSettings("volume01001", volume1);
+    if(!settings.contains("VolumEE"))
+        dude.writeSettings("VolumEE", volume1);
     else
-        extra.setVolume(SettingsManager::loadSettings("volume01001").toDouble());
+        extra.setVolume(SettingsManager::loadSettings("VolumEE").toDouble());
 
     //save sound
     double sound1 = extra.sound();
-    if(!settings.contains("sound01001"))
-        dude.writeSettings("sound01001", sound1);
+    if(!settings.contains("SounDD"))
+        dude.writeSettings("SounDD", sound1);
     else
-        extra.setSound(SettingsManager::loadSettings("sound01001").toDouble());
+        extra.setSound(SettingsManager::loadSettings("SounDD").toDouble());
     //save coins
     double numCoins1 = extra.numCoins();
-    if(!settings.contains("numCoins211"))
-        dude.writeSettings("numCoins211", numCoins1);
+    if(!settings.contains("CoinSS"))
+        dude.writeSettings("CoinSS", numCoins1);
     else
-        extra.setNumCoins(SettingsManager::loadSettings("numCoins211").toInt());
+        extra.setNumCoins(SettingsManager::loadSettings("CoinSS").toInt());
 
     //save ball source
     QString ballSource1 = extra.ballSource();
-    if(!settings.contains("ballSource1"))
-        dude.writeSettings("ballSource1", ballSource1);
+    if(!settings.contains("BallSourcEE"))
+        dude.writeSettings("BallSourcEE", ballSource1);
     else
-        extra.setBallSource(SettingsManager::loadSettings("ballSource1").toString());
+        extra.setBallSource(SettingsManager::loadSettings("BallSourcEE").toString());
 
     //save personal best
     int personalBest1 = extra.personalBest();
-    if(!settings.contains("personalBest55551")){
-        dude.writeSettings("personalBest55551",personalBest1);
+    if(!settings.contains("PersonalBesTT")){
+        dude.writeSettings("PersonalBesTT",personalBest1);
     }
     else
-        extra.setPersonalBest(SettingsManager::loadSettings("personalBest55551").toInt());
+        extra.setPersonalBest(SettingsManager::loadSettings("PersonalBesTT").toInt());
 
     //set datastore
     QString datastore1 = extra.datastore();
-    if(!settings.contains("zzzzz")){
-        dude.writeSettings("zzzzz",datastore1);
+    if(!settings.contains("Datastory")){
+        dude.writeSettings("Datastory",datastore1);
     }
     else
-        extra.setDatastore(SettingsManager::loadSettings("zzzzz").toString());
+        extra.setDatastore(SettingsManager::loadSettings("Datastory").toString());
 
     //set myMissionsRn
     QString myMissionsRn1{};
-    if(!settings.contains("aaaaa")){
-        dude.writeSettings("aaaaa",myMissionsRn1);
+    if(!settings.contains("Missionsy")){
+        dude.writeSettings("Missionsy",myMissionsRn1);
     }
     else{
-        extra.setMyMissionsRn(SettingsManager::loadSettings("aaaaa").toString());
+        extra.setMyMissionsRn(SettingsManager::loadSettings("Missionsy").toString());
     }
-     felgo.setMainQmlFileName(QStringLiteral("qrc:/qml/Main.qml"));
-     engine.load(QUrl(felgo.mainQmlFileName()));
-     return app.exec();
+
+    felgo.setMainQmlFileName(QStringLiteral("qrc:/qml/Main.qml"));
+    engine.load(QUrl(felgo.mainQmlFileName()));
+    return app.exec();
 }
 
 
