@@ -80,7 +80,7 @@ Page {
     //sound effects start here - coin clink
     Audio{
         id: coinClinkSoundEffect
-        source:"sounds/coinSound.mp3"
+        source:"../assets/sounds/coinSound.mp3"
         volume: Extra.sound*1
     }
     function afterGameIsActuallyOver(){
@@ -198,7 +198,7 @@ Page {
     property bool mvpSoundEffectPlaying: false
     Audio{
         id: mvpSoundEffect
-        source:"sounds/mvpSoundEffect.mp3"
+        source:"../assets/sounds/mvpSoundEffect.mp3"
         loops:Audio.Infinite
         volume: 0.0
         playbackRate: 1.2
@@ -447,7 +447,7 @@ Page {
             width: 552*4/5*1.45
             height: 452*4/5*1.45
             anchors.centerIn: parent
-            source: "images/pauseButton.png"
+            source: "../assets/images/pauseButton.png"
         }
     }
     onShouldStartThirdLevelChanged: {
@@ -630,7 +630,7 @@ Page {
         }
     }
 
-    //Images start here
+    //../assets/images start here
     //Sky
     Rectangle {
         Component.onCompleted: {
@@ -676,7 +676,7 @@ Page {
         height: 600*1/6*1.6;
         x: insideContainerId.x+insideContainerId.width/2-width/2
         y: insideContainerId.y+50-height;
-        source: "images/pointingPicture.png"
+        source: "../assets/images/pointingPicture.png"
         onVisibleChanged: {
             //start the animation once it is visible
             pointingFingerAnim.start()
@@ -733,7 +733,7 @@ Page {
     Image{
         z:4
         id: rim
-        source: "images/basketballHoop2.png"
+        source: "../assets/images/basketballHoop2.png"
         anchors.right: backboard.left
         y: backboard.y+(backboard.height*2/3)
         width: 150*1.38
@@ -780,7 +780,7 @@ Page {
             Image{
                 width: 35
                 height: 35
-                source: "images/coinFront.png"
+                source: "../assets/images/coinFront.png"
             }
             Text{
                 property int theText: Extra.numCoins
@@ -802,13 +802,13 @@ Page {
             width: 62.5
             height: 62.5
             anchors.centerIn: parent
-            source: "images/coinFront.png"
+            source: "../assets/images/coinFront.png"
         }
         back: Image { //--> collapse
             width: 62.5
             height: 62.5
             anchors.centerIn: parent
-            source: "images/coinBack.png"
+            source: "../assets/images/coinBack.png"
         } //<-- collapse
 
         transform: Rotation {
@@ -1125,7 +1125,7 @@ Page {
 //                    anchors.verticalCenter: parent.verticalCenter
 //                    width: 50*1.3
 //                    height: 35*1.3
-//                    source: "images/PlayAdVideo.png"
+//                    source: "../assets/images/PlayAdVideo.png"
 //                }
                 //coin pic
                 Row{
@@ -1135,7 +1135,7 @@ Page {
                         anchors.verticalCenter: parent.verticalCenter
                         width: height
                         height: (50+35)/2*1.3
-                        source: "images/coinFront.png"
+                        source: "../assets/images/coinFront.png"
                     }
                     Text{
                         anchors.verticalCenter: parent.verticalCenter
@@ -1353,7 +1353,7 @@ Page {
     //        z:20
     //        id: giantX;
     //        anchors.centerIn: parent
-    //        source: "images/xSymbol.png"
+    //        source: "../assets/images/xSymbol.png"
     //        height: 600*1.3;
     //        width: 515*1.3;
     //    }
@@ -1368,21 +1368,21 @@ Page {
             id: x1
             height: 45*1.4;
             width: 30*1.4;
-            source: "images/xSymbol.png"
+            source: "../assets/images/xSymbol.png"
         }
         Image{
             visible: false
             id: x2
             height: 45*1.4;
             width: 30*1.4;
-            source: "images/xSymbol.png"
+            source: "../assets/images/xSymbol.png"
         }
         Image{
             visible: false
             id: x3
             height: 45*1.4;
             width: 30*1.4;
-            source: "images/xSymbol.png"
+            source: "../assets/images/xSymbol.png"
         }
     }
     //All ten of the lines
@@ -1395,7 +1395,7 @@ Page {
             id: tally1
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
         }
         Image{
             visible: false
@@ -1404,27 +1404,27 @@ Page {
             //            width: 10;
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"        }
+            source: "../assets/images/oneTallyMark.png"        }
         Image{
             visible: false
             id: tally3
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
         }
         Image{
             visible: false;
             id: tally4
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
         }
         Image{
             visible: false
             id: tally5
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
             transform: Rotation{
                 id: rotateImagePhoto
                 angle: 326
@@ -1437,35 +1437,35 @@ Page {
             id: tally6
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
         }
         Image{
             visible: false;
             id: tally7
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
         }
         Image{
             visible: false
             id: tally8
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
         }
         Image{
             visible: false
             id: tally9
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
         }
         Image{
             visible: false
             id: tally10
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "images/oneTallyMark.png"
+            source: "../assets/images/oneTallyMark.png"
             transform: Rotation{
                 id: rotateImagePhoto2
                 angle: 326
@@ -1479,7 +1479,7 @@ Page {
             id: plus11
             height: 40*1.3;
             width: 40*1.3;
-            source: "images/plusSign.png"
+            source: "../assets/images/plusSign.png"
         }
     }
 
@@ -2445,7 +2445,7 @@ Page {
     }
     Audio{
         id: splashSoundEffect
-        source:"sounds/splashSoundEffectCropped.mp3"
+        source:"../assets/sounds/splashSoundEffectCropped.mp3"
         volume: Extra.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
@@ -2604,7 +2604,7 @@ Page {
     }
     Audio{
         id: backboardMakeSoundEffect
-        source:"sounds/backboardMissSoundEffectCropped1.mp3"
+        source:"../assets/sounds/backboardMissSoundEffectCropped1.mp3"
         volume: Extra.sound*1
 
     }
@@ -2617,7 +2617,7 @@ Page {
     }
     Audio{
         id: backboardMakeSoundEffect2
-        source:"sounds/splashSoundEffectCropped.mp3"
+        source:"../assets/sounds/splashSoundEffectCropped.mp3"
         volume: Extra.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
@@ -2756,7 +2756,7 @@ Page {
     }
     Audio{
         id: backboardMissSoundEffect
-        source:"sounds/backboardMissSoundEffectCropped.mp3"
+        source:"../assets/sounds/backboardMissSoundEffectCropped.mp3"
         volume: Extra.sound*0.64
     }
 
@@ -2908,7 +2908,7 @@ Page {
     }
     Audio{
         id: rimMakeSoundEffect
-        source:"sounds/rimMakeSoundEffectCropped.mp3"
+        source:"../assets/sounds/rimMakeSoundEffectCropped.mp3"
         volume: Extra.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
@@ -3064,7 +3064,7 @@ Page {
     }
     Audio{
         id: rimMissSoundEffect
-        source:"sounds/rimMissSoundEffect2.mp3"
+        source:"../assets/sounds/rimMissSoundEffect2.mp3"
         volume: Extra.sound*0.8
 
     }
@@ -3077,7 +3077,7 @@ Page {
     }
     Audio{
         id: rimMissSoundEffect2
-        source:"sounds/rimMissSoundEffect2.mp3"
+        source:"../assets/sounds/rimMissSoundEffect2.mp3"
         volume: Extra.sound*0.3
     }
     Rectangle{

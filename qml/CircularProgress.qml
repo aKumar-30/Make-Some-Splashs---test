@@ -137,7 +137,7 @@ Canvas {
         anchors.centerIn: parent
         width: parent.height-50
         height: parent.height-50
-        source: "images/coinFrontTranslucent.png"
+        source: "../assets/images/coinFrontTranslucent.png"
     }
     IconButtonBarItem{
         z:10

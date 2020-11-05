@@ -394,30 +394,30 @@ Page {
         y:50
         width:130
         height:130
-        source:"file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/moon.png"
+        source:"file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/../assets/images/moon.png"
     }
     BallImage{
         id: soccerBall
-        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/soccer_ball.png"
+        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/../assets/images/soccer_ball.png"
     }
     BallImage{
         myVisible: true
         id: basketBall
-        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/basket_ball.png"
+        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/../assets/images/basket_ball.png"
     }
     BallImage{
         id: tennisBall
-        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/tennis_ball.png"
+        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/../assets/images/tennis_ball.png"
     }
     BallImage{
         id: volleyBall
-        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/volley_ball.png"
+        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/../assets/images/volley_ball.png"
     }
     BallImage{
         id: bowlingBall
-        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/images/bowling_ball.png"
+        source: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/../assets/images/bowling_ball.png"
     }
-    //Images for the balls end here
+    //../assets/images for the balls end here
     // M3>>
     property int firstBounceDuration: root.duration
     property int secondBounceDuration: 0

@@ -12,19 +12,6 @@ import QtMultimedia 5.8
 
 ////New VERSION STARTS HERE
 GameWindow {
-    Item{
-        focus: true
-        Keys.onPressed:{
-            if(event.key===Qt.Key_Space){
-                if(Extra.endingPage==="CompetitiveMode.qml"){
-                    Extra.emittingSpaceInCompSignal();
-                }
-                else if(Extra.endingPage==="CustomizationMode.qml"){
-                    Extra.emittingSpaceInCustSignal();
-                }
-            }
-        }
-    }
     visible: true
     //    width: 708
     //    height: 785
@@ -70,7 +57,7 @@ GameWindow {
     }
     Audio{
         id: mMusic1
-        source:"images/mMusic1.wav"
+        source:"../assets/../assets/images/mMusic1.wav"
         loops:Audio.Infinite
         volume: Extra.volume*4/5
     }
@@ -809,7 +796,7 @@ GameWindow {
                                         anchors.verticalCenter: parent.verticalCenter
                                         width: 40
                                         height: 40
-                                        source: "images/coinFront.png"
+                                        source: "../assets/../assets/images/coinFront.png"
                                     }
                                 }
                             }
@@ -904,7 +891,7 @@ GameWindow {
                         anchors.verticalCenter: parent.verticalCenter
                         width: 40
                         height: 40
-                        source: "images/coinFront.png"
+                        source: "../assets/../assets/images/coinFront.png"
                     }
                 }
             }
@@ -976,14 +963,14 @@ GameWindow {
             ////                        anchors.verticalCenter: parent.verticalCenter
             ////                        width: 50*1.35
             ////                        height: 35*1.35
-            ////                        source: "images/PlayAdVideo.png"
+            ////                        source: "../assets/../assets/images/PlayAdVideo.png"
             ////                    }
             //                    //coin pic
             //                    Image{
             //                        anchors.verticalCenter: parent.verticalCenter
             //                        width: (50+35)/2*1.35
             //                        height: (50+35)/2*1.35
-            //                        source: "images/coinFront.png"
+            //                        source: "../assets/../assets/images/coinFront.png"
             //                    }
             //                }
             //            }
@@ -1019,20 +1006,6 @@ GameWindow {
             height: /*60*/85
             width: parent.width
             id: newNavigationBar
-            //            navigationBar.onBackButtonItemPressedChanged: {
-            //                if (navigationStack.depth > 1) {
-            //                    //Give them a reset warning
-            //                    if(root.width!=708){
-            //                        root.width = 708;
-            //                        root.height = 785;
-            //                    }
-            //                    Extra.endingPage==="CompetitiveMode.qml"
-
-            //                    if(Extra.endingPage==="CompetitiveMode.qml"){
-            //                        warningDialog.open();
-            //                    }
-            //                }
-            //            }
             leftBarItem: NavigationBarItem{
                 visible:  navigationStack.depth>1
                 contentWidth: 38
@@ -1065,33 +1038,6 @@ GameWindow {
                     }
                 }
             }
-
-            //                IconButtonBarItem{
-            //                visible:  navigationStack.depth>1
-            //                icon: IconType.arrowleft
-            //                color: "white"
-            //                iconSize: newNavigationBar.size-10
-            //                onClicked: {
-            //                    //Give them a reset warning
-            //                    if(Extra.endingPage==="CompetitiveMode.qml"){
-            //                        if(adScreenHappening!==true&&retryScreenHappening!==true)
-            //                            warningDialog.visible=true;
-            //                        else if(adScreenHappening===true){
-            //                            backButtonClickedWhenAdScreen=true
-            //                            //                            warningDialog.box.accepted()
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                        }
-            //                        else{
-            //                            //                            warningDialog.box.selectedOk()
-            //                            myDialog1.selectedOk()
-            //                            //                            warningDialog.box.accepted()
-            //                        }
-            //                    }
-            //                    else
-            //                        navigationStack.pop()
-            //                }
-            //            }
             titleItem: Text{
                 x:165
                 y:8
@@ -1168,7 +1114,7 @@ GameWindow {
                     id: backgroundImage
                     opacity: 0.4
                     anchors.fill: parent
-                    source: "images/background.png"
+                    source: "../assets/../assets/images/background.png"
                 }
                 Rectangle{
                     id: personalBestBox
@@ -1246,7 +1192,7 @@ GameWindow {
                             anchors.verticalCenter: parent.verticalCenter
                             width: 35
                             height: 35
-                            source: "images/coinFront.png"
+                            source: "../assets/../assets/images/coinFront.png"
                         }
                         Text{
                             anchors.verticalCenter: parent.verticalCenter
@@ -1351,7 +1297,7 @@ GameWindow {
                             anchors.centerIn: parent
                             width: 115
                             height: 115
-                            source: "images/shopIcon.png"
+                            source: "../assets/../assets/images/shopIcon.png"
                         }
                         MouseArea{
                             anchors.fill: parent
@@ -1376,7 +1322,7 @@ GameWindow {
                             y:5
                             width: 35
                             height: 35
-                            source: "images/exclamationMark.png"
+                            source: "../assets/../assets/images/exclamationMark.png"
                             visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
                         }
 
@@ -1385,7 +1331,7 @@ GameWindow {
                             anchors.centerIn: parent
                             width: 115
                             height: 115
-                            source: "images/missionsIcon.png"
+                            source: "../assets/../assets/images/missionsIcon.png"
                         }
                         Rectangle{
                             visible: thePauseTimer.running
