@@ -164,12 +164,12 @@ int main(int argc, char *argv[])
     QGuiApplication::setApplicationName("Shoot Hoops");
     QGuiApplication::setOrganizationName("shootHoops");
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-        QGuiApplication appy(argc, argv);
+    QGuiApplication appy(argc, argv);
 
-        //App information
-        appy.setOrganizationName("someOrganization");
-        appy.setOrganizationDomain("someOrganization.com");
-        appy.setApplicationName("Make some splashs!");
+    //App information
+    appy.setOrganizationName("someOrganization");
+    appy.setOrganizationDomain("someOrganization.com");
+    appy.setApplicationName("Make some splashs!");
 
     QApplication app(argc, argv);
     //App information
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
     appy.setApplicationName("Shoot Hoops");
 
     FelgoApplication felgo;
-//    felgo.setPreservePlatformFonts(true);
+    //    felgo.setPreservePlatformFonts(true);
     QQmlApplicationEngine engine;
     felgo.initialize(&engine);
     felgo.setLicenseKey(PRODUCT_LICENSE_KEY);

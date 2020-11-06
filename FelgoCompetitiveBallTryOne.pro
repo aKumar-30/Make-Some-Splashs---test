@@ -86,6 +86,7 @@ DISTFILES += \
     qml/CustomizationMode.qml \
     qml/HalftimeBall.qml \
     qml/HalftimeMode.qml \
+    qml/Main.qml \
     qml/MyAnimation.qml \
     qml/MyAnimationCustom.qml \
     qml/TestScene.qml \

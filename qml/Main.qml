@@ -57,7 +57,7 @@ GameWindow {
     }
     Audio{
         id: mMusic1
-        source:"../assets/../assets/images/mMusic1.wav"
+        source:"../assets/images/mMusic1.wav"
         loops:Audio.Infinite
         volume: Extra.volume*4/5
     }
@@ -796,7 +796,7 @@ GameWindow {
                                         anchors.verticalCenter: parent.verticalCenter
                                         width: 40
                                         height: 40
-                                        source: "../assets/../assets/images/coinFront.png"
+                                        source: "../assets/images/coinFront.png"
                                     }
                                 }
                             }
@@ -891,7 +891,7 @@ GameWindow {
                         anchors.verticalCenter: parent.verticalCenter
                         width: 40
                         height: 40
-                        source: "../assets/../assets/images/coinFront.png"
+                        source: "../assets/images/coinFront.png"
                     }
                 }
             }
@@ -963,14 +963,14 @@ GameWindow {
             ////                        anchors.verticalCenter: parent.verticalCenter
             ////                        width: 50*1.35
             ////                        height: 35*1.35
-            ////                        source: "../assets/../assets/images/PlayAdVideo.png"
+            ////                        source: "../assets/images/PlayAdVideo.png"
             ////                    }
             //                    //coin pic
             //                    Image{
             //                        anchors.verticalCenter: parent.verticalCenter
             //                        width: (50+35)/2*1.35
             //                        height: (50+35)/2*1.35
-            //                        source: "../assets/../assets/images/coinFront.png"
+            //                        source: "../assets/images/coinFront.png"
             //                    }
             //                }
             //            }
@@ -1114,7 +1114,7 @@ GameWindow {
                     id: backgroundImage
                     opacity: 0.4
                     anchors.fill: parent
-                    source: "../assets/../assets/images/background.png"
+                    source: "../assets/images/background.png"
                 }
                 Rectangle{
                     id: personalBestBox
@@ -1192,7 +1192,7 @@ GameWindow {
                             anchors.verticalCenter: parent.verticalCenter
                             width: 35
                             height: 35
-                            source: "../assets/../assets/images/coinFront.png"
+                            source: "../assets/images/coinFront.png"
                         }
                         Text{
                             anchors.verticalCenter: parent.verticalCenter
@@ -1297,7 +1297,7 @@ GameWindow {
                             anchors.centerIn: parent
                             width: 115
                             height: 115
-                            source: "../assets/../assets/images/shopIcon.png"
+                            source: "../assets/images/shopIcon.png"
                         }
                         MouseArea{
                             anchors.fill: parent
@@ -1322,7 +1322,7 @@ GameWindow {
                             y:5
                             width: 35
                             height: 35
-                            source: "../assets/../assets/images/exclamationMark.png"
+                            source: "../assets/images/exclamationMark.png"
                             visible: checkIfButtonNeedsToBeVisible(false)    //change this to something else
                         }
 
@@ -1331,7 +1331,7 @@ GameWindow {
                             anchors.centerIn: parent
                             width: 115
                             height: 115
-                            source: "../assets/../assets/images/missionsIcon.png"
+                            source: "../assets/images/missionsIcon.png"
                         }
                         Rectangle{
                             visible: thePauseTimer.running
