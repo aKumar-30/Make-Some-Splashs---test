@@ -166,11 +166,6 @@ int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication appy(argc, argv);
 
-    //App information
-    appy.setOrganizationName("someOrganization");
-    appy.setOrganizationDomain("someOrganization.com");
-    appy.setApplicationName("Make some splashs!");
-
     QApplication app(argc, argv);
     //App information
     appy.setOrganizationName("shootHoops");
