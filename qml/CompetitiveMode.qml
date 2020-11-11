@@ -34,7 +34,6 @@ Page {
     property bool whatToDoWhenClicked: false
     property int counterr1 : 0;
     property var mDuration: 1400
-    property int points: 0;
     property var manyMisses : 0;
     property var manyMakes: 0;
     property var extraPoints: 0;
@@ -81,7 +80,7 @@ Page {
     Audio{
         id: coinClinkSoundEffect
         source:"../assets/sounds/coinSound.mp3"
-        volume: Extra.sound*1
+        volume: root.sound*1
     }
     function afterGameIsActuallyOver(){
         //this used to be above
@@ -118,13 +117,13 @@ Page {
             if (checkIfCurrentMission(14)&&!(mMissionModel.get(14).currentThings>=mMissionModel.get(14).neededThings)){
                 let x = false
                 for(let i = 0; i < counter14.length; i++){
-                    if(Extra.ballSource===counter14[i]){
+                    if(ballSource===counter14[i]){
                         x=true;
                         break;
                     }
                 }
                 if(x===false){
-                    counter14.push(Extra.ballSource);
+                    counter14.push(ballSource);
                     if(counter14.length===mMissionModel.get(14).neededThings){
                         mMissionModel.get(14).currentThings=mMissionModel.get(14).neededThings
                     }
@@ -156,9 +155,9 @@ Page {
         //Just resetting somethings
         flashingScoreText.color="black"
         insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
-        if(points>Extra.personalBest)
+        if(points>personalBest)
         {
-            Extra.personalBest=points;
+            personalBest=points;
         }
         points = 0;
         level= 1;
@@ -178,7 +177,7 @@ Page {
         target: mvpSoundEffect
         property: "volume"
         from:0.0
-        to:0.8*Extra.volume
+        to:0.8*volume
         duration: 300
         easing.type: Easing.Linear
     }
@@ -186,8 +185,8 @@ Page {
         id: fadeOut
         target: mvpSoundEffect
         property: "volume"
-        from:0.8*Extra.volume
-        to:0.001*Extra.volume
+        from:0.8*volume
+        to:0.001*volume
         duration: 300
         easing.type: Easing.Linear
         onFinished:{
@@ -656,7 +655,7 @@ Page {
         font.pointSize: 14
         color: "black"
         font.bold: true
-        font.family: "Century Gothic"
+        font.family: centuryGothic.name
         width: 170
         horizontalAlignment: Text.AlignHCenter
         //        visible: pointingFinger.visible
@@ -757,7 +756,7 @@ Page {
             color: "black"
             font.bold: true
             font.underline: true
-            font.family: "Century Gothic"
+            font.family: centuryGothic.name
             wrapMode: Text.Wrap
         }
         Text{
@@ -766,7 +765,7 @@ Page {
             text: levelIndicatorDown;
             y: onSunLevelText.y+onSunLevelText.height+5
             color: "black"
-            font.family: "Stencil"
+            font.family: stencil.name
             wrapMode: Text.Wrap
             anchors.horizontalCenter: onSunLevelText.horizontalCenter
         }
@@ -783,9 +782,9 @@ Page {
                 source: "../assets/images/coinFront.png"
             }
             Text{
-                property int theText: Extra.numCoins
+                property int theText: numCoins
                 text: theText
-                font.family: "Stencil"
+                font.family: stencil.name
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize:21
             }
@@ -838,7 +837,7 @@ Page {
                 flipable.back.width = 62.5;
                 flipable.front.width = 62.5;
                 flipable.front.height = 62.5;
-                Extra.numCoins++;
+                numCoins++;
                 coinsThisRound++;
                 //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
                 if (Math.floor((Math.random()*coinProb))==0){
@@ -899,12 +898,12 @@ Page {
         x:33;
         width: 140
         height: 140
-        source: Extra.ballSource
+        source: ballSource
     }
     //feedback label
     Label{
         id: feedbackLabel
-        font.family: "Century Gothic"
+        font.family: centuryGothic.name
         text: "dda"
         z: 2
         width: 250
@@ -930,7 +929,7 @@ Page {
             id: levelRectangleText1
             text: "Level " + level
             font.pointSize: 1;
-            font.family: "Bodoni MT Black"
+            font.family: bodoniMTBlack.name
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
@@ -951,7 +950,7 @@ Page {
             id: levelRectangleText
             text: levelTextFunc(level)
             font.pointSize: 18;
-            font.family: "Century Gothic"
+            font.family: centuryGothic.name
             wrapMode: Text.Wrap
             width: parent.width-30
             lineHeight: 1.32
@@ -1070,8 +1069,8 @@ Page {
             //                            }
             //                        }
             onClicked: {
-                if(Extra.numCoins>=10){
-                    Extra.numCoins=Extra.numCoins-10;
+                if(numCoins>=10){
+                    numCoins=numCoins-10;
                     adUsed=true
                     quitButtonWasClicked=true
                     newRetryCircle.visible=false
@@ -1101,7 +1100,7 @@ Page {
             z:5
             Rectangle{
                 anchors.fill: parent
-                color: (Extra.numCoins>=10)?"#2e8ddb":"#6e7a85"
+                color: (numCoins>=10)?"#2e8ddb":"#6e7a85"
             }
             Row{
                 x:10
@@ -1110,7 +1109,7 @@ Page {
                 Text{
                     anchors.verticalCenter: parent.verticalCenter
                     color: "White"
-                    font.family: "Swis721 Cn BT"
+                    font.family: centuryGothic.name
                     font.bold: true
                     font.pointSize: 28
                     text:"Continue"
@@ -1140,7 +1139,7 @@ Page {
                     Text{
                         anchors.verticalCenter: parent.verticalCenter
                         text: "10"
-                        font.family: "Stencil"
+                        font.family: stencil.name
                         font.pointSize:23
                     }
                 }
@@ -1184,7 +1183,7 @@ Page {
                 Text{
                     anchors.verticalCenter: parent.verticalCenter
                     color: "White"
-                    font.family: "Swis721 Cn BT"
+                    font.family: centuryGothic.name
                     font.bold: true
                     font.pointSize: 28
 
@@ -1244,7 +1243,7 @@ Page {
             spacing:10
             Text{
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.family: "Bodoni MT Black"
+                font.family: bodoniMTBlack.name
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 34
@@ -1254,7 +1253,7 @@ Page {
             Text{
                 x:10
                 width: parent.width-20
-                font.family: "Century Gothic"
+                font.family: centuryGothic.name
                 font.pointSize: 17.5
                 wrapMode: Text.Wrap
                 text:"     Please try again! Remember 3 missed shots and you are out"
@@ -1274,7 +1273,7 @@ Page {
                         font.pointSize: 20
                         text: "Retry"
                         color: "White"
-                        font.family: "Century Gothic"
+                        font.family: centuryGothic.name
                     }
                     id: okButton
                     height: 115
@@ -1297,7 +1296,7 @@ Page {
                         font.pointSize: 20
                         text: "Quit"
                         color: "White"
-                        font.family: "Century Gothic"
+                        font.family: centuryGothic.name
                     }
                     id: cancelButton
                     width: okButton.width*0.7
@@ -1501,7 +1500,7 @@ Page {
             y: 1
             text:"apples are cool"
             rotation: 0
-            font.family: "Snap ITC"
+            font.family: snapITC.name
             font.pointSize: 19
         }
 
@@ -1538,14 +1537,14 @@ Page {
             y: 10
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
-            font.family: "Impact"
+            font.family: impact.name
         }
 
         Text{
-            text: "PB: " + Extra.personalBest;
+            text: "PB: " + personalBest;
+            font.family: stencil.name
             font.pointSize: 20
             font.bold: true
-            font.family: "Stencil"
             anchors.top: pointText.bottom
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -2446,7 +2445,7 @@ Page {
     Audio{
         id: splashSoundEffect
         source:"../assets/sounds/splashSoundEffectCropped.mp3"
-        volume: Extra.sound*1
+        volume: root.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
                 if(flipable.visible){
@@ -2605,7 +2604,7 @@ Page {
     Audio{
         id: backboardMakeSoundEffect
         source:"../assets/sounds/backboardMissSoundEffectCropped1.mp3"
-        volume: Extra.sound*1
+        volume: root.sound*1
 
     }
     MyTimer{
@@ -2618,7 +2617,7 @@ Page {
     Audio{
         id: backboardMakeSoundEffect2
         source:"../assets/sounds/splashSoundEffectCropped.mp3"
-        volume: Extra.sound*1
+        volume: root.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
                 if(flipable.visible){
@@ -2757,7 +2756,7 @@ Page {
     Audio{
         id: backboardMissSoundEffect
         source:"../assets/sounds/backboardMissSoundEffectCropped.mp3"
-        volume: Extra.sound*0.64
+        volume: root.sound*0.64
     }
 
     //Rim make
@@ -2909,7 +2908,7 @@ Page {
     Audio{
         id: rimMakeSoundEffect
         source:"../assets/sounds/rimMakeSoundEffectCropped.mp3"
-        volume: Extra.sound*1
+        volume: root.sound*1
         onPlaybackStateChanged: {
             if(playbackState===Audio.PlayingState){
                 if(flipable.visible){
@@ -3065,7 +3064,7 @@ Page {
     Audio{
         id: rimMissSoundEffect
         source:"../assets/sounds/rimMissSoundEffect2.mp3"
-        volume: Extra.sound*0.8
+        volume: root.sound*0.8
 
     }
     MyTimer{
@@ -3078,7 +3077,7 @@ Page {
     Audio{
         id: rimMissSoundEffect2
         source:"../assets/sounds/rimMissSoundEffect2.mp3"
-        volume: Extra.sound*0.3
+        volume: root.sound*0.3
     }
     Rectangle{
         id: stateRectId

@@ -119,7 +119,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 id: labelText
                 text: "How to play??"
-                font.family: "Bodoni MT Black"
+                font.family: bodoniMTBlack.name
                 wrapMode: Label.Wrap
                 font.pointSize:27
                 font.bold:true;
@@ -144,7 +144,7 @@ Item {
                 spacing: 20
                 width:parent.width
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     Text{
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
@@ -155,7 +155,7 @@ Item {
                     }
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     Text{
                         font.bold: true
                         wrapMode: Label.Wrap
@@ -164,14 +164,14 @@ Item {
                     }
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     text: "    Click near the slider to get the ball to shoot towards the basketball. The closer the slider is to the green the better the shot. If the ball misses three times in a row, you lose. Be careful, the slider moves faster as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     Text{
                         font.bold: true
                         wrapMode: Label.Wrap
@@ -180,14 +180,14 @@ Item {
                     }
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     text: "    Click near the slider to get the ball to shoot towards the basketball. The closer the slider is to the green the better the shot. If the ball misses three times in a row, you lose. Be careful, the slider moves in different speeds and speed patterns as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     Text{
                         font.bold: true
                         wrapMode: Label.Wrap
@@ -196,14 +196,14 @@ Item {
                     }
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     text: "    Time to have some fun! Try to click on as many balls as you can as they fall. The more balls you click the more bonus points you earn"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     Text{
                         font.bold: true
                         wrapMode: Label.Wrap
@@ -212,14 +212,14 @@ Item {
                     }
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     text: "    Try to click on the green part of the slider. The closer you are to a geen color (green then yellow then orange then red) the better the shot! If the ball misses three times in a row, you lose. Be careful, it switches faster as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     Text{
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
@@ -230,14 +230,14 @@ Item {
                     }
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     text: "    Earn coins by completing daily missions, watching ads, or playing the game (randomly appearing)!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     Text{
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
@@ -248,14 +248,14 @@ Item {
                     }
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     text: "    Complete tasks by playing to game to earn coins. There are 3 missions, which reset and change every day"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5
                     lineHeight: 1.45
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     Text{
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
@@ -266,7 +266,7 @@ Item {
                     }
                 }
                 Label {
-                    font.family: "Century Gothic"; width: parent.width
+                    font.family: centuryGothic.name; width: parent.width
                     text: "    Use coins to purchase a new ball! These balls provide cool new looks for when you play. Wow!"
                     wrapMode: Label.Wrap
                     font.pointSize: 12.5

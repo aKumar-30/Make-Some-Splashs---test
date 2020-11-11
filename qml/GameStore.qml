@@ -43,7 +43,7 @@ Page {
     {
         let thing;
         for(let i =0; i < contactModel.count;i++){
-            if(contactModel.get(i).picSource=== Extra.ballSource)
+            if(contactModel.get(i).picSource=== ballSource)
                 thing = i
         }
         for(let k =0; k <bought.length; k++){
@@ -78,7 +78,7 @@ Page {
 
             purchaseButtonText.text = count;
 
-            if(Extra.numCoins>=count){
+            if(numCoins>=count){
                 purchaseButton.enabled=true;
                 colorRect.color= "#bdbd22"
             }
@@ -89,7 +89,7 @@ Page {
         }
         else{
             //bought before
-            Extra.ballSource=mSource;
+            ballSource=mSource;
             purchaseButton.visible=false;
             buttonFadeRect.visible=false;
             lockSign.visible = false;
@@ -122,9 +122,9 @@ Page {
             }
             Text{
                 anchors.verticalCenter: parent.verticalCenter
-                property int value: Extra.numCoins
+                property int value: numCoins
                 text: value
-                font.family: "Stencil"
+                font.family: stencil.name
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize:21
                 Behavior on value {
@@ -148,7 +148,7 @@ Page {
         Text{
             text: "Normal Ball"
             id: bigPicText
-            font.family: "Impact"
+            font.family: impact.name
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             font.pointSize: 35
@@ -158,7 +158,7 @@ Page {
         }
         Image{
             id: bigPicImage
-            source: Extra.ballSource
+            source: ballSource
             width: 240;
             height: 240;
             anchors.horizontalCenter: parent.horizontalCenter
@@ -218,7 +218,7 @@ Page {
             box.color: "white"
             modal: true
             onSelectedOk: {
-                Extra.numCoins-=count
+                numCoins-=count
                 contactModel.get(mIndex).isBought=true
                 bought.push(mName);
                 boughtChanged();
@@ -261,7 +261,7 @@ Page {
                     font.pointSize: 29
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.family: "Goudy Stout"
+                    font.family: stencil.name
                 }
                 Image{
                     //coin pic
@@ -291,7 +291,7 @@ Page {
             isBought: false
             type: "regularBall";
             name: "Normal Ball"
-            picSource: "file:///Users/arjun/Documents/All_Qt_Projects/Qt Quick/Qt Fundamentals Udemy Course/10-6AnimationDemo/../assets/images/basket_ball.png"
+            picSource: "../assets/images/basket_ball.png"
             price: 0;
         } ListElement{
             index:1
@@ -471,7 +471,7 @@ Page {
                         anchors.horizontalCenter: parent.horizontalCenter
                         id: nameText
                         text: name
-                        font.family: "Century Gothic"
+                        font.family: centuryGothic.name
                         font.bold:  (grid.isCurrentItem===true)?"true":"false"
                         horizontalAlignment: Text.AlignHCenter
                         font.pointSize: 10

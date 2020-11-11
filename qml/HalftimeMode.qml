@@ -191,7 +191,7 @@ Page {
             id: remainingTimeBoxText
             x: parent.width/2-40
             anchors.centerIn: parent
-            font.family: "GENISO"
+            font.family: geniso.name
             font.bold: true
             text: timeRemaining
             font.pointSize: 120
@@ -220,7 +220,7 @@ Page {
                     NumberAnimation { duration: 800; easing.type: Easing.InOutQuad }
                 }
                 id: totalRewardsBoxText
-                font.family: "GENISO"
+                font.family: geniso.name
                 font.bold: true
                 font.pointSize: 40
                 color: "white"
@@ -235,7 +235,7 @@ Page {
                     }
                     anchors.verticalCenter: parent.verticalCenter
                     text: value
-                    font.family: "GENISO"
+                    font.family: geniso.name
                     font.bold: true
                     font.pointSize: 55
                     color: "white"
@@ -243,7 +243,7 @@ Page {
                 Text{
                     anchors.verticalCenter: parent.verticalCenter
                     text: " extra points"
-                    font.family: "GENISO"
+                    font.family: geniso.name
                     font.pointSize: 15
                     color: "white"
                 }

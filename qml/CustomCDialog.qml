@@ -124,7 +124,7 @@ anchors.fill: parent
             Layout.fillHeight: true
             wrapMode: Label.Wrap
             font.pointSize: 20
-            font.family: "Bodoni MT Black"
+            font.family: bodoniMTBlack.name
         }
 
         Label {
@@ -139,7 +139,7 @@ anchors.fill: parent
             Layout.fillHeight: true
             wrapMode: Label.Wrap
             font.pointSize: 16.5
-            font.family: "Century Gothic"
+            font.family: centuryGothic.name
         }
         Button {
             Rectangle{
@@ -151,7 +151,7 @@ anchors.fill: parent
                 font.pointSize: 20
                 text: "Ok"
                 color: "White"
-                font.family: "Century Gothic"
+                font.family: centuryGothic.name
             }
             id: okButton
             width: templateButton.width+140
@@ -176,7 +176,7 @@ anchors.fill: parent
                 font.pointSize: 20
                 text: "Cancel"
                 color: "White"
-                font.family: "Century Gothic"
+                font.family: centuryGothic.name
             }
             id: cancelButton
             width: templateButton.width+140

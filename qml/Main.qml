@@ -10,7 +10,7 @@ import Qt.labs.settings 1.0
 import QtQuick.Controls 2.12
 import QtMultimedia 5.8
 
-////New VERSION STARTS HERE
+////New VERSION STARTS HER E
 GameWindow {
     visible: true
     //    width: 708
@@ -34,9 +34,120 @@ GameWindow {
     property var counter14: [];
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
+    property int points: 0;
     id: root
+
+
+    //these ones used to be from Extra
+    property double volume: 0.0;
+    property double sound: 0.0;
+    property bool isOpen: false;
+    property int numCoins: 5;
+    property string ballSource:"../assets/images/basket_ball.png";
+    property int personalBest: 0;
+    property string datastore: "";
+    property string miniStore:""
+    property string myMissionsRn:""
+    property string endingPage: ""
     //        width: 708
     //        height: 785
+    //settings is now in storage instead of QSettings
+    Storage{
+        id: settings
+        Component.onCompleted: {
+//            settings.clearAll()
+            //save volume
+            if(!settings.getValue("volume")){
+                settings.setValue("volume", root.volume);
+            }
+            else{
+                console.log("root.volume is "+root.volume)
+                root.volume = settings.getValue("volume");
+            }
+            //save sound
+            if(!settings.getValue("sound"))
+                settings.setValue("sound", sound);
+            else
+                sound = settings.getValue("sound");
+            //save coins
+            if(!settings.getValue("coins"))
+                settings.setValue("coins", numCoins);
+            else{
+                console.log("settings.getValue(coins) is"+settings.getValue("coins"))
+                numCoins = settings.getValue("coins");
+            }
+            //save ball source
+            if(!settings.getValue("ballSource"))
+                settings.setValue("ballSource", ballSource);
+            else
+                ballSource = settings.getValue("ballSource");
+            //save personal best
+            if(!settings.getValue("personalBest")){
+                settings.setValue("personalBest", personalBest);
+            }
+            else{
+                personalBest = settings.getValue("personalBest");
+                console.log("I AM IN THE ELSE STATEMENT AND EVERYTHING IS CHILLIN HERE IS PB: "+personalBest)
+           }
+            //save datastore
+            if(!settings.getValue("datastore"))
+                settings.setValue("datastore", datastore);
+            else{
+                datastore = settings.getValue("datastore");
+                console.log("DATASTORE IS COOL + " + datastore)
+            }
+            //save myMissionsRn
+            if(!settings.getValue("myMissionsRn"))
+                settings.setValue("myMissionsRn", myMissionsRn);
+            else
+                myMissionsRn = settings.getValue("myMissionsRn");
+
+            //other stuff
+            mMusic1.play()
+            if ( datastore) {
+                mMissionModel.clear()
+                var datamodel = JSON.parse(datastore)
+                for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+            }
+            if(myMissionsRn){
+                getCurrentMissions()
+            }
+            if(presentMissions.length!==0){
+                displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+                displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+                displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+                displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+            }
+            else{
+                updateMissions();
+            }
+        }
+        Component.onDestruction: {
+            counter14Changed();
+            mMusic1.stop()
+            storeForSettings();
+
+            var datamodel = []
+            for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
+            datamodel =  JSON.stringify(datamodel)
+            settings.setValue("datastore", datamodel)
+
+            settings.setValue("volume", root.volume);
+            settings.setValue("sound", sound);
+            settings.setValue("coins", numCoins);
+            settings.setValue("ballSource", ballSource);
+            settings.setValue("personalBest", personalBest);
+            settings.setValue("myMissionsRn", myMissionsRn);
+        }
+    }
+    //font loader
+    FontLoader{id: impact; source: "../assets/Fonts/Impact/impact.ttf"}
+    FontLoader{id: bodoniMTBlack; source: "../assets/Fonts/BodoniMTBlack/bod_blar.ttf"}
+    FontLoader{id: geniso; source: "../assets/Fonts/Geniso/Geniso.ttf"}
+    FontLoader{id: stencil; source: "../assets/Fonts/Gunplay/gunplay.ttf"}
+    FontLoader{id: snapITC; source: "../assets/Fonts/SnapITC/SnapITC.ttf"}
+    FontLoader{id: centuryGothic; source: "../assets/Fonts/CenturyGothic/CenturyGothic.ttf"}
+
     Scene {
         id: settingsDialog
         width: mainScene.width
@@ -59,30 +170,14 @@ GameWindow {
         id: mMusic1
         source:"../assets/images/mMusic1.wav"
         loops:Audio.Infinite
-        volume: Extra.volume*4/5
+        volume: root.volume*4/5
+        Component.onCompleted: {
+            console.log("OUR VOLUME IS>>>>"+mMusic1.volume+volume)
+        }
     }
-    Component.onDestruction: {
-        counter14Changed();
-        mMusic1.stop()
-        storeForSettings();
-
-        var datamodel = []
-        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-        Extra.datastore = JSON.stringify(datamodel)
-
-        s_manager.writeSettings("VolumEE", Extra.volume);
-        s_manager.writeSettings("SounDD",Extra.sound);
-        s_manager.writeSettings("CoinSS", Extra.numCoins);
-        s_manager.writeSettings("BallSourcEE", Extra.ballSource);
-        s_manager.writeSettings("PersonalBesTT",Extra.personalBest);
-        s_manager.writeSettings("Datastory",Extra.datastore);
-        //convert array to string
-        setCurrentMissions()
-        s_manager.writeSettings("Missionsy",Extra.myMissionsRn);
-    }
-    SettingsManager{
-        id: s_manager
-    }
+//    SettingsManager{
+//        id: s_manager
+//    }
     //may no longer be used
     Connections{
         target: Extra;
@@ -91,7 +186,7 @@ GameWindow {
         }
         function onGoBackFromHalftime(points1){
             navigationStack.pop()
-            Extra.points+=points1
+            points+=points1
         }
         function onGoToHalftime(){
             navigationStack.push(halftimeModeComponent)
@@ -101,8 +196,8 @@ GameWindow {
         let j =0;
         for(let i =0; i < 3; i++){
             var q = "";
-            while(Extra.myMissionsRn[j]!==","){
-                q+=(Extra.myMissionsRn[j]).toString();
+            while(myMissionsRn[j]!==","){
+                q+=(myMissionsRn[j]).toString();
                 j++
             }
             j++;
@@ -110,27 +205,7 @@ GameWindow {
         }
     }
     function setCurrentMissions(){
-        Extra.myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+presentMissions[2]+","
-    }
-    Component.onCompleted: {
-        mMusic1.play()
-        if ( Extra.datastore) {
-            mMissionModel.clear()
-            var datamodel = JSON.parse(Extra.datastore)
-            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        }
-        if(Extra.myMissionsRn){
-            getCurrentMissions()
-        }
-        if(presentMissions.length!==0){
-            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        }
-        else{
-            updateMissions();
-        }
+        myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+presentMissions[2]+","
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -237,7 +312,7 @@ GameWindow {
         arr.push(mMissionModel.get(mMissionModel.count-1));
     }
     function updatingMissionsDuringGame(){
-        countingUpdatingMissions++;
+//        countingUpdatingMissions++;
         //make missions invisible here
         partUpdatingMissions()
 
@@ -339,7 +414,7 @@ GameWindow {
         height: 50
         onEditingFinished:{
             if(text==="4895"){
-                Extra.numCoins+=4;
+                numCoins+=4;
                 text=""
             }
             visible = false;
@@ -476,7 +551,7 @@ GameWindow {
                     text: "Missions"
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
-                    font.family: "Bodoni MT Black"
+                    font.family: bodoniMTBlack.name
                 }
             }
             Rectangle{
@@ -492,7 +567,7 @@ GameWindow {
                 width: parent.width
                 anchors.top: headerFade.bottom
                 text: "NEXT MISSIONS IN "+whatToPrint;
-                font.family: "GENISO"
+                font.family: geniso.name
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 color: "#595756"
@@ -734,7 +809,7 @@ GameWindow {
                                 Text{
                                     id: theText
                                     y:15
-                                    font.family: "Swis721 Cn BT"
+                                    font.family: centuryGothic.name
                                     font.bold: true
                                     width: parent.width*2/3+15
                                     wrapMode: Text.Wrap
@@ -754,7 +829,7 @@ GameWindow {
                                             z:3
                                             anchors.centerIn: parent
                                             color: "white"
-                                            font.family: "Swis721 Cn BT"
+                                            font.family: centuryGothic.name
                                             font.bold: true
                                             font.pointSize: 18
                                             text:(currentThings>=neededThings)?(neededThings+"/"+neededThings):(currentThings+"/"+neededThings)
@@ -786,7 +861,7 @@ GameWindow {
                                     Text{
                                         anchors.verticalCenter: parent.verticalCenter
                                         color: "black"
-                                        font.family: "Swis721 Cn BT"
+                                        font.family: centuryGothic.name
                                         font.bold: true
                                         font.pointSize: 20
                                         text:reward
@@ -833,7 +908,7 @@ GameWindow {
             Button{
                 onClicked: {
                     if(visible){
-                        Extra.numCoins+= currentMissionRewards;
+                        numCoins+= currentMissionRewards;
                         //remove delegates for completed missions
                         let j =0;
                         for(let i =displayDelegateModel.items.count-3; i< displayDelegateModel.items.count;i++){
@@ -866,7 +941,7 @@ GameWindow {
                     Text{
                         anchors.verticalCenter: parent.verticalCenter
                         color: "black"
-                        font.family: "Swis721 Cn BT"
+                        font.family: centuryGothic.name
                         font.bold: true
                         font.pointSize: 25
                         text:"Get"
@@ -881,7 +956,7 @@ GameWindow {
                     Text{
                         anchors.verticalCenter: parent.verticalCenter
                         color: "black"
-                        font.family: "Swis721 Cn BT"
+                        font.family: centuryGothic.name
                         font.bold: true
                         font.pointSize: 25
                         text: currentMissionRewards
@@ -926,7 +1001,7 @@ GameWindow {
             //                        //                        myRewardedVideo.showRewardedVideoIfLoaded()
             //                        //                        // load a new video every time it got shown, to give the user a fresh ad
             //                        //                        myRewardedVideo.loadRewardedVideo()
-            //                        Extra.numCoins-=10;
+            //                        numCoins-=10;
             //                        updatingMissionsDuringGame();
             //                    }
             //                }
@@ -948,7 +1023,7 @@ GameWindow {
             //                    Text{
             //                        anchors.verticalCenter: parent.verticalCenter
             //                        color: "White"
-            //                        font.family: "Swis721 Cn BT"
+            //                        font.family: centuryGothic.name
             //                        font.bold: true
             //                        font.pointSize: 30
             //                        text:"New Missions"
@@ -1044,7 +1119,7 @@ GameWindow {
                 font.pointSize: 25
                 font.bold: true
                 text:navigationStack.currentPage.title
-                font.family: "Century Gothic"
+                font.family: centuryGothic.name
                 color: "white"
             }
 
@@ -1133,7 +1208,7 @@ GameWindow {
                         id:templateText
                         text:"Personal Best: "
                         font.pointSize: 20
-                        font.family: "Stencil"
+                        font.family: stencil.name
                     }
 
                     Text{
@@ -1143,7 +1218,7 @@ GameWindow {
                         width: templateText.width+5
                         text: "Personal Best: ";
                         font.pointSize: 20
-                        font.family: "Stencil"
+                        font.family: stencil.name
                         wrapMode: Text.Wrap
                     }
                     Text{
@@ -1151,9 +1226,9 @@ GameWindow {
                         anchors.horizontalCenter: mainPBText.horizontalCenter
                         anchors.top:mainPBText.bottom
                         anchors.bottomMargin: 10
-                        text: Extra.personalBest
+                        text: personalBest
                         font.pointSize: 27
-                        font.family: "Stencil"
+                        font.family: stencil.name
                     }
                     radius: 5
                     Timer{
@@ -1196,9 +1271,9 @@ GameWindow {
                         }
                         Text{
                             anchors.verticalCenter: parent.verticalCenter
-                            property int value: Extra.numCoins
+                            property int value: numCoins
                             text: value
-                            font.family: "Stencil"
+                            font.family: stencil.name
                             horizontalAlignment: Text.AlignHCenter
                             font.pointSize:21
                             Behavior on value {
@@ -1210,7 +1285,7 @@ GameWindow {
                 }
                 Label {
                     text: "Shoot Hoops!"
-                    font.family:"Impact"
+                    font.family:impact.name
                     font.pointSize: 70
                     width: 500
                     wrapMode: Label.Wrap
@@ -1396,7 +1471,7 @@ GameWindow {
     }
     Settings{
         id: something
-        property alias counterNumber14: root.counter14
-        property alias firstTimeUpdatingMissionsSettings: root.firstTimeUpdatingMissions
+        property alias couRnterNRumber1RR4: root.counter14
+        property alias firstRTimeUpdatiRRsionsSettiTngs: root.firstTimeUpdatingMissions
     }
 }

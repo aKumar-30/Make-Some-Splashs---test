@@ -69,13 +69,13 @@ Item {
         anchors.centerIn: parent
         onVisibleChanged: {
             if(visible){
-                Extra.isOpen = true;
+                isOpen = true;
             }
             else{
                 settingsDialog.visible=false
-                Extra.volume=volumeSlider.volume
-                Extra.sound=soundSlider.sound
-                Extra.isOpen = false;
+                root.volume=volumeSlider.volume
+                sound=soundSlider.sound
+                isOpen = false;
             }
         }
 
@@ -93,7 +93,7 @@ Item {
             Text{
                 width: 400
                 text: "          Settings                      "
-                font.family: "Bodoni MT Black"
+                font.family: bodoniMTBlack.name
                 wrapMode: Label.Wrap
                 font.pixelSize: 50
                 font.bold:true;
@@ -109,7 +109,7 @@ Item {
                     visible:true
                     color: "black"
                     id: musicVolumeIcon
-                    icon: (Extra.volume<0.45)?((Extra.volume<0.02)?IconType.volumeoff:IconType.volumeoff):IconType.volumeup
+                    icon: (volume<0.45)?((volume<0.02)?IconType.volumeoff:IconType.volumeoff):IconType.volumeup
                     iconSize: 50
                     Rectangle{
                         anchors.centerIn: parent
@@ -120,13 +120,13 @@ Item {
                             anchors.fill: parent
                             onClicked:{
                                 musicVolumeIcon.icon=IconType.volumeoff
-                                Extra.volume=0.0;
+                                volume=0.0;
                                 shouldExtraVolumeChange=false
                                 volumeSlider.valueChanged();
 
                                 //nobody knows why but do it twice
                                 musicVolumeIcon.icon=IconType.volumeoff
-                                Extra.volume=0.0;
+                                volume=0.0;
                                 shouldExtraVolumeChange=false
                                 volumeSlider.valueChanged();
                             }
@@ -192,12 +192,12 @@ Item {
                             }
                         }
                         if(shouldExtraVolumeChange){
-                            Extra.volume=volumeSlider.volume
+                            root.volume=volumeSlider.volume
                         }
                         else
                             shouldExtraVolumeChange=true
                     }
-                    value: QtMultimedia.convertVolume(Extra.volume,QtMultimedia.LinearVolumeScale,QtMultimedia.LogarithmicVolumeScale);
+                    value: QtMultimedia.convertVolume(root.volume,QtMultimedia.LinearVolumeScale,QtMultimedia.LogarithmicVolumeScale);
                     property real volume: QtMultimedia.convertVolume(volumeSlider.value,
                                                                      QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
                 }
@@ -213,7 +213,7 @@ Item {
                     visible:true
                     color: "black"
                     id: musicSoundIcon
-                    icon: (Extra.sound<0.45)?((Extra.sound<0.02)?IconType.volumeoff:IconType.volumeoff):IconType.volumeup
+                    icon: (sound<0.45)?((sound<0.02)?IconType.volumeoff:IconType.volumeoff):IconType.volumeup
                     iconSize: 50
                     Rectangle{
                         anchors.centerIn: parent
@@ -224,13 +224,13 @@ Item {
                             anchors.fill: parent
                             onClicked:{
                                 musicSoundIcon.icon=IconType.volumeoff
-                                Extra.sound=0.0;
+                                sound=0.0;
                                 shouldExtraSoundChange=false
                                 soundSlider.valueChanged();
 
                                 //nobody knows why but do it twice
                                 musicSoundIcon.icon=IconType.volumeoff
-                                Extra.sound=0.0;
+                                sound=0.0;
                                 shouldExtraSoundChange=false
                                 soundSlider.valueChanged();
                             }
@@ -296,12 +296,12 @@ Item {
                             }
                         }
                         if(shouldExtraSoundChange){
-                            Extra.sound=soundSlider.sound
+                            root.sound=soundSlider.sound
                         }
                         else
                             shouldExtraSoundChange=true
                     }
-                    value: QtMultimedia.convertVolume(Extra.sound,QtMultimedia.LinearVolumeScale,QtMultimedia.LogarithmicVolumeScale);
+                    value: QtMultimedia.convertVolume(root.sound,QtMultimedia.LinearVolumeScale,QtMultimedia.LogarithmicVolumeScale);
                     property real sound: QtMultimedia.convertVolume(soundSlider.value,
                                                                     QtMultimedia.LogarithmicVolumeScale, QtMultimedia.LinearVolumeScale)
                 }
@@ -321,7 +321,7 @@ Item {
                 font.pointSize: 20
                 text: "Ok"
                 color: "White"
-                font.family: "Century Gothic"
+                font.family: centuryGothic.name
             }
             id: okButton
             width: templateButton.width+140

@@ -82,6 +82,7 @@ DISTFILES += \
     qml/CustomSettingsDialog.qml \
     qml/CustomWDialog.qml \
     qml/CustomizationMode.qml \
+    qml/GameStore.qml \
     qml/HalftimeBall.qml \
     qml/HalftimeMode.qml \
     qml/Main.qml \

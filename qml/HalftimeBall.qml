@@ -37,7 +37,7 @@ Item {
         x:Math.floor(Math.random() * (root2.width-width));
         width: 115
         height: 115
-        source: Extra.ballSource
+        source: ballSource
         NumberAnimation{
             onStopped: {
                 mId.visible=false
