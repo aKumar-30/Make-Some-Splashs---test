@@ -59,7 +59,7 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             id: levelRectangleText1
             text: "It's HALFTIME!"
-            font.pointSize: 1;
+            font.pointSize: 2* 1;
             font.family: "Impact"
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
@@ -68,7 +68,7 @@ Page {
         Text{
             id: levelRectangleText
             text: "Click the ball to collect it and earn points - this adds on to your game score"
-            font.pointSize: 14;
+            font.pointSize: 2* 14;
             font.family: "Century Gothic"
             wrapMode: Text.Wrap
             width: parent.width-30
@@ -80,7 +80,7 @@ Page {
         //            visible: false
         //            id: startGameButton
         //            text: "Start"
-        //            font.pointSize: 14;
+        //            font.pointSize: 2* 14;
         //            width: parent.width-90
         //            height: 120
         //            y: levelRectangleText.y+levelRectangleText.implicitHeight+30
@@ -100,7 +100,7 @@ Page {
             }
             Text{
                 anchors.centerIn: parent
-                font.pointSize: 20
+                font.pointSize: 2* 20
                 text: "Start"
                 color: "White"
                 font.family: "Century Gothic"
@@ -108,7 +108,7 @@ Page {
             id: startGameButton
             width: templateButton.width+140
             height: templateButton.height+38
-            font.pointSize: 14;
+            font.pointSize: 2* 14;
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
                 // emit signal and hide dialog if button is selected
@@ -194,7 +194,7 @@ Page {
             font.family: geniso.name
             font.bold: true
             text: timeRemaining
-            font.pointSize: 120
+            font.pointSize: 2* 120
             color: "white"
         }
     }
@@ -222,7 +222,7 @@ Page {
                 id: totalRewardsBoxText
                 font.family: geniso.name
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 2* 40
                 color: "white"
             }
             Row{
@@ -237,14 +237,14 @@ Page {
                     text: value
                     font.family: geniso.name
                     font.bold: true
-                    font.pointSize: 55
+                    font.pointSize: 2* 55
                     color: "white"
                 }
                 Text{
                     anchors.verticalCenter: parent.verticalCenter
                     text: " extra points"
                     font.family: geniso.name
-                    font.pointSize: 15
+                    font.pointSize: 2* 15
                     color: "white"
                 }
             }
@@ -317,7 +317,7 @@ Page {
     //        color: "yellow"
     //        Text{
     //            id: onSunLevelText
-    //            font.pointSize: 10
+    //            font.pointSize: 2* 10
     //            text: "Count";
     //            x: height*3/5+50
     //            y: width*3/5+30
@@ -328,7 +328,7 @@ Page {
     //        }
     //        Text{
     //            id: onSunLevelText1
-    //            font.pointSize: 18
+    //            font.pointSize: 2* 18
     //            text: numberOfClicks;
     //            anchors.top: onSunLevelText.bottom
     //            color: "black"
@@ -350,7 +350,7 @@ Page {
         z: 17
         Text{
             id: onSunLevelText
-            font.pointSize: 14
+            font.pointSize: 2* 14
             text: "Count";
             anchors.centerIn: parent
             color: "black"
@@ -361,7 +361,7 @@ Page {
         }
         Text{
             id: onSunLevelText1
-            font.pointSize: 15
+            font.pointSize: 2* 15
             text: numberOfClicks;
             y: onSunLevelText.y+onSunLevelText.height+5
             color: "black"

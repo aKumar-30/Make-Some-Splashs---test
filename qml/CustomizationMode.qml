@@ -68,7 +68,7 @@ Page {
         Text{
             id: text
             anchors.centerIn: parent
-            font.pointSize: 20
+            font.pointSize: 2* 20
             color: "black"
             width: 360;
             wrapMode: Label.Wrap
@@ -168,7 +168,7 @@ Page {
                     text: "Choose duration (0-5 sec.)"
                     wrapMode: Label.WordWrap
                     font.bold: true
-                    font.pointSize: 10
+                    font.pointSize: 2* 10
                 }
 
                 Slider{

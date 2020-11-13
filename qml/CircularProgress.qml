@@ -134,9 +134,12 @@ Canvas {
         z:15
     }
     Image{
-        anchors.centerIn: parent
-        width: parent.height-50
-        height: parent.height-50
+        anchors.right: parent.right
+        anchors.rightMargin: 15
+        anchors.left: parent.left
+        anchors.leftMargin: 15
+        width: 50
+        height: 50
         source: "../assets/images/coinFrontTranslucent.png"
     }
     IconButtonBarItem{

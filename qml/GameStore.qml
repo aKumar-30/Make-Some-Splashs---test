@@ -126,7 +126,7 @@ Page {
                 text: value
                 font.family: stencil.name
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize:21
+                font.pointSize: 2*21
                 Behavior on value {
                     NumberAnimation { duration: (firstTime)?1:1000; easing.type: Easing.InOutQuad}
                 }
@@ -151,7 +151,7 @@ Page {
             font.family: impact.name
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: 35
+            font.pointSize: 2* 35
             anchors.horizontalCenter: parent.horizontalCenter
             y:2
             color: "black"
@@ -258,7 +258,7 @@ Page {
                     id: purchaseButtonText
                     //cost
                     text: "25"
-                    font.pointSize: 29
+                    font.pointSize: 2* 29
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
                     font.family: stencil.name
@@ -474,7 +474,7 @@ Page {
                         font.family: centuryGothic.name
                         font.bold:  (grid.isCurrentItem===true)?"true":"false"
                         horizontalAlignment: Text.AlignHCenter
-                        font.pointSize: 10
+                        font.pointSize: 2* 10
                         color:"#050027"
                     }
                     MouseArea{

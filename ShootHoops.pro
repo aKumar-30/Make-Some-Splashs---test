@@ -9,7 +9,7 @@ CONFIG += c++11
 
 # Project identifier and version
 # More information: https://felgo.com/doc/felgo-publishing/#project-configuration
-PRODUCT_IDENTIFIER = com.yourcompany.wizardEVP.FelgoCompetitiveBallTryOne
+PRODUCT_IDENTIFIER = com.ShootHoops.wizardEVP.ShootHoops
 PRODUCT_VERSION_NAME = 1.0.0
 PRODUCT_VERSION_CODE = 1
 

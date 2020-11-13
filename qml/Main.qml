@@ -55,7 +55,7 @@ GameWindow {
     Storage{
         id: settings
         Component.onCompleted: {
-//            settings.clearAll()
+            //            settings.clearAll()
             //save volume
             if(!settings.getValue("volume")){
                 settings.setValue("volume", root.volume);
@@ -88,7 +88,7 @@ GameWindow {
             else{
                 personalBest = settings.getValue("personalBest");
                 console.log("I AM IN THE ELSE STATEMENT AND EVERYTHING IS CHILLIN HERE IS PB: "+personalBest)
-           }
+            }
             //save datastore
             if(!settings.getValue("datastore"))
                 settings.setValue("datastore", datastore);
@@ -175,9 +175,9 @@ GameWindow {
             console.log("OUR VOLUME IS>>>>"+mMusic1.volume+volume)
         }
     }
-//    SettingsManager{
-//        id: s_manager
-//    }
+    //    SettingsManager{
+    //        id: s_manager
+    //    }
     //may no longer be used
     Connections{
         target: Extra;
@@ -312,7 +312,7 @@ GameWindow {
         arr.push(mMissionModel.get(mMissionModel.count-1));
     }
     function updatingMissionsDuringGame(){
-//        countingUpdatingMissions++;
+        //        countingUpdatingMissions++;
         //make missions invisible here
         partUpdatingMissions()
 
@@ -547,7 +547,7 @@ GameWindow {
                     color: "#ffffff"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: 36
+                    font.pointSize: 2* 36
                     text: "Missions"
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
@@ -572,7 +572,7 @@ GameWindow {
                 horizontalAlignment: Text.AlignHCenter
                 color: "#595756"
                 y: header.y+25
-                font.pointSize: 16
+                font.pointSize: 2* 16
             }
             //Actual model stuff START HERE-----------------------------------
             ListModel{
@@ -784,7 +784,7 @@ GameWindow {
                             font.bold: true
                             font.underline: true
                             horizontalAlignment: Text.AlignHCenter
-                            font.pointSize: 20
+                            font.pointSize: 2* 20
                             color: "#7ae868"
 
                         }
@@ -813,7 +813,7 @@ GameWindow {
                                     font.bold: true
                                     width: parent.width*2/3+15
                                     wrapMode: Text.Wrap
-                                    font.pointSize: 14
+                                    font.pointSize: 2* 14
                                     color: "white"
                                     text:description
                                     //description text
@@ -831,7 +831,7 @@ GameWindow {
                                             color: "white"
                                             font.family: centuryGothic.name
                                             font.bold: true
-                                            font.pointSize: 18
+                                            font.pointSize: 2* 18
                                             text:(currentThings>=neededThings)?(neededThings+"/"+neededThings):(currentThings+"/"+neededThings)
                                         }
                                         background: Rectangle {
@@ -863,7 +863,7 @@ GameWindow {
                                         color: "black"
                                         font.family: centuryGothic.name
                                         font.bold: true
-                                        font.pointSize: 20
+                                        font.pointSize: 2* 20
                                         text:reward
                                     }
                                     //coin pic
@@ -943,7 +943,7 @@ GameWindow {
                         color: "black"
                         font.family: centuryGothic.name
                         font.bold: true
-                        font.pointSize: 25
+                        font.pointSize: 2* 25
                         text:"Get"
                     }
                     Rectangle{
@@ -958,7 +958,7 @@ GameWindow {
                         color: "black"
                         font.family: centuryGothic.name
                         font.bold: true
-                        font.pointSize: 25
+                        font.pointSize: 2* 25
                         text: currentMissionRewards
                     }
                     //coin pic
@@ -1025,7 +1025,7 @@ GameWindow {
             //                        color: "White"
             //                        font.family: centuryGothic.name
             //                        font.bold: true
-            //                        font.pointSize: 30
+            //                        font.pointSize: 2* 30
             //                        text:"New Missions"
             //                    }
             //                    Rectangle{
@@ -1116,7 +1116,7 @@ GameWindow {
             titleItem: Text{
                 x:165
                 y:8
-                font.pointSize: 25
+                font.pointSize: 2* 25
                 font.bold: true
                 text:navigationStack.currentPage.title
                 font.family: centuryGothic.name
@@ -1207,7 +1207,7 @@ GameWindow {
                         visible:false
                         id:templateText
                         text:"Personal Best: "
-                        font.pointSize: 20
+                        font.pointSize: 2* 20
                         font.family: stencil.name
                     }
 
@@ -1217,7 +1217,7 @@ GameWindow {
                         id: mainPBText
                         width: templateText.width+5
                         text: "Personal Best: ";
-                        font.pointSize: 20
+                        font.pointSize: 2* 20
                         font.family: stencil.name
                         wrapMode: Text.Wrap
                     }
@@ -1227,7 +1227,7 @@ GameWindow {
                         anchors.top:mainPBText.bottom
                         anchors.bottomMargin: 10
                         text: personalBest
-                        font.pointSize: 27
+                        font.pointSize: 2* 27
                         font.family: stencil.name
                     }
                     radius: 5
@@ -1275,7 +1275,7 @@ GameWindow {
                             text: value
                             font.family: stencil.name
                             horizontalAlignment: Text.AlignHCenter
-                            font.pointSize:21
+                            font.pointSize: 2*21
                             Behavior on value {
                                 NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad}
                             }
@@ -1286,7 +1286,7 @@ GameWindow {
                 Label {
                     text: "Shoot Hoops!"
                     font.family:impact.name
-                    font.pointSize: 70
+                    font.pointSize: 2* 70
                     width: 500
                     wrapMode: Label.Wrap
                     y:150
@@ -1311,7 +1311,7 @@ GameWindow {
                         font.family: "Tahoma"
                         font.bold: true
                         style: Text.Raised
-                        font.pointSize: 34
+                        font.pointSize: 2* 34
                         anchors.centerIn: parent
                     }
                     radius: 50

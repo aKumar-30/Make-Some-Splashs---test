@@ -86,6 +86,15 @@ Item {
         width: 620
         height: 550
         focus: true
+        Timer{
+            id: delayTimerVolume
+            interval: 1
+            onTriggered: {
+                volumeSlider.value=root.volume
+                soundSlider.value=root.sound
+                console.log("V ALUE IS "+value)
+            }
+        }
         ColumnLayout {
             id: settingsColumn
             spacing: 80
@@ -137,13 +146,16 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     x:98
                     text: "Music:"
-                    font.pointSize: 22
+                    font.pointSize: 2* 22
                     font.bold: true
                     id: musicText
                 }
                 AppSlider {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
+                        console.log("VALUE IS "+value)
+                        if(!delayTimer.running)
+                        delayTimer.start()
                         x=musicText.width+musicText.x+18
                     }
                     x:musicText.width+musicText.x+18
@@ -176,7 +188,9 @@ Item {
                     }
                     id: volumeSlider
                     onValueChanged: {
-                        if(value<0.02){
+                        if(value<0.05){
+                            value = 0.0
+                            value = 0.0
                             if(!(musicVolumeIcon.icon===IconType.volumeoff)){
                                 musicVolumeIcon.icon=IconType.volumeoff
                             }
@@ -241,13 +255,15 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     x:98
                     text: "Sound:"
-                    font.pointSize: 22
+                    font.pointSize: 2* 22
                     font.bold: true
                     id: soundText
                 }
                 AppSlider {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
+                        if(!delayTimer.running)
+                        delayTimer.start()
                         x=soundText.width+soundText.x+18
                     }
                     x:soundText.width+soundText.x+18
@@ -280,7 +296,9 @@ Item {
                         }
                     }
                     onValueChanged: {
-                        if(value<0.02){
+                        if(value<0.05){
+                            sound = 0.0
+                            sound = 0.0
                             if(!(musicSoundIcon.icon===IconType.volumeoff)){
                                 musicSoundIcon.icon=IconType.volumeoff
                             }
@@ -318,7 +336,7 @@ Item {
             }
             Text{
                 anchors.centerIn: parent
-                font.pointSize: 20
+                font.pointSize: 2* 20
                 text: "Ok"
                 color: "White"
                 font.family: centuryGothic.name

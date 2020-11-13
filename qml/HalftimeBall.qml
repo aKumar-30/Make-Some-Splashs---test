@@ -8,7 +8,7 @@ Item {
 //        id: plusOneText
 //        text: "+1"
 //        font.bold: true
-//        font.pointSize: 13
+//        font.pointSize: 2* 13
 //        color: "white"
 //    }
 //    ParallelAnimation{
