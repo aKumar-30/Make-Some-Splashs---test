@@ -170,7 +170,7 @@ Page {
         id: remainingTimeBox
         anchors.centerIn: parent
         width:height
-        height: remainingTimeBoxText.implicitHeight+90
+        height: remainingTimeBoxText.implicitHeight+30
         color: "black"
         z:200
         opacity: 0.4
@@ -182,7 +182,7 @@ Page {
             font.family: geniso.name
             font.bold: true
             text: timeRemaining
-            font.pointSize: textMultiplier* 150
+            font.pointSize: textMultiplier* 120
             color: "white"
         }
     }
@@ -210,7 +210,7 @@ Page {
                 id: totalRewardsBoxText
                 font.family: geniso.name
                 font.bold: true
-                font.pointSize: textMultiplier* 40
+                font.pointSize: textMultiplier* 50
                 color: "white"
             }
             Row{
@@ -225,14 +225,14 @@ Page {
                     text: value
                     font.family: geniso.name
                     font.bold: true
-                    font.pointSize: textMultiplier* 90
+                    font.pointSize: textMultiplier* 85
                     color: "white"
                 }
                 Text{
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "extra points"
+                    text: " extra points"
                     font.family: geniso.name
-                    font.pointSize: textMultiplier* 20
+                    font.pointSize: textMultiplier* 25
                     color: "white"
                 }
             }

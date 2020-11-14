@@ -37,8 +37,8 @@ Page {
     property var manyMisses : 0;
     property var manyMakes: 0;
     property var extraPoints: 0;
-    property int level: 1;
-    property int levelIndicator: 1
+    property int level: 2;
+    property int levelIndicator: 18
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
     property var levelIndicatorDown: (level!==3)?((level!==1)?20-levelIndicator:18-levelIndicator):(45-levelIndicator)
@@ -652,7 +652,7 @@ Page {
         id: explanationTutorialText
         text: "Click anywhere in the white"
         wrapMode: Text.Wrap
-        font.pointSize: 2* 14
+        font.pointSize: textMultiplier* 14
         color: "black"
         font.bold: true
         font.family: centuryGothic.name
@@ -750,7 +750,7 @@ Page {
         color: "yellow"
         Text{
             id: onSunLevelText
-            font.pointSize: 2* 22
+            font.pointSize: textMultiplier* 22
             text: "Level: " + level;
             anchors.centerIn: parent
             color: "black"
@@ -761,7 +761,7 @@ Page {
         }
         Text{
             id: onSunLevelText1
-            font.pointSize: 2* 23
+            font.pointSize: textMultiplier* 23
             text: levelIndicatorDown;
             y: onSunLevelText.y+onSunLevelText.height+5
             color: "black"
@@ -786,7 +786,7 @@ Page {
                 text: theText
                 font.family: stencil.name
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 2*21
+                font.pointSize: textMultiplier*21
             }
         }
     }
@@ -910,7 +910,7 @@ Page {
         wrapMode: Label.Wrap
         x: parent.width - width-20
         y: 20
-        font.pointSize: 2* 22
+        font.pointSize: textMultiplier* 22
         visible: false
     }
     //level animation/rectangle
@@ -928,7 +928,7 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             id: levelRectangleText1
             text: "Level " + level
-            font.pointSize: 2* 1;
+            font.pointSize: textMultiplier* 1;
             font.family: bodoniMTBlack.name
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
@@ -949,7 +949,7 @@ Page {
             }
             id: levelRectangleText
             text: levelTextFunc(level)
-            font.pointSize: 2* 18;
+            font.pointSize: textMultiplier* 18;
             font.family: centuryGothic.name
             wrapMode: Text.Wrap
             width: parent.width-30
@@ -1111,7 +1111,7 @@ Page {
                     color: "White"
                     font.family: centuryGothic.name
                     font.bold: true
-                    font.pointSize: 2* 28
+                    font.pointSize: textMultiplier* 28
                     text:"Continue"
                 }
                 Rectangle{
@@ -1140,7 +1140,7 @@ Page {
                         anchors.verticalCenter: parent.verticalCenter
                         text: "10"
                         font.family: stencil.name
-                        font.pointSize: 2*23
+                        font.pointSize: textMultiplier*23
                     }
                 }
             }
@@ -1185,7 +1185,7 @@ Page {
                     color: "White"
                     font.family: centuryGothic.name
                     font.bold: true
-                    font.pointSize: 2* 28
+                    font.pointSize: textMultiplier* 28
 
                     text:"Retry"
                 }
@@ -1246,7 +1246,7 @@ Page {
                 font.family: bodoniMTBlack.name
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: 2* 34
+                font.pointSize: textMultiplier* 34
                 width: parent.width
                 text: "You lost!"
             }
@@ -1254,7 +1254,7 @@ Page {
                 x:10
                 width: parent.width-20
                 font.family: centuryGothic.name
-                font.pointSize: 2* 17.5
+                font.pointSize: textMultiplier* 17.5
                 wrapMode: Text.Wrap
                 text:"     Please try again! Remember 3 missed shots and you are out"
             }
@@ -1270,7 +1270,7 @@ Page {
                     }
                     Text{
                         anchors.centerIn: parent
-                        font.pointSize: 2* 20
+                        font.pointSize: textMultiplier* 20
                         text: "Retry"
                         color: "White"
                         font.family: centuryGothic.name
@@ -1293,7 +1293,7 @@ Page {
                     }
                     Text{
                         anchors.centerIn: parent
-                        font.pointSize: 2* 20
+                        font.pointSize: textMultiplier* 20
                         text: "Quit"
                         color: "White"
                         font.family: centuryGothic.name
@@ -1315,7 +1315,7 @@ Page {
                 //                        color: "#ed912f"
                 //                        text: "RETRY"
                 //                        font.bold: true
-                //                        font.pointSize: 2* 23
+                //                        font.pointSize: textMultiplier* 23
                 //                        anchors.centerIn: parent
                 //                    }
                 //                    onClicked: {
@@ -1333,7 +1333,7 @@ Page {
                 //                    Text{
                 //                        color: "#ed912f"
                 //                        text: "QUIT"
-                //                        font.pointSize: 2* 20
+                //                        font.pointSize: textMultiplier* 20
                 //                        anchors.centerIn: parent
                 //                    }
                 //                    onClicked: {
@@ -1501,7 +1501,7 @@ Page {
             text:"apples are cool"
             rotation: 0
             font.family: snapITC.name
-            font.pointSize: 2* 19
+            font.pointSize: textMultiplier* 19
         }
 
         NumberAnimation {
@@ -1533,7 +1533,7 @@ Page {
             Behavior on value {
                 NumberAnimation { duration: 500; easing.type: Easing.InOutQuad }
             }
-            font.pointSize: 2* 28
+            font.pointSize: textMultiplier* 28
             y: 10
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
@@ -1543,7 +1543,7 @@ Page {
         Text{
             text: "PB: " + personalBest;
             font.family: stencil.name
-            font.pointSize: 2* 20
+            font.pointSize: textMultiplier* 20
             font.bold: true
             anchors.top: pointText.bottom
             anchors.horizontalCenter: parent.horizontalCenter

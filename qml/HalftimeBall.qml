@@ -8,7 +8,7 @@ Item {
 //        id: plusOneText
 //        text: "+1"
 //        font.bold: true
-//        font.pointSize: 2* 13
+//        font.pointSize: textMultiplier* 13
 //        color: "white"
 //    }
 //    ParallelAnimation{
@@ -35,8 +35,8 @@ Item {
         id: mId
         y:0;
         x:Math.floor(Math.random() * (root2.width-width));
-        width: 115
-        height: 115
+        width:140
+        height:140
         source: ballSource
         NumberAnimation{
             onStopped: {
@@ -53,9 +53,9 @@ Item {
         Component.onCompleted: {
             fallingAnim.start()
         }
-        MouseArea{
+        MultiPointTouchArea {
             anchors.fill: parent
-            onClicked: {
+            onPressed: {
                 if(mId.visible&&totalTimeTimer.running){
                     mId.visible=false;
                     root2.ballClicked();

@@ -146,7 +146,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     x:98
                     text: "Music:"
-                    font.pointSize: 2* 22
+                    font.pointSize: textMultiplier* 22
                     font.bold: true
                     id: musicText
                 }
@@ -255,7 +255,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     x:98
                     text: "Sound:"
-                    font.pointSize: 2* 22
+                    font.pointSize: textMultiplier* 22
                     font.bold: true
                     id: soundText
                 }
@@ -336,7 +336,7 @@ Item {
             }
             Text{
                 anchors.centerIn: parent
-                font.pointSize: 2* 20
+                font.pointSize: textMultiplier* 20
                 text: "Ok"
                 color: "White"
                 font.family: centuryGothic.name

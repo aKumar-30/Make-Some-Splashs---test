@@ -35,6 +35,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
+    property real textMultiplier: 1.65;
     id: root
 
 
@@ -547,7 +548,7 @@ GameWindow {
                     color: "#ffffff"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: 2* 36
+                    font.pointSize: textMultiplier* 36
                     text: "Missions"
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
@@ -572,7 +573,7 @@ GameWindow {
                 horizontalAlignment: Text.AlignHCenter
                 color: "#595756"
                 y: header.y+25
-                font.pointSize: 2* 16
+                font.pointSize: textMultiplier* 16
             }
             //Actual model stuff START HERE-----------------------------------
             ListModel{
@@ -784,7 +785,7 @@ GameWindow {
                             font.bold: true
                             font.underline: true
                             horizontalAlignment: Text.AlignHCenter
-                            font.pointSize: 2* 20
+                            font.pointSize: textMultiplier* 20
                             color: "#7ae868"
 
                         }
@@ -813,7 +814,7 @@ GameWindow {
                                     font.bold: true
                                     width: parent.width*2/3+15
                                     wrapMode: Text.Wrap
-                                    font.pointSize: 2* 14
+                                    font.pointSize: textMultiplier* 14
                                     color: "white"
                                     text:description
                                     //description text
@@ -831,7 +832,7 @@ GameWindow {
                                             color: "white"
                                             font.family: centuryGothic.name
                                             font.bold: true
-                                            font.pointSize: 2* 18
+                                            font.pointSize: textMultiplier* 18
                                             text:(currentThings>=neededThings)?(neededThings+"/"+neededThings):(currentThings+"/"+neededThings)
                                         }
                                         background: Rectangle {
@@ -863,7 +864,7 @@ GameWindow {
                                         color: "black"
                                         font.family: centuryGothic.name
                                         font.bold: true
-                                        font.pointSize: 2* 20
+                                        font.pointSize: textMultiplier* 20
                                         text:reward
                                     }
                                     //coin pic
@@ -943,7 +944,7 @@ GameWindow {
                         color: "black"
                         font.family: centuryGothic.name
                         font.bold: true
-                        font.pointSize: 2* 25
+                        font.pointSize: textMultiplier* 25
                         text:"Get"
                     }
                     Rectangle{
@@ -958,7 +959,7 @@ GameWindow {
                         color: "black"
                         font.family: centuryGothic.name
                         font.bold: true
-                        font.pointSize: 2* 25
+                        font.pointSize: textMultiplier* 25
                         text: currentMissionRewards
                     }
                     //coin pic
@@ -1025,7 +1026,7 @@ GameWindow {
             //                        color: "White"
             //                        font.family: centuryGothic.name
             //                        font.bold: true
-            //                        font.pointSize: 2* 30
+            //                        font.pointSize: textMultiplier* 30
             //                        text:"New Missions"
             //                    }
             //                    Rectangle{
@@ -1116,7 +1117,7 @@ GameWindow {
             titleItem: Text{
                 x:165
                 y:8
-                font.pointSize: 2* 25
+                font.pointSize: textMultiplier* 25
                 font.bold: true
                 text:navigationStack.currentPage.title
                 font.family: centuryGothic.name
@@ -1207,7 +1208,7 @@ GameWindow {
                         visible:false
                         id:templateText
                         text:"Personal Best: "
-                        font.pointSize: 2* 20
+                        font.pointSize: textMultiplier* 20
                         font.family: stencil.name
                     }
 
@@ -1217,7 +1218,7 @@ GameWindow {
                         id: mainPBText
                         width: templateText.width+5
                         text: "Personal Best: ";
-                        font.pointSize: 2* 20
+                        font.pointSize: textMultiplier* 20
                         font.family: stencil.name
                         wrapMode: Text.Wrap
                     }
@@ -1227,7 +1228,7 @@ GameWindow {
                         anchors.top:mainPBText.bottom
                         anchors.bottomMargin: 10
                         text: personalBest
-                        font.pointSize: 2* 27
+                        font.pointSize: textMultiplier* 27
                         font.family: stencil.name
                     }
                     radius: 5
@@ -1275,7 +1276,7 @@ GameWindow {
                             text: value
                             font.family: stencil.name
                             horizontalAlignment: Text.AlignHCenter
-                            font.pointSize: 2*21
+                            font.pointSize: textMultiplier*21
                             Behavior on value {
                                 NumberAnimation { duration: 1000; easing.type: Easing.InOutQuad}
                             }
@@ -1286,7 +1287,7 @@ GameWindow {
                 Label {
                     text: "Shoot Hoops!"
                     font.family:impact.name
-                    font.pointSize: 2* 70
+                    font.pointSize: textMultiplier* 70
                     width: 500
                     wrapMode: Label.Wrap
                     y:150
@@ -1311,7 +1312,7 @@ GameWindow {
                         font.family: "Tahoma"
                         font.bold: true
                         style: Text.Raised
-                        font.pointSize: 2* 34
+                        font.pointSize: textMultiplier* 34
                         anchors.centerIn: parent
                     }
                     radius: 50

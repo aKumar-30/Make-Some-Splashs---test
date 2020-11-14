@@ -123,7 +123,7 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             wrapMode: Label.Wrap
-            font.pointSize: 2* 20
+            font.pointSize: textMultiplier* 20
             font.family: bodoniMTBlack.name
         }
 
@@ -138,7 +138,7 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             wrapMode: Label.Wrap
-            font.pointSize: 2* 16.5
+            font.pointSize: textMultiplier* 16.5
             font.family: centuryGothic.name
         }
         Button {
@@ -148,7 +148,7 @@ Item {
             }
             Text{
                 anchors.centerIn: parent
-                font.pointSize: 2* 20
+                font.pointSize: textMultiplier* 20
                 text: "Ok"
                 color: "White"
                 font.family: centuryGothic.name
@@ -173,7 +173,7 @@ Item {
             }
             Text{
                 anchors.centerIn: parent
-                font.pointSize: 2* 20
+                font.pointSize: textMultiplier* 20
                 text: "Cancel"
                 color: "White"
                 font.family: centuryGothic.name
