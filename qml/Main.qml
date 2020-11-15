@@ -35,13 +35,13 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.65;
+    property real textMultiplier: 1.6;
     id: root
 
 
     //these ones used to be from Extra
-    property double volume: 0.0;
-    property double sound: 0.0;
+    property double volume: 0.45;
+    property double sound: 0.9;
     property bool isOpen: false;
     property int numCoins: 5;
     property string ballSource:"../assets/images/basket_ball.png";
@@ -171,7 +171,7 @@ GameWindow {
         id: mMusic1
         source:"../assets/images/mMusic1.wav"
         loops:Audio.Infinite
-        volume: root.volume*4/5
+        volume: root.volume*3/5
         Component.onCompleted: {
             console.log("OUR VOLUME IS>>>>"+mMusic1.volume+volume)
         }
@@ -263,7 +263,7 @@ GameWindow {
     }
     function partUpdatingMissions(){
         if(!firstTimeUpdatingMissions){
-            mMissionModel.remove(mMissionModel.count-1)
+            mMissionModel.remove(17)
         }
         else{
             firstTimeUpdatingMissions=false

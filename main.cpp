@@ -17,7 +17,7 @@
 #include "mytimer.h"
 #include <FelgoApplication>
 #include <QApplication>
-//#include <FelgoLiveClient>
+#include <FelgoLiveClient>
 //FlashingTimer allTheTimeStuff();
 
 //int main(int argc, char *argv[])

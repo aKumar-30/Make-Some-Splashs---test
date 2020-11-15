@@ -41,7 +41,7 @@ Page {
     property int levelIndicator: 18
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
-    property var levelIndicatorDown: (level!==3)?((level!==1)?20-levelIndicator:18-levelIndicator):(45-levelIndicator)
+    property var levelIndicatorDown: (level!==3)?((level!==1)?22-levelIndicator:22-levelIndicator):(45-levelIndicator)
     property var animationWhichIsRunning:1
     property var wasSecRunning: false;
     property var makingStreakColor: "red"
@@ -536,9 +536,9 @@ Page {
         {
             coinProb = 6;
             sliderId.value=100;
-            mDuration-=31 /*42*/
+            mDuration-=41 /*42*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
-            if(levelIndicator > 18)
+            if(levelIndicator > 22)
             {
                 whatToDoForNextLevel()
                 mDuration=1210
@@ -563,12 +563,12 @@ Page {
         else if(level===2)
         {
             coinProb = 4;
-            var options = [Easing.Linear, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.OutCirc, Easing.OutInCirc, Easing.InOutElastic, Easing.OutElastic, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.InBounce, Easing.OutBounce,Easing.InOutBounce, /*Easing.OutInBounce,*/ Easing.BezierCurve]
-            sliderEasingType=options[Math.floor((Math.random() * 28))];
+//            var options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
+//            sliderEasingType=options[Math.floor((Math.random() * 28))];
             sliderId.value=200;
-            mDuration-=22/*39*/;
+            mDuration-=26/*39*/;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
-            if(levelIndicator >20)
+            if(levelIndicator >22)
             {
                 sliderId.enabled=false;
                 if(true){
@@ -599,7 +599,7 @@ Page {
         {
             delayTimer.start()
             coinProb = 4;
-            mPauseAnim.duration-=20;
+            mPauseAnim.duration-=25;
             //clearling the last times random order
             currentRandomOrder5=[];
             //making sure it starts at the first index (index 0);
@@ -1681,8 +1681,8 @@ Page {
                 }
                 manyMisses++;
                 manyMakes=0;
-                points -= 120;
-                pointsThisRound -= 120;
+                points -= level*105;
+                pointsThisRound -= level*105;
                 airBallAnimation.start();
                 feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot better than that", "A complete fail...", "Practice makes perfect...you need practice!"]
                 random_number = Math.floor((Math.random() * 6));
@@ -1755,8 +1755,8 @@ Page {
 
                 manyMisses++;
                 manyMakes=0;
-                points -= 50;
-                pointsThisRound -= 50;
+                points -= level*75;
+                pointsThisRound -= level*75;
                 backboardMissAnimation.start()
                 feedback = ["Well, better than an airball", "Atleast you hit the backboard", "Your NBA hopes are dwindling", "Next time, try to hit the rim", "Might want to start taking some basketball lessons", "Not your worst...", "I think you can do better"]
                 random_number = Math.floor((Math.random() * 6));
@@ -1828,8 +1828,8 @@ Page {
 
                 manyMisses++;
                 manyMakes=0;
-                points -= 20;
-                pointsThisRound -= 20;
+                points -= level*40;
+                pointsThisRound -= level*40;
                 rimMissAnimation.start()
                 feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time", "Good try!", "Close but not there", "Seems like you have started practicing..."]
                 random_number = Math.floor((Math.random() * 5));
@@ -1902,7 +1902,7 @@ Page {
                 manyMakes++;
                 manyMisses=0
                 points +=30*level;
-                pointsThisRound += 30;
+                pointsThisRound += 30*level;
                 backboardAnimation.start()
                 feedback = ["Good shot","A make is a make", "A splash is a splash", "Lucky shot??",  "You can do even better", "Atleast it made"]
                 random_number = Math.floor((Math.random() * 7));
@@ -1975,7 +1975,7 @@ Page {
                 manyMakes++;
                 manyMisses=0
                 points+=50*level
-                pointsThisRound += 50;
+                pointsThisRound += 50*level;
                 rimMakeAnimation.start()
                 feedback = ["I thought that was going to miss", "The rim was on your side", "Looks like you are on a set path to the NBA", "Amazing shot!", "Pretty nice!", "Actually pretty good"]
                 random_number = Math.floor((Math.random() * 5));
@@ -2048,7 +2048,7 @@ Page {
                 manyMakes++;
                 manyMisses=0
                 points+= 110*level
-                pointsThisRound += 110;
+                pointsThisRound += 110*level;
                 splashAnimation.start()
                 feedback = ["Next MVP?","Future NBA champ","The next Steph Curry?", "Splashing it like Klay Thompson?", "What an amazing shot?", "Making some splashes", "All the way from deep?", "Swish!", "Like a true nba player"]
                 random_number = Math.floor((Math.random() * 7));
@@ -2122,7 +2122,7 @@ Page {
                 manyMakes++;
                 manyMisses=0
                 points+= 150*level
-                pointsThisRound +=150;
+                pointsThisRound +=150*level;
                 splashAnimation.start()
                 feedback = ["The GOAT?", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP", "Champion"]
                 random_number = Math.floor((Math.random() * 5));
@@ -2169,21 +2169,21 @@ Page {
                 case 4:tally1.visible =true; tally2.visible =true;
                     tally3.visible =true; tally4.visible =true;
                     flashingScoreText.color = "#523333"
-                    extraPoints=100;
+                    extraPoints=80;
                     points += extraPoints;
                     pointsThisRound +=extraPoints;
                     break;
                 case 5:tally1.visible =true; tally2.visible =true; tally3.visible =true;
                     tally4.visible =true; tally5.visible =true;
                     flashingScoreText.color = "#633434"
-                    extraPoints=120;
+                    extraPoints=100;
                     points += extraPoints;
                     pointsThisRound +=extraPoints;
                     break;
                 case 6:tally1.visible =true; tally2.visible =true; tally3.visible =true;
                     tally4.visible =true; tally5.visible =true; tally6.visible =true;
                     flashingScoreText.color = "#803434"
-                    extraPoints=140;
+                    extraPoints=120;
                     points += extraPoints;
                     pointsThisRound +=extraPoints;
                     break;
@@ -2191,7 +2191,7 @@ Page {
                     tally4.visible =true; tally5.visible =true;
                     tally6.visible =true; tally7.visible =true;
                     flashingScoreText.color = "#a34141"
-                    extraPoints=170;
+                    extraPoints=135;
                     points += extraPoints;
                     pointsThisRound +=extraPoints;
                     break;
@@ -2199,7 +2199,7 @@ Page {
                     tally4.visible =true; tally5.visible =true;
                     tally6.visible =true; tally7.visible =true; tally8.visible =true;
                     flashingScoreText.color = "#d44242"
-                    extraPoints=180;
+                    extraPoints=145;
                     points += extraPoints;
                     pointsThisRound +=extraPoints;
                     break;
@@ -2207,7 +2207,7 @@ Page {
                     tally4.visible =true; tally5.visible =true; tally6.visible =true;
                     tally7.visible =true; tally8.visible =true; tally9.visible =true;
                     flashingScoreText.color = "#ed4747"
-                    extraPoints=190;
+                    extraPoints=155;
                     points += extraPoints;
                     pointsThisRound +=extraPoints;
                     break;
@@ -2216,7 +2216,7 @@ Page {
                     tally7.visible =true; tally8.visible =true;
                     tally9.visible =true; tally10.visible =true;
                     flashingScoreText.color = "#ff0000"
-                    extraPoints=200;
+                    extraPoints=160;
                     points += extraPoints;
                     pointsThisRound +=extraPoints;
                     break;

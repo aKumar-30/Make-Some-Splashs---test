@@ -196,7 +196,7 @@ Page {
         z:200
         opacity: 0.4
         radius:25
-        Column{
+        Row{
             anchors.fill: parent
             anchors.centerIn: parent
             spacing: 25
@@ -213,11 +213,11 @@ Page {
                 font.pointSize: textMultiplier* 40
                 color: "white"
             }
-            Column{
+            Row{
 //                anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 20
                 Text{
-                    property int value: (totalRewardsBox.visible)?(numberOfClicks*15*4/3*6/5):(0)
+                    property int value: (totalRewardsBox.visible)?(numberOfClicks*15*4/3):(0)
                     Behavior on value {
                         NumberAnimation { duration: 900; easing.type: Easing.InOutQuad }
                     }
