@@ -141,10 +141,10 @@ FlashingTimer allTheTimeStuff(){
     QSettings settings;
     SettingsManager dude;
     QDateTime tomorrow=now.addSecs(86399);
-    if(!settings.contains("jamesHarden?1"))
-        dude.writeSettings("jamesHarden?1", tomorrow);
+    if(!settings.contains("wahahaha"))
+        dude.writeSettings("wahahaha?1", tomorrow);
     else{
-        tomorrow = SettingsManager::loadSettings("jamesHarden?1").toDateTime();
+        tomorrow = SettingsManager::loadSettings("wahahaha").toDateTime();
     }
     FlashingTimer joe(tomorrow);
     return joe;
