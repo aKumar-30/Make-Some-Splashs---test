@@ -47,7 +47,7 @@ Item {
             property: "y"
             from: 0
             to: root2.height
-            duration:Math.floor(Math.random() * (1000)+1500);
+            duration:Math.floor(Math.random() * (1200)+1000);
 
         }
         Component.onCompleted: {

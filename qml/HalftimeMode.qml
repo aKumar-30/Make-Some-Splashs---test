@@ -54,7 +54,7 @@ Page {
         Text{
             id: levelRectangleText
             text: "Click the ball to collect it and earn points - this adds on to your game score"
-            font.pointSize: textMultiplier* 25;
+            font.pointSize: textMultiplier* 18;
             font.family: "Century Gothic"
             wrapMode: Text.Wrap
             width: parent.width-30
@@ -152,11 +152,11 @@ Page {
                 sprite = component.createObject(root2);
                 if (sprite === null) {
                     // Error Handling
-//                    console.log("Error creating object");
+                    //                    console.log("Error creating object");
                 }
             } else if (component.status === Component.Error) {
                 // Error Handling
-//                console.log("Error loading component:", component.errorString());
+                //                console.log("Error loading component:", component.errorString());
             }
         }
         component = Qt.createComponent("HalftimeBall.qml");
@@ -213,28 +213,24 @@ Page {
                 font.pointSize: textMultiplier* 40
                 color: "white"
             }
-            Column{
-//                anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 20
-                Text{
-                    property int value: (totalRewardsBox.visible)?(numberOfClicks*15*4/3*6/5):(0)
-                    Behavior on value {
-                        NumberAnimation { duration: 900; easing.type: Easing.InOutQuad }
-                    }
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: value
-                    font.family: geniso.name
-                    font.bold: true
-                    font.pointSize: textMultiplier* 90
-                    color: "white"
+            Text{
+                property int value: (totalRewardsBox.visible)?(numberOfClicks*15*4/3*6/5):(0)
+                Behavior on value {
+                    NumberAnimation { duration: 900; easing.type: Easing.InOutQuad }
                 }
-                Text{
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: "extra points"
-                    font.family: geniso.name
-                    font.pointSize: textMultiplier* 20
-                    color: "white"
-                }
+                anchors.verticalCenter: parent.verticalCenter
+                text: value
+                font.family: geniso.name
+                font.bold: true
+                font.pointSize: textMultiplier* 90
+                color: "white"
+            }
+            Text{
+                anchors.verticalCenter: parent.verticalCenter
+                text: "extra points"
+                font.family: geniso.name
+                font.pointSize: textMultiplier* 20
+                color: "white"
             }
         }
     }
@@ -243,13 +239,13 @@ Page {
         interval: 545
         running: totalTimeTimer.running; repeat: true
         onTriggered:{
-            let b =3;
+            let b =4;
             if(timeRemaining<15)
-                b=4;
+                b=5;
             if(timeRemaining<9)
-                b=5
-            if(timeRemaining<3)
                 b=6
+            if(timeRemaining<3)
+                b=7
             for(let i =0; i < b; i++){
                 createHalftimeBallObjects()
             }

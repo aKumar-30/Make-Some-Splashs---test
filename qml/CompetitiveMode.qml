@@ -37,7 +37,7 @@ Page {
     property var manyMisses : 0;
     property var manyMakes: 0;
     property var extraPoints: 0;
-    property int level: 2;
+    property int level: 1;
     property int levelIndicator: 18
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
@@ -457,7 +457,7 @@ Page {
             shouldBeginThirdLevel=false
         }
     }
-
+    property int easingNumber:-1;
     function whatToDoWhenAnimFinished()
     {
         //variable declaration
@@ -538,7 +538,7 @@ Page {
             sliderId.value=100;
             mDuration-=41 /*42*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
-            if(levelIndicator > 22)
+            if(levelIndicator > 21)
             {
                 whatToDoForNextLevel()
                 mDuration=1210
@@ -563,12 +563,20 @@ Page {
         else if(level===2)
         {
             coinProb = 4;
-//            var options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
-//            sliderEasingType=options[Math.floor((Math.random() * 28))];
+            if(easingNumber < 4 && easingNumber>=0){
+                mDuration -=100
+            }
+
+            var options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
+            easingNumber = Math.floor((Math.random() * 24));
+            if(easingNumber<4){
+                mDuration += 100;
+            }
+            sliderEasingType=options[Math.floor((Math.random() * 28))];
             sliderId.value=200;
             mDuration-=26/*39*/;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
-            if(levelIndicator >22)
+            if(levelIndicator >21)
             {
                 sliderId.enabled=false;
                 if(true){
