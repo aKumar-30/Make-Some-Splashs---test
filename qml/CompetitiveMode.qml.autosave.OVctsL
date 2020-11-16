@@ -156,7 +156,7 @@ Page {
         //Just resetting somethings
         feedbackLabel.visible = false;
         flashingScoreText.color="black"
-        flashingScoreText.visible = false
+        flashingScoreText.visible = false     
         insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
         if(points>personalBest)
         {
@@ -511,7 +511,7 @@ Page {
             insideRectangleMouseArea.enabled=false
             insideTheSliderRectangleMouseArea.enabled=false
             //            retryBox.visible= true;
-            if(!adUsed&&numCoins>10)
+            if(!adUsed)
                 newRetryCircle.visible=true
             //            fadedRED.visible=true;
             else{
@@ -1112,8 +1112,7 @@ Page {
             z:5
             Rectangle{
                 anchors.fill: parent
-//                color: (numCoins>=10)?"#2e8ddb":"#6e7a85"
-                color: "#2e8ddb"
+                color: (numCoins>=10)?"#2e8ddb":"#6e7a85"
             }
             Row{
                 x:10
@@ -2264,7 +2263,7 @@ Page {
             //feedback label
             feedbackLabel.x= Math.random()*(20)+40;
             feedbackLabel.y= Math.random()*(30)+parent.width/2;
-            feedbackLabel.rotation= (Math.random()*80)-40;
+            feedbackLabel.rotation= (Math.random()*70)-35;
             feedbackLabel.visible = true;
             feedbackLabel.text = feedback[random_number];
 
@@ -2298,9 +2297,7 @@ Page {
         MouseArea{
             id: insideRectangleMouseArea
             enabled: false;
-            width: parent.width+20
-            height: parent.height+20
-            anchors.centerIn: parent
+            anchors.fill: parent
             propagateComposedEvents: true
             onClicked: {
                 whatToDoInsideRectangleMA()

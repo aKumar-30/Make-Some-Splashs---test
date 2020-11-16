@@ -92,7 +92,7 @@ Item {
         }
         id: box
         color: "white"
-        border.color: "black"
+//        border.color: "black"
         radius: 9
         anchors.centerIn: parent
         onVisibleChanged: {

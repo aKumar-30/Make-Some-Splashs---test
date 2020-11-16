@@ -54,11 +54,11 @@ Page {
         Text{
             id: levelRectangleText
             text: "Click the ball to collect it and earn points - this adds on to your game score"
-            font.pointSize: textMultiplier* 18;
+            font.pointSize: textMultiplier* 15;
             font.family: "Century Gothic"
             wrapMode: Text.Wrap
             width: parent.width-30
-            y: levelRectangleText1.y+levelRectangleText1.implicitHeight+30
+            y: levelRectangleText1.y+levelRectangleText1.implicitHeight+30+10
             anchors.horizontalCenter: parent.horizontalCenter
             visible:false
         }
@@ -218,7 +218,7 @@ Page {
                 Behavior on value {
                     NumberAnimation { duration: 900; easing.type: Easing.InOutQuad }
                 }
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
                 text: value
                 font.family: geniso.name
                 font.bold: true
@@ -226,7 +226,7 @@ Page {
                 color: "white"
             }
             Text{
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
                 text: "extra points"
                 font.family: geniso.name
                 font.pointSize: textMultiplier* 20

@@ -134,8 +134,8 @@ Canvas {
         z:15
     }
     Image{
-        anchors.right: parent.right
-        anchors.rightMargin: 15
+        anchors.top: parent.right
+        anchors.topMargin: 15
         anchors.left: parent.left
         anchors.leftMargin: 15
         width: 50

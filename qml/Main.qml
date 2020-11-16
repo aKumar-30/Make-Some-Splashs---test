@@ -35,7 +35,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.6;
+    property real textMultiplier: 1;
     id: root
 
 
@@ -50,6 +50,7 @@ GameWindow {
     property string miniStore:""
     property string myMissionsRn:""
     property string endingPage: ""
+    property bool firstTimeEVER: true;
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
@@ -102,7 +103,23 @@ GameWindow {
                 settings.setValue("myMissionsRn", myMissionsRn);
             else
                 myMissionsRn = settings.getValue("myMissionsRn");
-
+            //other settings (mostly one time)
+            //save counter 14
+            if(!settings.getValue("counter14"))
+                settings.setValue("counter14", counter14);
+            else
+                counter14 = settings.getValue("counter14");
+            //save firstTimeUpdatingMissions
+            if(!settings.getValue("firstTimeUpdatingMissions"))
+                settings.setValue("firstTimeUpdatingMissionsfirstTimeUpdatingMissions", myMissionsRn);
+            else
+                firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
+            //save firstTimeEVER
+            if(!settings.getValue("firstTimeEVER"))
+                settings.setValue("firstTimeEVER", firstTimeEVER);
+            else
+                firstTimeEVER = settings.getValue("firstTimeEVER");
+            aboutDialog.visible=firstTimeEVER
             //other stuff
             mMusic1.play()
             if ( datastore) {
@@ -124,6 +141,8 @@ GameWindow {
             }
         }
         Component.onDestruction: {
+            //for how to play not popping up every time
+            firstTimeEVER= false;
             counter14Changed();
             mMusic1.stop()
             storeForSettings();
@@ -133,6 +152,10 @@ GameWindow {
             datamodel =  JSON.stringify(datamodel)
             settings.setValue("datastore", datamodel)
 
+
+            settings.setValue("counter14", root.counter14);
+            settings.setValue("firstTimeUpdatingMissions", root.firstTimeUpdatingMissions);
+            settings.setValue("firstTimeEVER", root.firstTimeEVER);
             settings.setValue("volume", root.volume);
             settings.setValue("sound", sound);
             settings.setValue("coins", numCoins);
@@ -167,11 +190,10 @@ GameWindow {
             modal: true
         }
     }
-    Audio{
+    BackgroundMusic{
         id: mMusic1
         source:"../assets/images/mMusic1.wav"
-        loops:Audio.Infinite
-        volume: root.volume*3/5
+        volume: root.volume*4/7
         Component.onCompleted: {
             console.log("OUR VOLUME IS>>>>"+mMusic1.volume+volume)
         }
@@ -466,7 +488,7 @@ GameWindow {
         height: mainScene.height
         anchors.centerIn: mainScene
         z:10
-        visible: false
+        visible:false
         onVisibleChanged: {
             if(visible)
                 myDialog2.show()
@@ -1469,10 +1491,5 @@ GameWindow {
         id: halftimeModeComponent
         HalftimeMode{
         }
-    }
-    Settings{
-        id: something
-        property alias couRnterNRumber1RR4: root.counter14
-        property alias firstRTimeUpdatiRRsionsSettiTngs: root.firstTimeUpdatingMissions
     }
 }
