@@ -69,13 +69,13 @@ Item {
         anchors.centerIn: parent
         onVisibleChanged: {
             if(visible){
-                isOpen = true;
+                Extra.isOpen = true;
             }
             else{
                 settingsDialog.visible=false
+                Extra.isOpen = false;
                 root.volume=volumeSlider.volume
                 sound=soundSlider.sound
-                isOpen = false;
             }
         }
 

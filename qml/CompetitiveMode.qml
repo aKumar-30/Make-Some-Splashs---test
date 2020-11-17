@@ -38,7 +38,7 @@ Page {
     property var manyMakes: 0;
     property var extraPoints: 0;
     property int level: 1;
-    property int levelIndicator: 18
+    property int levelIndicator: 0
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
     property var levelIndicatorDown: (level!==3)?((level!==1)?22-levelIndicator:22-levelIndicator):(45-levelIndicator)
@@ -449,7 +449,7 @@ Page {
             width: 552*4/5*1.45
             height: 452*4/5*1.45
             anchors.centerIn: parent
-            source: "../assets/images/pauseButton.png"
+            source: "../assets/images/symbols/pause.png"
         }
     }
     onShouldStartThirdLevelChanged: {
@@ -685,7 +685,7 @@ Page {
         height: 600*1/6*1.6;
         x: insideContainerId.x+insideContainerId.width/2-width/2
         y: insideContainerId.y+50-height;
-        source: "../assets/images/pointingPicture.png"
+        source: "../assets/images/symbols/pointingPicture.png"
         onVisibleChanged: {
             //start the animation once it is visible
             pointingFingerAnim.start()
@@ -742,7 +742,7 @@ Page {
     Image{
         z:4
         id: rim
-        source: "../assets/images/basketballHoop2.png"
+        source: "../assets/images/basketballHoop.png"
         anchors.right: backboard.left
         y: backboard.y+(backboard.height*2/3)
         width: 150*1.38
@@ -918,8 +918,8 @@ Page {
         z: 2
         width: 250
         wrapMode: Label.Wrap
-//        x: parent.width - width-20
-//        y: 20
+        //        x: parent.width - width-20
+        //        y: 20
         x: 60
         y:parent.width/2+15
         font.pointSize: textMultiplier* 22
@@ -1112,7 +1112,7 @@ Page {
             z:5
             Rectangle{
                 anchors.fill: parent
-//                color: (numCoins>=10)?"#2e8ddb":"#6e7a85"
+                //                color: (numCoins>=10)?"#2e8ddb":"#6e7a85"
                 color: "#2e8ddb"
             }
             Row{
@@ -1132,13 +1132,13 @@ Page {
                     height: 2*1.3
                     color: "transparent"
                 }
-//                //video pic
-//                Image{
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    width: 50*1.3
-//                    height: 35*1.3
-//                    source: "../assets/images/PlayAdVideo.png"
-//                }
+                //                //video pic
+                //                Image{
+                //                    anchors.verticalCenter: parent.verticalCenter
+                //                    width: 50*1.3
+                //                    height: 35*1.3
+                //                    source: "../assets/images/PlayAdVideo.png"
+                //                }
                 //coin pic
                 Row{
                     anchors.verticalCenter: parent.verticalCenter
@@ -1373,8 +1373,8 @@ Page {
     //All three of the x's
     Row{
         id: threeMissesX
-//        anchors.bottom: scoreId.top
-//        x: scoreId.x +35
+        //        anchors.bottom: scoreId.top
+        //        x: scoreId.x +35
         anchors.top: parent.top
         anchors.topMargin: 15
         anchors.right: parent.right
@@ -1384,21 +1384,21 @@ Page {
             id: x1
             height: 45*1.4;
             width: 30*1.4;
-            source: "../assets/images/xSymbol.png"
+            source: "../assets/images/symbols/curvedX.png"
         }
         Image{
             visible: false
             id: x2
             height: 45*1.4;
             width: 30*1.4;
-            source: "../assets/images/xSymbol.png"
+            source: "../assets/images/symbols/curvedX.png"
         }
         Image{
             visible: false
             id: x3
             height: 45*1.4;
             width: 30*1.4;
-            source: "../assets/images/xSymbol.png"
+            source: "../assets/images/symbols/curvedX.png"
         }
     }
     //All ten of the lines
@@ -1411,7 +1411,7 @@ Page {
             id: tally1
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
+            source: "../assets/images/symbols/tallyMark.png"
         }
         Image{
             visible: false
@@ -1420,85 +1420,85 @@ Page {
             //            width: 10;
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"        }
-        Image{
-            visible: false
-            id: tally3
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
-        }
-        Image{
-            visible: false;
-            id: tally4
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally5
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
-            transform: Rotation{
-                id: rotateImagePhoto
-                angle: 326
-                origin.x: tally5.width/2
-                origin.y: tally5.height
+            source: "../assets/images/symbols/tallyMark.png"
+            Image{
+                visible: false
+                id: tally3
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
             }
-        }
-        Image{
-            visible: false
-            id: tally6
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
-        }
-        Image{
-            visible: false;
-            id: tally7
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally8
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally9
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally10
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/oneTallyMark.png"
-            transform: Rotation{
-                id: rotateImagePhoto2
-                angle: 326
-                origin.x: tally10.width/2
-                origin.y: tally10.height
+            Image{
+                visible: false;
+                id: tally4
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
             }
-        }
-        Image{
-            anchors.verticalCenter: parent.verticalCenter
-            visible: false
-            id: plus11
-            height: 40*1.3;
-            width: 40*1.3;
-            source: "../assets/images/plusSign.png"
+            Image{
+                visible: false
+                id: tally5
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+                transform: Rotation{
+                    id: rotateImagePhoto
+                    angle: 326
+                    origin.x: tally5.width/2
+                    origin.y: tally5.height
+                }
+            }
+            Image{
+                visible: false
+                id: tally6
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+            }
+            Image{
+                visible: false;
+                id: tally7
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+            }
+            Image{
+                visible: false
+                id: tally8
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+            }
+            Image{
+                visible: false
+                id: tally9
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+            }
+            Image{
+                visible: false
+                id: tally10
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+                transform: Rotation{
+                    id: rotateImagePhoto2
+                    angle: 326
+                    origin.x: tally10.width/2
+                    origin.y: tally10.height
+                }
+            }
+            Image{
+                anchors.verticalCenter: parent.verticalCenter
+                visible: false
+                id: plus11
+                height: 40*1.3;
+                width: 40*1.3;
+                source: "../assets/images/symbols/plus.png"
+            }
         }
     }
-
     //Score and PB rectangle
     Rectangle{
         id: flashingScore
@@ -1917,7 +1917,7 @@ Page {
                 }
 
                 manyMakes++;
-//                manyMisses=0
+                //                manyMisses=0
                 points +=30*level;
                 pointsThisRound += 30*level;
                 backboardAnimation.start()
@@ -1990,7 +1990,7 @@ Page {
                 }
 
                 manyMakes++;
-//                manyMisses=0
+                //                manyMisses=0
                 points+=50*level
                 pointsThisRound += 50*level;
                 rimMakeAnimation.start()
@@ -2063,7 +2063,7 @@ Page {
                 }
 
                 manyMakes++;
-//                manyMisses=0
+                //                manyMisses=0
                 points+= 110*level
                 pointsThisRound += 110*level;
                 splashAnimation.start()
@@ -2137,7 +2137,7 @@ Page {
                 }
 
                 manyMakes++;
-//                manyMisses=0
+                //                manyMisses=0
                 points+= 150*level
                 pointsThisRound +=150*level;
                 splashAnimation.start()
@@ -2161,9 +2161,9 @@ Page {
                         counter8++;
                     }
                 }
-//                x1.visible=false;
-//                x2.visible=false;
-//                x3.visible=false;
+                //                x1.visible=false;
+                //                x2.visible=false;
+                //                x3.visible=false;
                 //Brighten the color of the score box text on the bottom left
                 switch(manyMakes){
                 case 1: tally1.visible =true;
@@ -3137,3 +3137,4 @@ Page {
         ]
     }
 }
+

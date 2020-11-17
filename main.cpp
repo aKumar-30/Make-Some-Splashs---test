@@ -5,7 +5,6 @@
 #include <QQuickStyle>
 #include <QIcon>
 #include <QQmlContext>
-#include <QDebug>
 #include "extras.h"
 #include <QQuickView>
 #include "settingsmanager.h"

@@ -187,7 +187,7 @@ Page {
         height: width
         anchors.bottom: buttonFadeRect.top
         anchors.horizontalCenter: parent.horizontalCenter
-        source: "../assets/images/lockSign.png"
+        source: "../assets/images/symbols/lockSign.png"
     }
     //    Dialog {
     //        id: customDialog
@@ -290,50 +290,50 @@ Page {
             index:0
             isBought: false
             type: "regularBall";
-            name: "Normal Ball"
-            picSource: "../assets/images/basket_ball.png"
+            name: "Basketball"
+            picSource: "../assets/images/balls/basketBall.png"
             price: 0;
         } ListElement{
             index:1
             isBought: false
             type: "blueBall";
             name: "Blue"
-            picSource: "../assets/images/blueBall.png"
+            picSource: "../assets/images/balls/blueBall.png"
             price: 5
         } ListElement{
             index:2
             isBought: false
             type: "greenBall";
             name: "Green"
-            picSource: "../assets/images/greenBall.png";
+            picSource: "../assets/images/balls/greenBall.png";
             price: 10
         } ListElement{
             index:3
             isBought: false
             type: "redBall";
             name: "Red"
-            picSource: "../assets/images/redBall.png"
+            picSource: "../assets/images/balls/redBall.png"
             price: 15
         }ListElement{
             index:4
             isBought: false
             type: "tennisBall";
             name: "Tennis Ball"
-            picSource: "../assets/images/tennis_ball.png"
+            picSource: "../assets/images/balls/tennisBall.png"
             price: 15
         }ListElement{
             index:5
             isBought: false
             type: "soccerBall";
             name: "Soccer Ball"
-            picSource: "../assets/images/soccer_ball.png"
+            picSource: "../assets/images/balls/soccerBall.png"
             price: 20
         }ListElement{
             index:6
             isBought: false
             type: "bowlingBall";
             name: "Bowling Ball"
-            picSource: "../assets/images/bowling_ball.png"
+            picSource: "../assets/images/balls/bowlingBall.png"
             price: 30
 
         }ListElement{
@@ -341,7 +341,7 @@ Page {
             isBought: false
             type: "volleyBall";
             name: "Volley Ball"
-            picSource: "../assets/images/volley_ball.png"
+            picSource: "../assets/images/balls/volleyBall.png"
             price: 30
         }
         ListElement{
@@ -349,80 +349,80 @@ Page {
             isBought: false
             type: "Cookie";
             name: "The Cookie"
-            picSource: "../assets/images/cookieBall.png"
-            price: 40
+            picSource: "../assets/images/balls/cookieBall.png"
+            price: 35
         }
         ListElement{
             index:9
             isBought: false
-            type: "Pancake";
-            name: "The Pancake"
-            picSource: "../assets/images/pancakeBall.png"
-            price: 50
+            type: "Waffle";
+            name: "The Waffle"
+            picSource: "../assets/images/balls/waffleBall.png"
+            price: 40
         }
         ListElement{
             index:10
             isBought: false
             type: "Tire";
             name: "The Tire"
-            picSource: "../assets/images/tire_ball.png"
-            price: 50
+            picSource: "../assets/images/balls/tireBall.png"
+            price: 40
         }
         ListElement{
             index:11
             isBought: false
             type: "Donut";
             name: "The Donut"
-            picSource: "../assets/images/donut_ball.png"
-            price: 62
+            picSource: "../assets/images/balls/donutBall.png"
+            price: 45
         }
         ListElement{
             index:12
             isBought: false
             type: "Coin";
             name: "The Coin"
-            picSource: "../assets/images/coin.png"
-            price: 62
-        }
-        ListElement{
-            index:13
-            isBought: false
-            type: "Dartboard";
-            name: "The Dartboard"
-            picSource: "../assets/images/dartBoardBall.png"
-            price: 70
+            picSource: "../assets/images/balls/coinBall.png"
+            price: 50
         }
         ListElement{
             index:14
             isBought: false
             type: "clock";
             name: "The Clock"
-            picSource: "../assets/images/clockBall.png"
-            price: 70
+            picSource: "../assets/images/balls/clockBall.png"
+            price: 50
+        }
+        ListElement{
+            index:13
+            isBought: false
+            type: "Dartboard";
+            name: "The Dartboard"
+            picSource: "../assets/images/balls/dartboardBall.png"
+            price: 60
         }
         ListElement{
             index:15
             isBought: false
             type: "Earth";
             name: "The Earth"
-            picSource: "../assets/images/earth.png"
-            price: 80
+            picSource: "../assets/images/balls/earthBall.png"
+            price: 70
         }
         ListElement{
             index:16
             isBought: false
             type: "moon";
             name: "The Moon"
-            picSource: "../assets/images/moon.png"
-            price: 80
+            picSource: "../assets/images/balls/moonBall.png"
+            price: 70
         }
         ListElement{
             index:17
             isBought: false
             type: "white";
             name: "The White"
-            picSource: "../assets/images/theGreatWhiteCircle.png"
-            price: 500
+            picSource: "../assets/images/balls/whiteCircle.png"
+            price: 300
         }
     }
 
@@ -506,7 +506,7 @@ Page {
                 anchors.centerIn: parent
                 width: 120;
                 height: 120;
-                source: "../assets/images/checkMark.png"
+                source: "../assets/images/symbols/checkRounded.png"
             }
             Image{
                 id: theXofDoom
@@ -514,7 +514,7 @@ Page {
                 anchors.centerIn: parent
                 width: 120;
                 height: 120;
-                source: "../assets/images/theXOfDoomAndHorror.png"
+                source: "../assets/images/straightX.png"
             }
         }
         focus: true

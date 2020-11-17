@@ -5,6 +5,7 @@ CONFIG += c++11
 # uncomment this line to add the Live Client Module and use live reloading with your custom C++ code
 # for the remaining steps to build a custom Live Code Reload app see here: https://felgo.com/custom-code-reload-app/
 # CONFIG += felgo-live
+CONFIG += resources_big
 # FELGO_PLUGINS += admob
 
 # Project identifier and version

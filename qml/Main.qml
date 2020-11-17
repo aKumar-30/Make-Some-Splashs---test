@@ -35,14 +35,13 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1;
+    property real textMultiplier: 1.54;
     id: root
 
 
     //these ones used to be from Extra
-    property double volume: 0.45;
-    property double sound: 0.9;
-    property bool isOpen: false;
+    property double volume: 0.55;
+    property double sound: 0.93;
     property int numCoins: 5;
     property string ballSource:"../assets/images/basket_ball.png";
     property int personalBest: 0;
@@ -63,7 +62,6 @@ GameWindow {
                 settings.setValue("volume", root.volume);
             }
             else{
-                console.log("root.volume is "+root.volume)
                 root.volume = settings.getValue("volume");
             }
             //save sound
@@ -75,7 +73,6 @@ GameWindow {
             if(!settings.getValue("coins"))
                 settings.setValue("coins", numCoins);
             else{
-                console.log("settings.getValue(coins) is"+settings.getValue("coins"))
                 numCoins = settings.getValue("coins");
             }
             //save ball source
@@ -89,14 +86,12 @@ GameWindow {
             }
             else{
                 personalBest = settings.getValue("personalBest");
-                console.log("I AM IN THE ELSE STATEMENT AND EVERYTHING IS CHILLIN HERE IS PB: "+personalBest)
             }
             //save datastore
             if(!settings.getValue("datastore"))
                 settings.setValue("datastore", datastore);
             else{
                 datastore = settings.getValue("datastore");
-                console.log("DATASTORE IS COOL + " + datastore)
             }
             //save myMissionsRn
             if(!settings.getValue("myMissionsRn"))
@@ -153,10 +148,10 @@ GameWindow {
             settings.setValue("datastore", datamodel)
 
 
-            settings.setValue("counter14", root.counter14);
-            settings.setValue("firstTimeUpdatingMissions", root.firstTimeUpdatingMissions);
-            settings.setValue("firstTimeEVER", root.firstTimeEVER);
-            settings.setValue("volume", root.volume);
+            settings.setValue("counter14", counter14);
+            settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
+            settings.setValue("firstTimeEVER", firstTimeEVER);
+            settings.setValue("volume", volume);
             settings.setValue("sound", sound);
             settings.setValue("coins", numCoins);
             settings.setValue("ballSource", ballSource);
@@ -192,11 +187,8 @@ GameWindow {
     }
     BackgroundMusic{
         id: mMusic1
-        source:"../assets/images/mMusic1.wav"
-        volume: root.volume*4/7
-        Component.onCompleted: {
-            console.log("OUR VOLUME IS>>>>"+mMusic1.volume+volume)
-        }
+        source:"../assets/sounds/backgroundMusic.wav"
+        volume: root.volume*6/11
     }
     //    SettingsManager{
     //        id: s_manager
@@ -1395,7 +1387,7 @@ GameWindow {
                             anchors.centerIn: parent
                             width: 115
                             height: 115
-                            source: "../assets/images/shopIcon.png"
+                            source: "../assets/images/symbols/shop.png"
                         }
                         MouseArea{
                             anchors.fill: parent
@@ -1429,7 +1421,7 @@ GameWindow {
                             anchors.centerIn: parent
                             width: 115
                             height: 115
-                            source: "../assets/images/missionsIcon.png"
+                            source: "../assets/images/symbols/missions.png"
                         }
                         Rectangle{
                             visible: thePauseTimer.running
@@ -1480,11 +1472,6 @@ GameWindow {
     Component{
         id: gameStoreComponent
         GameStore{
-        }
-    }
-    Component{
-        id: customizationModeComponent
-        CustomizationMode{
         }
     }
     Component{
