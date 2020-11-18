@@ -43,7 +43,7 @@ GameWindow {
     property double volume: 0.55;
     property double sound: 0.93;
     property int numCoins: 5;
-    property string ballSource:"../assets/images/balls/basketBall.png";
+    property string ballSource:"../assets/images/basket_ball.png";
     property int personalBest: 0;
     property string datastore: "";
     property string miniStore:""
@@ -57,8 +57,6 @@ GameWindow {
         id: settings
         Component.onCompleted: {
             //            settings.clearAll()
-            //other stuff
-            mMusic1.play()
             //save volume
             if(!settings.getValue("volume")){
                 settings.setValue("volume", root.volume);
@@ -118,6 +116,8 @@ GameWindow {
                 firstTimeEVER = settings.getValue("firstTimeEVER");
             aboutDialog.visible=firstTimeEVER
             firstTimeEVER=false;
+            //other stuff
+            mMusic1.play()
             if ( datastore) {
                 mMissionModel.clear()
                 var datamodel = JSON.parse(datastore)
@@ -186,16 +186,18 @@ GameWindow {
             modal: true
         }
     }
+    BackgroundMusic{
+        id: mMusic1
+        source:"../assets/sounds/backgroundMusic.mp3"
+         volume: root.volume*6/11
+    }
+    onVolumeChanged: {
+        console.log("THIS IS VOLUME WHOOOHHHOOOO"+volume)
+    }
 
     //    SettingsManager{
     //        id: s_manager
     //    }
-    Audio{
-        id: mMusic1
-        source:"../assets/sounds/backgroundMusic.mp3"
-        volume: root.volume*6/11
-        loops: Audio.Infinite
-    }
     //may no longer be used
     Connections{
         target: Extra;

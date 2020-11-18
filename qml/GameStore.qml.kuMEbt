@@ -514,7 +514,7 @@ Page {
                 anchors.centerIn: parent
                 width: 120;
                 height: 120;
-                source: "../assets/images/symbols/straightX.png"
+                source: "../assets/images/straightX.png"
             }
         }
         focus: true

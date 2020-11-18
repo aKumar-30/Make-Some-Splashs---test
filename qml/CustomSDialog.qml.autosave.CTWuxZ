@@ -72,7 +72,7 @@ Item {
                 Extra.isOpen = true;
             }
             else{
-                settingsDialog.visible=false
+                settingsDialog.visible=false                
                 Extra.isOpen = false;
                 root.volume=volumeSlider.volume
                 sound=soundSlider.sound
@@ -153,8 +153,8 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
                         console.log("VALUE IS "+value)
-                        if(!delayTimerVolume.running)
-                            delayTimerVolume.start()
+                        if(!delayTimer.running)
+                        delayTimer.start()
                         x=musicText.width+musicText.x+18
                     }
                     x:musicText.width+musicText.x+18
@@ -261,8 +261,8 @@ Item {
                 AppSlider {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
-                        if(!delayTimerVolume.running)
-                        delayTimerVolume.start()
+                        if(!delayTimer.running)
+                        delayTimer.start()
                         x=soundText.width+soundText.x+18
                     }
                     x:soundText.width+soundText.x+18

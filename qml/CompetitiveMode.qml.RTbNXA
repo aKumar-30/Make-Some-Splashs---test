@@ -174,29 +174,29 @@ Page {
         //used to be above ended
     }
 
-    //    //sound effects start here - mvp
-    //    NumberAnimation {
-    //        id: fadeIn
-    //        target: mvpSoundEffect
-    //        property: "volume"
-    //        from:0.0
-    //        to:0.8*volume
-    //        duration: 300
-    //        easing.type: Easing.Linear
-    //    }
-    //    NumberAnimation {
-    //        id: fadeOut
-    //        target: mvpSoundEffect
-    //        property: "volume"
-    //        from:0.8*volume
-    //        to:0.001*volume
-    //        duration: 300
-    //        easing.type: Easing.Linear
-    //        onFinished:{
-    //            mvpSoundEffect.stop()
-    //            mvpSoundEffect.volume=0.0
-    //        }
-    //    }
+//    //sound effects start here - mvp
+//    NumberAnimation {
+//        id: fadeIn
+//        target: mvpSoundEffect
+//        property: "volume"
+//        from:0.0
+//        to:0.8*volume
+//        duration: 300
+//        easing.type: Easing.Linear
+//    }
+//    NumberAnimation {
+//        id: fadeOut
+//        target: mvpSoundEffect
+//        property: "volume"
+//        from:0.8*volume
+//        to:0.001*volume
+//        duration: 300
+//        easing.type: Easing.Linear
+//        onFinished:{
+//            mvpSoundEffect.stop()
+//            mvpSoundEffect.volume=0.0
+//        }
+//    }
     property bool mvpSoundEffectPlaying: false
     Audio{
         id: mvpSoundEffect
@@ -495,10 +495,10 @@ Page {
 
         //general check
         flashingScoreText.opacity=0;
-        //        if(mvpSoundEffectPlaying){
-        //            fadeOut.start();
-        //            mvpSoundEffectPlaying=false
-        //        }
+//        if(mvpSoundEffectPlaying){
+//            fadeOut.start();
+//            mvpSoundEffectPlaying=false
+//        }
         //Check if three misses- if game is over
         //If you lose it all...
         if(manyMisses==3)
@@ -525,9 +525,9 @@ Page {
         }
         //General thing to do if MAKE for AFTER THE ANIMATION IS FINISHED
         if(manyMakes>0){
-            //            if(manyMakes>=10&&manyMakes%5===0){
-            //                mvpSoundEffect.play()
-            //            }
+//            if(manyMakes>=10&&manyMakes%5===0){
+//                mvpSoundEffect.play()
+//            }
             if(flipable.visible){
                 haveRandomlyChoosenIfCoinAppears=true;
                 coinAnim.start()
@@ -591,10 +591,10 @@ Page {
                     }
                     counter8=0;
                 }
-                //                if(mvpSoundEffectPlaying){
-                //                    fadeOut.start();
-                //                    mvpSoundEffectPlaying=false
-                //                }
+//                if(mvpSoundEffectPlaying){
+//                    fadeOut.start();
+//                    mvpSoundEffectPlaying=false
+//                }
                 //head to halftime yay!
                 onGoToHalftime()
             }
@@ -1369,12 +1369,7 @@ Page {
     //        height: 600*1.3;
     //        width: 515*1.3;
     //    }
-    BackgroundMusic{
-        id: mMusic1
-        source:"../assets/sounds/backgroundMusic.mp3"
-        volume: root.volume*6/11
-        autoPlay: true;
-    }
+
     //All three of the x's
     Row{
         id: threeMissesX
@@ -1426,82 +1421,82 @@ Page {
             height: 250/3.7*1.3;
             width: 37/3.7*1.3;
             source: "../assets/images/symbols/tallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally3
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/symbols/tallyMark.png"
-        }
-        Image{
-            visible: false;
-            id: tally4
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/symbols/tallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally5
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/symbols/tallyMark.png"
-            transform: Rotation{
-                id: rotateImagePhoto
-                angle: 326
-                origin.x: tally5.width/2
-                origin.y: tally5.height
+            Image{
+                visible: false
+                id: tally3
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
             }
-        }
-        Image{
-            visible: false
-            id: tally6
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/symbols/tallyMark.png"
-        }
-        Image{
-            visible: false;
-            id: tally7
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/symbols/tallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally8
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/symbols/tallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally9
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/symbols/tallyMark.png"
-        }
-        Image{
-            visible: false
-            id: tally10
-            height: 250/3.7*1.3;
-            width: 37/3.7*1.3;
-            source: "../assets/images/symbols/tallyMark.png"
-            transform: Rotation{
-                id: rotateImagePhoto2
-                angle: 326
-                origin.x: tally10.width/2
-                origin.y: tally10.height
+            Image{
+                visible: false;
+                id: tally4
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
             }
-        }
-        Image{
-            anchors.verticalCenter: parent.verticalCenter
-            visible: false
-            id: plus11
-            height: 40*1.3;
-            width: 40*1.3;
-            source: "../assets/images/symbols/plus.png"
+            Image{
+                visible: false
+                id: tally5
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+                transform: Rotation{
+                    id: rotateImagePhoto
+                    angle: 326
+                    origin.x: tally5.width/2
+                    origin.y: tally5.height
+                }
+            }
+            Image{
+                visible: false
+                id: tally6
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+            }
+            Image{
+                visible: false;
+                id: tally7
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+            }
+            Image{
+                visible: false
+                id: tally8
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+            }
+            Image{
+                visible: false
+                id: tally9
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+            }
+            Image{
+                visible: false
+                id: tally10
+                height: 250/3.7*1.3;
+                width: 37/3.7*1.3;
+                source: "../assets/images/symbols/tallyMark.png"
+                transform: Rotation{
+                    id: rotateImagePhoto2
+                    angle: 326
+                    origin.x: tally10.width/2
+                    origin.y: tally10.height
+                }
+            }
+            Image{
+                anchors.verticalCenter: parent.verticalCenter
+                visible: false
+                id: plus11
+                height: 40*1.3;
+                width: 40*1.3;
+                source: "../assets/images/symbols/plus.png"
+            }
         }
     }
     //Score and PB rectangle
