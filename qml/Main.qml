@@ -35,12 +35,12 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1;
+    property real textMultiplier: 1.55;
     id: root
 
 
     //these ones used to be from Extra
-    property double volume: 0.55;
+    property double volume: 0.45;
     property double sound: 0.93;
     property int numCoins: 5;
     property string ballSource:"../assets/images/balls/basketBall.png";
