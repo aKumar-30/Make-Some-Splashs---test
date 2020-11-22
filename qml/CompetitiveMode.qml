@@ -538,7 +538,7 @@ Page {
         {
             coinProb = 6;
             sliderId.value=100;
-            mDuration-=41 /*42*/
+            mDuration-=46 /*42*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator > 21)
             {

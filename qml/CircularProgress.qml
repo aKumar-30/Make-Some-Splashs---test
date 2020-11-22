@@ -142,6 +142,33 @@ Canvas {
         height: 50
         source: "../assets/images/coinFrontTranslucent.png"
     }
+    Image{
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 15
+        anchors.left: parent.left
+        anchors.leftMargin: 15
+        width: 50
+        height: 50
+        source: "../assets/images/coinFrontTranslucent.png"
+    }
+    Image{
+        anchors.top: parent.top
+        anchors.topMargin: 15
+        anchors.right: parent.left
+        anchors.rightMargin: 15
+        width: 50
+        height: 50
+        source: "../assets/images/coinFrontTranslucent.png"
+    }
+    Image{
+        anchors.bottom: parent.top
+        anchors.bottomMargin: 15
+        anchors.right: parent.left
+        anchors.rightMargin: 15
+        width: 50
+        height: 50
+        source: "../assets/images/coinFrontTranslucent.png"
+    }
     IconButtonBarItem{
         z:10
         onVisibleChanged: {
