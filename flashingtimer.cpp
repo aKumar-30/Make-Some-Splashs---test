@@ -11,7 +11,7 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
     QDateTime now1 = QDateTime::currentDateTime();
     if(tomorrow<now1){
         while(tomorrow<now1)
-//            tomorrow=tomorrow.addSecs(86399);
+            tomorrow=tomorrow.addSecs(86399);
         emit callUpdateMissions();
     }
     //Intialize the timer
@@ -21,7 +21,7 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         difference = now.secsTo(tomorrow);
         display();
         if(difference == 0){
-//            tomorrow=tomorrow.addSecs(86399);
+            tomorrow=tomorrow.addSecs(86399);
             emit callUpdateMissions();
         }
     });

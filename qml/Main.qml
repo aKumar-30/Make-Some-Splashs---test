@@ -35,7 +35,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1;
+    property real textMultiplier: 1.55;
     id: root
 
 
@@ -56,7 +56,7 @@ GameWindow {
     Storage{
         id: settings
         Component.onCompleted: {
-//                        settings.clearAll()
+            //            settings.clearAll()
             //other stuff
             mMusic1.play()
             //save volume
@@ -108,12 +108,12 @@ GameWindow {
                 counter14 = settings.getValue("counter14");
             //save firstTimeUpdatingMissions
             if(!settings.getValue("firstTimeUpdatingMissions"))
-                settings.setValue("firstTimeUpdatingMissions", myMissionsRn);
+                settings.setValue("firstTimeUpdatingMissionsfirstTimeUpdatingMissions", myMissionsRn);
             else
                 firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
             //save firstTimeEVER
             if(!settings.getValue("firstTimeEVER"))
-                settings.setValue("firstTimeEVER", false);
+                settings.setValue("firstTimeEVER", firstTimeEVER);
             else
                 firstTimeEVER = settings.getValue("firstTimeEVER");
             aboutDialog.visible=firstTimeEVER
@@ -190,25 +190,6 @@ GameWindow {
     //    SettingsManager{
     //        id: s_manager
     //    }
-    Connections {
-           target: Qt.application
-           // Qt.application.state:     0 - mimimized
-           //                           2 - lost focus
-           //                           4 - got focus
-           onStateChanged: {
-
-                if (Qt.application.state === 0) {
-                    mMusic1.pause();
-                }
-                else if (Qt.application.state === 2) {
-
-                    mMusic1.pause()
-                }
-                else if (Qt.application.state === 4) {
-                    mMusic1.play()
-          }
-          }
-    }
     Audio{
         id: mMusic1
         source:"../assets/sounds/backgroundMusic.mp3"

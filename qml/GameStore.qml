@@ -506,7 +506,7 @@ Page {
                 anchors.centerIn: parent
                 width: 120;
                 height: 120;
-                source: "../assets/images/symbols/roundedCheck.png"
+                source: "../assets/images/symbols/checkRounded.png"
             }
             Image{
                 id: theXofDoom
