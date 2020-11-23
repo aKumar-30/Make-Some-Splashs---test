@@ -35,7 +35,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.45;
+    property real textMultiplier: 1;
     id: root
 
 
@@ -223,10 +223,10 @@ GameWindow {
         function onSomethingCompetitiveChanged(){
             navigationStack.pop()
         }
-//        function onGoBackFromHalftime(points1){
-//            navigationStack.pop()
-//            points+=points1
-//        }
+        function onGoBackFromHalftime(points1){
+            navigationStack.pop()
+            points+=points1
+        }
         function onGoToHalftime(){
             navigationStack.push(halftimeModeComponent)
         }

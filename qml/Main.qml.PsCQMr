@@ -35,7 +35,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.45;
+    property real textMultiplier: 1;
     id: root
 
 
@@ -53,114 +53,112 @@ GameWindow {
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
-    Component.onCompleted: {
-//                        settings.clearAll()
-        //other stuff
-        mMusic1.play()
-        //save volume
-        if(!settings.getValue("volume")){
-            console.log("ROOT VOLUME IS>>>>>>>> INSIDE IF STATEMENT"+root.volume)
-            settings.setValue("volume", root.volume);
-        }
-        else{
-            console.log("ROOT VOLUME IS"+root.volume)
-            root.volume = settings.getValue("volume");
-        }
-        //save sound
-        if(!settings.getValue("sound"))
-            settings.setValue("sound", sound);
-        else
-            sound = settings.getValue("sound");
-        //save coins
-        if(!settings.getValue("coins"))
-            settings.setValue("coins", numCoins);
-        else{
-            numCoins = settings.getValue("coins");
-        }
-        //save ball source
-        if(!settings.getValue("ballSource"))
-            settings.setValue("ballSource", ballSource);
-        else
-            ballSource = settings.getValue("ballSource");
-        //save personal best
-        if(!settings.getValue("personalBest")){
-            settings.setValue("personalBest", personalBest);
-        }
-        else{
-            personalBest = settings.getValue("personalBest");
-        }
-        //save datastore
-        if(!settings.getValue("datastore"))
-            settings.setValue("datastore", datastore);
-        else{
-            datastore = settings.getValue("datastore");
-        }
-        //save myMissionsRn
-        if(!settings.getValue("myMissionsRn"))
-            settings.setValue("myMissionsRn", myMissionsRn);
-        else
-            myMissionsRn = settings.getValue("myMissionsRn");
-        //other settings (mostly one time)
-        //save counter 14
-        if(!settings.getValue("counter14"))
-            settings.setValue("counter14", counter14);
-        else
-            counter14 = settings.getValue("counter14");
-        //save firstTimeUpdatingMissions
-        if(!settings.getValue("firstTimeUpdatingMissions"))
-            settings.setValue("firstTimeUpdatingMissions", myMissionsRn);
-        else
-            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
-        //save firstTimeEVER
-        if(!settings.getValue("firstTimeEVER"))
-            settings.setValue("firstTimeEVER", false);
-        else
-            firstTimeEVER = settings.getValue("firstTimeEVER");
-        aboutDialog.visible=firstTimeEVER
-        firstTimeEVER=false;
-        if ( datastore) {
-            mMissionModel.clear()
-            var datamodel = JSON.parse(datastore)
-            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        }
-        if(myMissionsRn){
-            getCurrentMissions()
-        }
-        if(presentMissions.length!==0){
-            displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
-        }
-        else{
-            updateMissions();
-        }
-    }
-    Component.onDestruction: {
-        //for how to play not popping up every time
-        firstTimeEVER= false;
-        counter14Changed();
-        mMusic1.stop()
-        storeForSettings();
-
-        var datamodel = []
-        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-        datamodel =  JSON.stringify(datamodel)
-        settings.setValue("datastore", datamodel)
-
-        console.log("ending ROOT>VOLUME!!!"+root.volume);
-        settings.setValue("counter14", counter14);
-        settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
-        settings.setValue("firstTimeEVER", firstTimeEVER);
-        settings.setValue("volume", volume);
-        settings.setValue("sound", sound);
-        settings.setValue("coins", numCoins);
-        settings.setValue("ballSource", ballSource);
-        settings.setValue("personalBest", personalBest);
-        settings.setValue("myMissionsRn", myMissionsRn);
-    }
     Storage{
         id: settings
+        Component.onCompleted: {
+            //            settings.clearAll()
+            //other stuff
+            mMusic1.play()
+            //save volume
+            if(!settings.getValue("volume")){
+                settings.setValue("volume", root.volume);
+            }
+            else{
+                root.volume = settings.getValue("volume");
+            }
+            //save sound
+            if(!settings.getValue("sound"))
+                settings.setValue("sound", sound);
+            else
+                sound = settings.getValue("sound");
+            //save coins
+            if(!settings.getValue("coins"))
+                settings.setValue("coins", numCoins);
+            else{
+                numCoins = settings.getValue("coins");
+            }
+            //save ball source
+            if(!settings.getValue("ballSource"))
+                settings.setValue("ballSource", ballSource);
+            else
+                ballSource = settings.getValue("ballSource");
+            //save personal best
+            if(!settings.getValue("personalBest")){
+                settings.setValue("personalBest", personalBest);
+            }
+            else{
+                personalBest = settings.getValue("personalBest");
+            }
+            //save datastore
+            if(!settings.getValue("datastore"))
+                settings.setValue("datastore", datastore);
+            else{
+                datastore = settings.getValue("datastore");
+            }
+            //save myMissionsRn
+            if(!settings.getValue("myMissionsRn"))
+                settings.setValue("myMissionsRn", myMissionsRn);
+            else
+                myMissionsRn = settings.getValue("myMissionsRn");
+            //other settings (mostly one time)
+            //save counter 14
+            if(!settings.getValue("counter14"))
+                settings.setValue("counter14", counter14);
+            else
+                counter14 = settings.getValue("counter14");
+            //save firstTimeUpdatingMissions
+            if(!settings.getValue("firstTimeUpdatingMissions"))
+                settings.setValue("firstTimeUpdatingMissions", myMissionsRn);
+            else
+                firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
+            //save firstTimeEVER
+            if(!settings.getValue("firstTimeEVER"))
+                settings.setValue("firstTimeEVER", false);
+            else
+                firstTimeEVER = settings.getValue("firstTimeEVER");
+            aboutDialog.visible=firstTimeEVER
+            firstTimeEVER=false;
+            if ( datastore) {
+                mMissionModel.clear()
+                var datamodel = JSON.parse(datastore)
+                for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+            }
+            if(myMissionsRn){
+                getCurrentMissions()
+            }
+            if(presentMissions.length!==0){
+                displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
+                displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
+                displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
+                displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+            }
+            else{
+                updateMissions();
+            }
+        }
+        Component.onDestruction: {
+            //for how to play not popping up every time
+            firstTimeEVER= false;
+            counter14Changed();
+            mMusic1.stop()
+            storeForSettings();
+
+            var datamodel = []
+            for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
+            datamodel =  JSON.stringify(datamodel)
+            settings.setValue("datastore", datamodel)
+
+
+            settings.setValue("counter14", counter14);
+            settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
+            settings.setValue("firstTimeEVER", firstTimeEVER);
+            settings.setValue("volume", volume);
+            settings.setValue("sound", sound);
+            settings.setValue("coins", numCoins);
+            settings.setValue("ballSource", ballSource);
+            settings.setValue("personalBest", personalBest);
+            settings.setValue("myMissionsRn", myMissionsRn);
+        }
     }
     //font loader
     FontLoader{id: impact; source: "../assets/Fonts/Impact/impact.ttf"}
@@ -223,10 +221,10 @@ GameWindow {
         function onSomethingCompetitiveChanged(){
             navigationStack.pop()
         }
-//        function onGoBackFromHalftime(points1){
-//            navigationStack.pop()
-//            points+=points1
-//        }
+        function onGoBackFromHalftime(points1){
+            navigationStack.pop()
+            points+=points1
+        }
         function onGoToHalftime(){
             navigationStack.push(halftimeModeComponent)
         }
@@ -1342,7 +1340,6 @@ GameWindow {
                     border.color: "red"
                     border.width: 7
                     color: (buttonToPlayGameMouseArea.pressed)?"#44a3f2":"#5db0f5"
-//                    color: (buttonToPlayGameMouseArea.pressed)?"orange":"yellow"
                     Component.onCompleted: {
                         switchToGreenTimer.start()
                     }
@@ -1489,10 +1486,6 @@ GameWindow {
             }
         }
     }
-    Settings{
-        property alias firstTimeEverSettings: root.firstTimeEVER
-    }
-
     Component{
         id: competitiveModeComponent
         CompetitiveMode{

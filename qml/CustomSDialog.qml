@@ -75,7 +75,7 @@ Item {
                 settingsDialog.visible=false
                 Extra.isOpen = false;
                 root.volume=volumeSlider.volume
-                sound=soundSlider.sound
+                root.sound=soundSlider.sound
             }
         }
 
@@ -152,6 +152,7 @@ Item {
                 AppSlider {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
+                        console.log("ROOT>VOLUME"+volume)
                         console.log("VALUE IS "+value)
                         if(!delayTimerVolume.running)
                             delayTimerVolume.start()
@@ -161,7 +162,7 @@ Item {
                     from: 0
                     to: 1
                     handle:Rectangle{
-                        x: volumeSlider.leftPadding + volumeSlider.visualPosition * (volumeSlider.availableWidth - width)
+                        x: volumeSlider.leftPadding  + volumeSlider.visualPosition * (volumeSlider.availableWidth - width)
                         y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
                         implicitWidth: volumeSlider.pressed ? 34: 28
                         implicitHeight: volumeSlider.pressed ? 34: 28
@@ -402,4 +403,8 @@ Item {
             dialog.visible = false
         }
     }
+//    Settings{
+//        property alias settingsVolume: volumeSlider.volume
+//        property alias settingsValue: volumeSlider.value
+//    }
 }

@@ -34,6 +34,10 @@
 //    appy.setApplicationName("Shoot Hoops");
 
 //    QApplication app(argc, argv);
+//    //App information
+//    app.setOrganizationName("shootHoops");
+//    app.setOrganizationDomain("shootHoops.com");
+//    app.setApplicationName("Shoot Hoops");
 //    FelgoApplication felgo;
 //    felgo.setPreservePlatformFonts(true);
 //    QQmlApplicationEngine engine;
@@ -101,12 +105,17 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("shootHoops");
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication appy(argc, argv);
-
-    QApplication app(argc, argv);
     //App information
     appy.setOrganizationName("shootHoops");
     appy.setOrganizationDomain("shootHoops.com");
     appy.setApplicationName("Shoot Hoops");
+
+    QApplication app(argc, argv);
+
+//App information
+app.setOrganizationName("shootHoops");
+app.setOrganizationDomain("shootHoops.com");
+app.setApplicationName("Shoot Hoops");
 
     FelgoApplication felgo;
     //    felgo.setPreservePlatformFonts(true);
@@ -149,7 +158,7 @@ FlashingTimer allTheTimeStuff(){
     return joe;
 }
 
-// Default message handler to be called to bypass all other warnings.
+//// Default message handler to be called to bypass all other warnings.
 //static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
 //// a custom message handler to intercept warnings
 //void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString & msg)

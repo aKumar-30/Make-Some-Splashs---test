@@ -538,7 +538,7 @@ Page {
         {
             coinProb = 6;
             sliderId.value=100;
-            mDuration-=41 /*42*/
+            mDuration-=46 /*41*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator > 21)
             {
@@ -1292,10 +1292,13 @@ Page {
                     height: 115
                     width: 200
                     onClicked: {
+                        afterGameIsActuallyOver()
                         seqAnimationId.stop()
                         levelRectangleAnimation.start()
                         x1.visible=false; x2.visible = false; x3.visible = false;
                         retryBox.visible=false
+                        fadedRED.visible=false
+                        adScreenHappening=false
                         retryScreenHappening=false
                     }
                 }
@@ -1317,6 +1320,12 @@ Page {
                     onClicked: {
                         retryBox.visible=false
                         fadedRED.visible=false
+                        afterGameIsActuallyOver()
+                        seqAnimationId.stop()
+                        levelRectangleAnimation.start()
+                        x1.visible=false; x2.visible = false; x3.visible = false;
+                        adScreenHappening=false
+                        retryScreenHappening=false
                         switchFileSignal()
                     }
                 }
