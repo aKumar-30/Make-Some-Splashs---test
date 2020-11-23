@@ -15,7 +15,7 @@ Page {
     anchors.fill: parent
     function onGoBackFromHalftime(points1){
         navigationStack.pop()
-        Extra.points+=points1
+        points+=points1
         shouldBeginThirdLevel=true
     }
 

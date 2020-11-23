@@ -35,7 +35,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.45;
+    property real textMultiplier: 1;
     id: root
 
 
@@ -54,34 +54,34 @@ GameWindow {
     //        height: 785
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
-//                        settings.clearAll()
+        //                        settings.clearAll()
         //other stuff
         mMusic1.play()
-        //save volume
-        if(!settings.getValue("volume")){
-            console.log("ROOT VOLUME IS>>>>>>>> INSIDE IF STATEMENT"+root.volume)
-            settings.setValue("volume", root.volume);
-        }
-        else{
-            console.log("ROOT VOLUME IS"+root.volume)
-            root.volume = settings.getValue("volume");
-        }
-        //save sound
-        if(!settings.getValue("sound"))
-            settings.setValue("sound", sound);
-        else
-            sound = settings.getValue("sound");
+//        //save volume
+//        if(!settings.getValue("volume")){
+//            console.log("ROOT VOLUME IS>>>>>>>> INSIDE IF STATEMENT"+root.volume)
+//            settings.setValue("volume", root.volume);
+//        }
+//        else{
+//            console.log("ROOT VOLUME IS"+root.volume)
+//            root.volume = settings.getValue("volume");
+//        }
+//        //save sound
+//        if(!settings.getValue("sound"))
+//            settings.setValue("sound", sound);
+//        else
+//            sound = settings.getValue("sound");
         //save coins
         if(!settings.getValue("coins"))
             settings.setValue("coins", numCoins);
         else{
             numCoins = settings.getValue("coins");
         }
-        //save ball source
-        if(!settings.getValue("ballSource"))
-            settings.setValue("ballSource", ballSource);
-        else
-            ballSource = settings.getValue("ballSource");
+//        //save ball source
+//        if(!settings.getValue("ballSource"))
+//            settings.setValue("ballSource", ballSource);
+//        else
+//            ballSource = settings.getValue("ballSource");
         //save personal best
         if(!settings.getValue("personalBest")){
             settings.setValue("personalBest", personalBest);
@@ -152,10 +152,10 @@ GameWindow {
         settings.setValue("counter14", counter14);
         settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
         settings.setValue("firstTimeEVER", firstTimeEVER);
-        settings.setValue("volume", volume);
-        settings.setValue("sound", sound);
+//        settings.setValue("volume", volume);
+//        settings.setValue("sound", sound);
         settings.setValue("coins", numCoins);
-        settings.setValue("ballSource", ballSource);
+//        settings.setValue("ballSource", ballSource);
         settings.setValue("personalBest", personalBest);
         settings.setValue("myMissionsRn", myMissionsRn);
     }
@@ -193,23 +193,23 @@ GameWindow {
     //        id: s_manager
     //    }
     Connections {
-           target: Qt.application
-           // Qt.application.state:     0 - mimimized
-           //                           2 - lost focus
-           //                           4 - got focus
-           onStateChanged: {
+        target: Qt.application
+        // Qt.application.state:     0 - mimimized
+        //                           2 - lost focus
+        //                           4 - got focus
+        onStateChanged: {
 
-                if (Qt.application.state === 0) {
-                    mMusic1.pause();
-                }
-                else if (Qt.application.state === 2) {
+            if (Qt.application.state === 0) {
+                mMusic1.pause();
+            }
+            else if (Qt.application.state === 2) {
 
-                    mMusic1.pause()
-                }
-                else if (Qt.application.state === 4) {
-                    mMusic1.play()
-          }
-          }
+                mMusic1.pause()
+            }
+            else if (Qt.application.state === 4) {
+                mMusic1.play()
+            }
+        }
     }
     Audio{
         id: mMusic1
@@ -223,10 +223,10 @@ GameWindow {
         function onSomethingCompetitiveChanged(){
             navigationStack.pop()
         }
-//        function onGoBackFromHalftime(points1){
-//            navigationStack.pop()
-//            points+=points1
-//        }
+        //        function onGoBackFromHalftime(points1){
+        //            navigationStack.pop()
+        //            points+=points1
+        //        }
         function onGoToHalftime(){
             navigationStack.push(halftimeModeComponent)
         }
@@ -1342,7 +1342,7 @@ GameWindow {
                     border.color: "red"
                     border.width: 7
                     color: (buttonToPlayGameMouseArea.pressed)?"#44a3f2":"#5db0f5"
-//                    color: (buttonToPlayGameMouseArea.pressed)?"orange":"yellow"
+                    //                    color: (buttonToPlayGameMouseArea.pressed)?"orange":"yellow"
                     Component.onCompleted: {
                         switchToGreenTimer.start()
                     }
@@ -1491,6 +1491,13 @@ GameWindow {
     }
     Settings{
         property alias firstTimeEverSettings: root.firstTimeEVER
+        property alias volumeSettings: root.volume
+        property alias soundSettings:root.sound
+        property alias numCoinsSettings: root.numCoins
+        property alias ballSourceSettings:root.ballSource
+        property alias personalBestSettings: root.personalBest
+        property alias datastoreSettings:root.datastore
+        property alias myMissionsRnSettings:root.myMissionsRn
     }
 
     Component{

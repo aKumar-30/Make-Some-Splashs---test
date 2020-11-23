@@ -152,8 +152,7 @@ Item {
                 AppSlider {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
-                        console.log("ROOT>VOLUME"+volume)
-                        console.log("VALUE IS "+value)
+                        root.volume = volumeSlider.volume
                         if(!delayTimerVolume.running)
                             delayTimerVolume.start()
                         x=musicText.width+musicText.x+18
@@ -262,8 +261,9 @@ Item {
                 AppSlider {
                     anchors.verticalCenter: parent.verticalCenter
                     Component.onCompleted:{
+                        root.volume = volumeSlider.volume
                         if(!delayTimerVolume.running)
-                        delayTimerVolume.start()
+                            delayTimerVolume.start()
                         x=soundText.width+soundText.x+18
                     }
                     x:soundText.width+soundText.x+18
@@ -403,8 +403,10 @@ Item {
             dialog.visible = false
         }
     }
-//    Settings{
-//        property alias settingsVolume: volumeSlider.volume
-//        property alias settingsValue: volumeSlider.value
-//    }
+    Settings{
+        property alias volumeSliderValueSettings: volumeSlider.value
+        property alias volumeSliderVolumeSettings: volumeSlider.volume
+        property alias soundSliderValueSettings: soundSlider.value
+        property alias soundSliderSoundSettings: soundSlider.sound
+    }
 }
