@@ -35,7 +35,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1;
+    property real textMultiplier: 1.45;
     id: root
 
 
@@ -50,6 +50,7 @@ GameWindow {
     property string myMissionsRn:""
     property string endingPage: ""
     property bool firstTimeEVER: true;
+    property var bought: ["Normal Ball", "Blue Ball"]
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
@@ -111,11 +112,16 @@ GameWindow {
             settings.setValue("firstTimeUpdatingMissions", myMissionsRn);
         else
             firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
+//        //save firstTimeEVER
+//        if(!settings.getValue("firstTimeEVER"))
+//            settings.setValue("firstTimeEVER", false);
+//        else
+//            firstTimeEVER = settings.getValue("firstTimeEVER");
         //save firstTimeEVER
-        if(!settings.getValue("firstTimeEVER"))
-            settings.setValue("firstTimeEVER", false);
+        if(!settings.getValue("bought"))
+            settings.setValue("bought", bought);
         else
-            firstTimeEVER = settings.getValue("firstTimeEVER");
+            bought = settings.getValue("bought");
         aboutDialog.visible=firstTimeEVER
         firstTimeEVER=false;
         if ( datastore) {
@@ -148,7 +154,6 @@ GameWindow {
         datamodel =  JSON.stringify(datamodel)
         settings.setValue("datastore", datamodel)
 
-        console.log("ending ROOT>VOLUME!!!"+root.volume);
         settings.setValue("counter14", counter14);
         settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
         settings.setValue("firstTimeEVER", firstTimeEVER);
@@ -1498,6 +1503,8 @@ GameWindow {
         property alias personalBestSettings: root.personalBest
         property alias datastoreSettings:root.datastore
         property alias myMissionsRnSettings:root.myMissionsRn
+
+        property alias mBoughtSettings: root.bought
     }
 
     Component{

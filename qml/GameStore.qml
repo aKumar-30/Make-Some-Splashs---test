@@ -18,7 +18,7 @@ Page {
     property int duration: 1000
     id: root
     property var found: true;
-    property var bought: ["Normal Ball", "Blue Ball"]
+//    property var bought: ["Normal Ball", "Blue Ball"]
     property int count: 0;
     property var mName: "";
     property var mSource: "";
@@ -522,7 +522,6 @@ Page {
 
     Settings{
         category: "mySettingsThing5"
-        property alias mBought2: root.bought
         property alias mMName1: root.givenName
     }
 }
