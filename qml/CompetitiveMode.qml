@@ -41,7 +41,7 @@ Page {
     property int levelIndicator: 0
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
-    property var levelIndicatorDown: (level!==3)?((level!==1)?22-levelIndicator:22-levelIndicator):(45-levelIndicator)
+    property var levelIndicatorDown: (level!==3)?((level!==1)?22-4-levelIndicator:22-levelIndicator):(45-levelIndicator)
     property var animationWhichIsRunning:1
     property var wasSecRunning: false;
     property var makingStreakColor: "red"
@@ -540,7 +540,7 @@ Page {
             sliderId.value=100;
             mDuration-=46 /*41*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
-            if(levelIndicator > 21)
+            if(levelIndicator > 21-4)
             {
                 whatToDoForNextLevel()
                 mDuration=1210

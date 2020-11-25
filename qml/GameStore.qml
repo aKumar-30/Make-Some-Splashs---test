@@ -18,7 +18,7 @@ Page {
     property int duration: 1000
     id: root
     property var found: true;
-//    property var bought: ["Normal Ball", "Blue Ball"]
+    property var bought: ["Basketball", "Blue"]
     property int count: 0;
     property var mName: "";
     property var mSource: "";
@@ -50,6 +50,7 @@ Page {
             for(let j = 0; j < contactModel.count; j++){
                 if(bought[k]===contactModel.get(j).name){
                     contactModel.get(j).isBought=true
+                    console.log("contactModel.get(j).isBought=true"+contactModel.get(j).isBought)
                     break;
                 }
             }
@@ -288,14 +289,14 @@ Page {
         id: contactModel
         ListElement{
             index:0
-            isBought: false
+            isBought: true
             type: "regularBall";
             name: "Basketball"
             picSource: "../assets/images/balls/basketBall.png"
             price: 0;
         } ListElement{
             index:1
-            isBought: false
+            isBought: true
             type: "blueBall";
             name: "Blue"
             picSource: "../assets/images/balls/blueBall.png"
@@ -523,6 +524,7 @@ Page {
     Settings{
         category: "mySettingsThing5"
         property alias mMName1: root.givenName
+        property alias mBought: root.bought
     }
 }
 

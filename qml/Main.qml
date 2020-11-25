@@ -50,39 +50,37 @@ GameWindow {
     property string myMissionsRn:""
     property string endingPage: ""
     property bool firstTimeEVER: true;
-    property var bought: ["Normal Ball", "Blue Ball"]
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
-        //                        settings.clearAll()
         //other stuff
         mMusic1.play()
-//        //save volume
-//        if(!settings.getValue("volume")){
-//            console.log("ROOT VOLUME IS>>>>>>>> INSIDE IF STATEMENT"+root.volume)
-//            settings.setValue("volume", root.volume);
-//        }
-//        else{
-//            console.log("ROOT VOLUME IS"+root.volume)
-//            root.volume = settings.getValue("volume");
-//        }
-//        //save sound
-//        if(!settings.getValue("sound"))
-//            settings.setValue("sound", sound);
-//        else
-//            sound = settings.getValue("sound");
+        //        //save volume
+        //        if(!settings.getValue("volume")){
+        //            console.log("ROOT VOLUME IS>>>>>>>> INSIDE IF STATEMENT"+root.volume)
+        //            settings.setValue("volume", root.volume);
+        //        }
+        //        else{
+        //            console.log("ROOT VOLUME IS"+root.volume)
+        //            root.volume = settings.getValue("volume");
+        //        }
+        //        //save sound
+        //        if(!settings.getValue("sound"))
+        //            settings.setValue("sound", sound);
+        //        else
+        //            sound = settings.getValue("sound");
         //save coins
         if(!settings.getValue("coins"))
             settings.setValue("coins", numCoins);
         else{
             numCoins = settings.getValue("coins");
         }
-//        //save ball source
-//        if(!settings.getValue("ballSource"))
-//            settings.setValue("ballSource", ballSource);
-//        else
-//            ballSource = settings.getValue("ballSource");
+        //        //save ball source
+        if(!settings.getValue("ballSource"))
+            settings.setValue("ballSource", ballSource);
+        else
+            ballSource = settings.getValue("ballSource");
         //save personal best
         if(!settings.getValue("personalBest")){
             settings.setValue("personalBest", personalBest);
@@ -112,16 +110,11 @@ GameWindow {
             settings.setValue("firstTimeUpdatingMissions", myMissionsRn);
         else
             firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
-//        //save firstTimeEVER
-//        if(!settings.getValue("firstTimeEVER"))
-//            settings.setValue("firstTimeEVER", false);
-//        else
-//            firstTimeEVER = settings.getValue("firstTimeEVER");
-        //save firstTimeEVER
-        if(!settings.getValue("bought"))
-            settings.setValue("bought", bought);
+        //        //save firstTimeEVER
+        if(!settings.getValue("firstTimeEVER"))
+            settings.setValue("firstTimeEVER", false);
         else
-            bought = settings.getValue("bought");
+            firstTimeEVER = settings.getValue("firstTimeEVER");
         aboutDialog.visible=firstTimeEVER
         firstTimeEVER=false;
         if ( datastore) {
@@ -157,12 +150,13 @@ GameWindow {
         settings.setValue("counter14", counter14);
         settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
         settings.setValue("firstTimeEVER", firstTimeEVER);
-//        settings.setValue("volume", volume);
-//        settings.setValue("sound", sound);
+        //        settings.setValue("volume", volume);
+        //        settings.setValue("sound", sound);
         settings.setValue("coins", numCoins);
-//        settings.setValue("ballSource", ballSource);
+        settings.setValue("ballSource", ballSource);
         settings.setValue("personalBest", personalBest);
         settings.setValue("myMissionsRn", myMissionsRn);
+//                settings.clearAll()
     }
     Storage{
         id: settings
@@ -1503,8 +1497,6 @@ GameWindow {
         property alias personalBestSettings: root.personalBest
         property alias datastoreSettings:root.datastore
         property alias myMissionsRnSettings:root.myMissionsRn
-
-        property alias mBoughtSettings: root.bought
     }
 
     Component{
