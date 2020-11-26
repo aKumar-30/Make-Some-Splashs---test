@@ -56,6 +56,7 @@ public:
     Q_INVOKABLE void emittingSpaceInCustSignal();
     Q_INVOKABLE void emittingGoToHalftimeSignal();
     Q_INVOKABLE void emittingGoBackFromHalftimeSignal(int points1);
+//    Q_INVOKABLE void emittingChaosSliderNeedsChange();
 
 
 signals:
@@ -70,12 +71,11 @@ signals:
 
     void somethingCompetitiveChanged();
     void spaceClickedInComp();
-    void spaceClickedInCust();
     
     void endingPageChanged(QString endingPage);
 
     void soundChanged(double sound);
-
+    void chaosSliderNeedsChange();
     //no uso
     void goToHalftime();
     void goBackFromHalftime(int points1 = 0);

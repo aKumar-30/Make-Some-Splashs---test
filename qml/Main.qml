@@ -35,7 +35,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1;
+    property real textMultiplier: 1.43;
     id: root
 
 
@@ -222,10 +222,6 @@ GameWindow {
         function onSomethingCompetitiveChanged(){
             navigationStack.pop()
         }
-        //        function onGoBackFromHalftime(points1){
-        //            navigationStack.pop()
-        //            points+=points1
-        //        }
         function onGoToHalftime(){
             navigationStack.push(halftimeModeComponent)
         }
@@ -440,23 +436,6 @@ GameWindow {
             if(event.modifiers===Qt.ControlModifier){
                 verification.visible=true;
             }
-        }
-    }
-    TextField{
-        z:5
-        color: "white"
-        id: verification
-        placeholderText:"Enter the code"
-        visible: false;
-        width: 200
-        height: 50
-        onEditingFinished:{
-            if(text==="4895"){
-                numCoins+=4;
-                text=""
-            }
-            visible = false;
-            clicker.focus=true;
         }
     }
     Settings{

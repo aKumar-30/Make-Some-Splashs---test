@@ -37,8 +37,8 @@ Page {
     property var manyMisses : 0;
     property var manyMakes: 0;
     property var extraPoints: 0;
-    property int level: 1
-    property int levelIndicator: 0
+    property int level: 4
+    property int levelIndicator: 15
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
     property var levelIndicatorDown:levelIndicatorSetter ()
@@ -70,7 +70,9 @@ Page {
         else if (level==3)
             return 16-levelIndicator
         else if (level == 4)
-            return 100-levelIndicator;
+            return 16-levelIndicator
+        else if (level == 5)
+            return 5-levelIndicator
     }
 
     onBackButtonClickedWhenAdScreenHereChanged: {
@@ -628,7 +630,10 @@ Page {
                     }
                     counter8=0;
                 }
-                mDuration=1000;
+                //                if(mvpSoundEffectPlaying){
+                //                    fadeOut.start();
+                //                    mvpSoundEffectPlaying=false
+                //                }
                 //head to halftime yay!
                 onGoToHalftime()
             }
@@ -642,13 +647,13 @@ Page {
         else if(level===3)
         {
             coinProb = 4;
-            mPauseAnim.duration-=35;
+            mPauseAnim.duration-=25;
             //clearling the last times random order
             currentRandomOrder5=[];
             //making sure it starts at the first index (index 0);
             currentIndexForRandom = 0;
             newRandomColors3();
-            if(levelIndicator >20)
+            if(levelIndicator >15)
             {
                 whatToDoForNextLevel()
                 handleId.visible=false;
@@ -656,7 +661,6 @@ Page {
                 mDuration=1200
                 mPauseAnim.pause()
                 handleId.visible=true;
-                onSunLevelText1.text=levelIndicator
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
@@ -665,7 +669,7 @@ Page {
                     mPauseAnim.restart();
             }
         }
-        //Level four stuff
+        //Level three stuff
         else if(level===4)
         {
             console.log("INSIDE LEVEL THREE!!!!");
@@ -674,46 +678,32 @@ Page {
                 mDuration -=100
             }
             easingNumber = Math.floor((Math.random() * 24));
-            if(mDuration>=650){
-                if(easingNumber<4){
-                    mDuration += 100;
-                }
-                mDuration-=50/*39*/;
+            if(easingNumber<4){
+                mDuration += 100;
             }
             let options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
             sliderEasingType=options[Math.floor((Math.random() * 28))];
             sliderId.value=200;
+            mDuration-=35/*39*/;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
 
-//            if(levelIndicator >15)
-//            {
-//               whatToDoForNextLevel()
-////                 spontaneouslyProduceSliders()
-//            }
-//            else{
+            if(levelIndicator >15)
+            {
+               whatToDoForNextLevel()
+//                insideContainerId.visible=false
+                 spontaneouslyProduceSliders()
+            }
+            else{
                 //have to have on all three, only restart thing if not going to next level
                 if(stateRectId.state!="paused")
                     seqAnimationId.restart();
-//            }
+            }
         }
-//        //Level five stuff
-//        else if(level===5)
-//        {
-//            coinProb = 3;
-//            Extra.emittingChaosSliderNeedsChange();
-//            insideRectangleMouseArea.enabled = true;
-
-//            if(levelIndicator >4)
-//            {
-//               whatToDoForNextLevel()
-////                insideContainerId.visible=false
-//            }
-//            else{
-//                //have to have on all three, only restart thing if not going to next level
-//                if(stateRectId.state!="paused")
-//                    seqAnimationId.restart();
-//            }
-//        }
+        //Level three stuff
+        else if(level===5)
+        {
+            
+        }
         //other variables stuff for everything
         //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
         if(!haveRandomlyChoosenIfCoinAppears){
