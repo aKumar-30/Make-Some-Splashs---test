@@ -582,7 +582,7 @@ Page {
                 mDuration -=100
             }
 
-            let options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
+            var options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
             easingNumber = Math.floor((Math.random() * 24));
             if(easingNumber<4){
                 mDuration += 100;
@@ -620,6 +620,7 @@ Page {
         //Level three stuff
         else if(level===3)
         {
+            delayTimer.start()
             coinProb = 4;
             mPauseAnim.duration-=25;
             //clearling the last times random order
@@ -630,15 +631,12 @@ Page {
             if(levelIndicator >15)
             {
                 whatToDoForNextLevel()
-                handleId.visible=false;
-                sliderId.enabled=true;
                 mDuration=1200
                 mPauseAnim.pause()
                 handleId.visible=true;
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
-                delayTimer.start()
                 if(stateRectId.state!="paused")
                     mPauseAnim.restart();
             }
@@ -646,8 +644,7 @@ Page {
         //Level three stuff
         else if(level===4)
         {
-            console.log("INSIDE LEVEL THREE!!!!");
-            coinProb = 3;
+            coinProb = 4;
             if(easingNumber < 4 && easingNumber>=0){
                 mDuration -=100
             }
@@ -655,35 +652,13 @@ Page {
             if(easingNumber<4){
                 mDuration += 100;
             }
-            let options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
             sliderEasingType=options[Math.floor((Math.random() * 28))];
             sliderId.value=200;
             mDuration-=35/*39*/;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
-
-            if(levelIndicator >17)
-            {
-                sliderId.enabled=false;
-                if(true){
-                    //8
-                    if(counter8===21&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)&&checkIfCurrentMission(8)){
-                        mMissionModel.get(8).currentThings=21
-                    }
-                    if(counter8>mMissionModel.get(8).currentThings&&!(mMissionModel.get(8).currentThings>=mMissionModel.get(8).neededThings)&&checkIfCurrentMission(8)){
-                        mMissionModel.get(8).currentThings=counter8
-                    }
-                    counter8=0;
-                }
-                //                if(mvpSoundEffectPlaying){
-                //                    fadeOut.start();
-                //                    mvpSoundEffectPlaying=false
-                //                }
-            }
-            else{
                 //have to have on all three, only restart thing if not going to next level
                 if(stateRectId.state!="paused")
                     seqAnimationId.restart();
-            }
         }
         //other variables stuff for everything
         //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
@@ -1024,9 +999,6 @@ Page {
                 }
                 else if(level===3){
                     levelRectangleText.text = "     Hint: The colors are switching! Try to catch the green one? (not as easy ias it looks)!  Survive for 21 shots to advance, 3 missed in a row and you're are out"
-                }
-                else if(level===4){
-                    levelRectangleText.text = "     FIX THIS"
                 }
             }
             id: levelRectangleText

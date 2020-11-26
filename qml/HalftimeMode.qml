@@ -261,7 +261,7 @@ Page {
         duration: 5000
         onStopped: {
             //do something
-            onGoBackFromHalftime(numberOfClicks*15);
+            onGoBackFromHalftime(numberOfClicks*15*4/3*6/5);
         }
     }
     PauseAnimation {
