@@ -37,8 +37,6 @@ Page {
     property var manyMisses : 0;
     property var manyMakes: 0;
     property var extraPoints: 0;
-    property int level: 2
-    property int levelIndicator: 16
     property int level: 1
     property int levelIndicator: 0
     property var sliderEasingType: Easing.Linear
