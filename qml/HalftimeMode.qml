@@ -199,7 +199,7 @@ Page {
         Column{
             anchors.fill: parent
             anchors.centerIn: parent
-            spacing: 25
+            spacing: 20
             Text{
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: value +" X " + " 15 = ";
@@ -222,14 +222,14 @@ Page {
                 text: value
                 font.family: geniso.name
                 font.bold: true
-                font.pointSize: textMultiplier* 90
+                font.pointSize: textMultiplier* 80
                 color: "white"
             }
             Text{
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "extra points"
                 font.family: geniso.name
-                font.pointSize: textMultiplier* 20
+                font.pointSize: textMultiplier* 440
                 color: "white"
             }
         }
