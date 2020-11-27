@@ -229,7 +229,7 @@ Page {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "extra points"
                 font.family: geniso.name
-                font.pointSize: textMultiplier* 440
+                font.pointSize: textMultiplier* 44
                 color: "white"
             }
         }

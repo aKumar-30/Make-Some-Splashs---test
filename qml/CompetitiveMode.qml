@@ -39,6 +39,8 @@ Page {
     property var extraPoints: 0;
     property int level: 2
     property int levelIndicator: 16
+    property int level: 1
+    property int levelIndicator: 0
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
     property var levelIndicatorDown:levelIndicatorSetter ()
@@ -62,6 +64,8 @@ Page {
     property bool adScreenHappeningHere: adScreenHappening
     property bool backButtonClickedWhenAdScreenHere: backButtonClickedWhenAdScreen
     property bool adUsed: false
+
+    property bool scoresSaved: false; /* currently not used */
     function levelIndicatorSetter (){
         if(level==1)
             return 18-levelIndicator
@@ -89,6 +93,10 @@ Page {
         points=0;
         getCurrentMissions()
     }
+    Component.onDestruction: {
+        afterGameIsActuallyOver();
+    }
+
     //sound effects start here - coin clink
     Audio{
         id: coinClinkSoundEffect
@@ -574,8 +582,8 @@ Page {
         if(level===1)
         {
             coinProb = 6;
-            sliderId.value=100;
-            mDuration-=46 /*41*/
+            sliderId.value=ath.random()*1000;
+            mDuration-=60 /*41*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator > 17)
             {
@@ -603,13 +611,13 @@ Page {
         {
             coinProb = 4;
             if(easingNumber < 4 && easingNumber>=0){
-                mDuration -=100
+                mDuration -=160
             }
 
             let options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
             easingNumber = Math.floor((Math.random() * 24));
             if(easingNumber<4){
-                mDuration += 100;
+                mDuration += 160;
             }
             sliderEasingType=options[Math.floor((Math.random() * 28))];
             sliderId.value=200;
@@ -642,13 +650,13 @@ Page {
         else if(level===3)
         {
             coinProb = 4;
-            mPauseAnim.duration-=35;
+            mPauseAnim.duration-=45;
             //clearling the last times random order
             currentRandomOrder5=[];
             //making sure it starts at the first index (index 0);
             currentIndexForRandom = 0;
             newRandomColors3();
-            if(levelIndicator >20)
+            if(levelIndicator >19)
             {
                 whatToDoForNextLevel()
                 handleId.visible=false;
@@ -671,14 +679,14 @@ Page {
             console.log("INSIDE LEVEL THREE!!!!");
             coinProb = 3;
             if(easingNumber < 4 && easingNumber>=0){
-                mDuration -=100
+                mDuration -=160
             }
             easingNumber = Math.floor((Math.random() * 24));
-            if(mDuration>=650){
+            if(mDuration>=800){
                 if(easingNumber<4){
-                    mDuration += 100;
+                    mDuration += 160;
                 }
-                mDuration-=50/*39*/;
+                mDuration-=35/*39*/;
             }
             let options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
             sliderEasingType=options[Math.floor((Math.random() * 28))];
