@@ -156,7 +156,7 @@ GameWindow {
         settings.setValue("ballSource", ballSource);
         settings.setValue("personalBest", personalBest);
         settings.setValue("myMissionsRn", myMissionsRn);
-//                settings.clearAll()
+        //                settings.clearAll()
     }
     Storage{
         id: settings
