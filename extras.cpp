@@ -126,7 +126,7 @@ void Extras::emittingSpaceInCompSignal(){
     emit spaceClickedInComp();
 }
 void Extras::emittingSpaceInCustSignal(){
-    emit spaceClickedInCust();
+    emit spaceClickedInComp();
 }
 void Extras::emittingGoToHalftimeSignal(){
     emit goToHalftime();
