@@ -135,7 +135,6 @@ void Extras::emittingGoBackFromHalftimeSignal(int points1=0){
     emit goBackFromHalftime(points1);
 }
 //void Extras::emittingChaosSliderNeedsChange(){
-//    qDebug()<<"THIS SIGNAL HAS BEEN EMITTEDEVERYONE CHEER";
 //    emit chaosSliderNeedsChange();
 //}
 double Extras::sound() const

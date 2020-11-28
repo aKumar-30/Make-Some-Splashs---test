@@ -17,7 +17,6 @@ Slider{
     Connections {
         target: Extra
         function onChaosSliderNeedsChange() {
-            console.log("YES THIS WORKS WE ARE GOATED")
             if(easingNumber < 4 && easingNumber>=0){
                 chaosDuration -= 150
             }

@@ -66,7 +66,7 @@ Page {
     property bool scoresSaved: false; /* currently not used */
     function levelIndicatorSetter (){
         if(level==1)
-            return 16-levelIndicator
+            return 18-levelIndicator
         else if (level == 2)
             return 18 - levelIndicator
         else if (level==3)
@@ -583,7 +583,7 @@ Page {
             sliderId.value=Math.random()*1000;
             mDuration-=60 /*41*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
-            if(levelIndicator > 15)
+            if(levelIndicator > 17)
             {
                 whatToDoForNextLevel()
                 mDuration=1210
@@ -674,6 +674,7 @@ Page {
         //Level four stuff
         else if(level===4)
         {
+            console.log("INSIDE LEVEL THREE!!!!");
             coinProb = 3;
             if(easingNumber < 4 && easingNumber>=0){
                 mDuration -=240
@@ -1383,13 +1384,13 @@ Page {
                     anchors.verticalCenter: parent.verticalCenter
                     Rectangle{
                         anchors.fill: parent
-                        color: okButton.pressed?"#233ab8" :"#2f44ba"
+                        color: okButton.pressed?"#233ab8" : "#3F51B5"
                     }
                     Text{
                         anchors.centerIn: parent
                         font.pointSize: textMultiplier* 20
                         text: "Retry"
-                        color: "white"
+                        color: "black"
                         font.family: centuryGothic.name
                     }
                     id: okButton
@@ -1409,13 +1410,13 @@ Page {
                 Button {
                     Rectangle{
                         anchors.fill: parent
-                        color: cancelButton.pressed?"#5d71de" : "#758bff"
+                        color: cancelButton.pressed?"#5d71de" : "#4357c4"
                     }
                     Text{
                         anchors.centerIn: parent
                         font.pointSize: textMultiplier* 20
                         text: "Quit"
-                        color: "black"
+                        color: "White"
                         font.family: centuryGothic.name
                     }
                     id: cancelButton
@@ -1725,7 +1726,7 @@ Page {
             let pointsThisRound = 0;
             function lastMissionCheck(shotShot){
                 function typeOfShot(shotShot){
-                    var correctShot = typesOfShotPossible[shotRandomNumber]
+                    var correctShot = typeOfShot[shotRandomNumber]
                     if(correctShot===shotShot){
                         return true;
                     }
@@ -1735,15 +1736,15 @@ Page {
                 if(typeOfShot(shotShot)){
                     if(level===levelOptions[levelRandomNumber]){
                         counterLast++;
-                        if(counterLast===mMissionModel.get(17).neededThings&&mMissionModel.get(17).currentThings<mMissionModel.get(17).neededThings){
-                            mMissionModel.get(17).currentThings=counterLast
+                        if(counterLast===mMissionModel.get(last).neededThings&&!(mMissionModel.get(last).currentThings>=mMissionModel.get(last).neededThings)){
+                            mMissionModel.get(last).currentThings=counterLast
                         }
                     }
                 }
                 else{
                     if(level===levelOptions[levelRandomNumber]){
-                        if(counterLast>mMissionModel.get(17).currentThings&&mMissionModel.get(17).currentThings<mMissionModel.get(17).neededThings){
-                            mMissionModel.get(17).currentThings=counterLast;
+                        if(counterLast>mMissionModel.get(last).currentThings&&!(mMissionModel.get(last).currentThings>=mMissionModel.get(last).neededThings)){
+                            mMissionModel.get(last).currentThings=counterLast;
                         }
                         counterLast=0;
                     }

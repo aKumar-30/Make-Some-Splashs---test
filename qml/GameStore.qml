@@ -50,7 +50,6 @@ Page {
             for(let j = 0; j < contactModel.count; j++){
                 if(bought[k]===contactModel.get(j).name){
                     contactModel.get(j).isBought=true
-                    console.log("contactModel.get(j).isBought=true"+contactModel.get(j).isBought)
                     break;
                 }
             }

@@ -26,7 +26,8 @@ GameWindow {
     property bool shouldBeginThirdLevel: false
     property var shotRandomNumber: 0;
     property var levelRandomNumber:0
-    property var levelOptions: []
+    property var levelOptions: [1,1,1,1,1,2,2,2,2,2,3,3,0,0]
+    property var typesOfShotPossible:["backboard","rim", "splash"]
 
     property bool adScreenHappening: false;
     property bool backButtonClickedWhenAdScreen: false;
@@ -40,7 +41,7 @@ GameWindow {
 
 
     //these ones used to be from Extra
-    property double volume: 0.55;
+    property double volume: 0.65;
     property double sound: 0.93;
     property int numCoins: 5;
     property string ballSource:"../assets/images/balls/basketBall.png";
@@ -55,6 +56,7 @@ GameWindow {
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
         //other stuff
+//        settings.clearAll()
         mMusic1.play()
         //        //save volume
         //        if(!settings.getValue("volume")){
@@ -325,14 +327,14 @@ GameWindow {
         }
         //        //we now want two with one extra special at the end
         var numberOfTimesAndCoins = [[2,2],[3,4],[4,6],[5,9],[6,10],[7,12],[8,16],[9,19]]
-        var typeOfShot = ["backboard","rim", "splash"]
-        levelOptions = [1,1,1,1,1,1,1,2,2,3,3,0]
+        typesOfShotPossible = ["backboard","rim", "splash"]
+        levelOptions = [1,1,1,1,1,2,2,2,2,2,3,3,0,0]
         var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
         tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
         tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
-        shotRandomNumber = Math.floor((Math.random()*typeOfShot.length));
+        shotRandomNumber = Math.floor((Math.random()*typesOfShotPossible.length));
         levelRandomNumber = Math.floor((Math.random()*levelOptions.length));
-        tempModel.get(0).description=(typeOfShot[shotRandomNumber]==="splash")?("Splash "+ tempModel.get(0).neededThings+" times in a row in "):("Make at the " + typeOfShot[shotRandomNumber] + " " +tempModel.get(0).neededThings+" times in a row in ");
+        tempModel.get(0).description=(typesOfShotPossible[shotRandomNumber]==="splash")?("Splash "+ tempModel.get(0).neededThings+" times in a row in "):("Make at the " + typesOfShotPossible[shotRandomNumber] + " " +tempModel.get(0).neededThings+" times in a row in ");
         tempModel.get(0).description+=(levelOptions[levelRandomNumber]===0)?("any level"):("level "+levelOptions[levelRandomNumber]);
         tempModel.get(0).description+= ". Record:"
         //adding it to the end
@@ -663,7 +665,7 @@ GameWindow {
                     description: "Make all the shots in level 1. Record"
                     multipleTimes: true
                     reward: 9;
-                    neededThings: 21
+                    neededThings: 16
                     currentThings: 0
                 }
                 ListElement{//8
@@ -672,7 +674,7 @@ GameWindow {
                     description: "Make all the shots in level 2. Record"
                     multipleTimes: true
                     reward: 23;
-                    neededThings: 21
+                    neededThings: 18
                     currentThings: 0
                 }
                 ListElement{//9
@@ -945,7 +947,7 @@ GameWindow {
                 anchors.top: listOfMissions.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
                 height: 80
-                width: 170
+                width: 200
                 Rectangle{
                     anchors.fill: parent
                     color: "#40ad36"
@@ -1468,14 +1470,17 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings: root.firstTimeEVER
-        property alias volumeSettings: root.volume
-        property alias soundSettings:root.sound
-        property alias numCoinsSettings: root.numCoins
-        property alias ballSourceSettings:root.ballSource
-        property alias personalBestSettings: root.personalBest
-        property alias datastoreSettings:root.datastore
-        property alias myMissionsRnSettings:root.myMissionsRn
+        property alias firstTimeEverSettings1: root.firstTimeEVER
+        property alias volumeSettings1: root.volume
+        property alias soundSettings1:root.sound
+//        property alias numCoinsSettings1: root.numCoins
+        property alias ballSourceSettings1:root.ballSource
+
+        property alias shotRandomNumberSettings: root.shotRandomNumber
+        property alias levelRandomNumberSettings: root.levelRandomNumber
+//        property alias personalBestSettings1: root.personalBest
+//        property alias datastoreSettings2:root.datastore
+//        property alias myMissionsRnSettings1:root.myMissionsRn
     }
 
     Component{
