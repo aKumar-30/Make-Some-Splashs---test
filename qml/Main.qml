@@ -43,7 +43,7 @@ GameWindow {
     //these ones used to be from Extra
     property double volume: 0.65;
     property double sound: 0.93;
-    property int numCoins: 5;
+    property int numCoins: 240;
     property string ballSource:"../assets/images/balls/basketBall.png";
     property int personalBest: 0;
     property string datastore: "";
