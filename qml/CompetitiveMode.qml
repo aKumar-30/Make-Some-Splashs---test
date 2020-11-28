@@ -580,7 +580,7 @@ Page {
         if(level===1)
         {
             coinProb = 6;
-            sliderId.value=ath.random()*1000;
+            sliderId.value=Math.random()*1000;
             mDuration-=60 /*41*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator > 17)
