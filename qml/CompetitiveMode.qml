@@ -37,7 +37,7 @@ Page {
     property var manyMisses : 0;
     property var manyMakes: 0;
     property var extraPoints: 0;
-    property int level: 2
+    property int level: 1
     property int levelIndicator: 0
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
@@ -180,7 +180,7 @@ Page {
                     if(counter14.length===mMissionModel.get(14).neededThings){
                         mMissionModel.get(14).currentThings=mMissionModel.get(14).neededThings
                     }
-                    if(counter14.length===mMissionModel.get(14).currentThings){
+                    if(counter14.length>=mMissionModel.get(14).currentThings){
                         mMissionModel.get(14).currentThings=counter14.length
                     }
                 }
@@ -598,7 +598,7 @@ Page {
                 //set mDuration
                 mDurationEasy=1200
                 mDurationMedium= 1500
-                mDurationHard= 1800
+                mDurationHard= 2250
                 mDuration=1500
                 if(true){
                     //7
@@ -687,7 +687,7 @@ Page {
 
                 mDurationEasy=1200
                 mDurationMedium= 1500
-                mDurationHard= 1800
+                mDurationHard= 2250
                 mDuration=1500
 
                 mPauseAnim.pause()
@@ -709,19 +709,22 @@ Page {
             if(easingNumber<12){
                 //easy
 //               start: mDurationEasy=1200;
-                mDurationEasy-=40
+                if(mDurationEasy>700)
+                    mDurationEasy-=40
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypes[easingNumber]
             }
             else if(easingNumber<21){
                 //medium
-                mDurationMedium-=35
+                if(mDurationMedium>850)
+                    mDurationMedium-=35
                 mDuration=mDurationMedium
                 sliderEasingType= mediumTypes[easingNumber-11]
             }
             else{
                 //hard
-                mDurationHard-=19
+                if(mDurationHard>1140)
+                    mDurationHard-=19
                 mDuration=mDurationHard
                 sliderEasingType= hardTypes[easingNumber-20]
             }

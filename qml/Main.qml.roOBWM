@@ -36,7 +36,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.43;
+    property real textMultiplier: 1;
     id: root
 
 
@@ -627,7 +627,7 @@ GameWindow {
                 ListElement{//3
                     index: 3
                     completed: false;
-                    description: "Miss at the backboard two consecutive times. Record: "
+                    description: "Miss at the backboard two consecutive time. Record: "
                     multipleTimes: true
                     reward: 2;
                     neededThings: 2
@@ -953,7 +953,8 @@ GameWindow {
                 width: 200
                 Rectangle{
                     anchors.fill: parent
-                    color: "#7ae868"
+                    color: "#40ad36"
+
                 }
                 Row{
                     x:10

@@ -225,7 +225,7 @@ Page {
                 checkIfFound()
                 counter15++;
                 if(counter15===mMissionModel.get(15).neededThings&&!(mMissionModel.get(15).currentThings>=mMissionModel.get(15).neededThings)&&checkIfCurrentMission(15)){
-                    mMissionModel.get(15).currentThings=counter15
+                    mMissionModel.get(15).currentThings=mMissionModel.get(15).neededThings
                 }
                 someOfTheStuffToDoWhenClicked();
             }
@@ -523,7 +523,7 @@ Page {
     Settings{
         category: "mySettingsThing5"
         property alias mMName1: root.givenName
-        property alias mBought: root.bought
+        property alias mBought2: root.bought
     }
 }
 
