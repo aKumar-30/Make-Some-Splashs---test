@@ -165,7 +165,7 @@ Item {
                 }
                 Label {
                     font.family: centuryGothic.name; width: parent.width
-                    text: "    Click near the slider to get the ball to shoot towards the basketball. The closer the slider is to the green the better the shot. If the ball misses three times in a row, you lose. Be careful, the slider moves faster as you go!"
+                    text: "    Click near the slider to get the ball to shoot! The closer the slider is to the green (the center), the more accurate. If the ball misses three times, you lose. Be careful, the slider moves faster as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: textMultiplier* 12.5
                     lineHeight: 1.45
@@ -181,7 +181,7 @@ Item {
                 }
                 Label {
                     font.family: centuryGothic.name; width: parent.width
-                    text: "    Click near the slider to get the ball to shoot towards the basketball. The closer the slider is to the green the better the shot. If the ball misses three times in a row, you lose. Be careful, the slider moves in different speeds and speed patterns as you go!"
+                    text: "    Click near the slider to get the ball to shoot!.  The closer the slider is to the green (the center), the more accurate. If the ball misses three times, you lose. Be careful, the slider moves in different speeds and patterns as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: textMultiplier* 12.5
                     lineHeight: 1.45
@@ -213,7 +213,23 @@ Item {
                 }
                 Label {
                     font.family: centuryGothic.name; width: parent.width
-                    text: "    Try to click on the green part of the slider. The closer you are to a geen color (green then yellow then orange then red) the better the shot! If the ball misses three times in a row, you lose. Be careful, it switches faster as you go!"
+                    text: "    Try to click on the green part of the slider. The closer you are to a geen color (green->yellow->orange->red) the better the shot! If the ball misses three times in a row, you lose. Be careful, it switches faster as you go!"
+                    wrapMode: Label.Wrap
+                    font.pointSize: textMultiplier* 12.5
+                    lineHeight: 1.45
+                }
+                Label {
+                    font.family: centuryGothic.name; width: parent.width
+                    Text{
+                        font.bold: true
+                        wrapMode: Label.Wrap
+                        font.pointSize: textMultiplier* 15
+                        text: "Level 4"
+                    }
+                }
+                Label {
+                    font.family: centuryGothic.name; width: parent.width
+                    text: "    Similiar to Level 2 except much harder! The closer the slider is to the green (the center), the more accurate. If the ball misses three times, you lose. Be careful, the slider moves in different speeds and patterns as you go!"
                     wrapMode: Label.Wrap
                     font.pointSize: textMultiplier* 12.5
                     lineHeight: 1.45
@@ -231,7 +247,7 @@ Item {
                 }
                 Label {
                     font.family: centuryGothic.name; width: parent.width
-                    text: "    Earn coins by completing daily missions, watching ads, or playing the game (randomly appearing)!"
+                    text: "    Earn coins by completing daily missions or in game!"
                     wrapMode: Label.Wrap
                     font.pointSize: textMultiplier* 12.5
                     lineHeight: 1.45
@@ -249,7 +265,7 @@ Item {
                 }
                 Label {
                     font.family: centuryGothic.name; width: parent.width
-                    text: "    Complete tasks by playing to game to earn coins. There are 3 missions, which reset and change every day"
+                    text: "    Complete tasks by playing to game to earn coins. There are 3 missions, which reset every day"
                     wrapMode: Label.Wrap
                     font.pointSize: textMultiplier* 12.5
                     lineHeight: 1.45

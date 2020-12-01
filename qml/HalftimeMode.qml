@@ -170,7 +170,7 @@ Page {
         id: remainingTimeBox
         anchors.centerIn: parent
         width:height
-        height: remainingTimeBoxText.implicitHeight+90
+        height: remainingTimeBoxText.implicitHeight+200
         color: "black"
         z:200
         opacity: 0.4

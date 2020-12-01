@@ -13,6 +13,7 @@ import otherArjun2 1.2
 Page {
     //do stuff in main yay
     function onGoToHalftime(){
+        Extra.endingPage="CompetitiveMode.qml"
         navigationStack.push(halftimeModeComponent)
     }
     function switchFileSignal(){
@@ -33,12 +34,11 @@ Page {
     property var gradientGround2: "#00803F"
     property bool whatToDoWhenClicked: false
     property int counterr1 : 0;
-    property var mDuration: 1400
     property var manyMisses : 0;
     property var manyMakes: 0;
     property var extraPoints: 0;
     property int level: 2
-    property int levelIndicator: 16
+    property int levelIndicator: 0
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
     property var levelIndicatorDown:levelIndicatorSetter ()
@@ -62,6 +62,15 @@ Page {
     property bool adScreenHappeningHere: adScreenHappening
     property bool backButtonClickedWhenAdScreenHere: backButtonClickedWhenAdScreen
     property bool adUsed: false
+
+    //easingThings
+    property var mDuration: 1400
+    property var mDurationEasy: -1
+    property var mDurationMedium: -1
+    property var mDurationHard: -1
+    property var easyTypes: [Easing.BezierCurve, Easing.OutInBack, Easing.InQuad, Easing.OutQuad,Easing.InOutCubic, Easing.InCubic, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.OutInExpo, Easing.OutInCirc]
+    property var mediumTypes: [Easing.OutInBounce, Easing.InOutBounce,Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InExpo, Easing.InCirc,  Easing.OutCirc]
+    property var hardTypes: [Easing.OutBounce, Easing.InBounce, Easing.OutElastic, Easing.OutBack, Easing.InBack]
 
     property bool scoresSaved: false; /* currently not used */
     function levelIndicatorSetter (){
@@ -102,7 +111,7 @@ Page {
         volume: root.sound*1
     }
     //for dynamic object creatin
-   property  var component;
+    property  var component;
     property var sprite;
 
     function createSliderObjects(yLocation) {
@@ -586,7 +595,11 @@ Page {
             if(levelIndicator > 15)
             {
                 whatToDoForNextLevel()
-                mDuration=1210
+                //set mDuration
+                mDurationEasy=1200
+                mDurationMedium= 1500
+                mDurationHard= 1800
+                mDuration=1500
                 if(true){
                     //7
                     if(counter7===21&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
@@ -608,18 +621,29 @@ Page {
         else if(level===2)
         {
             coinProb = 4;
-            if(easingNumber < 4 && easingNumber>=0){
-                mDuration -=160
+            easingNumber = Math.floor((Math.random() * 25));
+            if(easingNumber<12){
+                //easy
+//               start: mDurationEasy=1200;
+                mDurationEasy-=40
+                mDuration=mDurationEasy
+                sliderEasingType= easyTypes[easingNumber]
+            }
+            else if(easingNumber<21){
+                //medium
+                mDurationMedium-=35
+                mDuration=mDurationMedium
+                sliderEasingType= mediumTypes[easingNumber-11]
+            }
+            else{
+                //hard
+                mDurationHard-=19
+                mDuration=mDurationHard
+                sliderEasingType= hardTypes[easingNumber-20]
             }
 
-            let options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
-            easingNumber = Math.floor((Math.random() * 24));
-            if(easingNumber<4){
-                mDuration += 160;
-            }
-            sliderEasingType=options[Math.floor((Math.random() * 28))];
+
             sliderId.value=200;
-            mDuration-=26/*39*/;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator >17)
             {
@@ -637,6 +661,7 @@ Page {
                 mDuration=1000;
                 //head to halftime yay!
                 onGoToHalftime()
+                Extra.endingPage="HalftimeMode.qml"
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
@@ -659,7 +684,12 @@ Page {
                 whatToDoForNextLevel()
                 handleId.visible=false;
                 sliderId.enabled=true;
-                mDuration=1200
+
+                mDurationEasy=1200
+                mDurationMedium= 1500
+                mDurationHard= 1800
+                mDuration=1500
+
                 mPauseAnim.pause()
                 handleId.visible=true;
                 onSunLevelText1.text=levelIndicator
@@ -675,50 +705,57 @@ Page {
         else if(level===4)
         {
             coinProb = 3;
-            if(easingNumber < 4 && easingNumber>=0){
-                mDuration -=240
+            easingNumber = Math.floor((Math.random() * 25));
+            if(easingNumber<12){
+                //easy
+//               start: mDurationEasy=1200;
+                mDurationEasy-=40
+                mDuration=mDurationEasy
+                sliderEasingType= easyTypes[easingNumber]
             }
-            easingNumber = Math.floor((Math.random() * 24));
-            if(mDuration>=800){
-                if(easingNumber<4){
-                    mDuration += 240;
-                }
-                mDuration-=31/*39*/;
+            else if(easingNumber<21){
+                //medium
+                mDurationMedium-=35
+                mDuration=mDurationMedium
+                sliderEasingType= mediumTypes[easingNumber-11]
             }
-            let options = [Easing.OutInBounce, Easing.InOutBounce, Easing.OutBounce,Easing.InBounce, Easing.OutElastic, Easing.InQuad, Easing.OutQuad, Easing.InOutCubic, Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.InExpo, Easing.OutInExpo, Easing.InCirc, Easing.OutCirc, Easing.OutInCirc, Easing.OutBack, Easing.OutInBack, Easing.InBack, Easing.BezierCurve]
-            sliderEasingType=options[Math.floor((Math.random() * 28))];
-            sliderId.value=200;
+            else{
+                //hard
+                mDurationHard-=19
+                mDuration=mDurationHard
+                sliderEasingType= hardTypes[easingNumber-20]
+            }
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
 
-//            if(levelIndicator >15)
-//            {
-//               whatToDoForNextLevel()
-////                 spontaneouslyProduceSliders()
-//            }
-//            else{
-                //have to have on all three, only restart thing if not going to next level
-                if(stateRectId.state!="paused")
-                    seqAnimationId.restart();
-//            }
+            //            if(levelIndicator >15)
+            //            {
+            //               whatToDoForNextLevel()
+            ////                 spontaneouslyProduceSliders()
+            //            }
+            //            else{
+            //have to have on all three, only restart thing if not going to next level
+            if(stateRectId.state!="paused")
+                seqAnimationId.restart();
+            //            }
         }
-//        //Level five stuff
-//        else if(level===5)
-//        {
-//            coinProb = 3;
-//            Extra.emittingChaosSliderNeedsChange();
-//            insideRectangleMouseArea.enabled = true;
+        //        //Level five stuff
+        //        else if(level===5)
+        //        {
+        //            coinProb = 3;
+        //            Extra.emittingChaosSliderNeedsChange();
+        //            insideRectangleMouseArea.enabled = true;
 
-//            if(levelIndicator >4)
-//            {
-//               whatToDoForNextLevel()
-////                insideContainerId.visible=false
-//            }
-//            else{
-//                //have to have on all three, only restart thing if not going to next level
-//                if(stateRectId.state!="paused")
-//                    seqAnimationId.restart();
-//            }
-//        }
+        //            if(levelIndicator >4)
+        //            {
+        //               whatToDoForNextLevel()
+        ////                insideContainerId.visible=false
+        //            }
+        //            else{
+        //                //have to have on all three, only restart thing if not going to next level
+        //                if(stateRectId.state!="paused")
+        //                    seqAnimationId.restart();
+        //            }
+        //        }
         //other variables stuff for everything
         //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
         if(!haveRandomlyChoosenIfCoinAppears){
@@ -1051,16 +1088,16 @@ Page {
             function levelTextFunc(level)
             {
                 if(level===1){
-                    levelRectangleText.text = "     Hint: The slider moves faster as you go along. Survive for 21 rounds to advance, 3 missed in a row and you're out"
+                    levelRectangleText.text = "     Hint: The slider moves faster as you go along. Survive to advance, 3 missed and you're out"
                 }
                 else if(level===2){
-                    levelRectangleText.text = "     Hint: The slider has different patterns of motion. Survive for 21 shots to advance, 3 missed in a row and you're are out"
+                    levelRectangleText.text = "     Hint: The slider has different patterns of motion. Survive to advance, 3 missed and you are out"
                 }
                 else if(level===3){
-                    levelRectangleText.text = "     Hint: The colors are switching! Try to catch the green one? (not as easy ias it looks)!  Survive for 21 shots to advance, 3 missed in a row and you're are out"
+                    levelRectangleText.text = "     Hint: The colors are switching! Try to catch the green one? (not as easy ias it looks)!  3 missed in a row and you're are out"
                 }
                 else if(level===4){
-                    levelRectangleText.text = "     FIX THIS"
+                    levelRectangleText.text = "     Try to beat your own record! 3 missed and you're out"
                 }
             }
             id: levelRectangleText
@@ -1375,8 +1412,13 @@ Page {
                 wrapMode: Text.Wrap
                 text:"     Please try again! Remember 3 missed shots and you are out"
             }
+            Rectangle{
+                width: 20
+                height: 30
+                color: "transparent"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
             Row{
-                x:60
                 spacing:25
                 anchors.horizontalCenter: parent.horizontalCenter
                 Button {

@@ -112,10 +112,10 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-//App information
-app.setOrganizationName("shootHoops");
-app.setOrganizationDomain("shootHoops.com");
-app.setApplicationName("Shoot Hoops");
+    //App information
+    app.setOrganizationName("shootHoops");
+    app.setOrganizationDomain("shootHoops.com");
+    app.setApplicationName("Shoot Hoops");
 
     FelgoApplication felgo;
     //    felgo.setPreservePlatformFonts(true);

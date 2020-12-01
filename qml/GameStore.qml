@@ -20,7 +20,7 @@ Page {
     property var found: true;
     property var bought: ["Basketball", "Blue"]
     property int count: 0;
-    property var mName: "";
+    property var mName: "Blue";
     property var mSource: "";
     property var mIndex: -1;
     property bool firstTime: true;
@@ -385,7 +385,7 @@ Page {
             price: 50
         }
         ListElement{
-            index:14
+            index:13
             isBought: false
             type: "clock";
             name: "The Clock"
@@ -393,7 +393,7 @@ Page {
             price: 50
         }
         ListElement{
-            index:13
+            index:14
             isBought: false
             type: "Dartboard";
             name: "The Dartboard"

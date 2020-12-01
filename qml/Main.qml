@@ -36,14 +36,14 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.43;
+    property real textMultiplier: 1.44;
     id: root
 
 
     //these ones used to be from Extra
     property double volume: 0.65;
     property double sound: 0.93;
-    property int numCoins: 240;
+    property int numCoins: 5;
     property string ballSource:"../assets/images/balls/basketBall.png";
     property int personalBest: 0;
     property string datastore: "";
@@ -1112,6 +1112,9 @@ GameWindow {
                 MouseArea{
                     anchors.fill: parent;
                     onClicked: {
+                        if(Extra.endingPage==="HalftimeMode.qml"){
+                            navigationStack.push(halftimeModeComponent)
+                        }
                         if(Extra.endingPage==="CompetitiveMode.qml"){
                             if(adScreenHappening!==true&&retryScreenHappening!==true)
                                 warningDialog.visible=true;
