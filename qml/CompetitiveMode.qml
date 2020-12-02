@@ -590,7 +590,7 @@ Page {
         {
             coinProb = 6;
             sliderId.value=Math.random()*1000;
-            mDuration-=60 /*41*/
+            mDuration-=40 /*41*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator > 15)
             {
@@ -625,19 +625,19 @@ Page {
             if(easingNumber<12){
                 //easy
 //               start: mDurationEasy=1200;
-                mDurationEasy-=40
+                mDurationEasy-=42
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypes[easingNumber]
             }
             else if(easingNumber<21){
                 //medium
-                mDurationMedium-=35
+                mDurationMedium-=32
                 mDuration=mDurationMedium
                 sliderEasingType= mediumTypes[easingNumber-11]
             }
             else{
                 //hard
-                mDurationHard-=19
+                mDurationHard-=18
                 mDuration=mDurationHard
                 sliderEasingType= hardTypes[easingNumber-20]
             }
@@ -710,21 +710,21 @@ Page {
                 //easy
 //               start: mDurationEasy=1200;
                 if(mDurationEasy>700)
-                    mDurationEasy-=40
+                    mDurationEasy-=42
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypes[easingNumber]
             }
             else if(easingNumber<21){
                 //medium
                 if(mDurationMedium>850)
-                    mDurationMedium-=35
+                    mDurationMedium-=32
                 mDuration=mDurationMedium
                 sliderEasingType= mediumTypes[easingNumber-11]
             }
             else{
                 //hard
-                if(mDurationHard>1140)
-                    mDurationHard-=19
+                if(mDurationHard>1010)
+                    mDurationHard-=18
                 mDuration=mDurationHard
                 sliderEasingType= hardTypes[easingNumber-20]
             }

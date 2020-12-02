@@ -129,12 +129,14 @@ Item {
                             onClicked:{
                                 musicVolumeIcon.icon=IconType.volumeoff
                                 volume=0.0;
+                                volumeSlider.value=0
                                 shouldExtraVolumeChange=false
                                 volumeSlider.valueChanged();
 
                                 //nobody knows why but do it twice
                                 musicVolumeIcon.icon=IconType.volumeoff
                                 volume=0.0;
+                                volumeSlider.value=0
                                 shouldExtraVolumeChange=false
                                 volumeSlider.valueChanged();
                             }
@@ -238,12 +240,14 @@ Item {
                             onClicked:{
                                 musicSoundIcon.icon=IconType.volumeoff
                                 sound=0.0;
+                                soundSlider.value=0
                                 shouldExtraSoundChange=false
                                 soundSlider.valueChanged();
 
                                 //nobody knows why but do it twice
                                 musicSoundIcon.icon=IconType.volumeoff
                                 sound=0.0;
+                                soundSlider.value=0
                                 shouldExtraSoundChange=false
                                 soundSlider.valueChanged();
                             }

@@ -36,7 +36,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.43;
+    property real textMultiplier: 1;
     id: root
 
 
@@ -127,7 +127,6 @@ GameWindow {
         if(myMissionsRn){
             getCurrentMissions()
         }
-        presentMissions=[] /*delete*/
         if(presentMissions.length!==0){
             displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
             displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
@@ -159,7 +158,6 @@ GameWindow {
         settings.setValue("ballSource", ballSource);
         settings.setValue("personalBest", personalBest);
         settings.setValue("myMissionsRn", myMissionsRn);
-        //                settings.clearAll()
     }
     Storage{
         id: settings
@@ -1483,7 +1481,7 @@ GameWindow {
 
         property alias shotRandomNumberSettings: root.shotRandomNumber
         property alias levelRandomNumberSettings: root.levelRandomNumber
-        //        property alias personalBestSettings1: root.personalBest
+        property alias personalBestSettings1: root.personalBest
         //        property alias datastoreSettings2:root.datastore
         //        property alias myMissionsRnSettings1:root.myMissionsRn
     }
