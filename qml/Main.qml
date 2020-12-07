@@ -270,24 +270,6 @@ GameWindow {
                 thing=true;
             }
         }
-        //        let i=0;
-        //        if( mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings && mMissionModel.get(presentMissions[i]).completed!==true){
-        //            if(whatFor)
-        //                currentMissionRewards+= mMissionModel.get(presentMissions[i]).reward
-        //            thing=true;
-        //        }
-        //        i=1
-        //        if( mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings && mMissionModel.get(presentMissions[i]).completed!==true){
-        //            if(whatFor)
-        //                currentMissionRewards+= mMissionModel.get(presentMissions[i]).reward
-        //            thing=true;
-        //        }
-        //        i=2
-        //        if( mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings && mMissionModel.get(presentMissions[i]).completed!==true){
-        //            if(whatFor)
-        //                currentMissionRewards+= mMissionModel.get(presentMissions[i]).reward
-        //            thing=true;
-        //        }
         return thing
         //        }
     }
