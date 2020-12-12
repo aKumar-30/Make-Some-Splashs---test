@@ -408,9 +408,9 @@ Item {
         }
     }
     Settings{
-        property alias volumeSliderValueSettings: volumeSlider.value
-        property alias volumeSliderVolumeSettings: volumeSlider.volume
-        property alias soundSliderValueSettings: soundSlider.value
-        property alias soundSliderSoundSettings: soundSlider.sound
+//        property alias volumeSliderValueSettings: volumeSlider.value
+//        property alias volumeSliderVolumeSettings: volumeSlider.volume
+//        property alias soundSliderValueSettings: soundSlider.value
+//        property alias soundSliderSoundSettings: soundSlider.sound
     }
 }

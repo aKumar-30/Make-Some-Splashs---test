@@ -56,22 +56,19 @@ GameWindow {
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
         //other stuff
-        //        settings.clearAll()
         mMusic1.play()
-        //        //save volume
-        //        if(!settings.getValue("volume")){
-        //            console.log("ROOT VOLUME IS>>>>>>>> INSIDE IF STATEMENT"+root.volume)
-        //            settings.setValue("volume", root.volume);
-        //        }
-        //        else{
-        //            console.log("ROOT VOLUME IS"+root.volume)
-        //            root.volume = settings.getValue("volume");
-        //        }
-        //        //save sound
-        //        if(!settings.getValue("sound"))
-        //            settings.setValue("sound", sound);
-        //        else
-        //            sound = settings.getValue("sound");
+//        //save volume
+//        if(!settings.getValue("volume")){
+//            settings.setValue("volume", root.volume);
+//        }
+//        else{
+//            console.log("ROOT VOLUME IS"+root.volume)
+//        }
+//        //save sound
+//        if(!settings.getValue("sound"))
+//            settings.setValue("sound", sound);
+//        else
+//            sound = settings.getValue("sound");
         //save coins
         if(!settings.getValue("coins"))
             settings.setValue("coins", numCoins);
@@ -149,15 +146,17 @@ GameWindow {
         datamodel =  JSON.stringify(datamodel)
         settings.setValue("datastore", datamodel)
 
-        settings.setValue("counter14", counter14);
-        settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
-        settings.setValue("firstTimeEVER", firstTimeEVER);
-        //        settings.setValue("volume", volume);
-        //        settings.setValue("sound", sound);
         settings.setValue("coins", numCoins);
         settings.setValue("ballSource", ballSource);
         settings.setValue("personalBest", personalBest);
         settings.setValue("myMissionsRn", myMissionsRn);
+        settings.setValue("counter14", counter14);
+        settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
+
+
+        settings.setValue("firstTimeEVER", firstTimeEVER);
+        //        settings.setValue("volume", volume);
+        //        settings.setValue("sound", sound);
     }
     Storage{
         id: settings
@@ -292,7 +291,7 @@ GameWindow {
             //            if((!entry.multipleTimes || !entry.completed))
             mArray.push(entry)
         }
-       arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)    /*add back later*/
+        arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)    /*add back later*/
         if(arr[0]===mMissionModel.get(16)||arr[1]===mMissionModel.get(16)){
             var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[10555,30]]
             var randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
@@ -978,7 +977,7 @@ GameWindow {
                 height: getRewardsButton.height
                 y: getRewardsButton.y+5
                 x: getRewardsButton.x-5
-                color: "#188509"
+                color: "#147307"
             }
 
             //            //ADS FOR THE MONEY MONEY MONEY
@@ -1454,19 +1453,19 @@ GameWindow {
             }
         }
     }
-    Settings{
-        property alias firstTimeEverSettings1: root.firstTimeEVER
-        property alias volumeSettings1: root.volume
-        property alias soundSettings1:root.sound
-        //        property alias numCoinsSettings1: root.numCoins
-        property alias ballSourceSettings1:root.ballSource
+        Settings{
+            property alias firstTimeEverSettings1: root.firstTimeEVER
+            property alias volumeSettings1: root.volume
+            property alias soundSettings1:root.sound
+                    property alias numCoinsSettings1: root.numCoins
+            property alias ballSourceSettings1:root.ballSource
 
-        property alias shotRandomNumberSettings: root.shotRandomNumber
-        property alias levelRandomNumberSettings: root.levelRandomNumber
-        property alias personalBestSettings1: root.personalBest
-        //        property alias datastoreSettings2:root.datastore
-        //        property alias myMissionsRnSettings1:root.myMissionsRn
-    }
+            property alias shotRandomNumberSettings: root.shotRandomNumber
+            property alias levelRandomNumberSettings: root.levelRandomNumber
+            property alias personalBestSettings1: root.personalBest
+                    property alias datastoreSettings3:root.datastore
+                    property alias myMissionsRnSettings3:root.myMissionsRn
+        }
 
     Component{
         id: competitiveModeComponent

@@ -68,10 +68,10 @@
 //    QSettings settings;
 //    SettingsManager dude;
 //    QDateTime tomorrow=now.addSecs(86399);
-//    if(!settings.contains("TimE"))
-//        dude.writeSettings("TimE", tomorrow);
+//    if(!settings.contains("Time0"))
+//        dude.writeSettings("Time0", tomorrow);
 //    else{
-//        tomorrow = SettingsManager::loadSettings("TimE").toDateTime();
+//        tomorrow = SettingsManager::loadSettings("Time0").toDateTime();
 //    }
 //    FlashingTimer joe(tomorrow);
 //    return joe;
@@ -149,10 +149,10 @@ FlashingTimer allTheTimeStuff(){
     QSettings settings;
     SettingsManager dude;
     QDateTime tomorrow=now.addSecs(86399);
-    if(!settings.contains("wahahaha"))
-        dude.writeSettings("wahahaha?1", tomorrow);
+    if(!settings.contains("Time0"))
+        dude.writeSettings("Time0", tomorrow);
     else{
-        tomorrow = SettingsManager::loadSettings("wahahaha").toDateTime();
+        tomorrow = SettingsManager::loadSettings("Time0").toDateTime();
     }
     FlashingTimer joe(tomorrow);
     return joe;
