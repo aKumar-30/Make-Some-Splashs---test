@@ -523,7 +523,7 @@ Page {
     Settings{
         category: "mySettingsThing5"
         property alias mMName1: root.givenName
-//        property alias mBought2: root.bought
+        property alias mBought2: root.bought
     }
 }
 

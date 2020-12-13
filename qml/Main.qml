@@ -55,6 +55,7 @@ GameWindow {
     //        height: 785
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
+//        settings.clearAll()
         //other stuff
         mMusic1.play()
 //        //save volume
@@ -124,11 +125,12 @@ GameWindow {
         if(myMissionsRn){
             getCurrentMissions()
         }
+        console.log("PRESENT MISSIOSN ARE"+presentMissions)
         if(presentMissions.length!==0){
             displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
             displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
             displayDelegateModel.items.insert(mMissionModel.get(presentMissions[1]), "todaysMissions");
-            displayDelegateModel.items.insert(mMissionModel.get(presentMissions[2]), "todaysMissions");
+            displayDelegateModel.items.insert(mMissionModel.get(17), "todaysMissions");
         }
         else{
             updateMissions();
@@ -239,7 +241,12 @@ GameWindow {
         }
     }
     function setCurrentMissions(){
-        myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+presentMissions[2]+","
+        if(presentMissions[0]!==17)
+            myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+17+","
+        else{
+            presentMissions[0]=presentMissions[2]
+            myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+17+","
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
@@ -1463,8 +1470,8 @@ GameWindow {
             property alias shotRandomNumberSettings: root.shotRandomNumber
             property alias levelRandomNumberSettings: root.levelRandomNumber
             property alias personalBestSettings1: root.personalBest
-                    property alias datastoreSettings3:root.datastore
-                    property alias myMissionsRnSettings3:root.myMissionsRn
+                    property alias datastoreSettings:root.datastore
+                    property alias myMissionsRnSettings:root.myMissionsRn
         }
 
     Component{
