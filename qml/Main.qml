@@ -48,28 +48,27 @@ GameWindow {
     property int personalBest: 0;
     property string datastore: "";
     property string miniStore:""
-    property string myMissionsRn:""
     property string endingPage: ""
     property bool firstTimeEVER: true;
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
-//        settings.clearAll()
+        //        settings.clearAll()
         //other stuff
         mMusic1.play()
-//        //save volume
-//        if(!settings.getValue("volume")){
-//            settings.setValue("volume", root.volume);
-//        }
-//        else{
-//            console.log("ROOT VOLUME IS"+root.volume)
-//        }
-//        //save sound
-//        if(!settings.getValue("sound"))
-//            settings.setValue("sound", sound);
-//        else
-//            sound = settings.getValue("sound");
+        //        //save volume
+        //        if(!settings.getValue("volume")){
+        //            settings.setValue("volume", root.volume);
+        //        }
+        //        else{
+        //            console.log("ROOT VOLUME IS"+root.volume)
+        //        }
+        //        //save sound
+        //        if(!settings.getValue("sound"))
+        //            settings.setValue("sound", sound);
+        //        else
+        //            sound = settings.getValue("sound");
         //save coins
         if(!settings.getValue("coins"))
             settings.setValue("coins", numCoins);
@@ -94,11 +93,6 @@ GameWindow {
         else{
             datastore = settings.getValue("datastore");
         }
-        //save myMissionsRn
-        if(!settings.getValue("myMissionsRn"))
-            settings.setValue("myMissionsRn", myMissionsRn);
-        else
-            myMissionsRn = settings.getValue("myMissionsRn");
         //other settings (mostly one time)
         //save counter 14
         if(!settings.getValue("counter14"))
@@ -107,7 +101,7 @@ GameWindow {
             counter14 = settings.getValue("counter14");
         //save firstTimeUpdatingMissions
         if(!settings.getValue("firstTimeUpdatingMissions"))
-            settings.setValue("firstTimeUpdatingMissions", myMissionsRn);
+            settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
         else
             firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
         //        //save firstTimeEVER
@@ -121,9 +115,6 @@ GameWindow {
             mMissionModel.clear()
             var datamodel = JSON.parse(datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-        }
-        if(myMissionsRn){
-            getCurrentMissions()
         }
         console.log("PRESENT MISSIOSN ARE"+presentMissions)
         if(presentMissions.length!==0){
@@ -139,6 +130,7 @@ GameWindow {
     Component.onDestruction: {
         //for how to play not popping up every time
         firstTimeEVER= false;
+        presentMissionsChanged()
         counter14Changed();
         mMusic1.stop()
         storeForSettings();
@@ -151,7 +143,6 @@ GameWindow {
         settings.setValue("coins", numCoins);
         settings.setValue("ballSource", ballSource);
         settings.setValue("personalBest", personalBest);
-        settings.setValue("myMissionsRn", myMissionsRn);
         settings.setValue("counter14", counter14);
         settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
 
@@ -228,26 +219,6 @@ GameWindow {
             navigationStack.push(halftimeModeComponent)
         }
     }
-    function getCurrentMissions(){
-        let j =0;
-        for(let i =0; i < 3; i++){
-            var q = "";
-            while(myMissionsRn[j]!==","){
-                q+=(myMissionsRn[j]).toString();
-                j++
-            }
-            j++;
-            presentMissions.push(parseInt(q))
-        }
-    }
-    function setCurrentMissions(){
-        if(presentMissions[0]!==17)
-            myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+17+","
-        else{
-            presentMissions[0]=presentMissions[2]
-            myMissionsRn = presentMissions[0]+","+presentMissions[1]+","+17+","
-        }
-    }
 
     //--------------------------------------------------------------------------------------------------------------MISSIONS START HERE
     function storeForSettings(){
@@ -255,8 +226,8 @@ GameWindow {
             presentMissions.push(displayDelegateModel.items.get(0).model.index);
             presentMissions.push(displayDelegateModel.items.get(1).model.index);
             presentMissions.push(displayDelegateModel.items.get(2).model.index);
-            setCurrentMissions()
         }
+        presentMissionsChanged()
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
@@ -1460,19 +1431,20 @@ GameWindow {
             }
         }
     }
-        Settings{
-            property alias firstTimeEverSettings1: root.firstTimeEVER
-            property alias volumeSettings1: root.volume
-            property alias soundSettings1:root.sound
-                    property alias numCoinsSettings1: root.numCoins
-            property alias ballSourceSettings1:root.ballSource
+    Settings{
+        property alias firstTimeEverSettings1: root.firstTimeEVER
+        property alias volumeSettings1: root.volume
+        property alias soundSettings1:root.sound
+        property alias numCoinsSettings1: root.numCoins
+        property alias ballSourceSettings1:root.ballSource
 
-            property alias shotRandomNumberSettings: root.shotRandomNumber
-            property alias levelRandomNumberSettings: root.levelRandomNumber
-            property alias personalBestSettings1: root.personalBest
-                    property alias datastoreSettings:root.datastore
-                    property alias myMissionsRnSettings:root.myMissionsRn
-        }
+        property alias shotRandomNumberSettings: root.shotRandomNumber
+        property alias levelRandomNumberSettings: root.levelRandomNumber
+        property alias personalBestSettings1: root.personalBest
+        property alias datastoreSettings:root.datastore
+
+        property alias presentMissionsSettings: root.presentMissions
+    }
 
     Component{
         id: competitiveModeComponent
