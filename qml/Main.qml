@@ -528,7 +528,8 @@ GameWindow {
                     text: "Missions"
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
-                    font.family: bodoniMTBlack.name
+//                    font.family: bodoniMTBlack.name
+                    font.family: presentMissions
                 }
             }
             Rectangle{
