@@ -98,9 +98,11 @@ Page {
     }
     Component.onCompleted: {
         points=0;
-        getCurrentMissions()
     }
     Component.onDestruction: {
+//        console.log("Present missions current things"+mMissionModel.get(presentMissions[0]).currentThings)
+//        console.log("Present missions current things"+mMissionModel.get(presentMissions[1]).currentThings)
+//        console.log("Present missions current things"+mMissionModel.get(presentMissions[2]).currentThings)
         afterGameIsActuallyOver();
     }
 
@@ -286,7 +288,11 @@ Page {
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
-            if(presentMissions[i]===num){
+//            console.log("Num"+num)
+//            console.log("presentMissions"+presentMissions[i])
+//            console.log("presentMissions[i]===num"+presentMissions[i]===num)
+            if(presentMissions[i]==num){    //THIS WARNING IS INTENTIONAL DO NOT CHANGE THIS OR IT WILLLLLLL BREAK
+                                            //THE CODE AND I WILL BE MAD EVEN THOUGH IT IS ME WHO IS READING THIS BUT I CAN BE MAD AT MYSELF
                 return true;
             }
         }
@@ -1771,9 +1777,12 @@ Page {
             function lastMissionCheck(shotShot){
                 function typeOfShot(shotShot){
                     var correctShot = typesOfShotPossible[shotRandomNumber]
+//                    console.log("correct shot is"+correctShot)
                     if(correctShot===shotShot){
+//                        console.log("Last mission check returned true")
                         return true;
                     }
+//                    console.log("Last mission check returned false")
                     return false;
                 }
                 let last= mMissionModel.get(17)
@@ -1782,6 +1791,7 @@ Page {
                         counterLast++;
                         if(counterLast===mMissionModel.get(17).neededThings&&mMissionModel.get(17).currentThings<mMissionModel.get(17).neededThings){
                             mMissionModel.get(17).currentThings=counterLast
+                            counterLast--
                         }
                     }
                 }
@@ -1810,7 +1820,15 @@ Page {
                     }
                     counter1=0;
                     //2
+//                    console.log("Am i outside of here??")
+//                    console.log("counter2 is..."+counter2)
+//                    console.log("Here are ALL the parts outputed: the if statement says"+counter2>mMissionModel.get(2).currentThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2))
+//                    console.log("counter2" + counter2)
+//                    console.log("mMissionModel.get(2).currentThings"+mMissionModel.get(2).currentThings)
+//                    console.log("mMissionModel.get(2).neededThings"+mMissionModel.get(2).neededThings)
+//                    console.log("checkIfCurrentMission(2)"+checkIfCurrentMission(2))
                     if(counter2>mMissionModel.get(2).currentThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
+                        console.log("Am I here???")
                         mMissionModel.get(2).currentThings=counter2
                     }
                     counter2=0;
@@ -1992,7 +2010,7 @@ Page {
                     if(level===3){
                         counter9++;
                         if(counter9===2&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)&&checkIfCurrentMission(9)){
-                            mMissionModel.get(9).currentThings=2
+                            mMissionModel.get(9).currentThings=mMissionModel.get(9).neededThings
                         }
                     }
                     //10
@@ -2049,7 +2067,7 @@ Page {
                     if(level===2){
                         counter5++;
                         if(counter5===9&&!(mMissionModel.get(5).currentThings>=mMissionModel.get(5).neededThings)){
-                            mMissionModel.get(5).currentThings=9
+                            mMissionModel.get(5).currentThings=mMissionModel.get(5).currentThings
                         }
                     }
                     //6
@@ -2074,7 +2092,7 @@ Page {
                     //13
                     counter13++;
                     if(counter13===mMissionModel.get(13).neededThings&&!(mMissionModel.get(13).currentThings>=mMissionModel.get(13).neededThings)&&checkIfCurrentMission(13)){
-                        mMissionModel.get(13).currentThings=4
+                        mMissionModel.get(13).currentThings=mMissionModel.get(13).neededThings
                     }
                     //14
                 }
@@ -2115,7 +2133,7 @@ Page {
                     if(level===3){
                         counter4++;
                         if(counter4===6&&!(mMissionModel.get(4).currentThings>=mMissionModel.get(4).neededThings)){
-                            mMissionModel.get(4).currentThings=6
+                            mMissionModel.get(4).currentThings=mMissionModel.get(4).neededThings
                         }
                     }
                     //5
@@ -2167,17 +2185,17 @@ Page {
                     //0
                     counter0++;
                     if(counter0===3&&!(mMissionModel.get(0).currentThings>=mMissionModel.get(0).neededThings)&&checkIfCurrentMission(0)){
-                        mMissionModel.get(0).currentThings=3
+                        mMissionModel.get(0).currentThings=mMissionModel.get(0).neededThings
                     }
                     //1
                     counter1++;
                     if(counter1===6&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings)&&checkIfCurrentMission(1)){
-                        mMissionModel.get(1).currentThings=6
+                        mMissionModel.get(1).currentThings=mMissionModel.get(1).neededThings
                     }
                     //2
                     counter2++;
                     if(counter2===11&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
-                        mMissionModel.get(2).currentThings=11
+                        mMissionModel.get(2).currentThings=mMissionModel.get(2).neededThings
                     }
                     //3
                     if(counter3>mMissionModel.get(3).currentThings&&!(mMissionModel.get(3).currentThings>=mMissionModel.get(3).neededThings)&&checkIfCurrentMission(3)){
@@ -2202,7 +2220,7 @@ Page {
                     if(level===3){
                         counter6++;
                         if(counter6===8&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)&&checkIfCurrentMission(6)){
-                            mMissionModel.get(6).currentThings=8
+                            mMissionModel.get(6).currentThings=mMissionModel.get(6).neededThings
                         }
                     }
                     //7
@@ -2241,17 +2259,17 @@ Page {
                     //0
                     counter0++;
                     if(counter0===3&&!(mMissionModel.get(0).currentThings>=mMissionModel.get(0).neededThings)&&checkIfCurrentMission(0)){
-                        mMissionModel.get(0).currentThings=3
+                        mMissionModel.get(0).currentThings=mMissionModel.get(0).neededThings
                     }
                     //1
                     counter1++;
                     if(counter1===6&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings)&&checkIfCurrentMission(1)){
-                        mMissionModel.get(1).currentThings=6
+                        mMissionModel.get(1).currentThings=mMissionModel.get(1).neededThings
                     }
                     //2
                     counter2++;
                     if(counter2===11&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
-                        mMissionModel.get(2).currentThings=11
+                        mMissionModel.get(2).currentThings=mMissionModel.get(2).neededThings
                     }
                     //3
                     if(counter3>mMissionModel.get(3).currentThings&&!(mMissionModel.get(3).currentThings>=mMissionModel.get(3).neededThings)&&checkIfCurrentMission(3)){
@@ -2276,7 +2294,7 @@ Page {
                     if(level===3){
                         counter6++;
                         if(counter6===8&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)&&checkIfCurrentMission(6)){
-                            mMissionModel.get(6).currentThings=8
+                            mMissionModel.get(6).currentThings=mMissionModel.get(6).neededThings
                         }
                     }
                     //7

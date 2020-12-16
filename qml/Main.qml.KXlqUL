@@ -36,7 +36,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.43;
+    property real textMultiplier: 1;
     id: root
 
 
@@ -116,7 +116,7 @@ GameWindow {
             var datamodel = JSON.parse(datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
         }
-//        console.log("PRESENT MISSIOSN ARE"+presentMissions)
+        console.log("PRESENT MISSIOSN ARE"+presentMissions)
         if(presentMissions.length!==0){
             displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
             displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
@@ -134,9 +134,9 @@ GameWindow {
         counter14Changed();
         mMusic1.stop()
         storeForSettings();
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[0]).currentThings)
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[1]).currentThings)
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[2]).currentThings)
+        console.log("Present missions current things"+mMissionModel.get(presentMissions[0]).currentThings)
+        console.log("Present missions current things"+mMissionModel.get(presentMissions[1]).currentThings)
+        console.log("Present missions current things"+mMissionModel.get(presentMissions[2]).currentThings)
 
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
@@ -230,7 +230,7 @@ GameWindow {
             presentMissions.push(displayDelegateModel.items.get(1).model.index);
             presentMissions.push(displayDelegateModel.items.get(2).model.index);
         }
-//        console.log("present Missions"+presentMissions)
+        console.log("present Missions"+presentMissions)
         presentMissionsChanged()
     }
     function checkIfCurrentMission(num){
@@ -323,7 +323,7 @@ GameWindow {
         presentMissions.push(arr[0].index);
         presentMissions.push(arr[1].index);
         presentMissions.push(arr[2].index);
-//        console.log("Pressent missions"+presentMissions)
+        console.log("Pressent missions"+presentMissions)
         setCurrentMissions()
         let s = 0
         for(s = 0; s<4; s++){ //displayDelegateModel.items.count-1-s
@@ -389,7 +389,7 @@ GameWindow {
                 //                        displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.index).currentThings
                 //                    else
                 //                displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[2-s]).currentThings
-//                console.log("displayDelegateModel.items.get(s).model.currentThings"+ displayDelegateModel.items.get(s).model.currentThings)
+                console.log("displayDelegateModel.items.get(s).model.currentThings"+ displayDelegateModel.items.get(s).model.currentThings)
                 displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
             }
         }
@@ -1438,18 +1438,18 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings: root.firstTimeEVER
-        property alias volumeSettings: root.volume
-        property alias soundSettings:root.sound
-        property alias numCoinsSettings: root.numCoins
-        property alias ballSourceSettings:root.ballSource
+        property alias firstTimeEverSettings32: root.firstTimeEVER
+        property alias volumeSettings32: root.volume
+        property alias soundSettings32:root.sound
+        property alias numCoinsSettings32: root.numCoins
+        property alias ballSourceSettings32:root.ballSource
 
-        property alias shotRandomNumberSettings: root.shotRandomNumber
-        property alias levelRandomNumberSettings: root.levelRandomNumber
-        property alias personalBestSettings: root.personalBest
-        property alias datastoreSettings:root.datastore
+        property alias shotRandomNumberSettings32: root.shotRandomNumber
+        property alias levelRandomNumberSettings32: root.levelRandomNumber
+        property alias personalBestSettings32: root.personalBest
+        property alias datastoreSettings32:root.datastore
 
-        property alias presentMissionsSettings: root.presentMissions
+        property alias presentMissionsSettings32: root.presentMissions
     }
 
     Component{
