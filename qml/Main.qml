@@ -54,7 +54,7 @@ GameWindow {
     //        height: 785
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
-        //        settings.clearAll()
+                settings.clearAll()
         //other stuff
         mMusic1.play()
         //        //save volume
@@ -528,8 +528,7 @@ GameWindow {
                     text: "Missions"
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
-//                    font.family: bodoniMTBlack.name
-                    font.family: presentMissions
+                    font.family: bodoniMTBlack.name
                 }
             }
             Rectangle{
@@ -1433,18 +1432,18 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings1: root.firstTimeEVER
-        property alias volumeSettings1: root.volume
-        property alias soundSettings1:root.sound
-        property alias numCoinsSettings1: root.numCoins
-        property alias ballSourceSettings1:root.ballSource
+        property alias firstTimeEverSettings2: root.firstTimeEVER
+        property alias volumeSettings2: root.volume
+        property alias soundSettings2:root.sound
+        property alias numCoinsSettings2: root.numCoins
+        property alias ballSourceSettings2:root.ballSource
 
-        property alias shotRandomNumberSettings: root.shotRandomNumber
-        property alias levelRandomNumberSettings: root.levelRandomNumber
-        property alias personalBestSettings1: root.personalBest
-        property alias datastoreSettings:root.datastore
+        property alias shotRandomNumberSettings2: root.shotRandomNumber
+        property alias levelRandomNumberSettings2: root.levelRandomNumber
+        property alias personalBestSettings2: root.personalBest
+        property alias datastoreSettings2:root.datastore
 
-        property alias presentMissionsSettings: root.presentMissions
+        property alias presentMissionsSettings2: root.presentMissions
     }
 
     Component{
