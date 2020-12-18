@@ -13,7 +13,6 @@ import otherArjun2 1.2
 Page {
     //do stuff in main yay
     function onGoToHalftime(){
-        Extra.endingPage="CompetitiveMode.qml"
         navigationStack.push(halftimeModeComponent)
     }
     function switchFileSignal(){
@@ -38,7 +37,7 @@ Page {
     property var manyMakes: 0;
     property var extraPoints: 0;
     property int level: 1
-    property int levelIndicator: 0
+    property int levelIndicator: 1
     property var sliderEasingType: Easing.Linear
     property var firstTime: true;
     property var levelIndicatorDown:levelIndicatorSetter ()
@@ -71,7 +70,6 @@ Page {
     property var easyTypes: [Easing.BezierCurve, Easing.OutInBack, Easing.InQuad, Easing.OutQuad,Easing.InOutCubic, Easing.InCubic, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.OutInExpo, Easing.OutInCirc]
     property var mediumTypes: [Easing.OutInBounce, Easing.InOutBounce,Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InExpo, Easing.InCirc,  Easing.OutCirc]
     property var hardTypes: [Easing.OutBounce, Easing.InBounce, Easing.OutElastic, Easing.OutBack, Easing.InBack]
-
     property bool scoresSaved: false; /* currently not used */
     function levelIndicatorSetter (){
         if(level==1)
@@ -92,6 +90,8 @@ Page {
         function onGoBackFromHalftime(addedPoints){
             points+=addedPoints
             levelRectangleAnimation.start();
+            console.log("I WAS HERE")
+            dayNightStateRectId.state= "night"
             seqAnimationId.pause()
             handleId.visible=false;
         }
@@ -100,9 +100,6 @@ Page {
         points=0;
     }
     Component.onDestruction: {
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[0]).currentThings)
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[1]).currentThings)
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[2]).currentThings)
         afterGameIsActuallyOver();
     }
 
@@ -186,6 +183,36 @@ Page {
                         mMissionModel.get(14).currentThings=counter14.length
                     }
                 }
+            }
+        }
+        //if this doesnt work kick it
+        if(true){
+            if(counter0>mMissionModel.get(0)&&!(mMissionModel.get(0).currentThings>=mMissionModel.get(0).neededThings)&&checkIfCurrentMission(0)){
+                mMissionModel.get(0).currentThings=(counter0>mMissionModel.get(0).neededThings)?mMissionModel.get(0).neededThings:counter0
+            }
+            if(counter1>mMissionModel.get(1)&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings)&&checkIfCurrentMission(1)){
+                mMissionModel.get(1).currentThings=(counter1>mMissionModel.get(1).neededThings)?mMissionModel.get(1).neededThings:counter1
+            }
+            if(counter2>mMissionModel.get(2)&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
+                mMissionModel.get(2).currentThings=(counter2>mMissionModel.get(2).neededThings)?mMissionModel.get(2).neededThings:counter2
+            }
+            if(counter3>mMissionModel.get(3)&&!(mMissionModel.get(3).currentThings>=mMissionModel.get(3).neededThings)&&checkIfCurrentMission(3)){
+                mMissionModel.get(3).currentThings=(counter3>mMissionModel.get(3).neededThings)?mMissionModel.get(3).neededThings:counter3
+            }
+            if(counter4>mMissionModel.get(4)&&!(mMissionModel.get(4).currentThings>=mMissionModel.get(4).neededThings)&&checkIfCurrentMission(4)){
+                mMissionModel.get(4).currentThings=(counter4>mMissionModel.get(4).neededThings)?mMissionModel.get(4).neededThings:counter4
+            }
+            if(counter5>mMissionModel.get(5)&&!(mMissionModel.get(5).currentThings>=mMissionModel.get(5).neededThings)&&checkIfCurrentMission(5)){
+                mMissionModel.get(5).currentThings=(counter5>mMissionModel.get(5).neededThings)?mMissionModel.get(5).neededThings:counter5
+            }
+            if(counter6>mMissionModel.get(6)&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)&&checkIfCurrentMission(6)){
+                mMissionModel.get(6).currentThings=(counter6>mMissionModel.get(6).neededThings)?mMissionModel.get(6).neededThings:counter6
+            }
+            if(counter9>mMissionModel.get(9)&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)&&checkIfCurrentMission(9)){
+                mMissionModel.get(9).currentThings=(counter9>mMissionModel.get(9).neededThings)?mMissionModel.get(9).neededThings:counter9
+            }
+            if(counter13>mMissionModel.get(13)&&!(mMissionModel.get(13).currentThings>=mMissionModel.get(13).neededThings)&&checkIfCurrentMission(13)){
+                mMissionModel.get(13).currentThings=(counter13>mMissionModel.get(13).neededThings)?mMissionModel.get(13).neededThings:counter13
             }
         }
         if(true){
@@ -288,11 +315,11 @@ Page {
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
-//            console.log("Num"+num)
-//            console.log("presentMissions"+presentMissions[i])
-//            console.log("presentMissions[i]===num"+presentMissions[i]===num)
+            //            console.log("Num"+num)
+            //            console.log("presentMissions"+presentMissions[i])
+            //            console.log("presentMissions[i]===num"+presentMissions[i]===num)
             if(presentMissions[i]==num){    //THIS WARNING IS INTENTIONAL DO NOT CHANGE THIS OR IT WILLLLLLL BREAK
-                                            //THE CODE AND I WILL BE MAD EVEN THOUGH IT IS ME WHO IS READING THIS BUT I CAN BE MAD AT MYSELF
+                //THE CODE AND I WILL BE MAD EVEN THOUGH IT IS ME WHO IS READING THIS BUT I CAN BE MAD AT MYSELF
                 return true;
             }
         }
@@ -315,10 +342,13 @@ Page {
     property var counterLast: 0;
 
     onMIsOpenChanged:{
-        if(Extra.isOpen===false)
-            whatToDoWhenDoubleClicked()
+        if(Extra.isOpen===false){
+            if(stateRectId.state=="paused")
+                whatToDoWhenDoubleClicked()
+        }
         else{
-            whatToDoWhenDoubleClicked()
+            if(stateRectId.state!="paused")
+                whatToDoWhenDoubleClicked()
         }
     }
     function newRandomColors3(){
@@ -481,6 +511,9 @@ Page {
                     levelRectangleAnimation.complete()
                     levelRectangleAnimationPause.complete()
                 }
+                else {
+                    whatToDoInsideRectangleMA()
+                }
             }
         }
 
@@ -512,12 +545,21 @@ Page {
     }
     onShouldStartThirdLevelChanged: {
         if(shouldStartThirdLevel===true){
-            sliderId.enabled=true;
+            handleId.visible=false;
             whatToDoWhenAnimFinished.whatToDoForNextLevel();
+            dayNightStateRectId.state= "night"
+            sliderId.enabled=true;
             shouldBeginThirdLevel=false
         }
     }
+    function checkIfSwitchNightToDay(){
+        if(levelIndicator%15==0 && levelIndicator!=0){
+            dayNightStateRectId.state = (dayNightStateRectId.state==="day")?"night":"day"
+        }
+    }
+
     property int easingNumber:-1;
+
     function whatToDoWhenAnimFinished()
     {
         //variable declaration
@@ -527,7 +569,7 @@ Page {
         function whatToDoForNextLevel()
         {
             level++;
-            levelIndicator=1;
+            levelIndicator=0;
             tally1.visible =false; tally2.visible =false; tally3.visible =false;
             tally4.visible =false; tally5.visible =false; tally6.visible =false;
             tally7.visible =false; tally3.visible =false; tally8.visible =false;
@@ -595,11 +637,11 @@ Page {
         if(level===1)
         {
             coinProb = 6;
-            sliderId.value=Math.random()*1000;
+            sliderId.value=Math.random()*820;
             mDuration-=40 /*41*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator > 15)
-            {
+             {
                 whatToDoForNextLevel()
                 //set mDuration
                 mDurationEasy=1200
@@ -630,7 +672,7 @@ Page {
             easingNumber = Math.floor((Math.random() * 25));
             if(easingNumber<12){
                 //easy
-//               start: mDurationEasy=1200;
+                //               start: mDurationEasy=1200;
                 mDurationEasy-=42
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypes[easingNumber]
@@ -666,8 +708,8 @@ Page {
                 }
                 mDuration=1000;
                 //head to halftime yay!
-                onGoToHalftime()
                 Extra.endingPage="HalftimeMode.qml"
+                onGoToHalftime()
             }
             else{
                 //have to have on all three, only restart thing if not going to next level
@@ -710,11 +752,12 @@ Page {
         //Level four stuff
         else if(level===4)
         {
+            checkIfCurrentMission();
             coinProb = 3;
             easingNumber = Math.floor((Math.random() * 25));
             if(easingNumber<12){
                 //easy
-//               start: mDurationEasy=1200;
+                //               start: mDurationEasy=1200;
                 if(mDurationEasy>700)
                     mDurationEasy-=42
                 mDuration=mDurationEasy
@@ -905,6 +948,12 @@ Page {
         width:180
         height:180
         color: "yellow"
+        Image{
+            visible: false
+            id: moonInSun
+            anchors.fill: parent
+            source: "../assets/images/moon.png"
+        }
         Text{
             id: onSunLevelText
             font.pointSize: textMultiplier* 22
@@ -939,6 +988,7 @@ Page {
                 source: "../assets/images/coinFront.png"
             }
             Text{
+                id: coinInTheCornerText
                 property int theText: numCoins
                 text: theText
                 font.family: stencil.name
@@ -1097,16 +1147,16 @@ Page {
             function levelTextFunc(level)
             {
                 if(level===1){
-                    levelRectangleText.text = "     Hint: The slider moves faster as you go along. Survive to advance, 3 missed and you're out"
+                    levelRectangleText.text = "     Don't miss three. It gets harder as you go!"
                 }
                 else if(level===2){
-                    levelRectangleText.text = "     Hint: The slider has different patterns of motion. Survive to advance, 3 missed and you are out"
+                    levelRectangleText.text = "     Don't miss three. Watch for the crazy patterns!"
                 }
                 else if(level===3){
-                    levelRectangleText.text = "     Hint: The colors are switching! Try to catch the green one? (not as easy ias it looks)!  3 missed in a row and you're are out"
+                    levelRectangleText.text = "     Don't miss three. Watch for the switching colors"
                 }
                 else if(level===4){
-                    levelRectangleText.text = "     Try to beat your own record! 3 missed and you're out"
+                    levelRectangleText.text = "     Don't miss three. Watch for the crazier patterns!"
                 }
             }
             id: levelRectangleText
@@ -1777,12 +1827,12 @@ Page {
             function lastMissionCheck(shotShot){
                 function typeOfShot(shotShot){
                     var correctShot = typesOfShotPossible[shotRandomNumber]
-//                    console.log("correct shot is"+correctShot)
+                    //                    console.log("correct shot is"+correctShot)
                     if(correctShot===shotShot){
-//                        console.log("Last mission check returned true")
+                        //                        console.log("Last mission check returned true")
                         return true;
                     }
-//                    console.log("Last mission check returned false")
+                    //                    console.log("Last mission check returned false")
                     return false;
                 }
                 let last= mMissionModel.get(17)
@@ -1820,13 +1870,6 @@ Page {
                     }
                     counter1=0;
                     //2
-//                    console.log("Am i outside of here??")
-//                    console.log("counter2 is..."+counter2)
-//                    console.log("Here are ALL the parts outputed: the if statement says"+counter2>mMissionModel.get(2).currentThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2))
-//                    console.log("counter2" + counter2)
-//                    console.log("mMissionModel.get(2).currentThings"+mMissionModel.get(2).currentThings)
-//                    console.log("mMissionModel.get(2).neededThings"+mMissionModel.get(2).neededThings)
-//                    console.log("checkIfCurrentMission(2)"+checkIfCurrentMission(2))
                     if(counter2>mMissionModel.get(2).currentThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
                         console.log("Am I here???")
                         mMissionModel.get(2).currentThings=counter2
@@ -1882,7 +1925,7 @@ Page {
                 points -= level*105;
                 pointsThisRound -= level*105;
                 airBallAnimation.start();
-                feedback = ["Seriously, you can do better", "An airball?", "You are supposed to shoot it into the hoop", "My dog can shoot better than that", "A complete fail...", "Practice makes perfect...you need practice!"]
+                feedback = ["You can do better", "An airball?", "Try to aim at the hoop", "My dog can shoot better than that", "A complete fail...", "Practice makes perfect...you need practice!"]
                 random_number = Math.floor((Math.random() * 6));
                 feedbackLabel.font.italic = true;
             }
@@ -1907,7 +1950,7 @@ Page {
                     counter2=0;
                     //3
                     counter3++;
-                    if(counter3===2&&!(mMissionModel.get(3).currentThings>=mMissionModel.get(3).neededThings)&&checkIfCurrentMission(3)){
+                    if(counter3===mMissionModel.get(3).neededThings&&!(mMissionModel.get(3).currentThings>=mMissionModel.get(3).neededThings)&&checkIfCurrentMission(3)){
                         mMissionModel.get(3).currentThings=2
                     }
                     //4
@@ -1956,7 +1999,7 @@ Page {
                 points -= level*75;
                 pointsThisRound -= level*75;
                 backboardMissAnimation.start()
-                feedback = ["Well, better than an airball", "Atleast you hit the backboard", "Your NBA hopes are dwindling", "Next time, try to hit the rim", "Might want to start taking some basketball lessons", "Not your worst...", "I think you can do better"]
+                feedback = ["Better than an airball", "Atleast you hit the backboard", "Your NBA hopes are dwindling", "Next time, try to hit the rim", "Might want to take some basketball lessons", "Not your worst...", "I think you can do better"]
                 random_number = Math.floor((Math.random() * 6));
             }
             else if(level3ShotAccuracy==="rimMiss"|| level3ShotAccuracy==="null"&&(value <270 || value >730)){
@@ -2009,7 +2052,7 @@ Page {
                     //9
                     if(level===3){
                         counter9++;
-                        if(counter9===2&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)&&checkIfCurrentMission(9)){
+                        if(counter9===mMissionModel.get(2).neededThings&&!(mMissionModel.get(9).currentThings>=mMissionModel.get(9).neededThings)&&checkIfCurrentMission(9)){
                             mMissionModel.get(9).currentThings=mMissionModel.get(9).neededThings
                         }
                     }
@@ -2066,7 +2109,7 @@ Page {
                     //5
                     if(level===2){
                         counter5++;
-                        if(counter5===9&&!(mMissionModel.get(5).currentThings>=mMissionModel.get(5).neededThings)){
+                        if(counter5===mMissionModel.get(5).neededThings&&!(mMissionModel.get(5).currentThings>=mMissionModel.get(5).neededThings)){
                             mMissionModel.get(5).currentThings=mMissionModel.get(5).currentThings
                         }
                     }
@@ -2102,7 +2145,7 @@ Page {
                 points +=30*level;
                 pointsThisRound += 30*level;
                 backboardAnimation.start()
-                feedback = ["Good shot","A make is a make", "A splash is a splash", "Lucky shot??",  "You can do even better", "Atleast it made"]
+                feedback = ["Good shot","A make is a make", "A splash is a splash", "Lucky shot?",  "You can do even better", "Atleast it made"]
                 random_number = Math.floor((Math.random() * 7));
             }
             else if(level3ShotAccuracy==="rimMake"|| level3ShotAccuracy==="null"&&(value <415 || value > 585)){
@@ -2132,7 +2175,7 @@ Page {
                     //4
                     if(level===3){
                         counter4++;
-                        if(counter4===6&&!(mMissionModel.get(4).currentThings>=mMissionModel.get(4).neededThings)){
+                        if(counter4===mMissionModel.get(4).neededThings&&!(mMissionModel.get(4).currentThings>=mMissionModel.get(4).neededThings)){
                             mMissionModel.get(4).currentThings=mMissionModel.get(4).neededThings
                         }
                     }
@@ -2175,7 +2218,7 @@ Page {
                 points+=50*level
                 pointsThisRound += 50*level;
                 rimMakeAnimation.start()
-                feedback = ["I thought that was going to miss", "The rim was on your side", "Looks like you are on a set path to the NBA", "Amazing shot!", "Pretty nice!", "Actually pretty good"]
+                feedback = ["I thought that was going to miss", "The rim was on your side", "Looks like you are on a set path to the NBA", "Amazing shot!", "Pretty nice!", "Fantastic", "Pretty good"]
                 random_number = Math.floor((Math.random() * 5));
             }
             else if(level3ShotAccuracy==="splash"|| level3ShotAccuracy==="null"&&(value <485|| value>515)){
@@ -2184,17 +2227,17 @@ Page {
                     lastMissionCheck("splash")
                     //0
                     counter0++;
-                    if(counter0===3&&!(mMissionModel.get(0).currentThings>=mMissionModel.get(0).neededThings)&&checkIfCurrentMission(0)){
+                    if(counter0===mMissionModel.get(0).neededThings&&!(mMissionModel.get(0).currentThings>=mMissionModel.get(0).neededThings)&&checkIfCurrentMission(0)){
                         mMissionModel.get(0).currentThings=mMissionModel.get(0).neededThings
                     }
                     //1
                     counter1++;
-                    if(counter1===6&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings)&&checkIfCurrentMission(1)){
+                    if(counter1===mMissionModel.get(1).neededThings&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings)&&checkIfCurrentMission(1)){
                         mMissionModel.get(1).currentThings=mMissionModel.get(1).neededThings
                     }
                     //2
                     counter2++;
-                    if(counter2===11&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
+                    if(counter2===mMissionModel.get(2).neededThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
                         mMissionModel.get(2).currentThings=mMissionModel.get(2).neededThings
                     }
                     //3
@@ -2219,7 +2262,7 @@ Page {
                     //6
                     if(level===3){
                         counter6++;
-                        if(counter6===8&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)&&checkIfCurrentMission(6)){
+                        if(counter6===mMissionModel.get(6).neededThings&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)&&checkIfCurrentMission(6)){
                             mMissionModel.get(6).currentThings=mMissionModel.get(6).neededThings
                         }
                     }
@@ -2248,7 +2291,7 @@ Page {
                 points+= 110*level
                 pointsThisRound += 110*level;
                 splashAnimation.start()
-                feedback = ["Next MVP?","Future NBA champ","The next Steph Curry?", "Splashing it like Klay Thompson?", "What an amazing shot?", "Making some splashes", "All the way from deep?", "Swish!", "Like a true nba player"]
+                feedback = ["Next MVP?","Future NBA champion","The next Steph Curry?", "What an amazing shot?", "Making some splashes", "Raining threes", "All the way from deep?", "Swish!", "Like a true NBA player"]
                 random_number = Math.floor((Math.random() * 7));
             }
             else{
@@ -2258,17 +2301,17 @@ Page {
                     lastMissionCheck("splash")
                     //0
                     counter0++;
-                    if(counter0===3&&!(mMissionModel.get(0).currentThings>=mMissionModel.get(0).neededThings)&&checkIfCurrentMission(0)){
+                    if(counter0===mMissionModel.get(0).neededThings&&!(mMissionModel.get(0).currentThings>=mMissionModel.get(0).neededThings)&&checkIfCurrentMission(0)){
                         mMissionModel.get(0).currentThings=mMissionModel.get(0).neededThings
                     }
                     //1
                     counter1++;
-                    if(counter1===6&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings)&&checkIfCurrentMission(1)){
+                    if(counter1===mMissionModel.get(1).neededThings&&!(mMissionModel.get(1).currentThings>=mMissionModel.get(1).neededThings)&&checkIfCurrentMission(1)){
                         mMissionModel.get(1).currentThings=mMissionModel.get(1).neededThings
                     }
                     //2
                     counter2++;
-                    if(counter2===11&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
+                    if(counter2===mMissionModel.get(2).neededThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
                         mMissionModel.get(2).currentThings=mMissionModel.get(2).neededThings
                     }
                     //3
@@ -2293,7 +2336,7 @@ Page {
                     //6
                     if(level===3){
                         counter6++;
-                        if(counter6===8&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)&&checkIfCurrentMission(6)){
+                        if(counter6===mMissionModel.get(6).neededThings&&!(mMissionModel.get(6).currentThings>=mMissionModel.get(6).neededThings)&&checkIfCurrentMission(6)){
                             mMissionModel.get(6).currentThings=mMissionModel.get(6).neededThings
                         }
                     }
@@ -2322,7 +2365,7 @@ Page {
                 points+= 150*level
                 pointsThisRound +=150*level;
                 splashAnimation.start()
-                feedback = ["The GOAT?", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP", "Champion"]
+                feedback = ["The Greatest of All Time", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP", "Champion", "Beautiful shot"]
                 random_number = Math.floor((Math.random() * 5));
                 feedbackLabel.font.bold = true;
                 splashAnimation.start()
@@ -2576,7 +2619,8 @@ Page {
                 implicitWidth: 20
                 implicitHeight: 50
                 radius: 7
-                color: sliderId.pressed ? "#f0f0f0" : "#ededed"
+                //                color: sliderId.pressed ? "#f0f0f0" : "#ededed"
+                color: sliderId.pressed ? "#141414":"#1c1c1c"
                 border.color: "#9e9e9e"
             }
             SequentialAnimation{
@@ -3285,6 +3329,99 @@ Page {
         volume: root.sound*0.3
     }
     Rectangle{
+        id: dayNightStateRectId
+        state: "day"
+        states: [
+            State{
+                name: "day"
+                PropertyChanges {
+                    target: skyStartGradient
+                    color: "#0080FF"
+                }
+                PropertyChanges {
+                    target: skyEndGradient
+                    color: "#66CCFF"
+                }
+                PropertyChanges {
+                    target: groundStartGradient
+                    color: "#00FF00"
+                }
+                PropertyChanges {
+                    target: groundEndGradient
+                    color: "#00803F"
+                }
+                PropertyChanges{
+                    target: sun
+                    color: "yellow"
+                }
+
+                PropertyChanges {
+                    target: moonInSun
+                    visible: false
+                }
+                PropertyChanges {
+                    target: feedbackLabel
+                    color: "black"
+                }
+                PropertyChanges {
+                    target: coinInTheCornerText
+                    color: "black"
+                }
+            },
+            State{
+                name: "night"
+                PropertyChanges {
+                    target: skyStartGradient
+                    color: "#00008c"
+                }
+                PropertyChanges {
+                    target: skyEndGradient
+                    color: "#2020d6"
+                }
+
+                PropertyChanges {
+                    target: groundStartGradient
+                    color: "#045c16"
+                }
+                PropertyChanges {
+                    target: groundEndGradient
+                    color: "#177a2c"
+                }
+                PropertyChanges{
+                    target: sun
+                    color: "transparent"
+                }
+
+                PropertyChanges {
+                    target: moonInSun
+                    visible: true
+                }
+                PropertyChanges {
+                    target: feedbackLabel
+                    color: "white"
+                }
+                PropertyChanges {
+                    target: coinInTheCornerText
+                    color: "white"
+                }
+            }
+        ]
+        transitions: [
+            Transition {
+                from: "*"
+                to: "*"
+                ColorAnimation {
+                    duration: 1000
+                }
+                NumberAnimation{
+                    property: opacity
+                    duration: 100
+                }
+            }
+        ]
+    }
+
+    Rectangle{
         id: stateRectId
         state: "notPaused"
         states: [
@@ -3316,6 +3453,11 @@ Page {
                 }
             }
         ]
+    }
+    Component{
+        id: halftimeModeComponent
+        HalftimeMode{
+        }
     }
 }
 

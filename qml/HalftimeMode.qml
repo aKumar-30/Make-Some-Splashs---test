@@ -14,6 +14,7 @@ Page {
     height: parent.height
     anchors.fill: parent
     function onGoBackFromHalftime(points1){
+        Extra.endingPage="CompetitiveMode.qml"
         navigationStack.pop()
         points+=points1
         shouldBeginThirdLevel=true
@@ -44,9 +45,9 @@ Page {
         Text{
             anchors.horizontalCenter: parent.horizontalCenter
             id: levelRectangleText1
-            text: "It's HALFTIME!"
+            text: "It's Halftime"
             font.pointSize: textMultiplier*1;
-            font.family: "Impact"
+            font.family: bodoniMTBlack.name
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             width: parent.width
@@ -54,10 +55,11 @@ Page {
         Text{
             id: levelRectangleText
             text: "Click the ball to collect it and earn points - this adds on to your game score"
-            font.pointSize: textMultiplier* 15;
-            font.family: "Century Gothic"
+            font.pointSize: textMultiplier* 20;
+            font.family: centuryGothic.name
             wrapMode: Text.Wrap
             width: parent.width-30
+            lineHeight: 1.5
             y: levelRectangleText1.y+levelRectangleText1.implicitHeight+30+10
             anchors.horizontalCenter: parent.horizontalCenter
             visible:false
@@ -93,11 +95,11 @@ Page {
             }
             id: startGameButton
             width: templateButton.width+140
-            height: templateButton.height+38
+            height: templateButton.height+50
             font.pointSize: textMultiplier* 14;
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 20
+            anchors.bottomMargin: 50
             onClicked: {
                 // emit signal and hide dialog if button is selected
                 levelRectangle.visible=false;
@@ -170,7 +172,7 @@ Page {
         id: remainingTimeBox
         anchors.centerIn: parent
         width:height
-        height: remainingTimeBoxText.implicitHeight+200
+        height: remainingTimeBoxText.implicitHeight+129
         color: "black"
         z:200
         opacity: 0.4
@@ -222,14 +224,14 @@ Page {
                 text: value
                 font.family: geniso.name
                 font.bold: true
-                font.pointSize: textMultiplier* 80
+                font.pointSize: textMultiplier* 85
                 color: "white"
             }
             Text{
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "extra points"
                 font.family: geniso.name
-                font.pointSize: textMultiplier* 44
+                font.pointSize: textMultiplier* 40
                 color: "white"
             }
         }

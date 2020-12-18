@@ -36,7 +36,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.43;
+    property real textMultiplier: 1;
     id: root
 
 
@@ -431,12 +431,7 @@ GameWindow {
             box.color: "white"
             modal: true
             onSelectedOk: {
-                if(Extra.endingPage==="HalfimeMode.qml"){
-                    navigationStack.pop()
-                    navigationStack.pop()
-                }
-                else
-                    navigationStack.pop()
+                navigationStack.pop()
                 myDialog1.hide()
                 thisTitle = "Shoot Hoops"
                 //starting timer
@@ -1082,8 +1077,8 @@ GameWindow {
                 MouseArea{
                     anchors.fill: parent;
                     onClicked: {
-                        if(Extra.endingPage=="HalftimeMode.qml"){
-                            warningDialog.visible=true;
+                        if(Extra.endingPage==="HalftimeMode.qml"){
+                            navigationStack.push(halftimeModeComponent)
                         }
                         if(Extra.endingPage==="CompetitiveMode.qml"){
                             if(adScreenHappening!==true&&retryScreenHappening!==true)
@@ -1094,7 +1089,7 @@ GameWindow {
                                 //                            warningDialog.box.selectedOk()
                                 myDialog1.selectedOk()
                             }
-                             else{
+                            else{
                                 //                            warningDialog.box.selectedOk()
                                 myDialog1.selectedOk()
                                 //                            warningDialog.box.accepted()
@@ -1106,8 +1101,8 @@ GameWindow {
                 }
             }
             titleItem: Text{
-//                x:165
-                y:5
+                x:165
+                y:8
                 font.pointSize: textMultiplier* 25
                 font.bold: true
                 text:navigationStack.currentPage.title
@@ -1482,6 +1477,11 @@ GameWindow {
     Component{
         id: gameStoreComponent
         GameStore{
+        }
+    }
+    Component{
+        id: halftimeModeComponent
+        HalftimeMode{
         }
     }
 }
