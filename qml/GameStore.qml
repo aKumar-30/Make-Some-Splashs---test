@@ -10,10 +10,6 @@ import QtQuick.Controls 2.12
 import QtMultimedia 5.8
 Page {
     visible: true
-//    y: navigationStack.navigationBar.height
-//    width: parent.width
-//    height: parent.height
-    //    width: 705
     title:"The Store"
     property int duration: 1000
     id: root
@@ -189,18 +185,6 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         source: "../assets/images/symbols/lockSign.png"
     }
-    //    Dialog {
-    //        id: customDialog
-    //        title: "Do you think this is awesome?"
-    //        onRejected: title = "Think again!"
-    //        onAccepted: close()
-
-    //        AppImage { //will be placed inside the dialogs content area
-    //            anchors.fill: parent
-    //            source: "../assets/vplay-logo.png"
-    //            fillMode: Image.PreserveAspectFit
-    //        }
-    //    }
     Item {
         id: confirmMessage
         width: 708

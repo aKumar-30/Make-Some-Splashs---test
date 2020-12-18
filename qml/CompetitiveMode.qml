@@ -90,7 +90,6 @@ Page {
         function onGoBackFromHalftime(addedPoints){
             points+=addedPoints
             levelRectangleAnimation.start();
-            console.log("I WAS HERE")
             dayNightStateRectId.state= "night"
             seqAnimationId.pause()
             handleId.visible=false;
@@ -112,27 +111,6 @@ Page {
     //for dynamic object creatin
     property  var component;
     property var sprite;
-
-    function createSliderObjects(yLocation) {
-        component = Qt.createComponent("SliderCustomChaos.qml");
-        if (component.status === Component.Ready)
-            finishCreation(yLocation);
-        else
-            component.statusChanged.connect(finishCreation);
-    }
-
-    function finishCreation(yLocation) {
-        if (component.status === Component.Ready) {
-            sprite = component.createObject(parent,{x: (root2.width-width)/2, y: yLocation});
-        }
-    }
-    function spontaneouslyProduceSliders(){
-        let yLocation =  400
-        for(let q = 0; q< 4; q++){
-            yLocation+= sliderId.height+50
-            createSliderObjects(yLocation)
-        }
-    }
 
     function afterGameIsActuallyOver(){
         //this used to be above
@@ -255,29 +233,7 @@ Page {
         //used to be above ended
     }
 
-    //    //sound effects start here - mvp
-    //    NumberAnimation {
-    //        id: fadeIn
-    //        target: mvpSoundEffect
-    //        property: "volume"
-    //        from:0.0
-    //        to:0.8*volume
-    //        duration: 300
-    //        easing.type: Easing.Linear
-    //    }
-    //    NumberAnimation {
-    //        id: fadeOut
-    //        target: mvpSoundEffect
-    //        property: "volume"
-    //        from:0.8*volume
-    //        to:0.001*volume
-    //        duration: 300
-    //        easing.type: Easing.Linear
-    //        onFinished:{
-    //            mvpSoundEffect.stop()
-    //            mvpSoundEffect.volume=0.0
-    //        }
-    //    }
+
     property bool mvpSoundEffectPlaying: false
     Audio{
         id: mvpSoundEffect
@@ -315,9 +271,6 @@ Page {
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
-            //            console.log("Num"+num)
-            //            console.log("presentMissions"+presentMissions[i])
-            //            console.log("presentMissions[i]===num"+presentMissions[i]===num)
             if(presentMissions[i]==num){    //THIS WARNING IS INTENTIONAL DO NOT CHANGE THIS OR IT WILLLLLLL BREAK
                 //THE CODE AND I WILL BE MAD EVEN THOUGH IT IS ME WHO IS READING THIS BUT I CAN BE MAD AT MYSELF
                 return true;
