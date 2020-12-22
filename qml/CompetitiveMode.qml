@@ -465,7 +465,8 @@ Page {
                     levelRectangleAnimationPause.complete()
                 }
                 else {
-                    whatToDoInsideRectangleMA()
+                    if(insideRectangleMouseArea.enabled)
+                        whatToDoInsideRectangleMA()
                 }
             }
         }
@@ -594,7 +595,7 @@ Page {
             mDuration-=40 /*41*/
             insideRectangleMouseArea.enabled = true; insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator > 15)
-             {
+            {
                 whatToDoForNextLevel()
                 //set mDuration
                 mDurationEasy=1200
@@ -2527,10 +2528,11 @@ Page {
                 anchors.fill: parent
                 propagateComposedEvents: true
                 onClicked: {
-                    whatToDoInsideRectangleMA()
+                    if(insideRectangleMouseArea)
+                        whatToDoInsideRectangleMA()
                     if(level===3){
                         enabled=false
-                        mouse.accepted.false
+                        mouse.accepted=false
                     }
                 }
                 onDoubleClicked:{
