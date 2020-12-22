@@ -1111,7 +1111,7 @@ GameWindow {
                 font.pointSize: textMultiplier* 25
                 font.bold: true
                 text:navigationStack.currentPage.title
-                anchors.horizontalCenter: root.horizontalCenter
+                x: root.width/2-width/2
                 font.family: centuryGothic.name
                 color: "white"
             }
