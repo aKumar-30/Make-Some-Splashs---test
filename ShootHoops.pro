@@ -11,8 +11,8 @@ CONFIG += resources_big
 # Project identifier and version
 # More information: https://felgo.com/doc/felgo-publishing/#project-configuration
 PRODUCT_IDENTIFIER = com.ShootHoops.wizardEVP.FelgoCompetitiveBallTryOne
-PRODUCT_VERSION_NAME = 10.1.0
-PRODUCT_VERSION_CODE = 10
+PRODUCT_VERSION_NAME = 11.0.0
+PRODUCT_VERSION_CODE = 11
 
 # Optionally set a license key that is used instead of the license key from
 # main.qml file (App::licenseKey for your app or GameWindow::licenseKey for your game)
