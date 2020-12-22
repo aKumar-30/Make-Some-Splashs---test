@@ -2,7 +2,7 @@
     "title": "Shoot Hoops",
     "identifier": "com.ShootHoops.wizardEVP.FelgoCompetitiveBallTryOne",
     "orientation": "portrait",
-    "versioncode": 8,
-    "versionname": "8.0.0",
-    "stage": "release"
+    "versioncode": 10,
+    "versionname": "10.0.0",
+    "stage": "test"
 }
