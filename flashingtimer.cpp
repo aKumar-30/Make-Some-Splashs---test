@@ -5,6 +5,11 @@
 #include <string>
 #include <sstream>
 #include <QDebug>
+#include <QQmlEngine>
+#include <QQmlComponent>
+#include <QMetaObject>
+#include <QObject>
+#include <QFile>
 FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
     :QObject(parent), tomorrow(tomorrow1),timer(new QTimer(this)),difference(0),m_whatToPrint("Getting ready..."){
     //fix tomorrow
@@ -12,7 +17,8 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
     if(tomorrow<now1){
         while(tomorrow<now1)
             tomorrow=tomorrow.addSecs(86399);
-        emit callUpdateMissions();
+        QTimer::singleShot(6500, this, SIGNAL(callUpdateMissions())); //delays emitting the callUpdateMissions signal
+//        emit callUpdateMissions();
     }
     //Intialize the timer
     srand(time(NULL));
@@ -72,4 +78,8 @@ FlashingTimer &FlashingTimer::operator=(const FlashingTimer &rhs){
         return *this;
     tomorrow=rhs.tomorrow;
     return *this;
+}
+
+void FlashingTimer::functionToCallToUpdateMissions (){
+    emit callUpdateMissions();
 }

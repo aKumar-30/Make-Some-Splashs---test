@@ -14,7 +14,7 @@ public:
     void setWhatToPrint(QString whatToPrint);
     void display();
     void setQmlRootObject(QObject *value);
-
+    void functionToCallToUpdateMissions();
     //copy contructor and copy assignment
     FlashingTimer(const FlashingTimer &source);
     FlashingTimer& operator=(const FlashingTimer &rhs);

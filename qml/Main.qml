@@ -36,7 +36,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.43;
+    property real textMultiplier: 1.46;
     id: root
 
 
@@ -54,7 +54,7 @@ GameWindow {
     //        height: 785
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
-//                settings.clearAll()
+//                        settings.clearAll()
         //other stuff
         mMusic1.play()
         //        //save volume
@@ -88,10 +88,10 @@ GameWindow {
             personalBest = settings.getValue("personalBest");
         }
         //save datastore
-        if(!settings.getValue("datastore"))
-            settings.setValue("datastore", datastore);
+        if(!settings.getValue("datastore1"))
+            settings.setValue("datastore1", datastore);
         else{
-            datastore = settings.getValue("datastore");
+            datastore = settings.getValue("datastore1");
         }
         //other settings (mostly one time)
         //save counter 14
@@ -100,10 +100,10 @@ GameWindow {
         else
             counter14 = settings.getValue("counter14");
         //save firstTimeUpdatingMissions
-        if(!settings.getValue("firstTimeUpdatingMissions"))
-            settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
+        if(!settings.getValue("firstTimeUpdatingMissions22"))
+            settings.setValue("firstTimeUpdatingMissions22", firstTimeUpdatingMissions);
         else
-            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
+            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions22");
         //        //save firstTimeEVER
         if(!settings.getValue("firstTimeEVER"))
             settings.setValue("firstTimeEVER", false);
@@ -111,12 +111,12 @@ GameWindow {
             firstTimeEVER = settings.getValue("firstTimeEVER");
         aboutDialog.visible=firstTimeEVER
         firstTimeEVER=false;
+        stopMissionsFromViewageTimer.start();
         if ( datastore) {
             mMissionModel.clear()
             var datamodel = JSON.parse(datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
         }
-//        console.log("PRESENT MISSIOSN ARE"+presentMissions)
         if(presentMissions.length!==0){
             displayDelegateModel.items.remove(0,displayDelegateModel.items.count);
             displayDelegateModel.items.insert(mMissionModel.get(presentMissions[0]), "todaysMissions");
@@ -134,9 +134,6 @@ GameWindow {
         counter14Changed();
         mMusic1.stop()
         storeForSettings();
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[0]).currentThings)
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[1]).currentThings)
-//        console.log("Present missions current things"+mMissionModel.get(presentMissions[2]).currentThings)
 
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
@@ -147,7 +144,7 @@ GameWindow {
         settings.setValue("ballSource", ballSource);
         settings.setValue("personalBest", personalBest);
         settings.setValue("counter14", counter14);
-        settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
+        settings.setValue("firstTimeUpdatingMissions222", firstTimeUpdatingMissions);
 
 
         settings.setValue("firstTimeEVER", firstTimeEVER);
@@ -230,7 +227,6 @@ GameWindow {
             presentMissions.push(displayDelegateModel.items.get(1).model.index);
             presentMissions.push(displayDelegateModel.items.get(2).model.index);
         }
-//        console.log("present Missions"+presentMissions)
         presentMissionsChanged()
     }
     function checkIfCurrentMission(num){
@@ -258,6 +254,11 @@ GameWindow {
         interval: 1001
         id: delayTimer
     }
+    Timer{
+        interval : 3000
+        id: stopMissionsFromViewageTimer
+    }
+
     function partUpdatingMissions(){
         if(!firstTimeUpdatingMissions){
             mMissionModel.remove(17)
@@ -275,7 +276,7 @@ GameWindow {
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)    /*add back later*/
         if(arr[0]===mMissionModel.get(16)||arr[1]===mMissionModel.get(16)){
-            var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,25],[9000,26],[10555,30]]
+            var pointsScoredAndReward=[[1000,2],[2000,4],[4000,7],[5000,9],[6000,19],[7000,24],[8000,26],[9000,30],[10000,40]]
             var randomNumberForPointsMission= Math.floor(Math.random()*pointsScoredAndReward.length)
             mMissionModel.get(16).neededThings = pointsScoredAndReward[randomNumberForPointsMission][0]
             mMissionModel.get(16).reward = pointsScoredAndReward[randomNumberForPointsMission][1]
@@ -287,6 +288,8 @@ GameWindow {
             arr[h].completed=false
             arr[h].currentThings=0;
         }
+        tempModel.get(0).currentThings = 0
+        tempModel.get(0).completed = false
         //        //we now want two with one extra special at the end
         var numberOfTimesAndCoins = [[2,2],[3,4],[4,6],[5,9],[6,10],[7,12],[8,16],[9,19]]
         typesOfShotPossible = ["backboard","rim", "splash"]
@@ -309,44 +312,44 @@ GameWindow {
         }
         arr.push(mMissionModel.get(mMissionModel.count-1));
     }
-    function updatingMissionsDuringGame(){
-        //        countingUpdatingMissions++;
-        //make missions invisible here
-        partUpdatingMissions()
-
-        //        displayDelegateModel.items.insert(arr[0], "todaysMissions");
-        //        displayDelegateModel.items.insert(arr[1], "todaysMissions");
-        //        displayDelegateModel.items.insert(arr[2], "todaysMissions");
+    function updatingMissionsDuringGame () {
         //        presentMissions=[]
-        //        storeForSettings();
-        presentMissions=[]
-        presentMissions.push(arr[0].index);
-        presentMissions.push(arr[1].index);
-        presentMissions.push(arr[2].index);
-//        console.log("Pressent missions"+presentMissions)
-        setCurrentMissions()
-        let s = 0
-        for(s = 0; s<4; s++){ //displayDelegateModel.items.count-1-s
-            displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
-            displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
-            displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
-            displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
-            displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
-            displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
-            displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
-        }
-
+        //        updateMissions()
+        mDelegateGroupModel.remove(0,mDelegateGroupModel.count, "todaysMissions")
+        partUpdatingMissions()
         displayDelegateModel.items.insert(arr[0], "todaysMissions");
         displayDelegateModel.items.insert(arr[1], "todaysMissions");
         displayDelegateModel.items.insert(arr[2], "todaysMissions");
-        if(!delayTimer.running)
-            delayTimer.start()
+        presentMissions=[]
+        storeForSettings();
+        presentMissions=[arr[0].index, arr[1].index,arr[2].index]
+        //        //        countingUpdatingMissions++;
+        //        //make missions invisible here
+        //        partUpdatingMissions()
+
+        //        presentMissions=[]
+        //        storeForSettings()
+        ////        presentMissions=[arr[0].index, arr[1].index, arr[2].index]
+
+        //        let s = 0
+        //        for(s = 0; s<displayDelegateModel.items.count; s++){ //displayDelegateModel.items.count-1-s
+        //            displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
+        //            displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
+        //            displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
+        //            displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
+        //            displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
+        //            displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
+        //            displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
+        //        }
+
+        //        if(!delayTimer.running)
+        //            delayTimer.start()
     }
 
     Connections{
         id: flashingTimerConnection
         target: FlashingTimer
-        function onCallUpdateMissions(){
+        onCallUpdateMissions: {
             updatingMissionsDuringGame()
         }
     }
@@ -389,7 +392,6 @@ GameWindow {
                 //                        displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.index).currentThings
                 //                    else
                 //                displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[2-s]).currentThings
-//                console.log("displayDelegateModel.items.get(s).model.currentThings"+ displayDelegateModel.items.get(s).model.currentThings)
                 displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
             }
         }
@@ -631,7 +633,7 @@ GameWindow {
                 ListElement{//7
                     index: 7
                     completed: false;
-                    description: "Make all the shots in level 1. Record"
+                    description: "Make all the shots in level 1. Record:"
                     multipleTimes: true
                     reward: 9;
                     neededThings: 16
@@ -640,7 +642,7 @@ GameWindow {
                 ListElement{//8
                     index: 8
                     completed: false;
-                    description: "Make all the shots in level 2. Record"
+                    description: "Make all the shots in level 2. Record: "
                     multipleTimes: true
                     reward: 23;
                     neededThings: 18
@@ -1094,7 +1096,7 @@ GameWindow {
                                 //                            warningDialog.box.selectedOk()
                                 myDialog1.selectedOk()
                             }
-                             else{
+                            else{
                                 //                            warningDialog.box.selectedOk()
                                 myDialog1.selectedOk()
                                 //                            warningDialog.box.accepted()
@@ -1106,7 +1108,7 @@ GameWindow {
                 }
             }
             titleItem: Text{
-//                x:165
+                //                x:165
                 y:5
                 font.pointSize: textMultiplier* 25
                 font.bold: true
@@ -1173,7 +1175,7 @@ GameWindow {
                         }
                     }
                 }
-                title: "Shoot Hoops"
+                title: "   "
                 width: parent.width
                 height: parent.height
                 id: pane
@@ -1188,8 +1190,9 @@ GameWindow {
                     id: personalBestBox
                     width: mainPBText.implicitWidth+30
                     height: mainPBText.implicitHeight+mainPBText2.implicitHeight+20
-                    x:350
-                    y:800
+                    anchors.bottom:parent.bottom
+                    anchors.bottomMargin: 150
+                    x: parent.width/2
                     border.color: "blue"
                     border.width: 3
                     color: "transparent"
@@ -1279,17 +1282,18 @@ GameWindow {
                 Label {
                     text: "Shoot Hoops!"
                     font.family:impact.name
-                    font.pointSize: textMultiplier* 65
+                    font.pointSize: textMultiplier* 67
                     width: 470
                     wrapMode: Label.Wrap
-                    y:130
+                    y:90
                     anchors.horizontalCenter: parent.horizontalCenter
                     horizontalAlignment: Label.AlignHCenter
                 }
                 Rectangle{
                     //                    y: parent.width/2+40
-                    anchors.verticalCenter: smallCirclesColumn.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenterOffset: 15
                     id: buttonToPlayGame
                     width: 370*0.95
                     height: 120*0.95
@@ -1339,7 +1343,7 @@ GameWindow {
                         onClicked: {
                             if(!missionsScene.visible){
                                 //update current missions (just double checking)
-//                                setCurrentMissions()
+                                //                                setCurrentMissions()
                                 //                                missionsScene.visible=false
                                 makeMissionsInvisible()
                                 navigationStack.push(competitiveModeComponent)
@@ -1349,129 +1353,131 @@ GameWindow {
                         }
                     }
                 }
-                Column{
-                    y: 410
-                    x: 20
-                    spacing: 150
-                    id: smallCirclesColumn
-                    Rectangle{
-                        color: "transparent"
-                        width: 130
-                        height: 130
-                        radius: 115
-                        border.width: 2
-                        border.color: "black"
-                        Image{
-                            z:-1
-                            anchors.centerIn: parent
-                            width: 125
-                            height: 125
-                            source: "../assets/images/symbols/shop.png"
-                        }
-                        MouseArea{
-                            anchors.fill: parent
-                            onClicked: {
-                                //                                missionsScene.visible=false
-                                makeMissionsInvisible()
-                                navigationStack.push(gameStoreComponent);
-                                Extra.endingPage="GameStore.qml";
-                                thisTitle="The Store"
-                            }
-                        }
-                        Text{
-                            anchors.bottom: parent.top
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: "SHOP"
-                            font.family: geniso.name
-                            font.bold: true
-                            font.pointSize: 21
+                Rectangle{
+                    id: shopButtonRectangle
+                    color: "transparent"
+                    width: 130
+                    height: 130
+                    radius: 115
+                    border.width: 2
+                    border.color: "black"
+                    x:20
+                    anchors.bottom: buttonToPlayGame.top
+                    anchors.bottomMargin: 25
+                    Image{
+                        z:-1
+                        anchors.centerIn: parent
+                        width: 125
+                        height: 125
+                        source: "../assets/images/symbols/shop.png"
+                    }
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                            //                                missionsScene.visible=false
+                            makeMissionsInvisible()
+                            navigationStack.push(gameStoreComponent);
+                            Extra.endingPage="GameStore.qml";
+                            thisTitle="The Store"
                         }
                     }
+                    Text{
+                        anchors.bottom: parent.top
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "SHOP"
+                        font.family: geniso.name
+                        font.bold: true
+                        font.pointSize: 21
+                    }
+                }
+                Rectangle{
+                    id: missionsButtonRectangle
+                    color: "transparent"
+                    width: 130
+                    height: 130
+                    radius: 115
+                    border.width: 2
+                    border.color: "black"
+                    anchors.horizontalCenter: shopButtonRectangle.horizontalCenter
+                    anchors.top: buttonToPlayGame.bottom
+                    anchors.topMargin: 25
+                    Image{
+                        x: 5
+                        y:5
+                        width: 35
+                        height: 35
+                        source: "../assets/images/exclamationMark.png"
+                        visible: false /*checkIfButtonNeedsToBeVisible(false)*/    //change this to something else
+                    }
+
+                    Image{
+                        z:-1
+                        anchors.centerIn: parent
+                        width: 125
+                        height: 125
+                        source: "../assets/images/symbols/missions.png"
+                    }
                     Rectangle{
-                        color: "transparent"
-                        width: 130
-                        height: 130
-                        radius: 115
-                        border.width: 2
-                        border.color: "black"
-                        Image{
-                            x: 5
-                            y:5
-                            width: 35
-                            height: 35
-                            source: "../assets/images/exclamationMark.png"
-                            visible: false /*checkIfButtonNeedsToBeVisible(false)*/    //change this to something else
-                        }
+                        visible: thePauseTimer.running || stopMissionsFromViewageTimer.running
+                        z:-1
+                        anchors.centerIn: parent
+                        width: 125
+                        height: 125
+                        radius: 110
+                        color:"darkgray"
+                        opacity: 0.50
+                    }
 
-                        Image{
-                            z:-1
-                            anchors.centerIn: parent
-                            width: 125
-                            height: 125
-                            source: "../assets/images/symbols/missions.png"
-                        }
-                        Rectangle{
-                            visible: thePauseTimer.running
-                            z:-1
-                            anchors.centerIn: parent
-                            width: 125
-                            height: 125
-                            radius: 110
-                            color:"darkgray"
-                            opacity: 0.50
-                        }
-
-                        MouseArea{
-                            anchors.fill: parent
-                            onClicked: {
-                                if(!thePauseTimer.running){
-                                    //                                    missionsScene.visible=true
-                                    showMissionsAnimation.start()
-                                    checkIfButtonNeedsToBeVisible(true);
-                                    if(true){
-                                        //12
-                                        let couldTheMissionBeCompleted = 0;
-                                        for(let i =0; i< 3; i++){
-                                            if(presentMissions[i]!==12){
-                                                if ((mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings)){
-                                                    couldTheMissionBeCompleted++;
-                                                }
-                                                return true;
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                            if(!thePauseTimer.running){
+                                //                                    missionsScene.visible=true
+                                showMissionsAnimation.start()
+                                checkIfButtonNeedsToBeVisible(true);
+                                if(true){
+                                    //12
+                                    let couldTheMissionBeCompleted = 0;
+                                    for(let i =0; i< 3; i++){
+                                        if(presentMissions[i]!==12){
+                                            if ((mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings)){
+                                                couldTheMissionBeCompleted++;
                                             }
+                                            return true;
                                         }
-                                        if(couldTheMissionBeCompleted===2&&checkIfCurrentMission(12)){
-                                            mMissionModel.get(12).currentThings++
-                                        }
+                                    }
+                                    if(couldTheMissionBeCompleted===2&&checkIfCurrentMission(12)){
+                                        mMissionModel.get(12).currentThings++
                                     }
                                 }
                             }
                         }
-                        Text{
-                            anchors.bottom: parent.top
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            text: "MISSIONS"
-                            font.family: geniso.name
-                            font.bold: true
-                            font.pointSize: 21
-                        }
+                    }
+                    Text{
+                        anchors.bottom: parent.top
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "MISSIONS"
+                        font.family: geniso.name
+                        font.bold: true
+                        font.pointSize: 21
                     }
                 }
             }
         }
     }
     Settings{
-        property alias firstTimeEverSettings: root.firstTimeEVER
-        property alias volumeSettings: root.volume
-        property alias soundSettings:root.sound
-        property alias numCoinsSettings: root.numCoins
-        property alias ballSourceSettings:root.ballSource
+        property alias firstTimeEverSettings5: root.firstTimeEVER
+        property alias volumeSettings5: root.volume
+        property alias soundSettings5:root.sound
+        property alias numCoinsSettings5: root.numCoins
+        property alias ballSourceSettings5:root.ballSource
 
-        property alias shotRandomNumberSettings: root.shotRandomNumber
-        property alias levelRandomNumberSettings: root.levelRandomNumber
-        property alias personalBestSettings: root.personalBest
-        property alias datastoreSettings:root.datastore
+        property alias shotRandomNumberSettings5: root.shotRandomNumber
+        property alias levelRandomNumberSettings5: root.levelRandomNumber
+        property alias personalBestSettings5: root.personalBest
+        property alias datastoreSettings5:root.datastore
 
-        property alias presentMissionsSettings: root.presentMissions
+        property alias presentMissionsSettings5: root.presentMissions
     }
 
     Component{
