@@ -61,9 +61,6 @@ GameWindow {
         //        if(!settings.getValue("volume")){
         //            settings.setValue("volume", root.volume);
         //        }
-        //        else{
-        //            console.log("ROOT VOLUME IS"+root.volume)
-        //        }
         //        //save sound
         //        if(!settings.getValue("sound"))
         //            settings.setValue("sound", sound);
@@ -492,7 +489,7 @@ GameWindow {
                 from: 0
                 to: 1
                 easing.type: Easing.OutBack
-                duration: 250
+                duration: 500
             }
         }
         ParallelAnimation {
@@ -503,7 +500,7 @@ GameWindow {
                 from: 1
                 to: 0
                 easing.type: Easing.InBack
-                duration: 250
+                duration: 500
             }
             onStopped: {
                 // set it invisible when the animation has finished to disable MouseAreas again

@@ -415,7 +415,7 @@ Page {
         ScrollBar.vertical: ScrollBar{}
         //        boundsBehavior: Flickable.OvershootBounds
         populate: Transition {
-            NumberAnimation { properties: "x,y"; duration: 400 }
+            NumberAnimation { properties: "x,y"; duration: 500 }
         }
         width: cellWidth*4; height: cellHeight*4
         cellWidth: 140; cellHeight: 140

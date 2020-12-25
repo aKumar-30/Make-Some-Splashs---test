@@ -70,6 +70,10 @@ Page {
     property var easyTypes: [Easing.BezierCurve, Easing.OutInBack, Easing.InQuad, Easing.OutQuad,Easing.InOutCubic, Easing.InCubic, Easing.InOutQuint, Easing.InSine, Easing.OutSine, Easing.OutInExpo, Easing.OutInCirc]
     property var mediumTypes: [Easing.OutInBounce, Easing.InOutBounce,Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.OutQuint, Easing.InExpo, Easing.InCirc,  Easing.OutCirc]
     property var hardTypes: [Easing.OutBounce, Easing.InBounce, Easing.OutElastic, Easing.OutBack, Easing.InBack]
+
+    property var easyTypesL2: [Easing.BezierCurve, Easing.OutInBack, Easing.InQuad, Easing.OutQuad,Easing.InOutCubic, Easing.InCubic, Easing.InOutQuint, Easing.InSine, Easing.OutSine]
+    property var mediumTypesL2: [Easing.OutInBounce, Easing.InOutBounce,Easing.OutCubic, Easing.InQuart, Easing.OutQuart, Easing.InExpo,Easing.OutCirc]
+
     property bool scoresSaved: false; /* currently not used */
     function levelIndicatorSetter (){
         if(level==1)
@@ -573,7 +577,7 @@ Page {
             }
 
             newFadedRed.visible=true
-            adScreenHappening=true;
+//            adScreenHappening=true;
             return;
             // mMusic1.stop()
         }
@@ -598,9 +602,8 @@ Page {
             {
                 whatToDoForNextLevel()
                 //set mDuration
-                mDurationEasy=1200
-                mDurationMedium= 1500
-                mDurationHard= 2250
+                mDurationEasy=1400
+                mDurationMedium= 1800
                 mDuration=1500
                 if(true){
                     //7
@@ -623,29 +626,22 @@ Page {
         else if(level===2)
         {
             coinProb = 4;
-            easingNumber = Math.floor((Math.random() * 25));
-            if(easingNumber<12){
+            easingNumber = Math.floor((Math.random() * 16));
+            if(easingNumber<10){
                 //easy
                 //               start: mDurationEasy=1200;
-                mDurationEasy-=42
+                mDurationEasy-=40
                 mDuration=mDurationEasy
-                sliderEasingType= easyTypes[easingNumber]
-            }
-            else if(easingNumber<21){
-                //medium
-                mDurationMedium-=32
-                mDuration=mDurationMedium
-                sliderEasingType= mediumTypes[easingNumber-11]
+                sliderEasingType= easyTypesL2[easingNumber]
             }
             else{
-                //hard
-                mDurationHard-=18
-                mDuration=mDurationHard
-                sliderEasingType= hardTypes[easingNumber-20]
+                //medium
+                mDurationMedium-=27
+                mDuration=mDurationMedium
+                sliderEasingType= mediumTypesL2[easingNumber-9]
             }
 
-
-            sliderId.value=200;
+            sliderId.value=Math.random()*150+50;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
             if(levelIndicator >17)
             {
@@ -660,7 +656,7 @@ Page {
                     }
                     counter8=0;
                 }
-                mDuration=1000;
+                mDuration=1050;
                 //head to halftime yay!
                 Extra.endingPage="HalftimeMode.qml"
                 onGoToHalftime()
@@ -687,9 +683,9 @@ Page {
                 handleId.visible=false;
                 sliderId.enabled=true;
 
-                mDurationEasy=1200
-                mDurationMedium= 1500
-                mDurationHard= 2250
+                mDurationEasy=1400
+                mDurationMedium= 1800
+                mDurationHard= 2625
                 mDuration=1500
 
                 mPauseAnim.pause()
@@ -712,25 +708,26 @@ Page {
             if(easingNumber<12){
                 //easy
                 //               start: mDurationEasy=1200;
-                if(mDurationEasy>700)
-                    mDurationEasy-=42
+                if(mDurationEasy>775)
+                    mDurationEasy-=47
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypes[easingNumber]
             }
             else if(easingNumber<21){
                 //medium
-                if(mDurationMedium>850)
-                    mDurationMedium-=32
+                if(mDurationMedium>1000)
+                    mDurationMedium-=37
                 mDuration=mDurationMedium
                 sliderEasingType= mediumTypes[easingNumber-11]
             }
             else{
                 //hard
-                if(mDurationHard>1010)
-                    mDurationHard-=18
+                if(mDurationHard>1750)
+                    mDurationHard-=37
                 mDuration=mDurationHard
                 sliderEasingType= hardTypes[easingNumber-20]
             }
+            sliderId.value=Math.random()*750+100;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
 
             //            if(levelIndicator >15)
