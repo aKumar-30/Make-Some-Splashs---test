@@ -123,9 +123,6 @@ int main(int argc, char *argv[])
     felgo.initialize(&engine);
     felgo.setLicenseKey(PRODUCT_LICENSE_KEY);
 
-    //sends when i break a property binding
-    //    QLoggingCategory::setFilterRules(QStringLiteral("qt.qml.binding.removal.info=true"));
-
     FlashingTimer joe = allTheTimeStuff();
     Extras extra;
     SettingsManager dude;
@@ -158,21 +155,4 @@ FlashingTimer allTheTimeStuff(){
     return joe;
 }
 
-//// Default message handler to be called to bypass all other warnings.
-//static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
-//// a custom message handler to intercept warnings
-//void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString & msg)
-//{
-//    switch (type) {
-//    case QtWarningMsg: {
-//        if (!msg.contains("Unable to assign [undefined] to int")){ // suppress this warning
-//            (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
-//        }
-//    }
-//    break;
-//    default:    // Call the default handler.
-//        (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
-//        break;
-//    }
-//}
 

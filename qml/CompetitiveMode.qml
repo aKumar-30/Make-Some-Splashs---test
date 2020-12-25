@@ -50,12 +50,10 @@ Page {
     property int counterio: 0;
     property bool firstTime2: true
     property bool firstTime3: true
-    property bool newRun: false;
     property var currentRandomOrder5: []
     property var currentIndexForRandom: 0;
     property var mIsOpen: Extra.isOpen
     property var coinsThisRound: 0
-    property int beforeHalftimeScore: 0;
     //for going back after halftime
     property bool shouldStartThirdLevel: shouldBeginThirdLevel
     property bool adScreenHappeningHere: adScreenHappening
@@ -577,7 +575,7 @@ Page {
             }
 
             newFadedRed.visible=true
-//            adScreenHappening=true;
+            adScreenHappening=true;
             return;
             // mMusic1.stop()
         }
@@ -730,35 +728,11 @@ Page {
             sliderId.value=Math.random()*750+100;
             insideRectangleMouseArea.enabled = true;insideTheSliderRectangleMouseArea.enabled = true
 
-            //            if(levelIndicator >15)
-            //            {
-            //               whatToDoForNextLevel()
-            ////                 spontaneouslyProduceSliders()
-            //            }
-            //            else{
             //have to have on all three, only restart thing if not going to next level
             if(stateRectId.state!="paused")
                 seqAnimationId.restart();
             //            }
         }
-        //        //Level five stuff
-        //        else if(level===5)
-        //        {
-        //            coinProb = 3;
-        //            Extra.emittingChaosSliderNeedsChange();
-        //            insideRectangleMouseArea.enabled = true;
-
-        //            if(levelIndicator >4)
-        //            {
-        //               whatToDoForNextLevel()
-        ////                insideContainerId.visible=false
-        //            }
-        //            else{
-        //                //have to have on all three, only restart thing if not going to next level
-        //                if(stateRectId.state!="paused")
-        //                    seqAnimationId.restart();
-        //            }
-        //        }
         //other variables stuff for everything
         //So basically we needed this to only happen AFTER the animation appears, so  if the animation doesnt appear this runs but if it does then it will run at the end of it
         if(!haveRandomlyChoosenIfCoinAppears){
@@ -1218,19 +1192,6 @@ Page {
         }
         Button{
             //these are the rewarded ad stuff IGNORE ERRORS FOR NOW
-            //                        AdMobRewardedVideo {
-            //                            id: myRewardedVideo
-            //                            // test ad for rewarded videos
-            //                            adUnitId: "ca-app-pub-3940256099942544/5224354917"
-
-            //                            onRewardedVideoRewarded: {
-            //                                updateMissions();
-            //                            }
-            //                            // load rewarded video at app start to cache it
-            //                            Component.onCompleted: {
-            //                                loadRewardedVideo()
-            //                            }
-            //                        }
             onClicked: {
                 if(numCoins>=10){
                     numCoins=numCoins-10;
@@ -1239,11 +1200,6 @@ Page {
                     newRetryCircle.visible=false
                     newFadedRed.visible=false
                     adScreenHappening=false
-                    //                    // show the new video if user is below 10 credits
-                    //                    myRewardedVideo.showRewardedVideoIfLoaded()
-                    //                    // load a new video every time it got shown, to give the user a fresh ad
-                    //                    myRewardedVideo.loadRewardedVideo()
-                    //all of this should be after onRewardedVideoRewarded but this is for testing
                     sliderId.enabled=true;
                     insideRectangleMouseArea.enabled=true
                     insideTheSliderRectangleMouseArea.enabled=true
@@ -1524,16 +1480,6 @@ Page {
         }
     }
 
-    //    //Giant x
-    //    Image{
-    //        visible: false
-    //        z:20
-    //        id: giantX;
-    //        anchors.centerIn: parent
-    //        source: "../assets/images/xSymbol.png"
-    //        height: 600*1.3;
-    //        width: 515*1.3;
-    //    }
     BackgroundMusic{
         id: mMusic1
         source:"../assets/sounds/backgroundMusic.mp3"
@@ -2456,19 +2402,6 @@ Page {
         Timer{
             id: isDoubleClickTimer
             interval:1550 //should be 500 maybe
-        }
-
-        Connections{
-            target: Extra
-            function onSpaceClickedInComp(){
-                if(!isDoubleClickTimer.running){
-                    isDoubleClickTimer.start()
-                    whatToDoInsideRectangleMA();
-                }
-                else{
-                    whatToDoWhenDoubleClicked();
-                }
-            }
         }
         MouseArea{
             id: insideRectangleMouseArea

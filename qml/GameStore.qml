@@ -11,7 +11,6 @@ import QtMultimedia 5.8
 Page {
     visible: true
     title:"The Store"
-    property int duration: 1000
     id: root
     property var found: true;
     property var bought: ["Basketball", "Blue"]
@@ -20,7 +19,6 @@ Page {
     property var mSource: "";
     property var mIndex: -1;
     property bool firstTime: true;
-    property bool firstTime1: true;
     property var givenName: "";
 
     property var counter15: 0

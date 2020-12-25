@@ -57,15 +57,6 @@ GameWindow {
 //                        settings.clearAll()
         //other stuff
         mMusic1.play()
-        //        //save volume
-        //        if(!settings.getValue("volume")){
-        //            settings.setValue("volume", root.volume);
-        //        }
-        //        //save sound
-        //        if(!settings.getValue("sound"))
-        //            settings.setValue("sound", sound);
-        //        else
-        //            sound = settings.getValue("sound");
         //save coins
         if(!settings.getValue("coins"))
             settings.setValue("coins", numCoins);
@@ -178,9 +169,6 @@ GameWindow {
         }
     }
 
-    //    SettingsManager{
-    //        id: s_manager
-    //    }
     Connections {
         target: Qt.application
         // Qt.application.state:     0 - mimimized
@@ -320,27 +308,6 @@ GameWindow {
         presentMissions=[]
         storeForSettings();
         presentMissions=[arr[0].index, arr[1].index,arr[2].index]
-        //        //        countingUpdatingMissions++;
-        //        //make missions invisible here
-        //        partUpdatingMissions()
-
-        //        presentMissions=[]
-        //        storeForSettings()
-        ////        presentMissions=[arr[0].index, arr[1].index, arr[2].index]
-
-        //        let s = 0
-        //        for(s = 0; s<displayDelegateModel.items.count; s++){ //displayDelegateModel.items.count-1-s
-        //            displayDelegateModel.items.get(s).model.index=mMissionModel.get(presentMissions[s]).index
-        //            displayDelegateModel.items.get(s).model.completed=mMissionModel.get(presentMissions[s]).completed
-        //            displayDelegateModel.items.get(s).model.description=mMissionModel.get(presentMissions[s]).description
-        //            displayDelegateModel.items.get(s).model.multipleTimes=mMissionModel.get(presentMissions[s]).multipleThings
-        //            displayDelegateModel.items.get(s).model.reward=mMissionModel.get(presentMissions[s]).reward
-        //            displayDelegateModel.items.get(s).model.neededThings=mMissionModel.get(presentMissions[s]).neededThings
-        //            displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
-        //        }
-
-        //        if(!delayTimer.running)
-        //            delayTimer.start()
     }
 
     Connections{
@@ -385,10 +352,6 @@ GameWindow {
 
             //update delegate with updated model
             for(let s = 0; s< 3; s++){
-                //                    if(presentMissions.length===0)
-                //                        displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.index).currentThings
-                //                    else
-                //                displayDelegateModel.items.get(displayDelegateModel.items.count-1-s).model.currentThings=mMissionModel.get(presentMissions[2-s]).currentThings
                 displayDelegateModel.items.get(s).model.currentThings=mMissionModel.get(presentMissions[s]).currentThings
             }
         }
@@ -720,35 +683,6 @@ GameWindow {
 
 
                 //            ListElement{//7
-                //                index: 7
-                //                completed: false;
-                //                description: "Buy 3 different types of balls"
-                //                multipleTimes: false
-                //                reward: 8;
-                //                neededThings: 3
-                //                currentThings: 0
-                //            }
-                //            ListElement{//10
-                //                index: 10
-                //                completed: false;
-                //                description: "Earning 8 coins in a game. Record: "
-                //                multipleTimes: true
-                //                reward: 4;
-                //                neededThings: 1
-                //                currentThings: 0
-                //            }
-
-
-                //            ListElement{//14
-                //                index: 14
-                //                completed: false;
-                //                name: ""
-                //                description: "Advance to level 2 while earning zero coins in the match"
-                //                multipleTimes: true
-                //                reward: 9;
-                //                neededThings: 1
-                //                currentThings: 0
-                //            }
             }
             Component{
                 id: mMissionDelegate
@@ -967,85 +901,6 @@ GameWindow {
                 x: getRewardsButton.x-5
                 color: "#147307"
             }
-
-            //            //ADS FOR THE MONEY MONEY MONEY
-            //            Button{
-            //                //these are the rewarded ad stuff IGNORE ERRORS FOR NOW
-            //                //                        AdMobRewardedVideo {
-            //                //                            id: myRewardedVideo
-            //                //                            // test ad for rewarded videos
-            //                //                            adUnitId: "ca-app-pub-3940256099942544/5224354917"
-
-            //                //                            onRewardedVideoRewarded: {
-            //                //updatingMissionsDuringGame();
-            //                //                            // load rewarded video at app start to cache it
-            //                //                            Component.onCompleted: {
-            //                //                                loadRewardedVideo()
-            //                //                            }
-            //                //                        }
-            //                onClicked: {
-            //                    if(visible){
-            //                        //                        // show the new video if user is below 10 credits
-            //                        //                        myRewardedVideo.showRewardedVideoIfLoaded()
-            //                        //                        // load a new video every time it got shown, to give the user a fresh ad
-            //                        //                        myRewardedVideo.loadRewardedVideo()
-            //                        numCoins-=10;
-            //                        updatingMissionsDuringGame();
-            //                    }
-            //                }
-            //                visible: (!getRewardsButton.visible&&countingUpdatingMissions<1);
-            //                z: 19
-            //                id: newMissionsAdButton
-            //                anchors.top: listOfMissions.bottom
-            //                anchors.horizontalCenter: parent.horizontalCenter
-            //                height: 80
-            //                width: 140*3
-            //                Rectangle{
-            //                    anchors.fill: parent
-            //                    color: "#2e8ddb"
-            //                }
-            //                Row{
-            //                    x:10
-            //                    anchors.verticalCenter: parent.verticalCenter
-            //                    anchors.centerIn: parent
-            //                    Text{
-            //                        anchors.verticalCenter: parent.verticalCenter
-            //                        color: "White"
-            //                        font.family: centuryGothic.name
-            //                        font.bold: true
-            //                        font.pointSize: textMultiplier* 30
-            //                        text:"New Missions"
-            //                    }
-            //                    Rectangle{
-            //                        width: 15
-            //                        height: 2
-            //                        color: "transparent"
-            //                    }
-            //                    //video pic
-            ////                    Image{
-            ////                        anchors.verticalCenter: parent.verticalCenter
-            ////                        width: 50*1.35
-            ////                        height: 35*1.35
-            ////                        source: "../assets/images/PlayAdVideo.png"
-            ////                    }
-            //                    //coin pic
-            //                    Image{
-            //                        anchors.verticalCenter: parent.verticalCenter
-            //                        width: (50+35)/2*1.35
-            //                        height: (50+35)/2*1.35
-            //                        source: "../assets/images/coinFront.png"
-            //                    }
-            //                }
-            //            }
-            //            Rectangle{
-            //                visible: newMissionsAdButton.visible;
-            //                id: newMissionsAdButtonFade
-            //                width: newMissionsAdButton.width
-            //                height: newMissionsAdButton.height
-            //                y: newMissionsAdButton.y+5
-            //                x: newMissionsAdButton.x-5
-            //                color: "#18549e"
-            //            }
         }
         Rectangle{
             visible:true;
@@ -1130,13 +985,6 @@ GameWindow {
 
                     }
                 }
-                //                IconButtonBarItem{
-                //                color: "white"
-                //                icon: IconType.ellipsisv
-                //                iconSize: newNavigationBar.size-10
-                //                onClicked: {
-                //                    optionsMenu.open()
-                //                }
                 Menu {
                     id: optionsMenu
                     x: parent.width - width

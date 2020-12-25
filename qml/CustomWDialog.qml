@@ -5,35 +5,6 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Styles 1.4
 import QtMultimedia 5.9
-/*
-  DESCRIPTION:
-
-//  An example dialog implementation, with modal option and simple animations.
-//  EXAMPLE USAGE:
-
-  Scene {
-    id: scene
-    width: 480
-    height: 320
-
-    SimpleButton {
-      text: "SHOW DIALOG"
-      anchors.centerIn: parent
-      onClicked: myDialog.show()
-    }
-
-    customSettingsDialog {
-      id: myDialog
-      box.color: "#f0f0f0"
-      question.text: "Quit the game?"
-      modal: true
-      onSelectedOk: {
-        Qt.quit()
-      }
-    }
-  }
-
-*/
 
 Item {
     z:20
@@ -105,10 +76,6 @@ Item {
             }
         }
 
-        //            x: Math.round((705 - width) / 2)
-        //            y: 130
-        //            y: Math.round(785 / 6)
-        //            width: Math.round(Math.min(705, 785) /3 * 2)
         width: 630
         height: 330
         focus: true

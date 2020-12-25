@@ -1,33 +1,6 @@
 import QtQuick 2.0
 
 Item {
-//    Text{
-//        anchors.right: mId.left
-//        anchors.top: mId.Top
-//        opacity: 0
-//        id: plusOneText
-//        text: "+1"
-//        font.bold: true
-//        font.pointSize: textMultiplier* 13
-//        color: "white"
-//    }
-//    ParallelAnimation{
-//        id: plusOneTextAnim
-//        NumberAnimation{
-//            target: plusOneText
-//            property: "opacity"
-//            from: 0
-//            to: 1
-//            duration: 20
-//        }
-//        PauseAnimation{
-//            duration: 250
-//            onStopped: {
-//                plusOneText.visible=false
-//            }
-//        }
-//    }
-
     //basketball
     Image{
         visible: totalTimeTimer.running
