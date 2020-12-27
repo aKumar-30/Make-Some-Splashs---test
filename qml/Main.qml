@@ -76,27 +76,27 @@ GameWindow {
             personalBest = settings.getValue("personalBest");
         }
         //save datastore
-        if(!settings.getValue("datastore1"))
-            settings.setValue("datastore1", datastore);
+        if(!settings.getValue("datastore3"))
+            settings.setValue("datastore3", datastore);
         else{
-            datastore = settings.getValue("datastore1");
+            datastore = settings.getValue("datastore3");
         }
         //other settings (mostly one time)
         //save counter 14
-        if(!settings.getValue("counter14"))
-            settings.setValue("counter14", counter14);
+        if(!settings.getValue("counter15"))
+            settings.setValue("counter15", counter14);
         else
-            counter14 = settings.getValue("counter14");
+            counter14 = settings.getValue("counter15");
         //save firstTimeUpdatingMissions
-        if(!settings.getValue("firstTimeUpdatingMissions22"))
-            settings.setValue("firstTimeUpdatingMissions22", firstTimeUpdatingMissions);
+        if(!settings.getValue("firstTimeUpdatingMissions2222"))
+            settings.setValue("firstTimeUpdatingMissions2222", firstTimeUpdatingMissions);
         else
-            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions22");
+            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions2222");
         //        //save firstTimeEVER
-        if(!settings.getValue("firstTimeEVER"))
-            settings.setValue("firstTimeEVER", false);
+        if(!settings.getValue("firstTimeEVER1"))
+            settings.setValue("firstTimeEVER1", false);
         else
-            firstTimeEVER = settings.getValue("firstTimeEVER");
+            firstTimeEVER = settings.getValue("firstTimeEVER1");
         aboutDialog.visible=firstTimeEVER
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
@@ -1311,18 +1311,18 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings5: root.firstTimeEVER
-        property alias volumeSettings5: root.volume
-        property alias soundSettings5:root.sound
-        property alias numCoinsSettings5: root.numCoins
-        property alias ballSourceSettings5:root.ballSource
+        property alias firstTimeEverSettings51: root.firstTimeEVER
+        property alias volumeSettings51: root.volume
+        property alias soundSettings51:root.sound
+        property alias numCoinsSettings51: root.numCoins
+        property alias ballSourceSettings51:root.ballSource
 
-        property alias shotRandomNumberSettings5: root.shotRandomNumber
-        property alias levelRandomNumberSettings5: root.levelRandomNumber
-        property alias personalBestSettings5: root.personalBest
-        property alias datastoreSettings5:root.datastore
+        property alias shotRandomNumberSettings51: root.shotRandomNumber
+        property alias levelRandomNumberSettings51: root.levelRandomNumber
+        property alias personalBestSettings51: root.personalBest
+        property alias datastoreSettings51:root.datastore
 
-        property alias presentMissionsSettings5: root.presentMissions
+        property alias presentMissionsSettings51: root.presentMissions
     }
 
     Component{
