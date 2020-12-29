@@ -601,8 +601,8 @@ Page {
                 whatToDoForNextLevel()
                 //set mDuration
                 mDurationEasy=1400
-                mDurationMedium= 1800
-                mDuration=1500
+                mDurationMedium= 1820
+                mDuration=1600
                 if(true){
                     //7
                     if(counter7===21&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
@@ -628,13 +628,13 @@ Page {
             if(easingNumber<10){
                 //easy
                 //               start: mDurationEasy=1200;
-                mDurationEasy-=40
+                mDurationEasy-=35
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypesL2[easingNumber]
             }
             else{
                 //medium
-                mDurationMedium-=27
+                mDurationMedium-=26
                 mDuration=mDurationMedium
                 sliderEasingType= mediumTypesL2[easingNumber-9]
             }
