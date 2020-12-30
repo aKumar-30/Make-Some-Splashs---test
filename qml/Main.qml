@@ -59,11 +59,12 @@ GameWindow {
         id: giantRect
         visible: true
         color: "white"
-        width: 150
-        height: 400
+        width: 300
+        height: 500
         Text{
             text: datastore
-            font.pointSize: 12
+            font.pointSize: 8
+            wrapMode: Text.Wrap
             color: "black"
         }
 
@@ -88,7 +89,6 @@ GameWindow {
         let datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
         datastore =  JSON.stringify(datamodel)
-        datastoreChanged();
     }
 
     Storage{
