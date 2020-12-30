@@ -53,6 +53,22 @@ GameWindow {
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
+    Rectangle{
+        anchors.centerIn: parent
+        z:100000
+        id: giantRect
+        visible: true
+        color: "white"
+        width: 150
+        height: 400
+        Text{
+            text: datastore
+            font.pointSize: 12
+            color: "black"
+        }
+
+    }
+
     Component.onCompleted: {
         //other stuff
         mMusic1.play()
