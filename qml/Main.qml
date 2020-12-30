@@ -119,6 +119,7 @@ GameWindow {
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
         datamodel =  JSON.stringify(datamodel)
+        datastore = datamodel;
         settings.setValue("datastore", datamodel)
 
         settings.setValue("coins", numCoins);
