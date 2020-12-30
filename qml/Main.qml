@@ -36,7 +36,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.46;
+    property real textMultiplier: 1.46
     id: root
 
 
@@ -54,49 +54,8 @@ GameWindow {
     //        height: 785
     //settings is now in storage instead of QSettings
     Component.onCompleted: {
-        //                        settings.clearAll()
         //other stuff
         mMusic1.play()
-        //save coins
-        if(!settings.getValue("coins"))
-            settings.setValue("coins", numCoins);
-        else{
-            numCoins = settings.getValue("coins");
-        }
-        //        //save ball source
-        if(!settings.getValue("ballSource"))
-            settings.setValue("ballSource", ballSource);
-        else
-            ballSource = settings.getValue("ballSource");
-        //save personal best
-        if(!settings.getValue("personalBest")){
-            settings.setValue("personalBest", personalBest);
-        }
-        else{
-            personalBest = settings.getValue("personalBest");
-        }
-        //save datastore
-        if(!settings.getValue("datastore"))
-            settings.setValue("datastore", datastore);
-        else{
-            datastore = settings.getValue("datastore");
-        }
-        //other settings (mostly one time)
-        //save counter 14
-        if(!settings.getValue("counter14"))
-            settings.setValue("counter14", counter14);
-        else
-            counter14 = settings.getValue("counter14");
-        //save firstTimeUpdatingMissions
-        if(!settings.getValue("firstTimeUpdatingMissions"))
-            settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
-        else
-            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
-        //        //save firstTimeEVER
-        if(!settings.getValue("firstTimeEVER"))
-            settings.setValue("firstTimeEVER", false);
-        else
-            firstTimeEVER = settings.getValue("firstTimeEVER");
         aboutDialog.visible=firstTimeEVER
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
@@ -114,24 +73,13 @@ GameWindow {
         firstTimeEVER= false;
         presentMissionsChanged()
         counter14Changed();
-        mMusic1.stop()
 
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-        datamodel =  JSON.stringify(datamodel)
-        datastore = datamodel;
-        settings.setValue("datastore", datamodel)
-
-        settings.setValue("coins", numCoins);
-        settings.setValue("ballSource", ballSource);
-        settings.setValue("personalBest", personalBest);
-        settings.setValue("counter14", counter14);
-        settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
+        datastore =  JSON.stringify(datamodel)
 
 
-        settings.setValue("firstTimeEVER", firstTimeEVER);
-        //        settings.setValue("volume", volume);
-        //        settings.setValue("sound", sound);
+        mMusic1.stop()
     }
     Storage{
         id: settings
@@ -1272,19 +1220,19 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings: root.firstTimeEVER
-        property alias volumeSettings: root.volume
-        property alias soundSettings:root.sound
-        property alias numCoinsSettings: root.numCoins
-        property alias ballSourceSettings:root.ballSource
+        property alias firstTimeEverSettings23w: root.firstTimeEVER
+        property alias volumeSettings23w: root.volume
+        property alias soundSettings23w:root.sound
+        property alias numCoinsSettings23w: root.numCoins
+        property alias ballSourceSettings23w:root.ballSource
 
-        property alias shotRandomNumberSettings: root.shotRandomNumber
-        property alias levelRandomNumberSettings: root.levelRandomNumber
-        property alias personalBestSettings: root.personalBest
-        property alias datastoreSettings:root.datastore
+        property alias shotRandomNumberSettings23w: root.shotRandomNumber
+        property alias levelRandomNumberSettings23w: root.levelRandomNumber
+        property alias personalBestSettings23w: root.personalBest
+        property alias datastoreSettings23w:root.datastore
 
-        property alias presentMissionsSettings: root.presentMissions
-        property alias firstTimeUpdatingMissions: root.firstTimeUpdatingMissions
+        property alias presentMissionsSettings23w: root.presentMissions
+        property alias firstTimeUpdatingMissionsSettings23w: root.firstTimeUpdatingMissions
     }
 
     Component{
