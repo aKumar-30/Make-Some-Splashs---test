@@ -61,13 +61,20 @@ GameWindow {
         stopMissionsFromViewageTimer.start();
         if ( datastore) {
             mMissionModel.clear()
-            var datamodel = JSON.parse(datastore)
+            let datamodel = JSON.parse(datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
         }
         if(presentMissions.length==0){
             updateMissions();
         }
     }
+    function parseData(){
+        let datamodel = []
+        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
+        datastore =  JSON.stringify(datamodel)
+        datastoreChanged();
+    }
+
     Storage{
         id: settings
     }
@@ -117,19 +124,14 @@ GameWindow {
             }
         }
     }
+    Component.onDestruction: {
+        //for how to play not popping up every time
+        presentMissionsChanged()
+        counter14Changed();
+        parseData()
+        mMusic1.stop()
+    }
     Audio{
-        Component.onDestruction: {
-            //for how to play not popping up every time
-            presentMissionsChanged()
-            counter14Changed();
-
-            var datamodel = []
-            for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-            datastore =  JSON.stringify(datamodel)
-            datastoreChanged();
-
-            mMusic1.stop()
-        }
         id: mMusic1
         source:"../assets/sounds/backgroundMusic.mp3"
         volume: root.volume*6/11
@@ -277,7 +279,7 @@ GameWindow {
     }
     Timer{
         id: thePauseTimer
-        interval: 1000
+        interval: 2000
     }
     Settings{
         category: "windows"
@@ -314,6 +316,8 @@ GameWindow {
                     navigationStack.pop()
                 myDialog1.hide()
                 thisTitle = "Shoot Hoops"
+
+                parseData()
                 //starting timer
                 thePauseTimer.start()
             }
@@ -1220,6 +1224,9 @@ GameWindow {
         }
     }
     Settings{
+        Component.onDestruction: {
+            parseData()
+        }
         property alias firstTimeEverSettings23wr: root.firstTimeEVER
         property alias volumeSettings23wr: root.volume
         property alias soundSettings23wr:root.sound
