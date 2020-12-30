@@ -63,9 +63,9 @@ GameWindow {
             mMissionModel.clear()
             var datamodel = JSON.parse(datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+            numCoins = datamodel.length;
         }
         if(presentMissions.length==0){
-            thisTitle = "Updated"
             updateMissions();
         }
     }
@@ -1034,7 +1034,8 @@ GameWindow {
                     }
                 }
                 Label {
-                    text: "Shoot Hoops!"
+//                    text: "Shoot Hoops!"
+                    text: presentMissions
                     font.family:impact.name
                     font.pointSize: textMultiplier* 67
                     width: 470
