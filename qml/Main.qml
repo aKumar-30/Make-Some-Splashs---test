@@ -65,12 +65,12 @@ GameWindow {
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
         }
         if(presentMissions.length==0){
+            thisTitle = "Updated"
             updateMissions();
         }
     }
     Component.onDestruction: {
         //for how to play not popping up every time
-        firstTimeEVER= false;
         presentMissionsChanged()
         counter14Changed();
 
@@ -193,7 +193,8 @@ GameWindow {
             firstTimeUpdatingMissions=false
         }
         else{
-            mMissionModel.remove(17)
+            if(mMissionModel.count==18)
+                mMissionModel.remove(17)
         }
         var rowCount = mMissionModel.count
         mArray = []
@@ -1220,19 +1221,19 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings23w: root.firstTimeEVER
-        property alias volumeSettings23w: root.volume
-        property alias soundSettings23w:root.sound
-        property alias numCoinsSettings23w: root.numCoins
-        property alias ballSourceSettings23w:root.ballSource
+        property alias firstTimeEverSettings23wr: root.firstTimeEVER
+        property alias volumeSettings23wr: root.volume
+        property alias soundSettings23wr:root.sound
+        property alias numCoinsSettings23wr: root.numCoins
+        property alias ballSourceSettings23wr:root.ballSource
 
-        property alias shotRandomNumberSettings23w: root.shotRandomNumber
-        property alias levelRandomNumberSettings23w: root.levelRandomNumber
-        property alias personalBestSettings23w: root.personalBest
-        property alias datastoreSettings23w:root.datastore
+        property alias shotRandomNumberSettings23wr: root.shotRandomNumber
+        property alias levelRandomNumberSettings23wr: root.levelRandomNumber
+        property alias personalBestSettings23wr: root.personalBest
+        property alias datastoreSettings23wr:root.datastore
 
-        property alias presentMissionsSettings23w: root.presentMissions
-        property alias firstTimeUpdatingMissionsSettings23w: root.firstTimeUpdatingMissions
+        property alias presentMissionsSettings23wr: root.presentMissions
+        property alias firstTimeUpdatingMissionsSettings23wr: root.firstTimeUpdatingMissions
     }
 
     Component{
