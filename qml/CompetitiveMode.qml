@@ -273,6 +273,7 @@ Page {
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
+            //@disable-check M126
             if(presentMissions[i]==num){    //THIS WARNING IS INTENTIONAL DO NOT CHANGE THIS OR IT WILLLLLLL BREAK
                 //THE CODE AND I WILL BE MAD EVEN THOUGH IT IS ME WHO IS READING THIS BUT I CAN BE MAD AT MYSELF
                 return true;
@@ -1725,7 +1726,6 @@ Page {
                 function typeOfShot(shotShot){
                     var correctShot = typesOfShotPossible[shotRandomNumber]
                     if(correctShot===shotShot){
-                        console.log("i am going to return true")
                         return true;
                     }
                     return false;
@@ -1733,10 +1733,8 @@ Page {
                 let last= mMissionModel.get(17)
                 if(typeOfShot(shotShot)){
                     if(level===levelOptions[levelRandomNumber]){
-                        console.log("i am in the correct level in if")
                         counterLast++;
                         if(counterLast===mMissionModel.get(17).neededThings&&mMissionModel.get(17).currentThings<mMissionModel.get(17).neededThings){
-                            console.log("i am in the correct level in if in if")
                             mMissionModel.get(17).currentThings=counterLast
                             counterLast--
                         }
@@ -1744,9 +1742,7 @@ Page {
                 }
                 else{
                     if(level===levelOptions[levelRandomNumber]){
-                        console.log("i am in the correct level in else")
                         if(counterLast>mMissionModel.get(17).currentThings&&mMissionModel.get(17).currentThings<mMissionModel.get(17).neededThings){
-                            console.log("i am in the correct level in else in if")
                             mMissionModel.get(17).currentThings=counterLast;
                         }
                         counterLast=0;
@@ -2043,7 +2039,7 @@ Page {
                 points +=30*level;
                 pointsThisRound += 30*level;
                 backboardAnimation.start()
-                feedback = ["Good shot","A make is a make", "A splash is a splash", "Lucky shot?",  "You can do even better", "Atleast it made"]
+                feedback = ["Good shot","A make is a make", "A score is a score", "Lucky shot?",  "You can do even better", "Atleast it made"]
                 random_number = Math.floor((Math.random() * 6));
             }
             else if(level3ShotAccuracy==="rimMake"|| level3ShotAccuracy==="null"&&(value <415 || value > 585)){

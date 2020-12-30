@@ -36,7 +36,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1;
+    property real textMultiplier: 1.46;
     id: root
 
 
@@ -58,45 +58,45 @@ GameWindow {
         //other stuff
         mMusic1.play()
         //save coins
-        if(!settings.getValue("coins1ceeccgg"))
-            settings.setValue("coins1ceeccgg", numCoins);
+        if(!settings.getValue("coins"))
+            settings.setValue("coins", numCoins);
         else{
-            numCoins = settings.getValue("coins1ceeccgg");
+            numCoins = settings.getValue("coins");
         }
         //        //save ball source
-        if(!settings.getValue("ballSource1ceeccgg"))
-            settings.setValue("ballSource1ceeccgg", ballSource);
+        if(!settings.getValue("ballSource"))
+            settings.setValue("ballSource", ballSource);
         else
-            ballSource = settings.getValue("ballSource1ceeccgg");
+            ballSource = settings.getValue("ballSource");
         //save personal best
-        if(!settings.getValue("personalBest1ceeccgg")){
-            settings.setValue("personalBest1ceeccgg", personalBest);
+        if(!settings.getValue("personalBest")){
+            settings.setValue("personalBest", personalBest);
         }
         else{
-            personalBest = settings.getValue("personalBest1ceeccgg");
+            personalBest = settings.getValue("personalBest");
         }
         //save datastore
-        if(!settings.getValue("datastore1ceeccgg"))
-            settings.setValue("datastore1ceeccgg", datastore);
+        if(!settings.getValue("datastore"))
+            settings.setValue("datastore", datastore);
         else{
-            datastore = settings.getValue("datastore1ceeccgg");
+            datastore = settings.getValue("datastore");
         }
         //other settings (mostly one time)
         //save counter 14
-        if(!settings.getValue("counter1ceeccgg"))
-            settings.setValue("counter1ceeccgg", counter14);
+        if(!settings.getValue("counter14"))
+            settings.setValue("counter14", counter14);
         else
-            counter14 = settings.getValue("counter1ceeccgg");
+            counter14 = settings.getValue("counter14");
         //save firstTimeUpdatingMissions
-        if(!settings.getValue("firstTimeUpdatingMissions1ceeccgg"))
-            settings.setValue("firstTimeUpdatingMissions1ceeccgg", firstTimeUpdatingMissions);
+        if(!settings.getValue("firstTimeUpdatingMissions"))
+            settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
         else
-            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions1ceeccgg");
+            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions");
         //        //save firstTimeEVER
-        if(!settings.getValue("firstTimeEVER1ceeccgg"))
-            settings.setValue("firstTimeEVER1ceeccgg", false);
+        if(!settings.getValue("firstTimeEVER"))
+            settings.setValue("firstTimeEVER", false);
         else
-            firstTimeEVER = settings.getValue("firstTimeEVER1ceeccgg");
+            firstTimeEVER = settings.getValue("firstTimeEVER");
         aboutDialog.visible=firstTimeEVER
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
@@ -108,9 +108,6 @@ GameWindow {
         if(presentMissions.length==0){
             updateMissions();
         }
-        console.log("Present missions: " + presentMissions)
-         case1DelegateChooser =  "MissionsDelegate.qml"
-        case2DelegateChooser = "NoShowDelegate.qml"
     }
     Component.onDestruction: {
         //for how to play not popping up every time
@@ -118,21 +115,20 @@ GameWindow {
         presentMissionsChanged()
         counter14Changed();
         mMusic1.stop()
-        storeForSettings();
 
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
         datamodel =  JSON.stringify(datamodel)
-        settings.setValue("datastore1ceeccgg", datamodel)
+        settings.setValue("datastore", datamodel)
 
-        settings.setValue("coins1ceeccgg", numCoins);
-        settings.setValue("ballSource1ceeccgg", ballSource);
-        settings.setValue("personalBest1ceeccgg", personalBest);
-        settings.setValue("counter1ceeccgg", counter14);
-        settings.setValue("firstTimeUpdatingMissions1ceeccgg", firstTimeUpdatingMissions);
+        settings.setValue("coins", numCoins);
+        settings.setValue("ballSource", ballSource);
+        settings.setValue("personalBest", personalBest);
+        settings.setValue("counter14", counter14);
+        settings.setValue("firstTimeUpdatingMissions", firstTimeUpdatingMissions);
 
 
-        settings.setValue("firstTimeEVER1ceeccgg", firstTimeEVER);
+        settings.setValue("firstTimeEVER", firstTimeEVER);
         //        settings.setValue("volume", volume);
         //        settings.setValue("sound", sound);
     }
@@ -214,8 +210,8 @@ GameWindow {
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
-            if(presentMissions[i]==num){
-                console.log("Going to return true at index" + num)
+           //@disable-check M126
+            if(presentMissions[i]==num){   //INTENTIONAL DO NOT CHANGE
                 return true;
             }
         }
@@ -239,17 +235,15 @@ GameWindow {
         id: delayTimer
     }
     Timer{
-        interval : 4000
+        interval : 7000
         id: stopMissionsFromViewageTimer
     }
 
     function partUpdatingMissions(){
         if(firstTimeUpdatingMissions){
-            console.log("in here555")
             firstTimeUpdatingMissions=false
         }
         else{
-            console.log("in here666")
             mMissionModel.remove(17)
         }
         var rowCount = mMissionModel.count
@@ -277,10 +271,7 @@ GameWindow {
         tempModel.get(0).currentThings = 0
         tempModel.get(0).completed = false
         //        //we now want two with one extra special at the end
-        var numberOfTimesAndCoins = [[2,2],[3,4],[4,6],[5,9],[6,10],[7,12],[8,16],[9,19]]
-        typesOfShotPossible = ["backboard","rim", "splash"]
-        //        levelOptions = [1,1,1,1,1,2,2,2,2,2,3,3,0,0]
-        levelOptions = [1,1,1,1]
+        var numberOfTimesAndCoins = [[2,2],[3,5],[4,7],[5,10],[6,12],[7,14],[8,18],[9,24]]
         var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
         tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
         tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
@@ -310,7 +301,6 @@ GameWindow {
         id: flashingTimerConnection
         target: FlashingTimer
         onCallUpdateMissions: {
-            console.log("LET THE uPDATING BEGIN!")
             updatingMissionsDuringGame()
         }
     }
@@ -405,10 +395,6 @@ GameWindow {
         missionsScene.visible=false
         missionsScene.scale=0
     }
-
-    property var case1DelegateChooser: ""
-    property var case2DelegateChooser: ""
-
     Scene{
         z:4
         id: missionsScene
@@ -661,6 +647,135 @@ GameWindow {
 
                 //            ListElement{//7
             }
+            Component{
+                id: mMissionDelegate
+                Rectangle{
+                    visible: checkIfCurrentMission(index)
+                    Component.onCompleted: {
+                    }
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: mainRect.width-25
+                    height: (visible)?(width*1/4+45+spacingRect.height):0
+                    clip: true
+                    id: outsideComponentRect
+                    Rectangle{
+                        anchors.top: actualDelegate.bottom
+                        id: spacingRect
+                        height: 10
+                        width: parent.width;
+                        color: "transparent";
+                    }
+                    Rectangle{
+                        id: actualDelegate
+                        visible: (completed)
+                        width: outsideComponentRect.width
+                        height: outsideComponentRect.height
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        color: "white"
+                        border.width: 12
+                        border.color: "#7ae868"
+                        Text{
+                            anchors.centerIn: parent
+                            text: "COMPLETED"
+                            font.family: "Segoe UI Light"
+                            font.bold: true
+                            font.underline: true
+                            horizontalAlignment: Text.AlignHCenter
+                            font.pointSize: textMultiplier* 20
+                            color: "#7ae868"
+
+                        }
+                    }
+                    Rectangle{
+                        visible: !completed
+                        width: outsideComponentRect.width
+                        height: outsideComponentRect.height
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        color: "transparent"
+                        Rectangle{
+                            id: mainDelegateRect
+                            width: parent.width
+                            height: parent.height-12
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: (currentThings>=neededThings)?"#7ae868":"#2e8ddb"
+                            Column{
+                                x:16
+                                y:10
+                                spacing: 12;
+                                width: parent.width
+                                Text{
+                                    id: theText
+                                    y:15
+                                    font.family: centuryGothic.name
+                                    font.bold: true
+                                    width: parent.width*2/3+15
+                                    wrapMode: Text.Wrap
+                                    font.pointSize: textMultiplier* 14
+                                    color: "white"
+                                    text:description
+                                    //description text
+                                }
+                                Row{
+                                    spacing:2
+                                    //progress bar
+                                    ProgressBar {
+                                        id: thingsLeft
+                                        value: currentThings/neededThings
+                                        padding: 2
+                                        Text{
+                                            z:3
+                                            anchors.centerIn: parent
+                                            color: "white"
+                                            font.family: centuryGothic.name
+                                            font.bold: true
+                                            font.pointSize: textMultiplier* 18
+                                            text:(currentThings>=neededThings)?(neededThings+"/"+neededThings):(currentThings+"/"+neededThings)
+                                        }
+                                        background: Rectangle {
+                                            implicitWidth: theText.width
+                                            implicitHeight: 40
+                                            color: "#000000"
+                                            radius: 2
+                                        }
+                                        contentItem: Item {
+                                            implicitWidth: theText.width
+                                            implicitHeight: 30
+                                            Rectangle {
+                                                width: thingsLeft.visualPosition * parent.width
+                                                height: parent.height
+                                                radius: 2
+                                                color: "#06bf0c"
+                                            }
+                                        }
+                                    }
+                                    //filler space
+                                    Rectangle{
+                                        width: 30
+                                        height: 2
+                                        color: "transparent"
+                                    }
+                                    //reward
+                                    Text{
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        color: "black"
+                                        font.family: centuryGothic.name
+                                        font.bold: true
+                                        font.pointSize: textMultiplier* 20
+                                        text:reward
+                                    }
+                                    //coin pic
+                                    Image{
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        width: 40
+                                        height: 40
+                                        source: "../assets/images/coinFront.png"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             ListView {
                 id: listOfMissions
@@ -669,27 +784,9 @@ GameWindow {
                 width: parent.width
                 height: parent.height-header.height-headerFade.height-countdownText.height-getRewardsButton.height-15
                 x: 0;
-                spacing: 10
+                spacing: 0
                 model: mMissionModel
-                delegate:  Component{
-                    id: delegate
-                    Loader {
-                        source: {
-                            let doesInclude = checkIfCurrentMission(index)
-                            console.log("Does include for " +index + " is " + doesInclude);
-                            switch(doesInclude) {
-                                case true:{
-                                    console.log("in true case");
-                                    return case1DelegateChooser
-                                }
-                                case false:{
-                                    console.log("in true case");
-                                    return case2DelegateChooser
-                                }
-                            }
-                        }
-                    }
-                }
+                delegate:  mMissionDelegate
                 interactive: false;
             }
             //Actual model stuff ENDS HERE------------------------------------------------------------
@@ -700,12 +797,11 @@ GameWindow {
                         numCoins+= currentMissionRewards;
                         //remove delegates for completed missions
                         for(let i = 0; i< 3;i++){
-                            if(mMissionModel.get(presentMissions[i]).currentThings>=dmMissionModel.get(presentMissions[i]).neededThings){
+                            if(mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings){
                                 mMissionModel.get(presentMissions[i]).completed=true
                             }
                         }
-                        visible=false;
-                        getRewardsButtonFade.visible=false;
+                       currentMissionRewards=0;
                     }
                 }
                 visible: currentMissionRewards!=0;
@@ -713,7 +809,7 @@ GameWindow {
                 id: getRewardsButton
                 anchors.top: listOfMissions.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
-                height: 80
+                height: 73
                 width: 200
                 Rectangle{
                     anchors.fill: parent
@@ -756,7 +852,7 @@ GameWindow {
                 }
             }
             Rectangle{
-                visible: currentMissionRewards!=0;
+                visible: getRewardsButton.visible;
                 id: getRewardsButtonFade
                 width: getRewardsButton.width
                 height: getRewardsButton.height
@@ -1175,19 +1271,19 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings9yycvyfs: root.firstTimeEVER
-        property alias volumeSettings9yycvyfs: root.volume
-        property alias soundSettings9yycvyfs:root.sound
-        property alias numCoinsSettings9yycvyfs: root.numCoins
-        property alias ballSourceSettings9yycvyfs:root.ballSource
+        property alias firstTimeEverSettings: root.firstTimeEVER
+        property alias volumeSettings: root.volume
+        property alias soundSettings:root.sound
+        property alias numCoinsSettings: root.numCoins
+        property alias ballSourceSettings:root.ballSource
 
-        property alias shotRandomNumberSettings9yycvyfs: root.shotRandomNumber
-        property alias levelRandomNumberSettings9yycvyfs: root.levelRandomNumber
-        property alias personalBestSettings9yycvyfs: root.personalBest
-        property alias datastoreSettings9yycvyfs:root.datastore
+        property alias shotRandomNumberSettings: root.shotRandomNumber
+        property alias levelRandomNumberSettings: root.levelRandomNumber
+        property alias personalBestSettings: root.personalBest
+        property alias datastoreSettings:root.datastore
 
-        property alias presentMissionsSettings9yycvyfs: root.presentMissions
-        property alias firstTimeUpdatingMissions9yycvyfs: root.firstTimeUpdatingMissions
+        property alias presentMissionsSettings: root.presentMissions
+        property alias firstTimeUpdatingMissions: root.firstTimeUpdatingMissions
     }
 
     Component{
