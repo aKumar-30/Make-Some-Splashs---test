@@ -1724,19 +1724,19 @@ Page {
             function lastMissionCheck(shotShot){
                 function typeOfShot(shotShot){
                     var correctShot = typesOfShotPossible[shotRandomNumber]
-                    //                    console.log("correct shot is"+correctShot)
                     if(correctShot===shotShot){
-                        //                        console.log("Last mission check returned true")
+                        console.log("i am going to return true")
                         return true;
                     }
-                    //                    console.log("Last mission check returned false")
                     return false;
                 }
                 let last= mMissionModel.get(17)
                 if(typeOfShot(shotShot)){
                     if(level===levelOptions[levelRandomNumber]){
+                        console.log("i am in the correct level in if")
                         counterLast++;
                         if(counterLast===mMissionModel.get(17).neededThings&&mMissionModel.get(17).currentThings<mMissionModel.get(17).neededThings){
+                            console.log("i am in the correct level in if in if")
                             mMissionModel.get(17).currentThings=counterLast
                             counterLast--
                         }
@@ -1744,7 +1744,9 @@ Page {
                 }
                 else{
                     if(level===levelOptions[levelRandomNumber]){
+                        console.log("i am in the correct level in else")
                         if(counterLast>mMissionModel.get(17).currentThings&&mMissionModel.get(17).currentThings<mMissionModel.get(17).neededThings){
+                            console.log("i am in the correct level in else in if")
                             mMissionModel.get(17).currentThings=counterLast;
                         }
                         counterLast=0;
@@ -1768,7 +1770,6 @@ Page {
                     counter1=0;
                     //2
                     if(counter2>mMissionModel.get(2).currentThings&&!(mMissionModel.get(2).currentThings>=mMissionModel.get(2).neededThings)&&checkIfCurrentMission(2)){
-                        console.log("Am I here???")
                         mMissionModel.get(2).currentThings=counter2
                     }
                     counter2=0;
@@ -1970,7 +1971,7 @@ Page {
                 pointsThisRound -= level*40;
                 rimMissAnimation.start()
                 feedback = ["Brick", "Close but not yet there", "Hit the net next time, not the rim", "Closer than ever", "You'll do it next time", "Good try!", "Close but not there", "Seems like you have started practicing..."]
-                random_number = Math.floor((Math.random() * 5));
+                random_number = Math.floor((Math.random() * 8));
             }
             else if(level3ShotAccuracy==="backboardMake"|| level3ShotAccuracy==="null"&&(value < 350 || value >650)){
                 if(true){
@@ -2043,7 +2044,7 @@ Page {
                 pointsThisRound += 30*level;
                 backboardAnimation.start()
                 feedback = ["Good shot","A make is a make", "A splash is a splash", "Lucky shot?",  "You can do even better", "Atleast it made"]
-                random_number = Math.floor((Math.random() * 7));
+                random_number = Math.floor((Math.random() * 6));
             }
             else if(level3ShotAccuracy==="rimMake"|| level3ShotAccuracy==="null"&&(value <415 || value > 585)){
                 if(true){
@@ -2116,7 +2117,7 @@ Page {
                 pointsThisRound += 50*level;
                 rimMakeAnimation.start()
                 feedback = ["I thought that was going to miss", "The rim was on your side", "Looks like you are on a set path to the NBA", "Amazing shot!", "Pretty nice!", "Fantastic", "Pretty good"]
-                random_number = Math.floor((Math.random() * 5));
+                random_number = Math.floor((Math.random() * 7));
             }
             else if(level3ShotAccuracy==="splash"|| level3ShotAccuracy==="null"&&(value <485|| value>515)){
                 if(true){
@@ -2189,7 +2190,7 @@ Page {
                 pointsThisRound += 110*level;
                 splashAnimation.start()
                 feedback = ["Next MVP?","Future NBA champion","The next Steph Curry?", "What an amazing shot?", "Making some splashes", "Raining threes", "All the way from deep?", "Swish!", "Like a true NBA player"]
-                random_number = Math.floor((Math.random() * 7));
+                random_number = Math.floor((Math.random() * 9));
             }
             else{
                 //need these stuffy here for if statement to check for make the work
@@ -2263,7 +2264,7 @@ Page {
                 pointsThisRound +=150*level;
                 splashAnimation.start()
                 feedback = ["The Greatest of All Time", "May be the greatest shot ever", "Game winner!", "Buzzer beater", "MVP", "Champion", "Beautiful shot"]
-                random_number = Math.floor((Math.random() * 5));
+                random_number = Math.floor((Math.random() * 7));
                 feedbackLabel.font.bold = true;
                 splashAnimation.start()
             }

@@ -58,45 +58,45 @@ GameWindow {
         //other stuff
         mMusic1.play()
         //save coins
-        if(!settings.getValue("coins1ceeccgg"))
-            settings.setValue("coins1ceeccgg", numCoins);
+        if(!settings.getValue("coins1ceecgg"))
+            settings.setValue("coins1ceecgg", numCoins);
         else{
-            numCoins = settings.getValue("coins1ceeccgg");
+            numCoins = settings.getValue("coins1ceecgg");
         }
         //        //save ball source
-        if(!settings.getValue("ballSource1ceeccgg"))
-            settings.setValue("ballSource1ceeccgg", ballSource);
+        if(!settings.getValue("ballSource1ceecgg"))
+            settings.setValue("ballSource1ceecgg", ballSource);
         else
-            ballSource = settings.getValue("ballSource1ceeccgg");
+            ballSource = settings.getValue("ballSource1ceecgg");
         //save personal best
-        if(!settings.getValue("personalBest1ceeccgg")){
-            settings.setValue("personalBest1ceeccgg", personalBest);
+        if(!settings.getValue("personalBest1ceecgg")){
+            settings.setValue("personalBest1ceecgg", personalBest);
         }
         else{
-            personalBest = settings.getValue("personalBest1ceeccgg");
+            personalBest = settings.getValue("personalBest1ceecgg");
         }
         //save datastore
-        if(!settings.getValue("datastore1ceeccgg"))
-            settings.setValue("datastore1ceeccgg", datastore);
+        if(!settings.getValue("datastore1ceecgg"))
+            settings.setValue("datastore1ceecgg", datastore);
         else{
-            datastore = settings.getValue("datastore1ceeccgg");
+            datastore = settings.getValue("datastore1ceecgg");
         }
         //other settings (mostly one time)
         //save counter 14
-        if(!settings.getValue("counter1ceeccgg"))
-            settings.setValue("counter1ceeccgg", counter14);
+        if(!settings.getValue("counter1ceecgg"))
+            settings.setValue("counter1ceecgg", counter14);
         else
-            counter14 = settings.getValue("counter1ceeccgg");
+            counter14 = settings.getValue("counter1ceecgg");
         //save firstTimeUpdatingMissions
-        if(!settings.getValue("firstTimeUpdatingMissions1ceeccgg"))
-            settings.setValue("firstTimeUpdatingMissions1ceeccgg", firstTimeUpdatingMissions);
+        if(!settings.getValue("firstTimeUpdatingMissions1ceecgg"))
+            settings.setValue("firstTimeUpdatingMissions1ceecgg", firstTimeUpdatingMissions);
         else
-            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions1ceeccgg");
+            firstTimeUpdatingMissions = settings.getValue("firstTimeUpdatingMissions1ceecgg");
         //        //save firstTimeEVER
-        if(!settings.getValue("firstTimeEVER1ceeccgg"))
-            settings.setValue("firstTimeEVER1ceeccgg", false);
+        if(!settings.getValue("firstTimeEVER1ceecgg"))
+            settings.setValue("firstTimeEVER1ceecgg", false);
         else
-            firstTimeEVER = settings.getValue("firstTimeEVER1ceeccgg");
+            firstTimeEVER = settings.getValue("firstTimeEVER1ceecgg");
         aboutDialog.visible=firstTimeEVER
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
@@ -109,8 +109,6 @@ GameWindow {
             updateMissions();
         }
         console.log("Present missions: " + presentMissions)
-         case1DelegateChooser =  "MissionsDelegate.qml"
-        case2DelegateChooser = "NoShowDelegate.qml"
     }
     Component.onDestruction: {
         //for how to play not popping up every time
@@ -123,16 +121,16 @@ GameWindow {
         var datamodel = []
         for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
         datamodel =  JSON.stringify(datamodel)
-        settings.setValue("datastore1ceeccgg", datamodel)
+        settings.setValue("datastore1ceecgg", datamodel)
 
-        settings.setValue("coins1ceeccgg", numCoins);
-        settings.setValue("ballSource1ceeccgg", ballSource);
-        settings.setValue("personalBest1ceeccgg", personalBest);
-        settings.setValue("counter1ceeccgg", counter14);
-        settings.setValue("firstTimeUpdatingMissions1ceeccgg", firstTimeUpdatingMissions);
+        settings.setValue("coins1ceecgg", numCoins);
+        settings.setValue("ballSource1ceecgg", ballSource);
+        settings.setValue("personalBest1ceecgg", personalBest);
+        settings.setValue("counter1ceecgg", counter14);
+        settings.setValue("firstTimeUpdatingMissions1ceecgg", firstTimeUpdatingMissions);
 
 
-        settings.setValue("firstTimeEVER1ceeccgg", firstTimeEVER);
+        settings.setValue("firstTimeEVER1ceecgg", firstTimeEVER);
         //        settings.setValue("volume", volume);
         //        settings.setValue("sound", sound);
     }
@@ -213,6 +211,7 @@ GameWindow {
         presentMissionsChanged()
     }
     function checkIfCurrentMission(num){
+        console.log("Num is")
         for(let i =0; i< 3; i++){
             if(presentMissions[i]==num){
                 console.log("Going to return true at index" + num)
@@ -405,9 +404,6 @@ GameWindow {
         missionsScene.visible=false
         missionsScene.scale=0
     }
-
-    property var case1DelegateChooser: ""
-    property var case2DelegateChooser: ""
 
     Scene{
         z:4
@@ -674,18 +670,15 @@ GameWindow {
                 delegate:  Component{
                     id: delegate
                     Loader {
+                        height: childrenRect.height
+                        width: parent.width
                         source: {
                             let doesInclude = checkIfCurrentMission(index)
-                            console.log("Does include for " +index + " is " + doesInclude);
                             switch(doesInclude) {
-                                case true:{
-                                    console.log("in true case");
-                                    return case1DelegateChooser
-                                }
-                                case false:{
-                                    console.log("in true case");
-                                    return case2DelegateChooser
-                                }
+                            case true:
+                                return "MissionsDelegate.qml"
+                            case false:
+                                return "NoShowDelegate.qml"
                             }
                         }
                     }
@@ -1175,19 +1168,19 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings9yycvyfs: root.firstTimeEVER
-        property alias volumeSettings9yycvyfs: root.volume
-        property alias soundSettings9yycvyfs:root.sound
-        property alias numCoinsSettings9yycvyfs: root.numCoins
-        property alias ballSourceSettings9yycvyfs:root.ballSource
+        property alias firstTimeEverSettings9yycvyff: root.firstTimeEVER
+        property alias volumeSettings9yycvyff: root.volume
+        property alias soundSettings9yycvyff:root.sound
+        property alias numCoinsSettings9yycvyff: root.numCoins
+        property alias ballSourceSettings9yycvyff:root.ballSource
 
-        property alias shotRandomNumberSettings9yycvyfs: root.shotRandomNumber
-        property alias levelRandomNumberSettings9yycvyfs: root.levelRandomNumber
-        property alias personalBestSettings9yycvyfs: root.personalBest
-        property alias datastoreSettings9yycvyfs:root.datastore
+        property alias shotRandomNumberSettings9yycvyff: root.shotRandomNumber
+        property alias levelRandomNumberSettings9yycvyff: root.levelRandomNumber
+        property alias personalBestSettings9yycvyff: root.personalBest
+        property alias datastoreSettings9yycvyff:root.datastore
 
-        property alias presentMissionsSettings9yycvyfs: root.presentMissions
-        property alias firstTimeUpdatingMissions9yycvyfs: root.firstTimeUpdatingMissions
+        property alias presentMissionsSettings9yycvyff: root.presentMissions
+        property alias firstTimeUpdatingMissions9yycvyff: root.firstTimeUpdatingMissions
     }
 
     Component{

@@ -10,15 +10,29 @@
 #include <QMetaObject>
 #include <QObject>
 #include <QFile>
+#include "settingsmanager.h"
+
 FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
     :QObject(parent), tomorrow(tomorrow1),timer(new QTimer(this)),difference(0),m_whatToPrint("Getting ready..."){
     //fix tomorrow
     QDateTime now1 = QDateTime::currentDateTime();
+    qDebug()<<"Inhere1";
     if(tomorrow<now1){
         while(tomorrow<now1)
             tomorrow=tomorrow.addSecs(86399);
-        QTimer::singleShot(6500, this, SIGNAL(callUpdateMissions())); //delays emitting the callUpdateMissions signal
-//        emit callUpdateMissions();
+        SettingsManager dude;
+        dude.writeSettings("steph57777", tomorrow);
+        QTimer* j = new QTimer(this);
+        srand(time(NULL));
+        j->setSingleShot(true);
+        connect(j,&QTimer::timeout, [=](){
+            qDebug()<<"Inhere2";
+            emit callUpdateMissions();
+            qDebug()<<"Inhere3";
+        });
+        j->start(12000);
+        //        QTimer::singleShot(6500, this, SIGNAL(callUpdateMissions())); //delays emitting the callUpdateMissions signal
+        //        emit callUpdateMissions();
     }
     //Intialize the timer
     srand(time(NULL));
