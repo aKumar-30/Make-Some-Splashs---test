@@ -118,7 +118,7 @@ GameWindow {
         }
     }
     Audio{
-        Component.onDestroyed: {
+        Component.onDestruction: {
             //for how to play not popping up every time
             presentMissionsChanged()
             counter14Changed();
