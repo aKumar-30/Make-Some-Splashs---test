@@ -63,23 +63,10 @@ GameWindow {
             mMissionModel.clear()
             var datamodel = JSON.parse(datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
-            numCoins = datamodel.length;
         }
         if(presentMissions.length==0){
             updateMissions();
         }
-    }
-    Component.onDestruction: {
-        //for how to play not popping up every time
-        presentMissionsChanged()
-        counter14Changed();
-
-        var datamodel = []
-        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-        datastore =  JSON.stringify(datamodel)
-
-
-        mMusic1.stop()
     }
     Storage{
         id: settings
@@ -131,6 +118,18 @@ GameWindow {
         }
     }
     Audio{
+        Component.onDestroyed: {
+            //for how to play not popping up every time
+            presentMissionsChanged()
+            counter14Changed();
+
+            var datamodel = []
+            for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
+            datastore =  JSON.stringify(datamodel)
+            datastoreChanged();
+
+            mMusic1.stop()
+        }
         id: mMusic1
         source:"../assets/sounds/backgroundMusic.mp3"
         volume: root.volume*6/11
@@ -1034,8 +1033,7 @@ GameWindow {
                     }
                 }
                 Label {
-//                    text: "Shoot Hoops!"
-                    text: presentMissions
+                    text: "Shoot Hoops!"
                     font.family:impact.name
                     font.pointSize: textMultiplier* 67
                     width: 470
