@@ -145,11 +145,11 @@ FlashingTimer allTheTimeStuff(){
     //Make and save tomorrow
     QSettings settings;
     SettingsManager dude;
-    QDateTime tomorrow=now.addSecs(86399);
-    if(!settings.contains("Timekk"))
-        dude.writeSettings("Timekk", tomorrow);
+    QDateTime tomorrow=now.addSecs(60);
+    if(!settings.contains("TimeTrack"))
+        dude.writeSettings("TimeTrack", tomorrow);
     else{
-        tomorrow = SettingsManager::loadSettings("Timekk").toDateTime();
+        tomorrow = SettingsManager::loadSettings("TimeTrack").toDateTime();
     }
     FlashingTimer joe(tomorrow);
     return joe;

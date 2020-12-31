@@ -20,7 +20,7 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         while(tomorrow<now1)
             tomorrow=tomorrow.addSecs(86399);
         SettingsManager dude;
-        dude.writeSettings("Time0", tomorrow);
+        dude.writeSettings("TimeTrack", tomorrow);
         QTimer* j = new QTimer(this);
         srand(time(NULL));
         j->setSingleShot(true);
