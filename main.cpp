@@ -145,7 +145,7 @@ FlashingTimer allTheTimeStuff(){
     //Make and save tomorrow
     QSettings settings;
     SettingsManager dude;
-    QDateTime tomorrow=now.addSecs(60);
+    QDateTime tomorrow=now.addSecs(40);
     if(!settings.contains("TimeTrack"))
         dude.writeSettings("TimeTrack", tomorrow);
     else{

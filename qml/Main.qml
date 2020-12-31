@@ -204,7 +204,7 @@ GameWindow {
         id: delayTimer
     }
     Timer{
-        interval : 7000
+        interval : 11000
         id: stopMissionsFromViewageTimer
     }
 

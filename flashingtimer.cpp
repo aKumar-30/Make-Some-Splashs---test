@@ -27,7 +27,7 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         connect(j,&QTimer::timeout, [=](){
             emit callUpdateMissions();
         });
-        j->start(8000);
+        j->start(11000);
         //        QTimer::singleShot(6500, this, SIGNAL(callUpdateMissions())); //delays emitting the callUpdateMissions signal
         //        emit callUpdateMissions();
     }
@@ -38,7 +38,9 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         difference = now.secsTo(tomorrow);
         display();
         if(difference == 0){
+            SettingsManager dude;
             tomorrow=tomorrow.addSecs(86399);
+            dude.writeSettings("TimeTrack", tomorrow);
             emit callUpdateMissions();
         }
     });
