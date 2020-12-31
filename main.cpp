@@ -16,7 +16,7 @@
 #include "mytimer.h"
 #include <FelgoApplication>
 #include <QApplication>
-#include <FelgoLiveClient>
+//#include <FelgoLiveClient>
 //FlashingTimer allTheTimeStuff();
 
 //int main(int argc, char *argv[])
@@ -77,23 +77,23 @@
 //    return joe;
 //}
 
-////// Default message handler to be called to bypass all other warnings.
-////static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
-////// a custom message handler to intercept warnings
-////void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString & msg)
-////{
-////    switch (type) {
-////    case QtWarningMsg: {
-////        if (!msg.contains("Unable to assign [undefined] to int")){ // suppress this warning
-////            (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
-////        }
-////    }
-////    break;
-////    default:    // Call the default handler.
-////        (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
-////        break;
-////    }
-////}
+//// Default message handler to be called to bypass all other warnings.
+//static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
+//// a custom message handler to intercept warnings
+//void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString & msg)
+//{
+//    switch (type) {
+//    case QtWarningMsg: {
+//        if (!msg.contains("Unable to assign [undefined] to int")){ // suppress this warning
+//            (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg); // bypass and display all other warnings
+//        }
+//    }
+//    break;
+//    default:    // Call the default handler.
+//        (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
+//        break;
+//    }
+//}
 
 
 FlashingTimer allTheTimeStuff();
@@ -146,10 +146,10 @@ FlashingTimer allTheTimeStuff(){
     QSettings settings;
     SettingsManager dude;
     QDateTime tomorrow=now.addSecs(86399);
-    if(!settings.contains("Time0"))
-        dude.writeSettings("Time0", tomorrow);
+    if(!settings.contains("Timekk"))
+        dude.writeSettings("Timekk", tomorrow);
     else{
-        tomorrow = SettingsManager::loadSettings("Time0").toDateTime();
+        tomorrow = SettingsManager::loadSettings("Timekk").toDateTime();
     }
     FlashingTimer joe(tomorrow);
     return joe;
