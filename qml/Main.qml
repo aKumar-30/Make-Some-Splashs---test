@@ -36,7 +36,7 @@ GameWindow {
     property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.46
+    property real textMultiplier: 1.45
     id: root
 
 
@@ -46,51 +46,63 @@ GameWindow {
     property int numCoins: 5;
     property string ballSource:"../assets/images/balls/basketBall.png";
     property int personalBest: 0;
-    property string datastore: "";
     property string miniStore:""
     property string endingPage: ""
     property bool firstTimeEVER: true;
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
-    Rectangle{
-        anchors.centerIn: parent
-        z:100000
-        id: giantRect
-        visible: true
-        color: "white"
-        width: 300
-        height: 500
-        Text{
-            text: datastore
-            font.pointSize: 8
-            wrapMode: Text.Wrap
-            color: "black"
+
+    property var datastore: [];
+    property var datascore: ""
+    function saveData(){
+        let dataThird = JSON.stringify(mMissionModel.get(17))
+        let dataFourth = ""
+       if(checkIfCurrentMission(16)){
+           dataFourth = JSON.stringify(mMissionModel.get(16))
+        }
+        //firstMission.currentThings,firstMission.completed, secondMission.currentThings, secondMission.completed, thirdMission (string)
+        datastore=[mMissionModel.get(presentMissions[0]).currentThings, mMissionModel.get(presentMissions[0]).completed, mMissionModel.get(presentMissions[1]).currentThings, mMissionModel.get(presentMissions[1]).completed, dataThird, dataFourth];
+        datastoreChanged()
+    }
+    function parseData(){
+        mMissionModel.get(presentMissions[0]).currentThings = datastore[0]
+        mMissionModel.get(presentMissions[0]).completed = datastore[1]
+        mMissionModel.get(presentMissions[1]).currentThings = datastore[2]
+        mMissionModel.get(presentMissions[1]).completed = datastore[3]
+
+        let datamodel = JSON.parse(datastore[4])
+        mMissionModel.append(datamodel)
+
+        if(datastore[5]!==""){
+            datamodel = JSON.parse(datastore[5])
+            mMissionModel.get(16).reward = datamodel.reward
+            mMissionModel.get(16).description = datamodel.description
+            mMissionModel.get(16).neededThings = datamodel.neededThings
         }
 
     }
-
     Component.onCompleted: {
         //other stuff
         mMusic1.play()
         aboutDialog.visible=firstTimeEVER
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
-        if ( datastore) {
-            mMissionModel.clear()
-            let datamodel = JSON.parse(datastore)
-            for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
+        if (datastore.length!=0) {
+            parseData()
         }
         if(presentMissions.length==0){
             updateMissions();
         }
     }
-    function parseData(){
-        let datamodel = []
-        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-        datastore =  JSON.stringify(datamodel)
-    }
+    Component.onDestruction: {
+        //for how to play not popping up every time
+        presentMissionsChanged()
+        counter14Changed();
+        mMusic1.stop()
 
+        saveData()
+    }
     Storage{
         id: settings
     }
@@ -140,13 +152,6 @@ GameWindow {
             }
         }
     }
-    Component.onDestruction: {
-        //for how to play not popping up every time
-        presentMissionsChanged()
-        counter14Changed();
-        parseData()
-        mMusic1.stop()
-    }
     Audio{
         id: mMusic1
         source:"../assets/sounds/backgroundMusic.mp3"
@@ -176,7 +181,7 @@ GameWindow {
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
-           //@disable-check M126
+            //@disable-check M126
             if(presentMissions[i]==num){   //INTENTIONAL DO NOT CHANGE
                 return true;
             }
@@ -333,7 +338,7 @@ GameWindow {
                 myDialog1.hide()
                 thisTitle = "Shoot Hoops"
 
-                parseData()
+                saveData()
                 //starting timer
                 thePauseTimer.start()
             }
@@ -770,7 +775,7 @@ GameWindow {
                                 mMissionModel.get(presentMissions[i]).completed=true
                             }
                         }
-                       currentMissionRewards=0;
+                        currentMissionRewards=0;
                     }
                 }
                 visible: currentMissionRewards!=0;
@@ -1240,22 +1245,19 @@ GameWindow {
         }
     }
     Settings{
-        Component.onDestruction: {
-            parseData()
-        }
-        property alias firstTimeEverSettings23wr: root.firstTimeEVER
-        property alias volumeSettings23wr: root.volume
-        property alias soundSettings23wr:root.sound
-        property alias numCoinsSettings23wr: root.numCoins
-        property alias ballSourceSettings23wr:root.ballSource
+        property alias firstTimeEverSettings5ty: root.firstTimeEVER
+        property alias volumeSettings5ty: root.volume
+        property alias soundSettings5ty:root.sound
+        property alias numCoinsSettings5ty: root.numCoins
+        property alias ballSourceSettings5ty:root.ballSource
 
-        property alias shotRandomNumberSettings23wr: root.shotRandomNumber
-        property alias levelRandomNumberSettings23wr: root.levelRandomNumber
-        property alias personalBestSettings23wr: root.personalBest
-        property alias datastoreSettings23wr:root.datastore
+        property alias shotRandomNumberSettings5ty: root.shotRandomNumber
+        property alias levelRandomNumberSettings5ty: root.levelRandomNumber
+        property alias personalBestSettings5ty: root.personalBest
+        property alias datastoreSettings5ty:root.datastore
 
-        property alias presentMissionsSettings23wr: root.presentMissions
-        property alias firstTimeUpdatingMissionsSettings23wr: root.firstTimeUpdatingMissions
+        property alias presentMissionsSettings5ty: root.presentMissions
+        property alias firstTimeUpdatingMissionsSettings5ty: root.firstTimeUpdatingMissions
     }
 
     Component{
