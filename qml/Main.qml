@@ -80,6 +80,14 @@ GameWindow {
         }
 
     }
+    Timer{
+        id: parseDataDelay
+        interval: 3000
+        onTriggered: {
+            parseData();
+        }
+    }
+
     Component.onCompleted: {
         //other stuff
         mMusic1.play()
@@ -88,14 +96,13 @@ GameWindow {
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
         if (datastore.length!=0) {
-            parseData()
+            parseDataDelay.start()
         }
         if(presentMissions.length==0){
             updateMissions();
         }
     }
     Component.onDestruction: {
-        presentMissionsChanged()
         counter14Changed();
         mMusic1.stop()
 
@@ -204,7 +211,7 @@ GameWindow {
         id: delayTimer
     }
     Timer{
-        interval : 11000
+        interval : 14000
         id: stopMissionsFromViewageTimer
     }
 
@@ -245,7 +252,7 @@ GameWindow {
         tempModel.get(0).description+=(levelOptions[levelRandomNumber]===0)?("any level"):("level "+levelOptions[levelRandomNumber]);
         tempModel.get(0).description+= ". Record:"
         //adding it to the end
-        var datamodel = []
+        let datamodel = []
         for (let t = 0; t < tempModel.count; ++t) datamodel.push(tempModel.get(t))
         let b = JSON.stringify(datamodel)
         datamodel = JSON.parse(b)
