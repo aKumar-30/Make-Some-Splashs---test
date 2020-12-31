@@ -33,10 +33,9 @@ GameWindow {
     property bool backButtonClickedWhenAdScreen: false;
     property bool retryScreenHappening: false;
     property var counter14: [];
-    property bool firstTimeUpdatingMissions: true
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.45
+    property real textMultiplier: 1.44
     id: root
 
 
@@ -54,7 +53,6 @@ GameWindow {
     //settings is now in storage instead of QSettings
 
     property var datastore: [];
-    property var datascore: ""
     function saveData(){
         let dataThird = JSON.stringify(mMissionModel.get(17))
         let dataFourth = ""
@@ -86,6 +84,7 @@ GameWindow {
         //other stuff
         mMusic1.play()
         aboutDialog.visible=firstTimeEVER
+        //for how to play not popping up every time
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
         if (datastore.length!=0) {
@@ -96,7 +95,6 @@ GameWindow {
         }
     }
     Component.onDestruction: {
-        //for how to play not popping up every time
         presentMissionsChanged()
         counter14Changed();
         mMusic1.stop()
@@ -211,19 +209,13 @@ GameWindow {
     }
 
     function partUpdatingMissions(){
-        if(firstTimeUpdatingMissions){
-            firstTimeUpdatingMissions=false
-        }
-        else{
             if(mMissionModel.count==18)
                 mMissionModel.remove(17)
-        }
         var rowCount = mMissionModel.count
         mArray = []
 
         for(let i =0;i < rowCount;i++ ) {
             let entry = mMissionModel.get(i)
-            //            if((!entry.multipleTimes || !entry.completed))
             mArray.push(entry)
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)    /*add back later*/
@@ -1245,19 +1237,18 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings5ty: root.firstTimeEVER
-        property alias volumeSettings5ty: root.volume
-        property alias soundSettings5ty:root.sound
-        property alias numCoinsSettings5ty: root.numCoins
-        property alias ballSourceSettings5ty:root.ballSource
+        property alias firstTimeEverSettings: root.firstTimeEVER
+        property alias volumeSettings: root.volume
+        property alias soundSettings:root.sound
+        property alias numCoinsSettings: root.numCoins
+        property alias ballSourceSettings:root.ballSource
 
-        property alias shotRandomNumberSettings5ty: root.shotRandomNumber
-        property alias levelRandomNumberSettings5ty: root.levelRandomNumber
-        property alias personalBestSettings5ty: root.personalBest
-        property alias datastoreSettings5ty:root.datastore
+        property alias shotRandomNumberSettings: root.shotRandomNumber
+        property alias levelRandomNumberSettings: root.levelRandomNumber
+        property alias personalBestSettings: root.personalBest
+        property alias datastoreSettings:root.datastore
 
-        property alias presentMissionsSettings5ty: root.presentMissions
-        property alias firstTimeUpdatingMissionsSettings5ty: root.firstTimeUpdatingMissions
+        property alias presentMissionsSettings: root.presentMissions
     }
 
     Component{

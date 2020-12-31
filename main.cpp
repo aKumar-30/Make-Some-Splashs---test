@@ -16,7 +16,7 @@
 #include "mytimer.h"
 #include <FelgoApplication>
 #include <QApplication>
-//#include <FelgoLiveClient>
+#include <FelgoLiveClient>
 //FlashingTimer allTheTimeStuff();
 
 //int main(int argc, char *argv[])
@@ -68,10 +68,10 @@
 //    QSettings settings;
 //    SettingsManager dude;
 //    QDateTime tomorrow=now.addSecs(86399);
-//    if(!settings.contains("Time0"))
-//        dude.writeSettings("Time0", tomorrow);
+//    if(!settings.contains("Time5t"))
+//        dude.writeSettings("Time5t", tomorrow);
 //    else{
-//        tomorrow = SettingsManager::loadSettings("Time0").toDateTime();
+//        tomorrow = SettingsManager::loadSettings("Time5t").toDateTime();
 //    }
 //    FlashingTimer joe(tomorrow);
 //    return joe;
