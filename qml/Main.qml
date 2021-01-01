@@ -89,12 +89,6 @@ GameWindow {
         //for how to play not popping up every time
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
-        if (datastore.length!=0 && presentMissions.length!=0) {
-            parseData()
-        }
-        if(presentMissions.length==0){
-            updateMissions();
-        }
     }
     Component.onDestruction: {
         counter14Changed();
@@ -206,6 +200,13 @@ GameWindow {
     Timer{
         interval : 10000
         id: stopMissionsFromViewageTimer
+    }
+    Timer{
+        interval: 3000
+        id: parseDataTimer
+        onTriggered: {
+            parseData()
+        }
     }
 
     function partUpdatingMissions(){
@@ -429,8 +430,10 @@ GameWindow {
                     color: "#ffffff"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: textMultiplier* 36
-                    text: "Missions"
+                    font.pointSize: textMultiplier* 10
+//                    text: "Missions"
+                    text: datastore.toString()
+                    wrapMode: Text.Wrap
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
                     font.family: bodoniMTBlack.name
@@ -458,6 +461,13 @@ GameWindow {
             }
             //Actual model stuff START HERE-----------------------------------
             ListModel{
+                Component.onCompleted: {
+                    if (datastore.length!=0 && presentMissions.length!=0) {
+                        parseDataTimer.start()
+                    }else{
+                        updateMissions();
+                    }
+                }
                 id: mMissionModel
                 ListElement{//0
                     index: 0
