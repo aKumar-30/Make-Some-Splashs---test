@@ -35,7 +35,7 @@ GameWindow {
     property var counter14: [];
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1
+    property real textMultiplier: 1.44
     id: root
 
 
