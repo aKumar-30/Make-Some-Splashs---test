@@ -35,7 +35,7 @@ GameWindow {
     property var counter14: [];
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1
+    property real textMultiplier: 1.44
     id: root
 
 
@@ -52,33 +52,44 @@ GameWindow {
     //        height: 785
     //settings is now in storage instead of QSettings
 
-    property var datastore: "";
-    property var datastore17: "";
-
-    function saveData() {
-        let datamodel = []
-        for (let ii = 0; ii < mMissionModel.count-1; ++ii) {
-            datamodel.push(mMissionModel.get(ii))
+    property var datastore: [];
+    function saveData(){
+        let dataThird = JSON.stringify(mMissionModel.get(17))
+        let dataFourth = ""
+       if(checkIfCurrentMission(16)){
+           dataFourth = JSON.stringify(mMissionModel.get(16))
         }
-        datastore =  JSON.stringify(datamodel)
-        datastore17 = JSON.stringify(mMissionModel.get(17))
+        //firstMission.currentThings,firstMission.completed, secondMission.currentThings, secondMission.completed, thirdMission (string)
+        datastore=[mMissionModel.get(presentMissions[0]).currentThings, mMissionModel.get(presentMissions[0]).completed, mMissionModel.get(presentMissions[1]).currentThings, mMissionModel.get(presentMissions[1]).completed, dataThird, dataFourth];
+        datastoreChanged()
     }
     function parseData(){
-        mMissionModel.clear()
-        let dataholder = JSON.parse(datastore)
-        for (let i = 0; i < dataholder.length; ++i)
-            mMissionModel.append(dataholder[i])
+        mMissionModel.get(presentMissions[0]).currentThings = datastore[0]
+        mMissionModel.get(presentMissions[0]).completed = datastore[1]
+        if(mMissionModel.get(presentMissions[0]).currentThings>=mMissionModel.get(presentMissions[0]).neededThings)
+            mMissionModel.get(presentMissions[0]).completed = true
 
-        let datamodel = JSON.parse(datastore17)
+        mMissionModel.get(presentMissions[1]).currentThings = datastore[2]
+        mMissionModel.get(presentMissions[1]).completed = datastore[3]
+        if(mMissionModel.get(presentMissions[1]).currentThings>=mMissionModel.get(presentMissions[1]).neededThings)
+            mMissionModel.get(presentMissions[1]).completed = true
+
+        let datamodel = JSON.parse(datastore[4])
         mMissionModel.append(datamodel)
-        updateCompleted()
+
+        if(datastore[5]!==""){
+            datamodel = JSON.parse(datastore[5])
+            mMissionModel.get(16).reward = datamodel.reward
+            mMissionModel.get(16).description = datamodel.description
+            mMissionModel.get(16).neededThings = datamodel.neededThings
+        }
+
     }
-    function updateCompleted(){
-        for(let i = 0; i< 3;i++){
-            if(mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings){
-                mMissionModel.get(presentMissions[i]).completed=true
-                console.log("MmissionModel[i] completed" + mMissionModel.get(presentMissions[i]).completed )
-            }
+    Timer{
+        id: parseMissionsDelay
+        interval: 5000
+        onTriggered: {
+            parseData()
         }
     }
 
@@ -89,8 +100,8 @@ GameWindow {
         //for how to play not popping up every time
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
-        if (datastore) {
-            parseData()
+        if (datastore.length!=0) {
+            parseMissionsDelay.start()
         }
         if(presentMissions.length==0){
             updateMissions();
@@ -203,16 +214,16 @@ GameWindow {
         id: delayTimer
     }
     Timer{
-        interval : 10000
+        interval : 16000
         id: stopMissionsFromViewageTimer
     }
 
     function partUpdatingMissions(){
-        //        if(getRewardsButton.visible){
-        //            getRewardsButton.clicked()
-        //        }
-        if(mMissionModel.count==18)
-            mMissionModel.remove(17)
+//        if(getRewardsButton.visible){
+//            getRewardsButton.clicked()
+//        }
+            if(mMissionModel.count==18)
+                mMissionModel.remove(17)
         var rowCount = mMissionModel.count
         mArray = []
 
@@ -261,7 +272,6 @@ GameWindow {
         //        updateMissions()
         partUpdatingMissions()
         storeForSettings();
-        saveData()
     }
 
     Connections{
@@ -274,7 +284,6 @@ GameWindow {
     function updateMissions(){
         partUpdatingMissions()
         storeForSettings();
-        saveData()
     }
     //temp model
     ListModel{
@@ -430,8 +439,10 @@ GameWindow {
                     color: "#ffffff"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: textMultiplier* 36
-                    text: "Missions"
+                    font.pointSize: textMultiplier* 6
+                    wrapMode: Text.Wrap
+//                    text: "Missions"
+                    text: datastore.toString()
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
                     font.family: bodoniMTBlack.name
@@ -1241,19 +1252,18 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettingsNewDesign12: root.firstTimeEVER
-        property alias volumeSettingsNewDesign12: root.volume
-        property alias soundSettingsNewDesign12:root.sound
-        property alias numCoinsSettingsNewDesign12: root.numCoins
-        property alias ballSourceSettingsNewDesign12:root.ballSource
+        property alias firstTimeEverSettings5tav: root.firstTimeEVER
+        property alias volumeSettings5tav: root.volume
+        property alias soundSettings5tav:root.sound
+        property alias numCoinsSettings5tav: root.numCoins
+        property alias ballSourceSettings5tav:root.ballSource
 
-        property alias shotRandomNumberSettingsNewDesign12: root.shotRandomNumber
-        property alias levelRandomNumberSettingsNewDesign12: root.levelRandomNumber
-        property alias personalBestSettingsNewDesign12: root.personalBest
+        property alias shotRandomNumberSettings5tav: root.shotRandomNumber
+        property alias levelRandomNumberSettings5tav: root.levelRandomNumber
+        property alias personalBestSettings5tav: root.personalBest
+        property alias datastoreSettings5tav:root.datastore
 
-        property alias presentMissionsSettingsNewDesign12: root.presentMissions
-        property alias datastoreSettingsNewDesign12:root.datastore
-        property alias datastore17SettingsNewDesign12:root.datastore17
+        property alias presentMissionsSettings5tav: root.presentMissions
     }
 
     Component{
