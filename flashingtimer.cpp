@@ -27,7 +27,7 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         connect(j,&QTimer::timeout, [=](){
             emit callUpdateMissions();
         });
-        j->start(11000);
+        j->start(10000);
         //        QTimer::singleShot(6500, this, SIGNAL(callUpdateMissions())); //delays emitting the callUpdateMissions signal
         //        emit callUpdateMissions();
     }
