@@ -67,11 +67,11 @@
 //    //Make and save tomorrow
 //    QSettings settings;
 //    SettingsManager dude;
-//    QDateTime tomorrow=now.addSecs(86399);
-//    if(!settings.contains("Time5t"))
-//        dude.writeSettings("Time5t", tomorrow);
+//    QDateTime tomorrow=now.addSecs(40);
+//    if(!settings.contains("TimeTrack"))
+//        dude.writeSettings("TimeTrack", tomorrow);
 //    else{
-//        tomorrow = SettingsManager::loadSettings("Time5t").toDateTime();
+//        tomorrow = SettingsManager::loadSettings("TimeTrack").toDateTime();
 //    }
 //    FlashingTimer joe(tomorrow);
 //    return joe;

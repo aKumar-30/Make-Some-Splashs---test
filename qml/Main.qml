@@ -35,7 +35,7 @@ GameWindow {
     property var counter14: [];
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.45
+    property real textMultiplier: 1
     id: root
 
 
@@ -66,8 +66,13 @@ GameWindow {
     function parseData(){
         mMissionModel.get(presentMissions[0]).currentThings = datastore[0]
         mMissionModel.get(presentMissions[0]).completed = datastore[1]
+        if(mMissionModel.get(presentMissions[0]).currentThings>=mMissionModel.get(presentMissions[0]).neededThings)
+            mMissionModel.get(presentMissions[0]).completed = true
+
         mMissionModel.get(presentMissions[1]).currentThings = datastore[2]
         mMissionModel.get(presentMissions[1]).completed = datastore[3]
+        if(mMissionModel.get(presentMissions[1]).currentThings>=mMissionModel.get(presentMissions[1]).neededThings)
+            mMissionModel.get(presentMissions[1]).completed = true
 
         let datamodel = JSON.parse(datastore[4])
         mMissionModel.append(datamodel)
@@ -80,6 +85,13 @@ GameWindow {
         }
 
     }
+    Timer{
+        id: parseMissionsDelay
+        interval: 5000
+        onTriggered: {
+            parseData()
+        }
+    }
 
     Component.onCompleted: {
         //other stuff
@@ -89,7 +101,7 @@ GameWindow {
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
         if (datastore.length!=0) {
-            parseData()
+            parseMissionsDelay.start()
         }
         if(presentMissions.length==0){
             updateMissions();
@@ -174,7 +186,6 @@ GameWindow {
             presentMissions.push(arr[2].index);
         }
         presentMissionsChanged()
-        saveData()
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
@@ -203,7 +214,7 @@ GameWindow {
         id: delayTimer
     }
     Timer{
-        interval : 11000
+        interval : 16000
         id: stopMissionsFromViewageTimer
     }
 
@@ -428,8 +439,10 @@ GameWindow {
                     color: "#ffffff"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: textMultiplier* 36
-                    text: "Missions"
+                    font.pointSize: textMultiplier* 6
+                    wrapMode: Text.Wrap
+//                    text: "Missions"
+                    text: datastore.toString()
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
                     font.family: bodoniMTBlack.name
@@ -1239,18 +1252,18 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings5tv: root.firstTimeEVER
-        property alias volumeSettings5tv: root.volume
-        property alias soundSettings5tv:root.sound
-        property alias numCoinsSettings5tv: root.numCoins
-        property alias ballSourceSettings5tv:root.ballSource
+        property alias firstTimeEverSettings5tav: root.firstTimeEVER
+        property alias volumeSettings5tav: root.volume
+        property alias soundSettings5tav:root.sound
+        property alias numCoinsSettings5tav: root.numCoins
+        property alias ballSourceSettings5tav:root.ballSource
 
-        property alias shotRandomNumberSettings5tv: root.shotRandomNumber
-        property alias levelRandomNumberSettings5tv: root.levelRandomNumber
-        property alias personalBestSettings5tv: root.personalBest
-        property alias datastoreSettings5tv:root.datastore
+        property alias shotRandomNumberSettings5tav: root.shotRandomNumber
+        property alias levelRandomNumberSettings5tav: root.levelRandomNumber
+        property alias personalBestSettings5tav: root.personalBest
+        property alias datastoreSettings5tav:root.datastore
 
-        property alias presentMissionsSettings5tv: root.presentMissions
+        property alias presentMissionsSettings5tav: root.presentMissions
     }
 
     Component{
