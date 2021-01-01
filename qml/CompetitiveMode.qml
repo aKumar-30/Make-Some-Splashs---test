@@ -601,8 +601,8 @@ Page {
             {
                 whatToDoForNextLevel()
                 //set mDuration
-                mDurationEasy=1400
-                mDurationMedium= 1820
+                mDurationEasy=1600
+                mDurationMedium= 2130
                 mDuration=1600
                 if(true){
                     //7
@@ -629,13 +629,13 @@ Page {
             if(easingNumber<10){
                 //easy
                 //               start: mDurationEasy=1200;
-                mDurationEasy-=35
+                mDurationEasy-=34
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypesL2[easingNumber]
             }
             else{
                 //medium
-                mDurationMedium-=26
+                mDurationMedium-=25
                 mDuration=mDurationMedium
                 sliderEasingType= mediumTypesL2[easingNumber-9]
             }

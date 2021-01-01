@@ -26,7 +26,7 @@ GameWindow {
     property bool shouldBeginThirdLevel: false
     property var shotRandomNumber: 0;
     property var levelRandomNumber:0
-    property var levelOptions: [1,1,1,1,1,2,2,2,2,2,3,3,0,0]
+    property var levelOptions: [1,1,1,1,1,2,2,2,2,3,3,3,3]
     property var typesOfShotPossible:["backboard","rim", "splash"]
 
     property bool adScreenHappening: false;
@@ -35,7 +35,7 @@ GameWindow {
     property var counter14: [];
     property int countingUpdatingMissions: 0;
     property int points: 0;
-    property real textMultiplier: 1.44
+    property real textMultiplier: 1.45
     id: root
 
 
@@ -66,13 +66,9 @@ GameWindow {
     function parseData(){
         mMissionModel.get(presentMissions[0]).currentThings = datastore[0]
         mMissionModel.get(presentMissions[0]).completed = datastore[1]
-        if(mMissionModel.get(presentMissions[0]).currentThings>=mMissionModel.get(presentMissions[0]).neededThings)
-            mMissionModel.get(presentMissions[0]).completed = true
 
         mMissionModel.get(presentMissions[1]).currentThings = datastore[2]
         mMissionModel.get(presentMissions[1]).completed = datastore[3]
-        if(mMissionModel.get(presentMissions[1]).currentThings>=mMissionModel.get(presentMissions[1]).neededThings)
-            mMissionModel.get(presentMissions[1]).completed = true
 
         let datamodel = JSON.parse(datastore[4])
         mMissionModel.append(datamodel)
@@ -85,13 +81,6 @@ GameWindow {
         }
 
     }
-    Timer{
-        id: parseMissionsDelay
-        interval: 5000
-        onTriggered: {
-            parseData()
-        }
-    }
 
     Component.onCompleted: {
         //other stuff
@@ -100,8 +89,8 @@ GameWindow {
         //for how to play not popping up every time
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
-        if (datastore.length!=0) {
-            parseMissionsDelay.start()
+        if (datastore.length!=0 && presentMissions.length!=0) {
+            parseData()
         }
         if(presentMissions.length==0){
             updateMissions();
@@ -186,6 +175,7 @@ GameWindow {
             presentMissions.push(arr[2].index);
         }
         presentMissionsChanged()
+        saveData()
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
@@ -214,7 +204,7 @@ GameWindow {
         id: delayTimer
     }
     Timer{
-        interval : 16000
+        interval : 10000
         id: stopMissionsFromViewageTimer
     }
 
@@ -248,7 +238,7 @@ GameWindow {
         tempModel.get(0).currentThings = 0
         tempModel.get(0).completed = false
         //        //we now want two with one extra special at the end
-        var numberOfTimesAndCoins = [[2,2],[3,5],[4,7],[5,10],[6,12],[7,14],[8,18],[9,24]]
+        var numberOfTimesAndCoins = [[2,2],[3,5],[4,8],[5,12],[6,14],[7,20],[8,25],[9,35]]
         var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
         tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
         tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
@@ -439,10 +429,8 @@ GameWindow {
                     color: "#ffffff"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: textMultiplier* 6
-                    wrapMode: Text.Wrap
-//                    text: "Missions"
-                    text: datastore.toString()
+                    font.pointSize: textMultiplier* 36
+                    text: "Missions"
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
                     font.family: bodoniMTBlack.name
@@ -632,15 +620,13 @@ GameWindow {
                 id: mMissionDelegate
                 Rectangle{
                     visible: checkIfCurrentMission(index)
-                    Component.onCompleted: {
-                    }
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: mainRect.width-25
                     height: (visible)?(width*1/4+45+spacingRect.height):0
                     clip: true
                     id: outsideComponentRect
                     Rectangle{
-                        anchors.top: actualDelegate.bottom
+                        anchors.bottom: outsideComponentRect.bottom
                         id: spacingRect
                         height: 10
                         width: parent.width;
@@ -783,6 +769,7 @@ GameWindow {
                             }
                         }
                         currentMissionRewards=0;
+                        saveData()
                     }
                 }
                 visible: currentMissionRewards!=0;
@@ -1252,18 +1239,18 @@ GameWindow {
         }
     }
     Settings{
-        property alias firstTimeEverSettings5tav: root.firstTimeEVER
-        property alias volumeSettings5tav: root.volume
-        property alias soundSettings5tav:root.sound
-        property alias numCoinsSettings5tav: root.numCoins
-        property alias ballSourceSettings5tav:root.ballSource
+        property alias firstTimeEverSettings: root.firstTimeEVER
+        property alias volumeSettings: root.volume
+        property alias soundSettings:root.sound
+        property alias numCoinsSettings: root.numCoins
+        property alias ballSourceSettings:root.ballSource
 
-        property alias shotRandomNumberSettings5tav: root.shotRandomNumber
-        property alias levelRandomNumberSettings5tav: root.levelRandomNumber
-        property alias personalBestSettings5tav: root.personalBest
-        property alias datastoreSettings5tav:root.datastore
+        property alias shotRandomNumberSettings: root.shotRandomNumber
+        property alias levelRandomNumberSettings: root.levelRandomNumber
+        property alias personalBestSettings: root.personalBest
+        property alias datastoreSettings: root.datastore
 
-        property alias presentMissionsSettings5tav: root.presentMissions
+        property alias presentMissionsSettings: root.presentMissions
     }
 
     Component{
