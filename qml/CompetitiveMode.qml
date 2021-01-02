@@ -685,9 +685,9 @@ Page {
                 handleId.visible=false;
                 sliderId.enabled=true;
 
-                mDurationEasy=1400
-                mDurationMedium= 1800
-                mDurationHard= 2625
+                mDurationEasy=1500
+                mDurationMedium= 1950
+                mDurationHard= 2755
                 mDuration=1500
 
                 mPauseAnim.pause()
@@ -704,28 +704,27 @@ Page {
         //Level four stuff
         else if(level===4)
         {
-            checkIfCurrentMission();
             coinProb = 3;
             easingNumber = Math.floor((Math.random() * 25));
             if(easingNumber<12){
                 //easy
                 //               start: mDurationEasy=1200;
-                if(mDurationEasy>775)
-                    mDurationEasy-=47
+                if(mDurationEasy>875)
+                    mDurationEasy-=43
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypes[easingNumber]
             }
             else if(easingNumber<21){
                 //medium
-                if(mDurationMedium>1000)
-                    mDurationMedium-=37
+                if(mDurationMedium>1250)
+                    mDurationMedium-=36
                 mDuration=mDurationMedium
                 sliderEasingType= mediumTypes[easingNumber-11]
             }
             else{
                 //hard
-                if(mDurationHard>1750)
-                    mDurationHard-=37
+                if(mDurationHard>2000)
+                    mDurationHard-=36
                 mDuration=mDurationHard
                 sliderEasingType= hardTypes[easingNumber-20]
             }

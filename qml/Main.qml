@@ -217,7 +217,7 @@ GameWindow {
         tempModel.get(0).currentThings = 0
         tempModel.get(0).completed = false
         //        //we now want two with one extra special at the end
-        var numberOfTimesAndCoins = [[2,2],[3,5],[4,7],[5,10],[6,12],[7,14],[8,18],[9,24]]
+        var numberOfTimesAndCoins = [[2,5],[3,8],[4,12],[5,18],[6,22],[7,28]]
         var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
         tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
         tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
@@ -470,7 +470,7 @@ GameWindow {
                 ListElement{//3
                     index: 3
                     completed: false;
-                    description: "Miss at the backboard two consecutive times. Record:"
+                    description: "Miss at the backboard two times in a row. Record:"
                     multipleTimes: true
                     reward: 2;
                     neededThings: 2
@@ -524,7 +524,7 @@ GameWindow {
                 ListElement{//9
                     index: 9
                     completed: false
-                    description: "Miss two consecutively at the rim in level 3. Record:"
+                    description: "Miss two at the rim in level 3 in a row. Record:"
                     multipleTimes: true
                     reward: 4;
                     neededThings: 2
@@ -560,7 +560,7 @@ GameWindow {
                 ListElement{//13
                     index: 13
                     completed: false;
-                    description: "Make at the backboard four consecutive times. Record: "
+                    description: "Make at the backboard four times in a row. Record: "
                     multipleTimes: true
                     reward: 4;
                     neededThings: 4
