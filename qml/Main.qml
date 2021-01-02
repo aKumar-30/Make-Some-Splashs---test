@@ -1191,19 +1191,18 @@ GameWindow {
                                 //                                    missionsScene.visible=true
                                 showMissionsAnimation.start()
                                 checkIfButtonNeedsToBeVisible(true);
-                                if(true){
+                                if(checkIfCurrentMission(12)) {
                                     //12
-                                    let couldTheMissionBeCompleted = 0;
+                                    let missionsCompleted = 0;
                                     for(let i =0; i< 3; i++){
                                         if(presentMissions[i]!==12){
                                             if ((mMissionModel.get(presentMissions[i]).currentThings>=mMissionModel.get(presentMissions[i]).neededThings)){
-                                                couldTheMissionBeCompleted++;
+                                                missionsCompleted++;
                                             }
-                                            return true;
                                         }
                                     }
-                                    if(couldTheMissionBeCompleted===2&&checkIfCurrentMission(12)){
-                                        mMissionModel.get(12).currentThings++
+                                    if(missionsCompleted>mMissionModel.get(12).currentThings && !(mMissionModel.get(12).currentThings>mMissionModel.get(12).neededThings)){
+                                        mMissionModel.get(12).currentThings=missionsCompleted
                                     }
                                 }
                             }

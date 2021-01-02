@@ -194,6 +194,9 @@ Page {
             if(counter13>mMissionModel.get(13)&&!(mMissionModel.get(13).currentThings>=mMissionModel.get(13).neededThings)&&checkIfCurrentMission(13)){
                 mMissionModel.get(13).currentThings=(counter13>mMissionModel.get(13).neededThings)?mMissionModel.get(13).neededThings:counter13
             }
+            if(counterLast>mMissionModel.get(17)&&!(mMissionModel.get(17).currentThings>=mMissionModel.get(17).neededThings)){
+                mMissionModel.get(17).currentThings=(counterLast>mMissionModel.get(17).neededThings)?mMissionModel.get(17).neededThings:counterLast
+            }
         }
         if(true){
             //make all counters zero
