@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.11.2, 2020-12-31T19:41:14. -->
+=======
+<!-- Written by QtCreator 4.11.2, 2020-12-30T10:17:41. -->
+>>>>>>> parent of eea02f1... still trying
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
