@@ -51,6 +51,7 @@ GameWindow {
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
+<<<<<<< HEAD
 
     property var datastore: [];
     function saveData(){
@@ -82,6 +83,8 @@ GameWindow {
 
     }
 
+=======
+>>>>>>> parent of a727c14... still trying...
     Component.onCompleted: {
         //other stuff
         mMusic1.play()
