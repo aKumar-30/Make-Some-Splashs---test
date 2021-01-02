@@ -629,7 +629,7 @@ Page {
             if(easingNumber<10){
                 //easy
                 //               start: mDurationEasy=1200;
-                mDurationEasy-=34
+                mDurationEasy-=33
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypesL2[easingNumber]
             }

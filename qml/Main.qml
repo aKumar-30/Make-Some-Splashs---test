@@ -10,7 +10,7 @@ import Qt.labs.settings 1.0
 import QtQuick.Controls 2.12
 import QtMultimedia 5.8
 
-////New VERSION STARTS HERE
+////New VERSION STARTS HER E
 GameWindow {
     visible: true
     //    width: 708
@@ -26,7 +26,7 @@ GameWindow {
     property bool shouldBeginThirdLevel: false
     property var shotRandomNumber: 0;
     property var levelRandomNumber:0
-    property var levelOptions: [1,1,1,1,1,2,2,2,2,3,3,3,3]
+    property var levelOptions: [1,1,1,1,1,2,2,2,2,2,3,3,0,0]
     property var typesOfShotPossible:["backboard","rim", "splash"]
 
     property bool adScreenHappening: false;
@@ -45,70 +45,35 @@ GameWindow {
     property int numCoins: 5;
     property string ballSource:"../assets/images/balls/basketBall.png";
     property int personalBest: 0;
+    property string datastore: "";
     property string miniStore:""
     property string endingPage: ""
     property bool firstTimeEVER: true;
     //        width: 708
     //        height: 785
     //settings is now in storage instead of QSettings
-<<<<<<< HEAD
-
-    property var datastore: [];
-    function saveData(){
-        let dataThird = JSON.stringify(mMissionModel.get(17))
-        let dataFourth = ""
-       if(checkIfCurrentMission(16)){
-           dataFourth = JSON.stringify(mMissionModel.get(16))
-        }
-        //firstMission.currentThings,firstMission.completed, secondMission.currentThings, secondMission.completed, thirdMission (string)
-        datastore=[mMissionModel.get(presentMissions[0]).currentThings, mMissionModel.get(presentMissions[0]).completed, mMissionModel.get(presentMissions[1]).currentThings, mMissionModel.get(presentMissions[1]).completed, dataThird, dataFourth];
-        datastoreChanged()
-    }
-    function parseData(){
-        mMissionModel.get(presentMissions[0]).currentThings = datastore[0]
-        mMissionModel.get(presentMissions[0]).completed = datastore[1]
-
-        mMissionModel.get(presentMissions[1]).currentThings = datastore[2]
-        mMissionModel.get(presentMissions[1]).completed = datastore[3]
-
-        let datamodel = JSON.parse(datastore[4])
-        mMissionModel.append(datamodel)
-
-        if(datastore[5]!==""){
-            datamodel = JSON.parse(datastore[5])
-            mMissionModel.get(16).reward = datamodel.reward
-            mMissionModel.get(16).description = datamodel.description
-            mMissionModel.get(16).neededThings = datamodel.neededThings
-        }
-
-    }
-
-=======
->>>>>>> parent of a727c14... still trying...
     Component.onCompleted: {
         //other stuff
         mMusic1.play()
         aboutDialog.visible=firstTimeEVER
-        //for how to play not popping up every time
         firstTimeEVER=false;
         stopMissionsFromViewageTimer.start();
-<<<<<<< HEAD
-    }
-    Component.onDestruction: {
-        counter14Changed();
-        mMusic1.stop()
-    }
-=======
         if ( datastore) {
             mMissionModel.clear()
-            var datamodel = JSON.parse(datastore)
+            let datamodel = JSON.parse(datastore)
             for (let i = 0; i < datamodel.length; ++i) mMissionModel.append(datamodel[i])
         }
         if(presentMissions.length==0){
             updateMissions();
         }
     }
->>>>>>> parent of eea02f1... still trying
+    function saveData(){
+        let datamodel = []
+        for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
+        datastore =  JSON.stringify(datamodel)
+        datastoreChanged();
+    }
+
     Storage{
         id: settings
     }
@@ -158,19 +123,12 @@ GameWindow {
             }
         }
     }
+    Component.onDestruction: {
+        //for how to play not popping up every time
+        counter14Changed();
+        mMusic1.stop()
+    }
     Audio{
-        Component.onDestruction: {
-            //for how to play not popping up every time
-            presentMissionsChanged()
-            counter14Changed();
-
-            var datamodel = []
-            for (let i = 0; i < mMissionModel.count; ++i) datamodel.push(mMissionModel.get(i))
-            datastore =  JSON.stringify(datamodel)
-            datastoreChanged();
-
-            mMusic1.stop()
-        }
         id: mMusic1
         source:"../assets/sounds/backgroundMusic.mp3"
         volume: root.volume*6/11
@@ -200,7 +158,7 @@ GameWindow {
     }
     function checkIfCurrentMission(num){
         for(let i =0; i< 3; i++){
-            //@disable-check M126
+           //@disable-check M126
             if(presentMissions[i]==num){   //INTENTIONAL DO NOT CHANGE
                 return true;
             }
@@ -225,21 +183,13 @@ GameWindow {
         id: delayTimer
     }
     Timer{
-        interval : 10000
+        interval : 9000
         id: stopMissionsFromViewageTimer
-    }
-    Timer{
-        interval: 3000
-        id: parseDataTimer
-        onTriggered: {
-            parseData()
-        }
     }
 
     function partUpdatingMissions(){
-//        if(getRewardsButton.visible){
-//            getRewardsButton.clicked()
-//        }
+        if(checkIfButtonNeedsToBeVisible(true))
+                                getRewardsButton.clicked()
             if(mMissionModel.count==18)
                 mMissionModel.remove(17)
         var rowCount = mMissionModel.count
@@ -247,6 +197,7 @@ GameWindow {
 
         for(let i =0;i < rowCount;i++ ) {
             let entry = mMissionModel.get(i)
+            //            if((!entry.multipleTimes || !entry.completed))
             mArray.push(entry)
         }
         arr = mArray.sort(() => Math.random() - Math.random()).slice(0, 2)    /*add back later*/
@@ -266,7 +217,7 @@ GameWindow {
         tempModel.get(0).currentThings = 0
         tempModel.get(0).completed = false
         //        //we now want two with one extra special at the end
-        var numberOfTimesAndCoins = [[2,2],[3,5],[4,8],[5,12],[6,14],[7,20],[8,25],[9,35]]
+        var numberOfTimesAndCoins = [[2,2],[3,5],[4,7],[5,10],[6,12],[7,14],[8,18],[9,24]]
         var thisRandomNumber = Math.floor((Math.random()*numberOfTimesAndCoins.length));
         tempModel.get(0).neededThings=numberOfTimesAndCoins[thisRandomNumber][0];
         tempModel.get(0).reward=numberOfTimesAndCoins[thisRandomNumber][1];
@@ -276,7 +227,7 @@ GameWindow {
         tempModel.get(0).description+=(levelOptions[levelRandomNumber]===0)?("any level"):("level "+levelOptions[levelRandomNumber]);
         tempModel.get(0).description+= ". Record:"
         //adding it to the end
-        let datamodel = []
+        var datamodel = []
         for (let t = 0; t < tempModel.count; ++t) datamodel.push(tempModel.get(t))
         let b = JSON.stringify(datamodel)
         datamodel = JSON.parse(b)
@@ -323,7 +274,10 @@ GameWindow {
     }
     Timer{
         id: thePauseTimer
-        interval: 1000
+        interval: 2000
+        onTriggered: {
+            saveData()
+        }
     }
     Settings{
         category: "windows"
@@ -360,11 +314,7 @@ GameWindow {
                     navigationStack.pop()
                 myDialog1.hide()
                 thisTitle = "Shoot Hoops"
-<<<<<<< HEAD
 
-                saveData()
-=======
->>>>>>> parent of eea02f1... still trying
                 //starting timer
                 thePauseTimer.start()
             }
@@ -460,10 +410,8 @@ GameWindow {
                     color: "#ffffff"
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
-                    font.pointSize: textMultiplier* 10
-//                    text: "Missions"
-                    text: datastore.toString()
-                    wrapMode: Text.Wrap
+                    font.pointSize: textMultiplier* 36
+                    text: "Missions"
                     anchors.centerIn: parent
                     //                    font.family: "Complex"
                     font.family: bodoniMTBlack.name
@@ -491,13 +439,6 @@ GameWindow {
             }
             //Actual model stuff START HERE-----------------------------------
             ListModel{
-                Component.onCompleted: {
-                    if (datastore.length!=0 && presentMissions.length!=0) {
-                        parseDataTimer.start()
-                    }else{
-                        updateMissions();
-                    }
-                }
                 id: mMissionModel
                 ListElement{//0
                     index: 0
@@ -660,6 +601,8 @@ GameWindow {
                 id: mMissionDelegate
                 Rectangle{
                     visible: checkIfCurrentMission(index)
+                    Component.onCompleted: {
+                    }
                     anchors.horizontalCenter: parent.horizontalCenter
                     width: mainRect.width-25
                     height: (visible)?(width*1/4+45+spacingRect.height):0
@@ -808,7 +751,7 @@ GameWindow {
                                 mMissionModel.get(presentMissions[i]).completed=true
                             }
                         }
-                        currentMissionRewards=0;
+                       currentMissionRewards=0;
                         saveData()
                     }
                 }
@@ -1279,26 +1222,18 @@ GameWindow {
         }
     }
     Settings{
-<<<<<<< HEAD
-        property alias firstTimeEverSettings: root.firstTimeEVER
-        property alias volumeSettings: root.volume
-        property alias soundSettings:root.sound
-        property alias numCoinsSettings: root.numCoins
-        property alias ballSourceSettings:root.ballSource
-=======
-        property alias firstTimeEverSettings23wr: root.firstTimeEVER
-        property alias volumeSettings23wr: root.volume
-        property alias soundSettings23wr:root.sound
-        property alias numCoinsSettings23wr: root.numCoins
-        property alias ballSourceSettings23wr:root.ballSource
->>>>>>> parent of eea02f1... still trying
+        property alias firstTimeEverSettingsSC3: root.firstTimeEVER
+        property alias volumeSettingsSC3: root.volume
+        property alias soundSettingsSC3:root.sound
+        property alias numCoinsSettingsSC3: root.numCoins
+        property alias ballSourceSettingsSC3:root.ballSource
 
-        property alias shotRandomNumberSettings: root.shotRandomNumber
-        property alias levelRandomNumberSettings: root.levelRandomNumber
-        property alias personalBestSettings: root.personalBest
-        property alias datastoreSettings: root.datastore
+        property alias shotRandomNumberSettingsSC3: root.shotRandomNumber
+        property alias levelRandomNumberSettingsSC3: root.levelRandomNumber
+        property alias personalBestSettingsSC3: root.personalBest
+        property alias datastoreSettingsSC3:root.datastore
 
-        property alias presentMissionsSettings: root.presentMissions
+        property alias presentMissionsSettingsSC3: root.presentMissions
     }
 
     Component{

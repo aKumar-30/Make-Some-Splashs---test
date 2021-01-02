@@ -67,11 +67,11 @@
 //    //Make and save tomorrow
 //    QSettings settings;
 //    SettingsManager dude;
-//    QDateTime tomorrow=now.addSecs(50);
-//    if(!settings.contains("TimeTracakaa"))
-//        dude.writeSettings("TimeTracakaa", tomorrow);
+//    QDateTime tomorrow=now.addSecs(60);
+//    if(!settings.contains("TimeShouldWork1"))
+//        dude.writeSettings("TimeShouldWork1", tomorrow);
 //    else{
-//        tomorrow = SettingsManager::loadSettings("TimeTracakaa").toDateTime();
+//        tomorrow = SettingsManager::loadSettings("TimeShouldWork1").toDateTime();
 //    }
 //    FlashingTimer joe(tomorrow);
 //    return joe;
@@ -145,11 +145,11 @@ FlashingTimer allTheTimeStuff(){
     //Make and save tomorrow
     QSettings settings;
     SettingsManager dude;
-    QDateTime tomorrow=now.addSecs(40);
-    if(!settings.contains("TimeTrack"))
-        dude.writeSettings("TimeTrack", tomorrow);
+    QDateTime tomorrow=now.addSecs(90);
+    if(!settings.contains("MissionsShouldWork"))
+        dude.writeSettings("MissionsShouldWork", tomorrow);
     else{
-        tomorrow = SettingsManager::loadSettings("TimeTrack").toDateTime();
+        tomorrow = SettingsManager::loadSettings("MissionsShouldWork").toDateTime();
     }
     FlashingTimer joe(tomorrow);
     return joe;

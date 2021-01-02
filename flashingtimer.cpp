@@ -20,14 +20,14 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         while(tomorrow<now1)
             tomorrow=tomorrow.addSecs(86399);
         SettingsManager dude;
-        dude.writeSettings("TimeTrack", tomorrow);
+        dude.writeSettings("MissionsShouldWork", tomorrow);
         QTimer* j = new QTimer(this);
         srand(time(NULL));
         j->setSingleShot(true);
         connect(j,&QTimer::timeout, [=](){
             emit callUpdateMissions();
         });
-        j->start(10000);
+        j->start(8000);
         //        QTimer::singleShot(6500, this, SIGNAL(callUpdateMissions())); //delays emitting the callUpdateMissions signal
         //        emit callUpdateMissions();
     }
@@ -40,7 +40,7 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         if(difference == 0){
             SettingsManager dude;
             tomorrow=tomorrow.addSecs(86399);
-            dude.writeSettings("TimeTrack", tomorrow);
+            dude.writeSettings("MissionsShouldWork", tomorrow);
             emit callUpdateMissions();
         }
     });
