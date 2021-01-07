@@ -60,7 +60,7 @@ void FlashingTimer::setWhatToPrint(QString whatToPrint)
 
     m_whatToPrint = whatToPrint;
     emit whatToPrintChanged(m_whatToPrint);
-};
+}
 
 void FlashingTimer::display(){
     int differenceC = difference;

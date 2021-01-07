@@ -119,6 +119,9 @@ GameWindow {
                 mMusic1.pause()
             }
             else if (Qt.application.state === 4) {
+                if(difference<0){
+                    updatingMissionsDuringGame()
+                }
                 mMusic1.play()
             }
         }
