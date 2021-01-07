@@ -604,9 +604,9 @@ Page {
             {
                 whatToDoForNextLevel()
                 //set mDuration
-                mDurationEasy=1600
-                mDurationMedium= 2130
-                mDuration=1600
+                mDurationEasy=1550
+                mDurationMedium= 2075
+                mDuration=1580
                 if(true){
                     //7
                     if(counter7===21&&!(mMissionModel.get(7).currentThings>=mMissionModel.get(7).neededThings)&&checkIfCurrentMission(7)){
@@ -679,15 +679,15 @@ Page {
             //making sure it starts at the first index (index 0);
             currentIndexForRandom = 0;
             newRandomColors3();
-            if(levelIndicator >19)
+            if(levelIndicator >15)
             {
                 whatToDoForNextLevel()
                 handleId.visible=false;
                 sliderId.enabled=true;
 
-                mDurationEasy=1500
-                mDurationMedium= 1950
-                mDurationHard= 2755
+                mDurationEasy=1540
+                mDurationMedium= 1970
+                mDurationHard= 2765
                 mDuration=1500
 
                 mPauseAnim.pause()
@@ -709,7 +709,7 @@ Page {
             if(easingNumber<12){
                 //easy
                 //               start: mDurationEasy=1200;
-                if(mDurationEasy>875)
+                if(mDurationEasy>900)
                     mDurationEasy-=43
                 mDuration=mDurationEasy
                 sliderEasingType= easyTypes[easingNumber]
