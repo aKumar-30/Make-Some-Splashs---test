@@ -8,7 +8,6 @@ class FlashingTimer : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString whatToPrint READ whatToPrint WRITE setWhatToPrint NOTIFY whatToPrintChanged)
-    Q_PROPERTY(int difference READ difference WRITE setDifference NOTIFY differenceChanged)
 public:
     explicit FlashingTimer(QDateTime tomorrow=QDateTime::currentDateTime(),QObject *parent=nullptr);
     QString whatToPrint() const;
