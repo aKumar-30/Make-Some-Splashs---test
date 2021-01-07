@@ -20,15 +20,19 @@ public:
     FlashingTimer(const FlashingTimer &source);
     FlashingTimer& operator=(const FlashingTimer &rhs);
 
+    int difference() const;
+    void setDifference(int difference);
+
 private:
     QDateTime tomorrow;
     QTimer *timer;
-    int difference;
     QString m_whatToPrint;
+    int m_difference;
 
 signals:
     void callUpdateMissions();
     void whatToPrintChanged(QString whatToPrint);
+    void differenceChanged(int difference);
 };
 
 #endif // FLASHINGTIMER_H
