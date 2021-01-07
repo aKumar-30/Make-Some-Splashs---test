@@ -13,7 +13,7 @@
 #include "settingsmanager.h"
 
 FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
-    :QObject(parent), tomorrow(tomorrow1),timer(new QTimer(this)),m_difference(0),m_whatToPrint("Getting ready..."){
+    :QObject(parent), tomorrow(tomorrow1),timer(new QTimer(this)),difference(0),m_whatToPrint("Getting ready..."){
     //fix tomorrow
     QDateTime now1 = QDateTime::currentDateTime();
     if(tomorrow<now1){
@@ -35,13 +35,15 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
     srand(time(NULL));
     connect(timer,&QTimer::timeout, [=](){
         QDateTime now = QDateTime::currentDateTime();
-        setDifference(now.secsTo(tomorrow));
+        difference = now.secsTo(tomorrow);
         display();
-        if(difference() == 0){
+        if(difference<0){
+            emit callUpdateMissions();
+        }
+        if(difference == 0){
             SettingsManager dude;
             tomorrow=tomorrow.addSecs(86399);
             dude.writeSettings("MissionsShouldWork", tomorrow);
-//            setDifference(now.secsTo(tomorrow));
             emit callUpdateMissions();
         }
     });
@@ -64,7 +66,7 @@ void FlashingTimer::setWhatToPrint(QString whatToPrint)
 };
 
 void FlashingTimer::display(){
-    int differenceC = difference();
+    int differenceC = difference;
     int seconds = differenceC%60;
     differenceC/=60;
     int minutes = differenceC%60;
@@ -92,20 +94,6 @@ FlashingTimer &FlashingTimer::operator=(const FlashingTimer &rhs){
         return *this;
     tomorrow=rhs.tomorrow;
     return *this;
-}
-
-int FlashingTimer::difference() const
-{
-    return m_difference;
-}
-
-void FlashingTimer::setDifference(int difference)
-{
-    if (m_difference == difference)
-        return;
-
-    m_difference = difference;
-    emit differenceChanged(m_difference);
 }
 
 void FlashingTimer::functionToCallToUpdateMissions (){
