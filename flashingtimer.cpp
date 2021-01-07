@@ -41,7 +41,7 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
             SettingsManager dude;
             tomorrow=tomorrow.addSecs(86399);
             dude.writeSettings("MissionsShouldWork", tomorrow);
-            setDifference(now.secsTo(tomorrow));
+//            setDifference(now.secsTo(tomorrow));
             emit callUpdateMissions();
         }
     });
