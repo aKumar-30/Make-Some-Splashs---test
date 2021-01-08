@@ -44,8 +44,6 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
                 SettingsManager dude;
                 dude.writeSettings("MissionsShouldWork", tomorrow);
                 emit callUpdateMissions();
-                //        QTimer::singleShot(6500, this, SIGNAL(callUpdateMissions())); //delays emitting the callUpdateMissions signal
-                //        emit callUpdateMissions();
             }
         }
         if(difference == 0){
