@@ -38,7 +38,15 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         difference = now.secsTo(tomorrow);
         display();
         if(difference<0){
-            emit callUpdateMissions();
+            if(tomorrow<now1){
+                while(tomorrow<now1)
+                    tomorrow=tomorrow.addSecs(86399);
+                SettingsManager dude;
+                dude.writeSettings("MissionsShouldWork", tomorrow);
+                emit callUpdateMissions();
+                //        QTimer::singleShot(6500, this, SIGNAL(callUpdateMissions())); //delays emitting the callUpdateMissions signal
+                //        emit callUpdateMissions();
+            }
         }
         if(difference == 0){
             SettingsManager dude;
