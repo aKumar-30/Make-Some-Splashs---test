@@ -38,13 +38,11 @@ FlashingTimer::FlashingTimer(QDateTime tomorrow1,QObject *parent)
         difference = now.secsTo(tomorrow);
         display();
         if(difference<0){
-            if(tomorrow<now1){
-                while(tomorrow<now1)
-                    tomorrow=tomorrow.addSecs(86399);
-                SettingsManager dude;
-                dude.writeSettings("MissionsShouldWork", tomorrow);
-                emit callUpdateMissions();
-            }
+            while(tomorrow<now)
+                tomorrow=tomorrow.addSecs(86399);
+            SettingsManager dude;
+            dude.writeSettings("MissionsShouldWork", tomorrow);
+            emit callUpdateMissions();
         }
         if(difference == 0){
             SettingsManager dude;
