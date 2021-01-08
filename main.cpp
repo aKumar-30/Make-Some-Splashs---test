@@ -145,7 +145,7 @@ FlashingTimer allTheTimeStuff(){
     //Make and save tomorrow
     QSettings settings;
     SettingsManager dude;
-    QDateTime tomorrow=now.addSecs(45);
+    QDateTime tomorrow=now.addSecs(86399);
     if(!settings.contains("MissionsShouldWork"))
         dude.writeSettings("MissionsShouldWork", tomorrow);
     else{
